@@ -1,0 +1,89 @@
+.extra-space {
+    width: 90vw;
+    height: 10rem;
+    color: white;
+    background-color: white;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 900;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+@media (min-width: 1279px) {
+    /* Device Passed to open Website */
+    * {
+        font-weight: 900;
+        margin: 0;
+        margin-bottom: 5rem;
+        margin-top: 2rem;
+        padding: 0;
+        text-decoration: none;
+        text-align: left;
+    }
+    body {
+        background-color: white;
+    }
+    h1 {
+        font-size: 7rem;
+    }
+    h2 {
+        font-size: 6rem;
+    }
+    hr {
+        margin-bottom: 0;
+        height: 2rem;
+        color: black;
+        background-color: black;
+    }
+    .Options-Line {
+        height: 0.5rem;
+    }
+    .Options {
+        position: relative;
+        left: 6rem;
+    }
+    .extra-space {
+        visibility: hidden;
+    }
+    div {
+        display: flex;
+        justify-content: left;
+        height: 8rem;
+    }
+    i {
+        font-size: 8rem;
+    }
+    #Login_User_Icon {
+        height: 8rem;
+        width: 10rem;
+        background-image: url(../Icons/Login_User.PNG);
+        background-size: cover;
+    }
+    #Login-Div {
+        left: 5rem;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        position: relative;
+        bottom: -2rem;
+    }
+    .different {
+        height: 12rem;
+    }
+}
+@media (min-width: 0px) and (max-width: 1279px) {
+    /* False Device Entry */
+    * {
+        background-color: black;
+    }
+    .extra-space {
+        margin-top: 25vh;
+        background-color: black;
+        visibility: visible;
+    }
+}
