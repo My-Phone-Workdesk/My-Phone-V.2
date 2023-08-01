@@ -29,14 +29,14 @@ a {
         background-color: white;
     }
     h1 {
-        font-size: 7rem;
+        font-size: 5rem;
     }
     h2 {
-        font-size: 6rem;
+        font-size: 3rem;
     }
     hr {
         margin-bottom: 0;
-        height: 2rem;
+        height: 1rem;
         color: black;
         background-color: black;
     }
@@ -53,16 +53,17 @@ a {
     div {
         display: flex;
         justify-content: left;
-        height: 8rem;
+        height: 4rem;
     }
     i {
-        font-size: 8rem;
+        margin-left: 3rem;
+        font-size: 4rem;
     }
     #Login_User_Icon {
-        height: 8rem;
-        width: 10rem;
+        height: 4rem;
+        width: 5rem;
         background-image: url(../Icons/Login_User.PNG);
-        background-size: cover;
+        background-size: contain;
     }
     #Login-Div {
         left: 5rem;
@@ -73,7 +74,7 @@ a {
         bottom: -2rem;
     }
     .different {
-        height: 12rem;
+        height: 5rem;
     }
 }
 @media (min-width: 0px) and (max-width: 1279px) {
