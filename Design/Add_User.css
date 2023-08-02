@@ -1,0 +1,12 @@
+a {
+    font-size: 10rem;
+    color: red;
+    background-color: aqua;
+    text-decoration: none;
+    margin-left: 10rem;
+    position: absolute;
+    top: 20rem;
+}
+div {
+    font-size: 10rem;
+}
