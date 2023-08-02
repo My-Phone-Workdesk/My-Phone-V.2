@@ -48,7 +48,7 @@ a {
         left: 6rem;
     }
     .extra-space {
-        visibility: hidden;
+        visibility: visible;
     }
     div {
         display: flex;
@@ -62,7 +62,7 @@ a {
     #Login_User_Icon {
         height: 4rem;
         width: 5rem;
-        background-image: url(../Icons/Login_User.PNG);
+        background-image: url(../Icons/Login_User.ico);
         background-size: contain;
     }
     #Login-Div {
