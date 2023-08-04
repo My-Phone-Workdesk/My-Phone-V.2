@@ -10,3 +10,20 @@ a {
     position: absolute;
     top: 20rem;
 }
+.Load_Back {
+    position: fixed;
+    bottom: 0;
+    height: 10vh;
+    width: 100vw;
+    background-color: black;
+}
+#Load_Line {
+    bottom: 5vh;
+    left: 2vw;
+    animation: Load 1s ease 0.1s 5 forwards none;
+    background-color: white;
+}
+@keyframes Load {
+    from {left: 2vw;}
+    to {right: 2vw;}
+}
