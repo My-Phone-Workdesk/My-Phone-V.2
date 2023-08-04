@@ -16,7 +16,7 @@ function Restart(restart_time) {
     setTimeout ( function restart_time_delay() {
         document.body.style.backgroundColor = "#ffffff";
         document.body.style.backgroundImage = "url('../Images/Start_Up_Logo.jpg')";
-        document.body.style.backgroundSize = "Contain";
+        document.body.style.backgroundSize = "100vw 100vh";
         document.body.style.backgroundRepeat = "no-repeat";
     }, restart_time)
 }
