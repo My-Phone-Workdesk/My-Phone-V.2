@@ -20,6 +20,8 @@ a {
 #Load_Line {
     bottom: 5vh;
     left: 2vw;
+    height: 8vh;
+    width: 5vw;
     animation: Load 1s ease 0.1s 5 forwards none;
     background-color: white;
 }
