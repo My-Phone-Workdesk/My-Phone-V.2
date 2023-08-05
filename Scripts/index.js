@@ -15,14 +15,13 @@ function Restart() {
     document.body.style.backgroundColor = "#000000";
     setTimeout ( function restart_time_delay() {
         document.body.style.backgroundImage = "url('../Images/Start_Up_Logo.jpg')";
-        document.body.style.backgroundSize = "100vw 90vh";
+        document.body.style.backgroundSize = "100vw 100vh";
         document.body.style.backgroundRepeat = "no-repeat";
     }, 5000);
     setTimeout ( function zoom() {
         document.body.style.backgroundColor = "#ffffff";
         document.getElementById("Load_Back").style.visibility = "hidden";
-        document.getElementById("Load_Line").style.visibility = "hidden";
-        document.body.style.backgroundSize = "100vw 100vh";
+        document.getElementById("Load_Line").style.visibility = "hidden";   
     }, 15575);
     setTimeout (power_off, 18000);
 }
