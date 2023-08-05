@@ -3,11 +3,30 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
+    height: 100vh;
+    width: 100vw;
 }
 .Device {
     height: 20vh;
     width: 30vw;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 #Desktop {
-    background-image: url(../);
+    background-image: url(../OS_Package/OS_Selector/Desktop.ico);
+}
+#Laptop {
+    background-image: url(../OS_Package/OS_Selector/Laptop.ico);
+}
+#Notepad {
+    background-image: url(../OS_Package/OS_Selector/Notepad.ico);
+}
+#Foldable {
+    background-image: url(../OS_Package/OS_Selector/Foldable.ico);
+}
+#Tablet {
+    background-image: url(../OS_Package/OS_Selector/Tablet.ico);
+}
+#Phone {
+    background-image: url(../OS_Package/OS_Selector/Phone.ico);
 }
