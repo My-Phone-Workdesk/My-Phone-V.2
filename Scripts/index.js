@@ -24,7 +24,7 @@ function Restart() {
         document.getElementById("Load_Line").style.visibility = "hidden";
         document.body.style.backgroundSize = "100vw 100vh";
     }, 15575);
-    setTimeout (power_off(), 18000);
+    setTimeout (power_off, 18000);
 }
 function power_off() {
     document.body.style.backgroundImage = "none";

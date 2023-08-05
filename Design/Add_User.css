@@ -26,7 +26,7 @@ a {
     height: 8vh;
     width: 5vw;
     animation: Load 3s ease 0.1s 5 normal none;
-    background-color: transparent;
+    background-color: white;
 }
 @keyframes Load {
     from {left: 2%;}
