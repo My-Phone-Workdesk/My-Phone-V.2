@@ -13,19 +13,28 @@ a {
 .Load_Back {
     position: fixed;
     bottom: 0;
+    left: 0;
     height: 10vh;
     width: 100vw;
     background-color: black;
+    display: flex;
+    align-items: center;
 }
 #Load_Line {
-    bottom: 5vh;
-    left: 2vw;
+    position: relative;
+    left: 2%;
     height: 8vh;
     width: 5vw;
-    animation: Load 1s ease 0.1s 5 forwards none;
-    background-color: white;
+    animation: Load 3s ease 0.1s 5 normal none;
+    background-color: transparent;
 }
 @keyframes Load {
-    from {left: 2vw;}
-    to {right: 2vw;}
+    from {
+        left: 2%;
+        background-color: white;
+    }
+    to {
+        left: 90%;
+        background-color: transparent;
+    }
 }
