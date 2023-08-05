@@ -1,3 +1,6 @@
+body {
+    background-color: black;
+}
 .all {
     display: flex;
     flex-wrap: wrap;
