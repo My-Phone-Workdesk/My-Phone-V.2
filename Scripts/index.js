@@ -26,6 +26,7 @@ function Restart() {
     }, 15575);
     setTimeout (power_off, 18000);
 }
+
 function power_off() {
     document.body.style.backgroundImage = "none";
     document.body.style.background = "none";
