@@ -32,6 +32,7 @@ a {
         font-size: 5rem;
         position: relative;
         left: 2.5rem;
+        text-decoration: underline;
     }
     h2 {
         font-size: 3rem;
@@ -58,17 +59,21 @@ a {
         height: 4rem;
     }
     i {
-        margin-left: 3rem;
         font-size: 4rem;
+        margin-left: 3rem;
     }
     #Login_User_Icon {
-        height: 4rem;
-        width: 5rem;
+        margin-left: 2.3rem;
+        color: black;
+        display: inline-block;
         background-image: url(../Icons/Login_User.ico);
         background-size: contain;
+        background-repeat: no-repeat;
+        height: 6rem;
+        width: 6rem;
     }
     #Login-Div {
-        left: 5rem;
+        left: 6rem;
         display: flex;
         justify-content: left;
         align-items: center;
