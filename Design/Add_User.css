@@ -10,7 +10,7 @@ a {
     position: absolute;
     top: 20rem;
 }
-.Load_Back {
+#Load_Back {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -29,12 +29,6 @@ a {
     background-color: transparent;
 }
 @keyframes Load {
-    from {
-        left: 2%;
-        background-color: white;
-    }
-    to {
-        left: 90%;
-        background-color: transparent;
-    }
+    from {left: 2%;}
+    to {left: 90%;}
 }
