@@ -1,0 +1,13 @@
+.all {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.Device {
+    height: 20vh;
+    width: 30vw;
+}
+#Desktop {
+    background-image: url(../);
+}
