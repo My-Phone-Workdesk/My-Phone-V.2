@@ -33,6 +33,7 @@ a {
         position: relative;
         left: 2.5rem;
         text-decoration: underline;
+        width: 90vw;
     }
     h2 {
         font-size: 3rem;
