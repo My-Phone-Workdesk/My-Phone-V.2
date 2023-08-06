@@ -4,11 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mother Board</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <script src="../../Scripts/Devices.js"></script>
+    <style>
+        div {
+            font-size: 2rem;
+            font-weight: 900;
+            text-align: center;
+            position: relative;
+            top: 12rem;
+        }
+        input {
+            position: relative;
+            left: 19rem;
+            top: 15rem;
+            font-weight: 900;
+            border: 0.3rem black solid;
+            height: 4rem;
+            width: 40rem;
+            font-size: 2rem;
+        }
+        i {
+            position: fixed;
+            top: 17.5rem;
+            font-size: 5rem;
+            right: 17.5rem;
+        }
+    </style>
 </head>
 <body>
     <div>Enter Your Security Code below to follow the Payment : </div>
-    <input type="password" placeholder="Must be of 6 Digits...">
+    <input id="input_code" type="password" placeholder="Security Code Must be of 6 Digits...">
+    <i id="show/hide" class="fa-solid fa-eye" onclick="show_hide();"></i>
     <div id="Price"></div>
 </body>
 </html>
