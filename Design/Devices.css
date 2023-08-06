@@ -16,20 +16,20 @@ body {
     background-size: contain;
 }
 #Desktop {
-    background-image: url(../OS_Package/OS_Selector/Desktop.ico);
+    background-image: url(../OS_Package/OS_Selector/Desktop.jpg);
 }
 #Laptop {
-    background-image: url(../OS_Package/OS_Selector/Laptop.ico);
+    background-image: url(../OS_Package/OS_Selector/Laptop.jpg);
 }
 #Notepad {
-    background-image: url(../OS_Package/OS_Selector/Notepad.ico);
+    background-image: url(../OS_Package/OS_Selector/Notepad.jpg);
 }
 #Foldable {
-    background-image: url(../OS_Package/OS_Selector/Foldable.ico);
+    background-image: url(../OS_Package/OS_Selector/Foldable.jpg);
 }
 #Tablet {
-    background-image: url(../OS_Package/OS_Selector/Tablet.ico);
+    background-image: url(../OS_Package/OS_Selector/Tablet.jpg);
 }
 #Phone {
-    background-image: url(../OS_Package/OS_Selector/Phone.ico);
+    background-image: url(../OS_Package/OS_Selector/Phone.jpg);
 }
