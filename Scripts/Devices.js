@@ -6,8 +6,9 @@ function Devices(Device) {
 }
 
 function Mother_Board(Money, Device) {
-    let price = document.getElementById("Price");
-    price.innerHTML = "Your Device Platform is : " + Device + '\n' + "Your Mother Board Cost is : " + Money;
+    let price = document.querySelector('p');
+    var statement = "Your Device Platform is : " + Device + '\n' + "Your Mother Board Cost is : " + Money;
+    price.innerHTML = statement;
 }
 
 function show_hide() {

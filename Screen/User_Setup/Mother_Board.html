@@ -25,10 +25,18 @@
             font-size: 2rem;
         }
         i {
-            position: fixed;
+            position: absolute;
             top: 17.5rem;
             font-size: 5rem;
             right: 17.5rem;
+        }
+        #Price {
+            position: relative;
+            top: 18rem;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            left: 0;
         }
     </style>
 </head>
@@ -36,6 +44,6 @@
     <div>Enter Your Security Code below to follow the Payment : </div>
     <input id="input_code" type="password" placeholder="Security Code Must be of 6 Digits...">
     <i id="show/hide" class="fa-solid fa-eye" onclick="show_hide();"></i>
-    <div id="Price"></div>
+    <p id="Price">Lala</p>
 </body>
 </html>
