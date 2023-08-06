@@ -6,12 +6,12 @@ body {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
-    height: 100vh;
-    width: 50vw;
+    height: 90vh;
+    width: 99.2vw;
 }
 .Device {
     height: 30vh;
-    width: 20vw;
+    width: 30vw;
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -19,21 +19,24 @@ body {
     background-image: url(../OS_Package/OS_Selector/Desktop.jpg);
 }
 #Laptop {
-    background-image: url(../OS_Package/OS_Selector/Laptop.jpgg);
+    background-image: url(../OS_Package/OS_Selector/Laptop.jpg);
 }
 #Notepad {
     background-image: url(../OS_Package/OS_Selector/Notepad.jpg);
-    justify-self: normal;
-    width: 10vw;
 }
 #Foldable {
     background-image: url(../OS_Package/OS_Selector/Foldable.jpg);
+    position: relative;
+    left: -3rem;
 }
 #Tablet {
     background-image: url(../OS_Package/OS_Selector/Tablet.jpg);
+    position: relative;
+    left: -6rem;
 }
 #Phone {
     background-image: url(../OS_Package/OS_Selector/Phone.jpg);
-    justify-self: normal;
-    width: 10vw;
+    position: relative;
+    left: -8rem;
+    width: 10rem;
 }
