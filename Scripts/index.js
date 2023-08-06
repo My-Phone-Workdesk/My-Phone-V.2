@@ -39,7 +39,7 @@ function power_off() {
         console.log("Continue Furthur Progress...");
         console.log("------------- Go Ahead ---------");
         setTimeout ( function Devices_screen() {
-            location.href = "../Screen/Devices.html";
+            location.href = "../Screen/User_Setup/Devices.html";
         }, 6000);
     } else {
         console.log("Unknown Package imported");
