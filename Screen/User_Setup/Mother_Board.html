@@ -7,43 +7,67 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <script src="../../Scripts/Devices.js"></script>
     <style>
-        div {
+        * {
+            color: white;
+        }
+        #back_cover {
+            position: relative;
+            background-color: black;
+            height: 50vh;
+            width: 70vw;
+            z-index: -1;
+            left: 10rem;
+            top: 10rem;
+        }
+        #text_box {
             font-size: 2rem;
             font-weight: 900;
             text-align: center;
             position: relative;
-            top: 12rem;
+            top: 1rem;
         }
         input {
             position: relative;
-            left: 19rem;
-            top: 15rem;
+            left: 9rem;
+            top: 5rem;
             font-weight: 900;
-            border: 0.3rem black solid;
+            border: 0.3rem white solid;
             height: 4rem;
             width: 40rem;
             font-size: 2rem;
+            color: black;
         }
         i {
             position: absolute;
-            top: 17.5rem;
+            top: 7.5rem;
             font-size: 5rem;
-            right: 17.5rem;
+            right: 3.5rem;
+            z-index: 2;
         }
-        #Price {
+        p, span {
             position: relative;
-            top: 18rem;
             text-align: center;
             font-size: 2rem;
             font-weight: 700;
-            left: 0;
+            bottom: -6rem;
+        }
+        body {
+            background-image: url(../../Images/Mother_Board.jpg);
+            background-size: cover;
+        }
+        span {
+            left: 16rem;
+            bottom: -2.2rem;
         }
     </style>
 </head>
 <body>
-    <div>Enter Your Security Code below to follow the Payment : </div>
-    <input id="input_code" type="password" placeholder="Security Code Must be of 6 Digits...">
-    <i id="show/hide" class="fa-solid fa-eye" onclick="show_hide();"></i>
-    <p id="Price">Lala</p>
+    <div id="back_cover">
+        <div id="text_box">Enter Your Security Code below to follow the Payment : </div>
+        <input id="input_code" type="password" placeholder="Security Code Must be of 6 Digits...">
+        <i id="show/hide" class="fa-solid fa-eye" onclick="show_hide();"></i>
+        <p onclick="Mother_Board(900, 'Desktop');">Click Me ! To Show Details</p>
+        <br><span></span>
+    </div>
 </body>
 </html>
