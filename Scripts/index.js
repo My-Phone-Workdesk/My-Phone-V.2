@@ -1,9 +1,9 @@
-function eventplay(time_delay) {
+function eventplay() {
     alert("Aahh... Don't Touch Me ! ");
     scroll(); //Scroll to top Function
     setTimeout ( function alert_after_scroll() {
         alert("This is Under Operation so don't touch it Please");
-    }, time_delay);
+    }, 1000);
 }
 
 function scroll() {
@@ -49,3 +49,7 @@ function power_off() {
         location.href = "../index.html";
     }
 }
+
+document.addEventListener("keyup", function eventkey() {
+    alert("Aahh... Don't Touch My Keyboard ! ");
+});
