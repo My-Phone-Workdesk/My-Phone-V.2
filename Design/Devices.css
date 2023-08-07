@@ -1,22 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+}
 body {
     background-color: black;
 }
 .all {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
     justify-content: space-evenly;
-    height: 90vh;
-    width: 99.2vw;
+    height: 98vh;
+    width: 95vw;
+    z-index: 0;
 }
 .Device {
     height: 30vh;
-    width: 30vw;
+    width: 10vw;
     background-repeat: no-repeat;
     background-size: contain;
+    flex-basis: 33.33%;
+    z-index: 1;
 }
 #Desktop {
     background-image: url(../OS_Package/OS_Selector/Desktop.jpg);
+    position: relative;
+    left: 2vw;
 }
 #Laptop {
     background-image: url(../OS_Package/OS_Selector/Laptop.jpg);
@@ -27,16 +37,14 @@ body {
 #Foldable {
     background-image: url(../OS_Package/OS_Selector/Foldable.jpg);
     position: relative;
-    left: -3rem;
+    left: 2vw;
 }
 #Tablet {
     background-image: url(../OS_Package/OS_Selector/Tablet.jpg);
-    position: relative;
-    left: -6rem;
 }
 #Phone {
     background-image: url(../OS_Package/OS_Selector/Phone.jpg);
     position: relative;
-    left: -8rem;
-    width: 10rem;
+    left: 5vw;
+    width: 6vw;
 }

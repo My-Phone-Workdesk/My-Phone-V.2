@@ -39,14 +39,14 @@ function power_off() {
         console.log("Continue Furthur Progress...");
         console.log("------------- Go Ahead ---------");
         setTimeout ( function Devices_screen() {
-            location.href = "../Screen/User_Setup/Devices.html";
+            Location.href = "../Screen/User_Setup/Devices.html";
         }, 6000);
     } else {
         console.log("Unknown Package imported");
         console.log("No File Location Found on Server");
         console.log("====== Acion Failed ============");
         alert("Package not Found... Go Back Instead...");
-        location.href = "../index.html";
+        Location.href = "../index.html";
     }
 }
 
