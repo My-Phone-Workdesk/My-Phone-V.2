@@ -16,7 +16,7 @@ function Devices(Device) {
     } else if (Device == "Phone") {
         window.Mother_Board_payment = 500;
     } else {
-        window.Error_Display(0);
+        Error_Display(0);
     }
     Location.href = "../../Screen/User_Setup/Mother_Board.html";
     let input = document.getElementById("input_code");
@@ -52,3 +52,17 @@ function Error_Display(Number) {
     }, 2500);
     return ED;
 }
+
+let Desktop = document.querySelector("#Desktop");
+let Laptop = document.getElementById("Laptop");
+let Notepad = document.getElementById("Notepad");
+let Foldable = document.getElementById("Foldable");
+let Tablet = document.getElementById("Tablet");
+let Phone = document.getElementById("Phone");
+
+Desktop.addEventListener( "click", Devices("Desktop") );
+Laptop.addEventListener( "click", Devices("Laptop") );
+Notepad.addEventListener( "click", Devices("Notepad") );
+Foldable.addEventListener( "click", Devices("Foldable") );
+Tablet.addEventListener( "click", Devices("Tablet") );
+Phone.addEventListener( "click", Devices("Phone") );
