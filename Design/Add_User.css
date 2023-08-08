@@ -30,5 +30,5 @@ a {
 }
 @keyframes Load {
     from {left: 2%;}
-    to {left: 90%;}
+    to {left: 100%;}
 }
