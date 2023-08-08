@@ -64,5 +64,5 @@ function Setup(name) {
 
 function Mother_Board() {
     document.querySelector('p').innerHTML = "Your Selected Device is : " + device_type;
-    document.querySelector('span').innerHTML = "Your Mother Board Price Bill is : " + amount_MB;
+    document.querySelector('span').innerHTML = "Your Device Mother Board Price is : " + amount_MB;
 }
