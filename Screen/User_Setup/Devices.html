@@ -6,16 +6,16 @@
     <title>Choose Your Device</title>
     <link rel="stylesheet" href="../../Design/Devices.css"/>
     <link rel="Icon" type="images/X-icon" href="../../Icons/Devices.ico"/>
+    <script src="../../Scripts/Devices.js"></script>
 </head>
 <body>
     <div class="all">
-        <div id="Desktop" class="Device"></div>
+        <div id="Desktop" class="Device" onclick="Setup(); window.device_type = 'Desktop';"></div>
         <div id="Laptop" class="Device"></div>
         <div id="Notepad" class="Device"></div>
         <div id="Foldable" class="Device"></div>
         <div id="Tablet" class="Device"></div>
         <div id="Phone" class="Device"></div>
     </div>
-    <script src="../../Scripts/Devices.js"></script>
 </body>
 </html>
