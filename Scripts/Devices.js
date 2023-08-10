@@ -11,38 +11,41 @@ function show_hide() {
     }
 }
 
-var device_type = null;
-var amount_MB = 0;
+window.localStorage.setItem("device_type", null);
+window.localStorage.setItem("Amount_MB", 0);
 
 function Setup() {
-    switch (window.device_type) {
+    var did = window.localStorage.getItem("device_type");
+    switch (did) {
         case "Desktop":
-            window.amount_MB = 4000;
+            localStorage.setItem("Amount_MB", 4000);
             break;
         case "Laptop" :
-            window.amount_MB = 2000;
+            localStorage.setItem("Amount_MB", 2000);
             break;
         case "Notepad" :
-            window.amount_MB = 1500;
+            localStorage.setItem("Amount_MB", 1500);
             break;
         case "Foldable" :
-            window.amount_MB = 1000;
+            localStorage.setItem("Amount_MB", 1000);
             break;
         case "Tablet" :
-            window.amount_MB = 800;
+            localStorage.setItem("Amount_MB", 800);
             break;
         case "Phone" :
-            window.amount_MB = 500;
+            localStorage.setItem("Amount_MB", 500);
             break;
         default :
-            window.device_type = "Administrative Device";
-            window.amount_MB = 5000;
+            localStorage.setItem("device_type", "Administrative Device");
+            localStorage.setItem("Amount_MB", 5000);
             break;
     }
-    location.href = "../../Screen/User_Setup/Mother_Board.html";
+    window.location.href = "../../Screen/User_Setup/Mother_Board.html";
 }
 
 function Mother_Board() {
-    document.querySelector('p').innerHTML = "Your Selected Device is : " + device_type;
-    document.querySelector('span').innerHTML = "Your Mother Board Price Bill is : " + amount_MB;
+    var does = window.localStorage.getItem("device_type");
+    var will_does = window.localStorage.getItem("Amount_MB");
+    document.querySelector('p').innerHTML = "Your Selected Device is : " + does;
+    document.querySelector('span').innerHTML = "Your Mother Board Price Bill is : " + will_does;
 }

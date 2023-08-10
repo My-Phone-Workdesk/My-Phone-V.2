@@ -48,3 +48,10 @@ body {
     left: 5vw;
     width: 6vw;
 }
+button {
+    width: 10vw;
+    height: 30vh;
+}
+button:hover {
+    cursor: pointer;
+}
