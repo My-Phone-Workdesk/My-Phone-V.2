@@ -11,39 +11,33 @@ function show_hide() {
     }
 }
 
-localStorage.setItem("device_type", null);
-localStorage.setItem("Amount_MB", 0);
-
 function Setup() {
     var know = localStorage.getItem("device_type");
     switch (know) {
         case "Desktop":
             localStorage.setItem("Amount_MB", 4000);
-            console.log("A good News"); 
-            setTimeout (8000);
             break;
-        case "Laptop" :
+        case "Laptop":
             localStorage.setItem("Amount_MB", 2000);
             break;
-        case "Notepad" :
+        case "Notepad":
             localStorage.setItem("Amount_MB", 1500);
             break;
-        case "Foldable" :
+        case "Foldable":
             localStorage.setItem("Amount_MB", 1000);
             break;
-        case "Tablet" :
+        case "Tablet":
             localStorage.setItem("Amount_MB", 800);
             break;
-        case "Phone" :
+        case "Phone":
             localStorage.setItem("Amount_MB", 500);
             break;
-        default :
+        default:
             localStorage.setItem("device_type", "Administrative Device");
             localStorage.setItem("Amount_MB", 5000);
             break;
     }
     window.location.href = "../../Screen/User_Setup/Mother_Board.html";
-    console.log("A bad News");
 }
 
 function Mother_Board() {
