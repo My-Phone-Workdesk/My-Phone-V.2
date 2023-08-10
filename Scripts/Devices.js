@@ -11,14 +11,16 @@ function show_hide() {
     }
 }
 
-window.localStorage.setItem("device_type", null);
-window.localStorage.setItem("Amount_MB", 0);
+localStorage.setItem("device_type", null);
+localStorage.setItem("Amount_MB", 0);
 
 function Setup() {
-    var did = window.localStorage.getItem("device_type");
-    switch (did) {
+    var know = localStorage.getItem("device_type");
+    switch (know) {
         case "Desktop":
             localStorage.setItem("Amount_MB", 4000);
+            console.log("A good News"); 
+            setTimeout (8000);
             break;
         case "Laptop" :
             localStorage.setItem("Amount_MB", 2000);
@@ -41,11 +43,12 @@ function Setup() {
             break;
     }
     window.location.href = "../../Screen/User_Setup/Mother_Board.html";
+    console.log("A bad News");
 }
 
 function Mother_Board() {
-    var does = window.localStorage.getItem("device_type");
-    var will_does = window.localStorage.getItem("Amount_MB");
+    var does = localStorage.getItem("device_type");
+    var did = localStorage.getItem("Amount_MB");
     document.querySelector('p').innerHTML = "Your Selected Device is : " + does;
-    document.querySelector('span').innerHTML = "Your Mother Board Price Bill is : " + will_does;
+    document.querySelector('span').innerHTML = "Your Mother Board Price Bill is : " + did;
 }

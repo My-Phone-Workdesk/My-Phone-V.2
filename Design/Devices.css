@@ -16,17 +16,15 @@ body {
     z-index: 0;
 }
 .Device {
-    height: 30vh;
-    width: 10vw;
+    height: 40vh;
+    width: 25vw;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 100% 100%;
     flex-basis: 33.33%;
     z-index: 1;
 }
 #Desktop {
     background-image: url(../OS_Package/OS_Selector/Desktop.jpg);
-    position: relative;
-    left: 2vw;
 }
 #Laptop {
     background-image: url(../OS_Package/OS_Selector/Laptop.jpg);
@@ -36,21 +34,16 @@ body {
 }
 #Foldable {
     background-image: url(../OS_Package/OS_Selector/Foldable.jpg);
-    position: relative;
-    left: 2vw;
 }
 #Tablet {
     background-image: url(../OS_Package/OS_Selector/Tablet.jpg);
 }
 #Phone {
     background-image: url(../OS_Package/OS_Selector/Phone.jpg);
-    position: relative;
-    left: 5vw;
-    width: 6vw;
 }
 button {
-    width: 10vw;
-    height: 30vh;
+    width: 25vw;
+    height: 40vh;
 }
 button:hover {
     cursor: pointer;

@@ -12,15 +12,13 @@
 
     <link rel="Icon" type="images/X-icon" href="../../Icons/Devices.ico"/>
 
-    <script src="../../Scripts/Devices.js"></script>
-
 </head>
 
 <body>
 
     <div class="all">
 
-        <button>
+        <button onclick="localStorage.setItem('device_type', 'Desktop'); Setup();">
             <div id="Desktop" class="Device"></div>
         </button>
 
@@ -45,6 +43,8 @@
         </button>
 
     </div>
+
+    <script src="../../Scripts/Devices.js"></script>
 
 </body>
 </html>
