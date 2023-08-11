@@ -1,11 +1,3 @@
-function eventplay() {
-    alert("Aahh... Don't Touch Me ! ");
-    scroll(); //Scroll to top Function
-    setTimeout ( function alert_after_scroll() {
-        alert("This is Under Operation so don't touch it Please");
-    }, 1000);
-}
-
 function scroll() {
     document.body.scrollTop = 0; //For Safari Browser if so...
     document.documentElement.scrollTop = 0; //For other browsers like FIrefox, Chrome, Edge, etc...
@@ -36,5 +28,16 @@ function power_off() {
 }
 
 document.addEventListener("keyup", function eventkey() {
-    alert("Aahh... Don't Touch My Keyboard ! ");
+    // alert("Aahh... Don't Touch My Keyboard ! ");
 });
+
+function Users() {
+    var b = new Array();
+    b = JSON.parse( localStorage.getItem("Users") );
+    let table = document.querySelector('table');
+    var c = b.length;
+    c--; let d = 0;
+    for (var a = 0; a <= c; a++) {
+        table.insertRow(a + 1).insertCell(0).innerHTML = b[a];
+    }
+}

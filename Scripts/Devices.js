@@ -70,6 +70,7 @@ function Payment_MB() {
                         localStorage.setItem("Money", a);
                         alert("Payment Successful");
                         location.reload();
+                        location.href = "../../OS_Package/OS_Setup/OS.html";
                         return 1;
                     } else {
                         alert("Sorry, You can't Proceed ahead due to insufficient Account Balance");

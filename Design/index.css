@@ -84,6 +84,28 @@ a {
     .different {
         height: 5rem;
     }
+    table {
+        color: black;
+        border: 0.2rem black solid;
+        width: 98vw;
+        font-weight: 500;
+        font-size: 2rem;
+        background-color: pink;
+    }
+    th {
+        text-align: center;
+        font-size: 4rem;
+        font-weight: 900;
+        background-color: aqua;
+    }
+    tr {
+        color: black;
+    }
+    td {
+        text-align: center;
+        font-size: 5rem;
+        border: 0.4rem black solid;
+    }
 }
 @media (min-width: 0px) and (max-width: 1279px) {
     /* False Device Entry */
