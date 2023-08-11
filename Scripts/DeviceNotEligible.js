@@ -5,3 +5,5 @@ function runOnStart() {
     location.href="../DeviceNotEligible.html";
   }
 }
+
+export {runOnStart};
