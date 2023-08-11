@@ -90,13 +90,13 @@ a {
         width: 98vw;
         font-weight: 500;
         font-size: 2rem;
-        background-color: pink;
+        background-color: lightgrey;
     }
     th {
         text-align: center;
         font-size: 4rem;
         font-weight: 900;
-        background-color: aqua;
+        background-color: lightgrey;
     }
     tr {
         color: black;
