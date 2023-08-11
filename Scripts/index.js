@@ -1,3 +1,5 @@
+import {runOnStart} from './DeviceNotEligible.js';
+
 function scroll() {
     document.body.scrollTop = 0; //For Safari Browser if so...
     document.documentElement.scrollTop = 0; //For other browsers like FIrefox, Chrome, Edge, etc...
@@ -28,6 +30,7 @@ function power_off() {
 }
 
 function Users() {
+    runOnStart();
     var b = new Array();
     b = JSON.parse( localStorage.getItem("Users") );
     let table = document.querySelector('table');
