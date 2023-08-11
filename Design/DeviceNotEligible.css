@@ -1,0 +1,15 @@
+.extra-space {
+    width: 90vw;
+    height: 10rem;
+    color: white;
+    background-color: white;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 900;
+}
+body {
+    background-color: black;
+}
