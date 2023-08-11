@@ -27,10 +27,6 @@ function power_off() {
     }, 6000);
 }
 
-document.addEventListener("keyup", function eventkey() {
-    // alert("Aahh... Don't Touch My Keyboard ! ");
-});
-
 function Users() {
     var b = new Array();
     b = JSON.parse( localStorage.getItem("Users") );
