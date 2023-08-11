@@ -14,8 +14,6 @@ a {
     text-decoration: none;
     color: black;
 }
-@media (min-width: 1279px) {
-    /* Device Passed to open Website */
     * {
         font-weight: 900;
         margin: 0;
@@ -106,15 +104,3 @@ a {
         font-size: 5rem;
         border: 0.4rem black solid;
     }
-}
-@media (min-width: 0px) and (max-width: 1279px) {
-    /* False Device Entry */
-    * {
-        background-color: black;
-    }
-    .extra-space {
-        margin-top: 25vh;
-        background-color: black;
-        visibility: visible;
-    }
-}
