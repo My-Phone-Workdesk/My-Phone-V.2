@@ -6,4 +6,4 @@ function runOnStart() {
   }
 }
 
-//export {runOnStart};
+export {runOnStart};
