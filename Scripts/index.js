@@ -30,9 +30,9 @@ function power_off() {
 }
 
 function Users() {
-    RunOnStart.runOnStart();
+    runOnStart();
     var b = new Array();
-    b = JSON.parse( localStorage.getItem("Users") );
+    b = JSON.parse(localStorage.getItem("Users") );
     let table = document.querySelector('table');
     var c = b.length;
     c--; let d = 0;
