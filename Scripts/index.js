@@ -29,7 +29,7 @@ function power_off() {
     }, 6000);
 }
 
-export function Users() {
+function Users() {
     RunOnStart.runOnStart();
     var b = new Array();
     b = JSON.parse( localStorage.getItem("Users") );
