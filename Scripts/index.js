@@ -1,4 +1,4 @@
-import {runOnStart} from './DeviceNotEligible.js';
+import * as RunOnStart from './DeviceNotEligible.js';
 
 function scroll() {
     document.body.scrollTop = 0; //For Safari Browser if so...
