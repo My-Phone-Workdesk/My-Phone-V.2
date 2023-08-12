@@ -1,5 +1,3 @@
-import {runOnStart} from './DeviceNotEligible.js';
-
 function scroll() {
     document.body.scrollTop = 0; //For Safari Browser if so...
     document.documentElement.scrollTop = 0; //For other browsers like FIrefox, Chrome, Edge, etc...
@@ -31,12 +29,23 @@ function power_off() {
 
 function Users() {
     runOnStart();
-    var b = new Array();
-    b = JSON.parse(localStorage.getItem("Users") );
-    let table = document.querySelector('table');
-    var c = b.length;
-    c--; let d = 0;
-    for (var a = 0; a <= c; a++) {
-        table.insertRow(a + 1).insertCell(0).innerHTML = b[a];
+    if (localStorage.getItem("Users") != null) {
+        var b = new Array();
+        b = JSON.parse(localStorage.getItem("Users"));
+        let table = document.querySelector('table');
+        var c = b.length;
+        
+        c--; let d = 0;
+        for (var a = 0; a <= c; a++) {
+            table.insertRow(a + 1).insertCell(0).innerHTML = b[a];
+        }
     }
 }
+
+function runOnStart() {
+    const minwidth = window.matchMedia("(min-width: 0px)");
+    const maxwidth = window.matchMedia("(max-width: 1279px)");
+    if (minwidth.matches && maxwidth.matches) {
+      location.href="../DeviceNotEligible.html";
+    }
+  }
