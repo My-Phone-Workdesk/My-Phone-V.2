@@ -85,14 +85,16 @@ a {
     table {
         color: black;
         border: 0.2rem black solid;
-        width: 98vw;
+        width: 90vw;
         font-weight: 500;
         font-size: 2rem;
         background-color: lightgrey;
+        position: relative;
+        left: 5rem;
     }
     th {
         text-align: center;
-        font-size: 4rem;
+        font-size: 5rem;
         font-weight: 900;
         background-color: lightgrey;
     }
@@ -101,6 +103,7 @@ a {
     }
     td {
         text-align: center;
-        font-size: 5rem;
+        font-size: 4rem;
         border: 0.4rem black solid;
+        background-color: white;
     }
