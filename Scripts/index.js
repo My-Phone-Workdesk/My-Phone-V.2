@@ -1,4 +1,4 @@
-import {runOnStart} from './DeviceNotEligible.js';
+import {runOnStart} as RunOnStart from './DeviceNotEligible.js';
 
 function scroll() {
     document.body.scrollTop = 0; //For Safari Browser if so...
@@ -29,7 +29,7 @@ function power_off() {
     }, 6000);
 }
 
-function Users() {
+export function Users() {
     RunOnStart.runOnStart();
     var b = new Array();
     b = JSON.parse( localStorage.getItem("Users") );
