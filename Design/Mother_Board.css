@@ -2,25 +2,22 @@
     color: white;
 }
 #back_cover {
-    position: relative;
     background-color: black;
     height: 50vh;
     width: 70vw;
-    z-index: -1;
-    left: 10rem;
-    top: 10rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
 }
 #text_box {
     font-size: 2rem;
     font-weight: 900;
     text-align: center;
     position: relative;
-    top: 1rem;
+    top: -3rem;
 }
 input {
-    position: relative;
-    left: 9rem;
-    top: 5rem;
     font-weight: 900;
     border: 0.3rem white solid;
     height: 4rem;
@@ -29,11 +26,7 @@ input {
     color: black;
 }
 i {
-    position: absolute;
-    top: 7.5rem;
     font-size: 5rem;
-    right: 3.5rem;
-    z-index: 2;
 }
 p, span {
     position: relative;
@@ -45,6 +38,11 @@ p, span {
 body {
     background-image: url(../Images/Mother_Board.jpg);
     background-size: cover;
+    height: 98vh;
+    width: 98vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 span {
     left: 14rem;
@@ -54,7 +52,7 @@ p:hover, button:hover {
     cursor: pointer;
 }
 button {
-    position: fixed;
+    position: absolute;
     color: black;
     background-color: white;
     font-size: 2rem;
