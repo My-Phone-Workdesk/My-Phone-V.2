@@ -8,15 +8,17 @@
     <script src="../../Scripts/Devices.js"></script>
     <link rel="stylesheet" href="../../Design/Mother_Board.css" />
 </head>
-<body>
+<body onload="Mother_Board();">
     <div id="back_cover">
-        <div id="text_box">Enter your Security Code below to make payment of Motherboard:</div>
-        <input id="input_code" type="password" placeholder="Security Code Must be of 6 Digits...">
+        <div id="heading">Enter your Security Code below to <br/> make payment of Motherboard:</div>
+        <input id="input_code" type="password" placeholder=" Security Code Must be of 6 Digits...">
         <i id="show/hide" class="fa-solid fa-eye" onclick="show_hide();"></i>
-        <p onclick="Mother_Board();">Click Me To Show Details</p>
-        <br><span></span>
+        <p></p>
+        <span></span>
     </div>
-    <button onclick="Payment_MB();">Submit and do Payment</button>
+    <button class="Payment" onclick="Payment_MB();">
+        Pay <i class="fa-solid fa-money-bill"></i>
+    </button>
     <button class="Skip" onclick="alert('I do not work at all');">
         Skip <i class="fa-solid fa-forward"></i>
     </button>
