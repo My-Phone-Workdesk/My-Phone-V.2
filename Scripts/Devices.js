@@ -43,8 +43,8 @@ function Setup() {
 function Mother_Board() {
     var does = localStorage.getItem("device_type");
     var did = localStorage.getItem("Amount_MB");
-    document.querySelector('p').innerHTML = "Your Selected Device is: " + does;
-    document.querySelector('span').innerHTML = "Your Mother Board Price Bill is: " + did;
+    document.querySelector('p').innerHTML = "Selected Device: " + does;
+    document.querySelector('span').innerHTML = "Price of Mother Board: " + did;
 }
 
 function Payment_MB() {
