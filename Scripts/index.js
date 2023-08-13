@@ -48,6 +48,36 @@ function runOnStart() {
     if (minwidth.matches && maxwidth.matches) {
         location.href="DeviceNotEligible.html";
     } else {
-        //COntinue with the Main Screen because the Device Passed to open website...
+        //Continue with the Main Screen because the Device Passed to open website...
     }
   }
+
+function Login() {
+    var answer = prompt("Login to an Existing User by its User Id", "Owner");
+    var list = new Array();
+    list = JSON.parse( localStorage.getItem("Users") );
+    for (var check = 0; check <= (list.length - 1); check++) {
+        var respond = list[check];
+        if ( respond.toLowerCase() == answer.toLowerCase() ) {
+            //The User Passed Away
+            if ( ! ( answer.toLowerCase() == "owner" ) ) {
+                var locks_hash = new Array();
+                locks_hash = JSON.parse( localStorage.getItem("User_Lock") );
+                do {
+                    var user_lock = prompt("Enter the User Lock of the User " + answer, "");
+                    if ( user_lock == locks_hash[check] ) {
+                        //Correct User Lock Entered... User Recognised...!!!
+                        location.href = "Screen/Login_User.html";
+                    } else {
+                        alert("Incorrect User Lock Entered...");
+                    }
+                } while ( ! ( user_lock == locks_hash[check] ) );
+            } else {
+                //No User Lock for the Public User Owner...
+                location.href = "Screen/Login_User.html";
+            }
+            return;
+        } //Do not Return Anything just add 1 to check variable
+    }
+    alert("User ID not Available");
+}
