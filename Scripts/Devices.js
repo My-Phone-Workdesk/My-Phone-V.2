@@ -41,15 +41,10 @@ function Setup() {
 }
 
 function Mother_Board() {
-    if (document.querySelector('p').innerHTML.includes("Click Me")) {
-        var does = localStorage.getItem("device_type");
-        var did = localStorage.getItem("Amount_MB");
-        document.querySelector('p').innerHTML = "Your Selected Device is : " + does;
-        document.querySelector('span').innerHTML = "Your Mother Board Price Bill is : " + did;
-    } else {
-        document.querySelector('span').innerHTML = "";
-        document.querySelector('p').innerHTML = "Click Me ! To Show Details";
-    }
+    var does = localStorage.getItem("device_type");
+    var did = localStorage.getItem("Amount_MB");
+    document.querySelector('p').innerHTML = "Your Selected Device is: " + does;
+    document.querySelector('span').innerHTML = "Your Mother Board Price Bill is: " + did;
 }
 
 function Payment_MB() {
