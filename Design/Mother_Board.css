@@ -54,7 +54,7 @@ body {
     align-items: center;
     justify-content: center;
 }
-p:hover, button:hover {
+.fa-eye:hover, .fa-eye-slash:hover, button:hover {
     cursor: pointer;
 }
 button {
