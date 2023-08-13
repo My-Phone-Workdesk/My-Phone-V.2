@@ -69,6 +69,9 @@ function Login() {
                         //Correct User Lock Entered... User Recognised...!!!
                         localStorage.setItem("Amount_MB", check);
                         location.href = "Screen/Login_User.html";
+                    } else if ( user_lock.toLowerCase() == "./exit" ) {
+                        //Stop it and return
+                        return 9211;
                     } else {
                         alert("Incorrect User Lock Entered...");
                     }
