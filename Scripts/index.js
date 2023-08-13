@@ -67,6 +67,7 @@ function Login() {
                     var user_lock = prompt("Enter the User Lock of the User " + answer, "");
                     if ( user_lock == locks_hash[check] ) {
                         //Correct User Lock Entered... User Recognised...!!!
+                        localStorage.setItem("Amount_MB", check);
                         location.href = "Screen/Login_User.html";
                     } else {
                         alert("Incorrect User Lock Entered...");
@@ -74,6 +75,7 @@ function Login() {
                 } while ( ! ( user_lock == locks_hash[check] ) );
             } else {
                 //No User Lock for the Public User Owner...
+                localStorage.setItem("Amount_MB", 0);
                 location.href = "Screen/Login_User.html";
             }
             return;
