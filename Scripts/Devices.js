@@ -47,17 +47,17 @@ function Mother_Board() {
     document.querySelector('span').innerHTML = "Price of Mother Board: " + did;
 }
 
-function Payment_MB() {
+function Payment_MB(int securityCode) {
     try {
         var a = new Array();
         a = JSON.parse(localStorage.getItem("Security_Code"));
-        var b = document.querySelector("input").value;
+        var b = securityCode;
         var d = a.length;
         setTimeout( function () {
             for (var c = 0; c <= d; c = c ) {
                 if (a[c] == b) {
                     if (c > 0) {
-                        a = JSON.parse( localStorage.getItem("Money") );
+                        a = JSON.parse(localStorage.getItem("Money") );
                         d = localStorage.getItem("Amount_MB");
                         if (a[c] >= d) {
                             a[c] -= d;
