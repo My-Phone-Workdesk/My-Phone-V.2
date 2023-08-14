@@ -24,7 +24,7 @@ function power_off() {
     document.body.style.backgroundColor = "#000000";
     setTimeout ( function Devices_screen() {
         location.href = "../Screen/User_Setup/Devices.html";
-    }, 6000);
+    }, 0);
 }
 
 function Users() {
