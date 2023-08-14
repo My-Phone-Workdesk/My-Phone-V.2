@@ -15,26 +15,26 @@ function Setup() {
     var know = localStorage.getItem("device_type");
     switch (know) {
         case "Desktop":
-            localStorage.setItem("Amount_MB", 4000);
+            localStorage.setItem("Amount_MB", 4000₹);
             break;
         case "Laptop":
-            localStorage.setItem("Amount_MB", 2000);
+            localStorage.setItem("Amount_MB", 2000₹);
             break;
         case "Notepad":
-            localStorage.setItem("Amount_MB", 1500);
+            localStorage.setItem("Amount_MB", 1500₹);
             break;
         case "Foldable":
-            localStorage.setItem("Amount_MB", 1000);
+            localStorage.setItem("Amount_MB", 1000₹);
             break;
         case "Tablet":
-            localStorage.setItem("Amount_MB", 800);
+            localStorage.setItem("Amount_MB", 800₹);
             break;
         case "Phone":
-            localStorage.setItem("Amount_MB", 500);
+            localStorage.setItem("Amount_MB", 500₹);
             break;
         default:
             localStorage.setItem("device_type", "Administrative Device");
-            localStorage.setItem("Amount_MB", 5000);
+            localStorage.setItem("Amount_MB", 5000₹);
             break;
     }
     window.location.href = "../../Screen/User_Setup/Mother_Board.html";
