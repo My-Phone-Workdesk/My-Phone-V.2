@@ -47,11 +47,11 @@ function Mother_Board() {
     document.querySelector('span').innerHTML = "Price of Mother Board: " + did;
 }
 
-function Payment_MB(int securityCode) {
+function Payment_MB() {
     try {
         var a = new Array();
         a = JSON.parse(localStorage.getItem("Security_Code"));
-        var b = securityCode;
+        var b = document.getElementById('input_code').value;
         var d = a.length;
         setTimeout( function () {
             for (var c = 0; c <= d; c = c ) {
