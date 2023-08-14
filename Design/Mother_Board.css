@@ -4,7 +4,7 @@
 #back_cover {
     background-color: black;
     height: 60vh;
-    width: 75vw;
+    width: 60vw;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
