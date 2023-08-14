@@ -1,3 +1,5 @@
+const { error } = require('console');
+
 function scroll() {
     document.body.scrollTop = 0; //For Safari Browser if so...
     document.documentElement.scrollTop = 0; //For other browsers like FIrefox, Chrome, Edge, etc...
@@ -50,6 +52,7 @@ function runOnStart() {
     } else {
         //Continue with the Main Screen because the Device Passed to open website...
     }
+    check_storage();
   }
 
 function Login() {
@@ -85,4 +88,11 @@ function Login() {
         } //Do not Return Anything just add 1 to check variable
     }
     alert("User ID not Available");
+}
+
+function check_storage() {
+    var on_in = new Array();
+    if ( localStorage.getItem("BIOS") === null ) {
+        localStorage.setItem("BIOS", );
+    }
 }
