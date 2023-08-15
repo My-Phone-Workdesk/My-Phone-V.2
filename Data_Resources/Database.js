@@ -16,7 +16,7 @@ function check_storage() {
         data.push("Windows", "Android");
         data = JSON.stringify(data);
         localStorage.setItem("OS", data);
-    }   if ( Common_Method("Security_Code") ) {
+    }   if ( Common_Method("Security_Code") === null ) {
         var data = new Array();
         data.push(123456, 921100);
         data = JSON.stringify(data);
