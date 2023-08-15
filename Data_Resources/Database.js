@@ -13,7 +13,7 @@ function check_storage() {
         localStorage.setItem("Money", data);
     }   if ( Common_Method("OS") === null ) {
         var data = new Array();
-        data.push("Windows", "Android");
+        data.push("Windows", "Mac");
         data = JSON.stringify(data);
         localStorage.setItem("OS", data);
     }   if ( Common_Method("Security_Code") === null ) {

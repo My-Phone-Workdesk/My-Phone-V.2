@@ -13,25 +13,25 @@ function Start_Up() {
                 document.body.style.backgroundImage = "url('../OS_Package/Windows.jpg')";
                 break;
             case "Mac":
-                document.body.style.backgroundImage = "../OS_Package/Mac.jpg";
+                document.body.style.backgroundImage = "url('../OS_Package/Mac.jpg')";
                 break;
             case "Linux":
-                document.body.style.backgroundImage = "../OS_Package/Linux.jpg";
+                document.body.style.backgroundImage = "url('../OS_Package/Linux.jpg')";
                 break;
             case "IOS":
-                document.body.style.backgroundImage = "../OS_Package/IOS.jpg";
+                document.body.style.backgroundImage = "url('../OS_Package/IOS.jpg')";
                 break;
             case "Android":
-                document.body.style.backgroundImage = "../OS_Package/Android.jpg";
+                document.body.style.backgroundImage = "url('../OS_Package/Android.jpg')";
                 break;
             case "Andos":
-                document.body.style.backgroundImage = "../OS_Package/Andos.jpg";
+                document.body.style.backgroundImage = "url('../OS_Package/Andos.jpg')";
                 break;
             default:
                 document.body.style.backgroundImage = "url('../OS_Package/Windows.jpg')";
                 break;
         }
-        document.body.style.backgroundSize = "90vw 90vh";
+        document.body.style.backgroundSize = "75vw 75vh";
         document.body.style.backgroundRepeat = "no-repeat";
         document.body.style.backgroundPosition = "center center";
     }, BIOS * 1000);
