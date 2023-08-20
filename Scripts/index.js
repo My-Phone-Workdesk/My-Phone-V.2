@@ -28,7 +28,6 @@ function power_off() {
 }
 
 function Users() {
-    runOnStart();
     if (localStorage.getItem("Users") != null) {
         var b = new Array();
         b = JSON.parse(localStorage.getItem("Users"));
