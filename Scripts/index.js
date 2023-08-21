@@ -45,7 +45,7 @@ function runOnStart() {
     const minwidth = window.matchMedia("(min-width: 0px)");
     const maxwidth = window.matchMedia("(max-width: 1279px)");
     if (minwidth.matches && maxwidth.matches) {
-        if (location.pathname.includes("/index.html")) {
+        if ( ! ( location.pathname.includes("/Device_Not_Eligible.html") ) ) {
             location.href="Device_Not_Eligible.html";
         }
     } else {
