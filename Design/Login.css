@@ -1,4 +1,25 @@
 body {
     width: 98vw;
-    height: 95vh;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+.os_loader {
+    background-color: white;
+    border: 1.5rem solid gray;
+    border-radius: 50%;
+    border-top-color: black;
+    border-bottom-color: black;
+    width: 120px;
+    height: 120px;
+    animation: Load_OS 2s ease 0.4s infinite normal none;
+}
+@keyframes Load_OS {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

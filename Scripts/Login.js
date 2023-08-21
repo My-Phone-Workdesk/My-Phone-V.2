@@ -3,11 +3,11 @@ function Start_Up() {
     BIOS_List = JSON.parse( localStorage.getItem("BIOS") );
     var BIOS = localStorage.getItem("Amount_MB");
     BIOS = BIOS_List[BIOS];
-    document.body.style.backgroundColor = "#000000";
+    document.body.style.backgroundColor = "#ffffff";
     setTimeout ( function () {
         BIOS_List = JSON.parse( localStorage.getItem("OS") );
-        BIOS = localStorage.getItem("Amount_MB");
-        var OS = BIOS_List[BIOS];
+        window.BIOS = localStorage.getItem("Amount_MB");
+        var OS = BIOS_List[BIOS - 1];
         switch (OS) {
             case "Windows":
                 document.body.style.backgroundImage = "url('../OS_Package/Windows.jpg')";
@@ -28,11 +28,17 @@ function Start_Up() {
                 document.body.style.backgroundImage = "url('../OS_Package/Andos.jpg')";
                 break;
             default:
-                document.body.style.backgroundImage = "url('../OS_Package/Windows.jpg')";
+                document.body.style.backgroundImage = "url('../OS_Package/Linux.jpg')";
                 break;
         }
         document.body.style.backgroundSize = "75vw 75vh";
         document.body.style.backgroundRepeat = "no-repeat";
         document.body.style.backgroundPosition = "center center";
+        setTimeout( function () {
+            document.body.style.backgroundImage = "";
+        }, BIOS * 2000 );
+        setTimeout ( function () {
+            location.href = "./Home_Screen.html";
+        } , BIOS * 3000 );
     }, BIOS * 1000);
 }
