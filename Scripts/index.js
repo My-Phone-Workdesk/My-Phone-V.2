@@ -45,12 +45,12 @@ function runOnStart() {
     const minwidth = window.matchMedia("(min-width: 0px)");
     const maxwidth = window.matchMedia("(max-width: 1279px)");
     if (minwidth.matches && maxwidth.matches) {
-        if ( location.pathname == "/index.html" ) {
+        if (location.pathname == "/index.html") {
             location.href="Device_Not_Eligible.html";
         }
     } else {
         //Continue with the Main Screen because the Device Passed to open website...
-        if ( location.pathname == "/Device_Not_Eligible.html" ) {
+        if (location.pathname == "/Device_Not_Eligible.html") {
             location.href = "index.html";
         }
     }
