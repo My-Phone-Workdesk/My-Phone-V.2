@@ -1,0 +1,37 @@
+body {
+    width: 98vw;
+    height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    background-color: rgba(130, 210, 60, 0.8);
+}
+textarea {
+    width: 95vw;
+    height: 70vh;
+    font-size: 2rem;
+    text-align: left;
+    word-wrap: break-word;
+    resize: none;
+    display: block;
+    background-color: black;
+    color: white;
+}
+input {
+    width: 30rem;
+    height: 3rem;
+    font-weight: 900;
+    font-size: 2rem;
+    position: fixed;
+    left: 2rem;
+    bottom: 4rem;
+    background-color: blue;
+    color: yellow;
+}
+label {
+    position: fixed;
+    bottom: 3.9rem;
+    font-size: 4rem;
+    left: 33rem;
+}
