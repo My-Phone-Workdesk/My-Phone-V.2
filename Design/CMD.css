@@ -29,9 +29,40 @@ input {
     background-color: blue;
     color: yellow;
 }
-label {
+select, button {
     position: fixed;
     bottom: 3.9rem;
-    font-size: 4rem;
+    font-size: 3rem;
+}
+select {
     left: 33rem;
+}
+select option {
+    font-size: 2rem;
+}
+button {
+    width: 24rem;
+    right: 15rem;
+    height: 6rem;
+    background-color: black;
+    color: red;
+    padding: 3rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#Save {
+    right: 2rem;
+    width: 10rem;
+}
+button:hover {
+    cursor: pointer;
+}
+button:active {
+    cursor: progress;
+    background-color: purple;
+    color: yellow;
+    border: 0.5rem dashed green;
+    transform: scale(1.4);
 }

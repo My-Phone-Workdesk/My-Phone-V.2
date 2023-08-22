@@ -70,15 +70,17 @@ function Login() {
                     locks_hash = JSON.parse( localStorage.getItem("User_Lock") );
                     do {
                         var user_lock = prompt("Enter the User Lock of the User " + answer, "");
-                        if ( user_lock == locks_hash[check] ) {
-                            //Correct User Lock Entered... User Recognised...!!!
-                            localStorage.setItem("Amount_MB", check);
-                            location.href = "Screen/Login_User.html";
-                        } else if ( user_lock.toLowerCase() == "./exit" ) {
-                            //Stop it and return
-                            return 9211;
-                        } else {
-                            alert("Incorrect User Lock Entered...");
+                        if ( user_lock != null ) {
+                            if ( user_lock == locks_hash[check] ) {
+                                //Correct User Lock Entered... User Recognised...!!!
+                                localStorage.setItem("Amount_MB", check);
+                                location.href = "Screen/Login_User.html";
+                            } else if ( user_lock.toLowerCase() == "./exit" ) {
+                                //Stop it and return
+                                return 9211;
+                            } else {
+                                alert("Incorrect User Lock Entered...");
+                            }
                         }
                     } while ( ! ( user_lock == locks_hash[check] ) );
                 } else {
