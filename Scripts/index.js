@@ -28,19 +28,20 @@ function power_off() {
 }
 
 function Users() {
-    if (localStorage.getItem("Users") != null) {
-        var b = new Array();
-        b = JSON.parse(localStorage.getItem("Users"));
-        let table = document.querySelector('table');
-        var c = b.length;
-        
-        c--; let d = 0;
-        for (var a = 0; a <= c; a++) {
-            table.insertRow(a + 1).insertCell(0).innerHTML = b[a];
-        }
-    } else {
-        check_Data();
+
+    check_Data();
+
+    var b = new Array();
+    b = JSON.parse(localStorage.getItem("Users"));
+    let table = document.querySelector('table');
+    var c = b.length;
+    
+    c--; let d = 0;
+    
+    for (var a = 0; a <= c; a++) {
+        table.insertRow(a + 1).insertCell(0).innerHTML = b[a];
     }
+
 }
 
 function runOnStart() {
@@ -176,5 +177,5 @@ function check_Data() {
         sequence is if, else if, else and so that the else should not
         be avoided or ignored this Waste situation is made... */
     }
-    
+
 }
