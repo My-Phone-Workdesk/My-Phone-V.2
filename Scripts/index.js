@@ -84,7 +84,10 @@ function Login() {
                             } else {
                                 alert("Incorrect User Lock Entered...");
                             }
+                        } else {
+                            return 9211;
                         }
+                        
                     } while ( ! ( user_lock == locks_hash[check] ) );
                 } else {
                     //No User Lock for the Public User Owner...
