@@ -45,7 +45,11 @@ function Scripting() {
 }
 
 function check_Syntax_Array(Syntax, line) {
-    
+
+    if ( Syntax.charAt(0) == '#' ) {
+        //Its a Comment just compile or ignore it...
+        return "Commentary Line..." + "Line == " + line;
+    }
     if ( ! ( Syntax.charAt(Syntax.length - 1) != ";" || Syntax.charAt(Syntax.length - 1) != "{" ) ) {
         var error = " ';' or '{' expected at the end of the line... ";
         return "Error in line : " + line + " : " + error;
@@ -67,11 +71,8 @@ function check_Syntax_Array(Syntax, line) {
             return "Error in line : " + line + " : " + error;
         }
     }
-    if ( Syntax.charAt(0) == '#' ) {
-        //Its a Comment just compile or ignore it...
-        return "Commentary Line..." + "Line == " + line;
-    }
     return "Syntax of Line : " + line + " : Successfully Compiled...";
+    
 }
 
 function Run_Code(statement) {
