@@ -13,6 +13,6 @@ function Load_Home_Screen() {
     CMD.title = "CMD -- Command Prompt";
     //Clicking on App Icons -->
     CMD.addEventListener('click', function () {
-        location.href = "./Apps/CMD.html";
+        location.href = "./Apps/CMD/CMD.html";
     });
 }
