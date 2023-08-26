@@ -5,7 +5,8 @@ function Load_Home_Screen() {
     play_store.title = "Play Store -- System App";
     //Settings ( System App ) -->
     const settings = document.body.appendChild( document.createElement('i') );
-    settings.className = "fa-solid fa-gear";
+    // settings.className = "fa-solid fa-gear";
+    settings.className = "fa-sharp fa-solid fa-gear";
     settings.title = "Settings -- System App";
     //CMD ( System App for Laptop, Desktop and Notepad ) ==>
     const CMD = document.body.appendChild( document.createElement('span') );
