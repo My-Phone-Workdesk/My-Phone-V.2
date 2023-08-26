@@ -23,7 +23,7 @@ function Compilation() {
 
 function Scripting() {
     if ( localStorage.getItem("Code_Ext") == ".cmd" ) {
-        // For CMD File..
+        // For CMD...
         var code_array = new Array();
         code_array = JSON.parse( localStorage.getItem("Code") );
         var field = "normal";
