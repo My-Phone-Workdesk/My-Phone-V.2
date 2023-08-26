@@ -61,16 +61,6 @@ i {
     font-size: 4rem;
     margin-left: 3rem;
 }
-#Login_User_Icon {
-    margin-left: 2.3rem;
-    color: black;
-    display: inline-block;
-    background-image: url(../Icons/Login_User.ico);
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 6rem;
-    width: 6rem;
-}
 #Login-Div {
     left: 6rem;
     display: flex;
