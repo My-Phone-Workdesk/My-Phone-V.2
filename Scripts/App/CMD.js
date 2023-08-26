@@ -18,6 +18,8 @@ function Compilation() {
     var code_array = new Array();
     code_array = code_text.split("\n");
     localStorage.setItem( "Code", JSON.stringify(code_array) );
+    var input_title = document.getElementById('input');
+    localStorage.setItem("device_type", input_title.value);
     location.href = './Run.html';
 }
 
@@ -28,9 +30,15 @@ function Scripting() {
         code_array = JSON.parse( localStorage.getItem("Code") );
         var field = "normal";
         var print = "nothing";
+        document.write("<h1 style='text-align: center; text-decoration: underline; '> " + localStorage.getItem("device_type") + localStorage.getItem("Code_Ext") + " </h1>");
+        document.write("<br>");
+        document.write("<br>");
+        document.write( "<h2> " + "-".repeat(45) + " Compilation and Errors " + "-".repeat(45) + " </h2>" );
+        document.write("<br>");
+        document.write("<br>");
         for (var line = 0; line < code_array.length; line++) {
             field = check_Syntax_Array( code_array[line], line);
-            document.write(field);
+            document.write("<h3> " + field + " </h3>");
             if ( field.includes("Error") ) {
                 console.error(field);
                 return "Error in Code";
@@ -40,7 +48,7 @@ function Scripting() {
         }   //Here the Compilation Finishes...
         setTimeout( () => {
             document.write("<br>");
-            document.write( "-".repeat(45) + " Output " + "-".repeat(45) );
+            document.write( "<h2> " + "-".repeat(45) + " Output " + "-".repeat(45) + " </h2>" );
             document.write("<br>");
             for (var line = 0; line < code_array.length; line++) {
                 Run_Code( code_array[line] );
@@ -91,7 +99,7 @@ function check_Syntax_Array(Syntax, line) {
     }
     if ( Syntax.includes("get.") ) {
         if ( Syntax.slice(-1) == ";" && Syntax.slice(-2, -1) == ")" ) {
-            if ( ! ( Syntax.toLowerCase().includes("user_lock of user (" || "user with user_lock (" || "user.id with user (" || "user.id with user_lock (" || "user_lock with id (" || "user with id (" || "user_device with id (" || "user_firmware with id (" || "user_firmware-version with id (" || "user_money with id (") ) ) {
+            if ( ! ( Syntax.toLowerCase().includes("user_lock of user (") || Syntax.toLowerCase().includes("user with user_lock (") || Syntax.toLowerCase().includes("user.id with user (") || Syntax.toLowerCase().includes("user.id with user_lock (") || Syntax.toLowerCase().includes("user_lock with id (") || Syntax.toLowerCase().includes("user with id (") || Syntax.toLowerCase().includes("user_device with id (") || Syntax.toLowerCase().includes("user_firmware with id (") || Syntax.toLowerCase().includes("user_firmware-version with id (") || Syntax.toLowerCase().includes("user_money with id (") ) ) {
                 var error = " This Syntax of 'get' module is invalid... "
                 return "Error in line : " + line + " : " + error;
             }
@@ -109,15 +117,15 @@ function Run_Code(statement) {
 
     if ( statement.includes("Print") ) {
         if ( statement.includes('"""') ) {
-            document.writeln( statement.slice(8, -4) );
+            document.writeln( "<h4> " + statement.slice(8, -4) + " </h4>" );
             document.writeln("<br>");
         } else if ( statement.includes('""') ) {
             var variable_data = statement.slice(7, -3);
             var variable_identity = JSON.parse( localStorage.getItem("Code_Var") );
-            document.writeln( variable_identity[variable_data] );
+            document.writeln( "<h4> " + variable_identity[variable_data] + " </h4>" );
             document.writeln("<br>");
         } else if ( statement.includes('"') ) {
-            document.writeln( statement.slice(6, -2) );
+            document.writeln( "<h4> " + statement.slice(6, -2) + " </h4>" );
             document.writeln("<br>");
         }
     } else if ( statement.includes("get.") ) {
@@ -151,7 +159,7 @@ function Run_Code(statement) {
                 // User Lock is not Correct
             }
         } else if ( statement.toLowerCase().includes("user.id with user (") ) {
-            input = statement.slice(24, -3);
+            input = statement.slice(23, -2);
             process = JSON.parse( localStorage.getItem("Users") );
             if ( process.indexOf(input) >= 0 ) {
                 process = process.indexOf(input);
