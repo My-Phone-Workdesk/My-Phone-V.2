@@ -11,6 +11,8 @@ function Run() {
 }
 
 function Compilation() {
+    let file_extention = document.getElementById("File-Extention");
+    localStorage.setItem("Code_Ext", file_extention.value);
     let code = document.getElementById("code");
     let code_text = code.value;
     var code_array = new Array();
@@ -20,28 +22,32 @@ function Compilation() {
 }
 
 function Scripting() {
-    var code_array = new Array();
-    code_array = JSON.parse( localStorage.getItem("Code") );
-    var field = "normal";
-    var print = "nothing";
-    for (var line = 0; line < code_array.length; line++) {
-        field = check_Syntax_Array( code_array[line], line);
-        document.write(field);
-        if ( field.includes("Error") ) {
-            console.error(field);
-            return "Error in Code";
-        } else {
-            document.write("<br>");
-        }
-    }   //Here the Compilation Finishes...
-    setTimeout( () => {
-        document.write("<br>");
-        document.write( "-".repeat(45) + " Output " + "-".repeat(45) );
-        document.write("<br>");
+    if ( localStorage.getItem("Code_Ext") == ".cmd" ) {
+        // For CMD File..
+        var code_array = new Array();
+        code_array = JSON.parse( localStorage.getItem("Code") );
+        var field = "normal";
+        var print = "nothing";
         for (var line = 0; line < code_array.length; line++) {
-            Run_Code( code_array[line] );
-        }
-    },2000 );
+            field = check_Syntax_Array( code_array[line], line);
+            document.write(field);
+            if ( field.includes("Error") ) {
+                console.error(field);
+                return "Error in Code";
+            } else {
+                document.write("<br>");
+            }
+        }   //Here the Compilation Finishes...
+        setTimeout( () => {
+            document.write("<br>");
+            document.write( "-".repeat(45) + " Output " + "-".repeat(45) );
+            document.write("<br>");
+            for (var line = 0; line < code_array.length; line++) {
+                Run_Code( code_array[line] );
+            }
+        },2000 );
+
+    }
 }
 
 function check_Syntax_Array(Syntax, line) {
