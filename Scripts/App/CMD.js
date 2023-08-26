@@ -56,11 +56,11 @@ function check_Syntax_Array(Syntax, line) {
     } // Checking of the Symbol ';' at the end of the Line or Syntax...
     if ( Syntax.includes("Print") ) {
         if ( Syntax.charAt(Syntax.length - 1) == ";" ) {
-            if ( ( Syntax.slice(-4, -1) ) == ")))" && ( Syntax.slice(5, 8) ) == "(((") {
+            if ( ( Syntax.slice(-4, -1) ) == '"""' && ( Syntax.slice(5, 8) ) == '"""') {
                 // No Error in Printing String...
-            } else if ( ( Syntax.slice(-3, -1) ) == "))" && ( Syntax.slice(5, 7) ) == "((") {
+            } else if ( ( Syntax.slice(-3, -1) ) == '""' && ( Syntax.slice(5, 7) ) == '""') {
                 // No Error in Printing Variables...
-            } else if ( ( Syntax.slice(-2, -1) ) == ")" && ( Syntax.slice(5, 6) ) == "(") {
+            } else if ( ( Syntax.slice(-2, -1) ) == '"' && ( Syntax.slice(5, 6) ) == '"') {
                 // No Error in Printing Integer Value...
             } else {
                 var error = " Print() function must include atleast one character ')' in start and before last... "
@@ -78,14 +78,12 @@ function check_Syntax_Array(Syntax, line) {
 function Run_Code(statement) {
 
     if ( statement.includes("Print") ) {
-        if ( statement.includes("(((") ) {
-            document.write( statement.slice(8, -4) );
-            document.write("<br>");
-        } else if ( statement.includes("((") ) {
+        if ( statement.includes('"""') ) {
+            document.writeln( statement.slice(8, -4) );
+        } else if ( statement.includes('""') ) {
             //variable Value...
-        } else if ( statement.includes("(") ) {
-            document.write( statement.slice(6, -2) );
-            document.write("<br>");
+        } else if ( statement.includes('"') ) {
+            document.writeln( statement.slice(6, -2) );
         }
     }
     
