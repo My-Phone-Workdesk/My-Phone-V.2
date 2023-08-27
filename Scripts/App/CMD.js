@@ -34,7 +34,7 @@ function Scripting() {
         document.write("<br>");
         document.write("<br>");
         document.write( "<h2> " + "-".repeat(45) + " Compilation and Errors " + "-".repeat(45) + " </h2>" );
-        document.write("<br>");
+        document.title = localStorage.getItem("device_type");
         document.write("<br>");
         for (var line = 0; line < code_array.length; line++) {
             field = check_Syntax_Array( code_array[line], line);
@@ -43,13 +43,12 @@ function Scripting() {
                 console.error(field);
                 return "Error in Code";
             } else {
-                document.write("<br>");
+                // All Good Compilation of that Line Done...!!!
             }
         }   //Here the Compilation Finishes...
         setTimeout( () => {
             document.write("<br>");
             document.write( "<h2> " + "-".repeat(45) + " Output " + "-".repeat(45) + " </h2>" );
-            document.write("<br>");
             for (var line = 0; line < code_array.length; line++) {
                 Run_Code( code_array[line] );
             }
@@ -118,20 +117,26 @@ function Run_Code(statement) {
     if ( statement.includes("Print") ) {
         if ( statement.includes('"""') ) {
             document.writeln( "<h4> " + statement.slice(8, -4) + " </h4>" );
-            document.writeln("<br>");
         } else if ( statement.includes('""') ) {
             var variable_data = statement.slice(7, -3);
             var variable_identity = JSON.parse( localStorage.getItem("Code_Var") );
             document.writeln( "<h4> " + variable_identity[variable_data] + " </h4>" );
-            document.writeln("<br>");
         } else if ( statement.includes('"') ) {
             document.writeln( "<h4> " + statement.slice(6, -2) + " </h4>" );
-            document.writeln("<br>");
         }
     } else if ( statement.includes("get.") ) {
         var input, process;
         if ( statement.toLowerCase().includes("user_lock of user (") ) {
-            input = statement.slice(24, -3);
+            input = statement.slice(23, -2);
+            if ( Type_Identification(input) == "Var" ) {
+                process = JSON.parse( localStorage.getItem("Code_Var") );
+                if ( process[input] != null ) {
+                    input = process[input];
+                } else {
+                    // Variable is not Defined...
+                    input = NaN;
+                }
+            }
             process = JSON.parse( localStorage.getItem("Users") );
             if ( process.indexOf(input) >= 0 ) {
                 input = process.indexOf(input);
@@ -145,7 +150,16 @@ function Run_Code(statement) {
                 // User is not Available
             }
         } else if ( statement.toLowerCase().includes("user with user_lock (") ) {
-            input = statement.slice(26, -3);
+            input = statement.slice(25, -2);
+            if ( Type_Identification(input) == "Var" ) {
+                process = JSON.parse( localStorage.getItem("Code_Var") );
+                if ( process[input] != null ) {
+                    input = process[input];
+                } else {
+                    // Variable is not Defined...
+                    input = NaN;
+                }
+            }
             process = JSON.parse( localStorage.getItem("User_Lock") );
             if ( process.indexOf(input) >= 0 ) {
                 input = process.indexOf(input);
@@ -160,6 +174,15 @@ function Run_Code(statement) {
             }
         } else if ( statement.toLowerCase().includes("user.id with user (") ) {
             input = statement.slice(23, -2);
+            if ( Type_Identification(input) == "Var" ) {
+                process = JSON.parse( localStorage.getItem("Code_Var") );
+                if ( process[input] != null ) {
+                    input = process[input];
+                } else {
+                    // Variable is not Defined...
+                    input = NaN;
+                }
+            }
             process = JSON.parse( localStorage.getItem("Users") );
             if ( process.indexOf(input) >= 0 ) {
                 process = process.indexOf(input);
@@ -171,19 +194,95 @@ function Run_Code(statement) {
                 // User is not Available
             }
         } else if ( statement.toLowerCase().includes("user.id with user_lock (") ) {
-
+            input = statement.slice(28, -2);
+            if ( Type_Identification(input) == "Var" ) {
+                process = JSON.parse( localStorage.getItem("Code_Var") );
+                if ( process[input] != null ) {
+                    input = process[input];
+                } else {
+                    // Variable is not Defined...
+                    input = NaN;
+                }
+            }
+            process = JSON.parse( localStorage.getItem("User_Lock") );
+            if ( process.indexOf(input) >= 0 ) {
+                process = process.indexOf(input);
+                input = JSON.parse(localStorage.getItem("Code_Var"));
+                input.get = process;
+                input = JSON.stringify(input);
+                localStorage.setItem("Code_Var", input);
+            } else {
+                // User is not Available
+            }
         } else if ( statement.toLowerCase().includes("user_lock with id (") ) {
-
+            input = statement.slice(23, -2);
+            if ( Type_Identification(input) == "Var" ) {
+                process = JSON.parse( localStorage.getItem("Code_Var") );
+                if ( process[input] != null ) {
+                    input = process[input];
+                } else {
+                    // Variable is not Defined...
+                    input = NaN;
+                }
+            }
+            process = JSON.parse( localStorage.getItem("User_Lock") );
+            if ( process.length > input ) {
+                process = process[input];
+                input = JSON.parse(localStorage.getItem("Code_Var"));
+                input.get = process;
+                input = JSON.stringify(input);
+                localStorage.setItem("Code_Var", input);
+            } else {
+                // User is not Available
+            }
         } else if ( statement.toLowerCase().includes("user with id (") ) {
-
+            input = statement.slice(18, -2);
+            if ( Type_Identification(input) == "Var" ) {
+                process = JSON.parse( localStorage.getItem("Code_Var") );
+                if ( process[input] != null ) {
+                    input = process[input];
+                } else {
+                    // Variable is not Defined...
+                    input = NaN;
+                }
+            }
+            process = JSON.parse( localStorage.getItem("Users") );
+            if ( process.length > input ) {
+                process = process[input];
+                input = JSON.parse(localStorage.getItem("Code_Var"));
+                input.get = process;
+                input = JSON.stringify(input);
+                localStorage.setItem("Code_Var", input);
+            } else {
+                // User is not Available
+            }
         } else if ( statement.toLowerCase().includes("user_device with id (") ) {
-
+            // No Data available for Device...
         } else if ( statement.toLowerCase().includes("user_firmware with id (") ) {
-
+            input = statement.slice(27, -2);
+            if ( Type_Identification(input) == "Var" ) {
+                process = JSON.parse( localStorage.getItem("Code_Var") );
+                if ( process[input] != null ) {
+                    input = process[input];
+                } else {
+                    // Variable is not Defined...
+                    input = NaN;
+                }
+            }
+            process = JSON.parse( localStorage.getItem("OS") );
+            if ( process.length > input ) {
+                process = process[input];
+                input = JSON.parse(localStorage.getItem("Code_Var"));
+                input.get = process;
+                input = JSON.stringify(input);
+                localStorage.setItem("Code_Var", input);
+            } else {
+                // User is not Available
+            }
         } else if ( statement.toLowerCase().includes("user_firmware-version with id (") ) {
-
+            // No Data available for Firmware or OS Version...
         } else if ( statement.toLowerCase().includes("user_money with id (") ) {
-
+            // No Data available for Money in case of Accounting...
         } else {
             // This Situation would never come... Gauranted by the Company & Owners...
         }
@@ -202,4 +301,14 @@ function Identify_Type(variable) {
         }
     }
     return "int";
+}
+
+function Type_Identification(variable) {
+
+    if ( variable.charAt(0) == "~" && variable.charAt(-1) == '~' ) {
+        return "Var";
+    } else {
+        return "String";
+    }
+
 }
