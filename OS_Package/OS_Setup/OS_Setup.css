@@ -26,9 +26,17 @@ input {
     background-color: rgba(0, 0, 255, 0.4);
     color: rgba(255, 50, 40, 0.8);
 }
-input:hover {
+input:hover, button:hover {
     cursor: pointer;
 }
-#display_text, #text {
+#display_text, #text, #Response {
     color: grey;
+}
+button {
+    background-color: black;
+    border: 1rem solid grey;
+    font-size: 3rem;
+    color: white;
+    padding: 0.4rem;
+    margin-bottom: 3rem;
 }

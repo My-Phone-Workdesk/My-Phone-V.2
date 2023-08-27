@@ -1,4 +1,6 @@
 function OS_Options() {
+    localStorage.setItem("device_type", false);
+    localStorage.setItem("Amount_MB", false);
     let OS_Select = document.getElementById('OS_select');
     let device_type = localStorage.getItem("device_type");
     if (device_type == "Desktop" || device_type == "Laptop" || device_type == "Notepad") {
@@ -51,11 +53,13 @@ function Check_Certificate() {
 }
 
 function Submit_OS() {
+    let text = document.getElementById('Response');
     var OS = localStorage.getItem("device_type");
     var Certificate = localStorage.getItem("Amount_MB");
-    if ( OS && Certificate ) {
-        // Here all correct so submit...
+    if ( OS == 'true' && Certificate == 'true' ) {
+        text.innerHTML = "File Uploaded to Server...";
+        document.createElement();
     } else {
-        // Something wrong so do not Submit...
+        text.innerHTML = "Accesss to Server have been Denied...";
     }
 }
