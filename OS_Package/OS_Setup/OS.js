@@ -58,7 +58,9 @@ function Submit_OS() {
     var Certificate = localStorage.getItem("Amount_MB");
     if ( OS == 'true' && Certificate == 'true' ) {
         text.innerHTML = "File Uploaded to Server...";
-        document.createElement();
+        let final = document.createElement('button');
+        final.textContent = "Done and Continue Ahead --> ";
+        document.body.appendChild(final);
     } else {
         text.innerHTML = "Accesss to Server have been Denied...";
     }
