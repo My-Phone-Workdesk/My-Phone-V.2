@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OS Setup</title>
-    <link rel="stylesheet" href="../../Design/OS_Setup.css" />
+    <link rel="stylesheet" href="./OS_Setup.css" />
+    <script src="./OS.js"></script>
 </head>
-<body>
+<body onload="OS_Options();">
     <h1>Select an OS for your Device</h1>
+    <select id="OS_select"></select>
+    <h1>Import Your OS Setup File Here Below...</h1>
+    <input type="file" id="OS_File" title="Only .bin Files Allowed" accept=".bin" onchange="Check_OS();"/>
+    <h1 id="display_text">Select a File</h1>
 </body>
 </html>

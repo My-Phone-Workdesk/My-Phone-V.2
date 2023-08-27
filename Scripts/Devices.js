@@ -61,9 +61,12 @@ function Payment_MB() {
                         d = localStorage.getItem("Amount_MB");
                         if (a[c] >= d) {
                             a[c] -= d;
-                            localStorage.removeItem("Money");
                             a = JSON.stringify(a);
                             localStorage.setItem("Money", a);
+                            var device_config = JSON.parse(localStorage.getItem("Devices"));
+                            device_config.push(localStorage.getItem("device_type"));
+                            device_config = JSON.stringify(device_config);
+                            localStorage.setItem("Devices", device_config)
                             alert("Payment Successful");
                             location.reload();
                             location.href = "../../OS_Package/OS_Setup/OS.html";
