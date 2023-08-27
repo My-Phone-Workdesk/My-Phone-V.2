@@ -13,9 +13,9 @@ $conn_str = 'pgsql:host=' . HOST . ';port=' . PORT . ';dbname=' . DB_NAME .
 
 try {
     $conn = new PDO($conn_str);
-    echo "Connect to database sucessful";
+    echo "Connection to database sucessful";
 } catch (PDOException $e) {
-    echo "fail to connect to database" . $e->getMessage();
+    echo "failed to connect to database. Error: " . $e->getMessage() . "\n";
 }
 
 ?>
