@@ -29,8 +29,6 @@ input {
 input:hover {
     cursor: pointer;
 }
-#display_text {
-    display: inline-block;
-    position: relative;
-    right: -3rem;
+#display_text, #text {
+    color: grey;
 }

@@ -10,8 +10,14 @@
 <body onload="OS_Options();">
     <h1>Select an OS for your Device</h1>
     <select id="OS_select"></select>
+    <br><br><br><br><br><br><br><br>
     <h1>Import Your OS Setup File Here Below...</h1>
     <input type="file" id="OS_File" title="Only .bin Files Allowed" accept=".bin" onchange="Check_OS();"/>
     <h1 id="display_text">Select a File</h1>
+    <h1>Import Your OS Related Certificate Here...</h1>
+    <input type="file" id="OS_Certificate" title="Certificate for your OS" accept=".txt" onchange="Check_Certificate();" />
+    <h1 id="text">Select a File</h1>
+    <br><br><br><br><br><br><br><br>
+    <button id="Submit" onclick="Submit_OS();">Upload File</button>
 </body>
 </html>

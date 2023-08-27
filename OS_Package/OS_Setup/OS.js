@@ -30,7 +30,32 @@ function Check_OS() {
     let text = document.getElementById('display_text');
     if ( value.slice(-4) == '.bin' ) {
         text.innerHTML = "Valid File, Supported ✅";
+        localStorage.setItem('device_type', true);
     } else {
         text.innerHTML = "Invalid File, Not Supported...!!! ❌";
+        localStorage.setItem('device_type', false);
+    }
+}
+
+function Check_Certificate() {
+    let file = document.getElementById('OS_Certificate');
+    let value = file.files[0].name;
+    let text = document.getElementById('text');
+    if ( value.slice(-4) == '.txt' ) {
+        text.innerHTML = "Valid File, Supported ✅";
+        localStorage.setItem('Amount_MB', true);
+    } else {
+        text.innerHTML = "Invalid File, Not Supported...!!! ❌";
+        localStorage.setItem('Amount_MB', false);
+    }
+}
+
+function Submit_OS() {
+    var OS = localStorage.getItem("device_type");
+    var Certificate = localStorage.getItem("Amount_MB");
+    if ( OS && Certificate ) {
+        // Here all correct so submit...
+    } else {
+        // Something wrong so do not Submit...
     }
 }
