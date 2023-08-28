@@ -1,6 +1,4 @@
 function OS_Options() {
-    localStorage.setItem("device_type", false);
-    localStorage.setItem("Amount_MB", false);
     let OS_Select = document.getElementById('OS_select');
     let device_type = localStorage.getItem("device_type");
     if (device_type == "Desktop" || device_type == "Laptop" || device_type == "Notepad") {
@@ -24,6 +22,8 @@ function OS_Options() {
         IOS.text = "IOS";
         OS_Select.add(IOS);
     }
+    localStorage.setItem("device_type", false);
+    localStorage.setItem("Amount_MB", false);
 }
 
 function Check_OS() {
@@ -57,11 +57,141 @@ function Submit_OS() {
     var OS = localStorage.getItem("device_type");
     var Certificate = localStorage.getItem("Amount_MB");
     if ( OS == 'true' && Certificate == 'true' ) {
+
         text.innerHTML = "File Uploaded to Server...";
-        let final = document.createElement('button');
-        final.textContent = "Done and Continue Ahead --> ";
-        document.body.appendChild(final);
+        var check = document.getElementById('continue.com');
+        if (check == null) {
+            let final = document.createElement('button');
+            final.textContent = "Done and Continue Ahead --> ";
+            final.id = "continue.com";
+            document.body.appendChild(final);
+            final.addEventListener('click', function () {
+                Check_Document();
+            });
+        } else {
+            let remove = document.getElementById('next.com');
+            if ( remove != null ) {
+                remove.remove();
+            }
+        }
+
     } else {
         text.innerHTML = "Accesss to Server have been Denied...";
     }
+}
+
+function Check_Document() {
+
+    let document_certificate = document.getElementById('OS_Certificate');
+    var document_data = new FileReader();
+    var file = document_certificate.files[0];
+    document_data.readAsText(file);
+    var text_data = new Array();
+    document_data.result;
+
+    document_data.onload = function () {
+        text_data.push( document_data.result );
+        text_data = text_data[0].split('\r\n');
+        text_data = JSON.stringify(text_data);
+        sessionStorage.setItem("Certificate", text_data);
+        
+        var check = document.getElementById('next.com');
+        if ( check == null ) {
+
+            let space = document.createElement('pre');
+            space.innerHTML = "             ";
+            space.style.display = "inline-block";
+            document.body.appendChild(space);
+
+            let _Confirm = document.createElement('button');
+            _Confirm.textContent = "Next ==> ";
+            _Confirm.style.display = "inline-block";
+            _Confirm.id = 'next.com';
+            document.body.appendChild(_Confirm);
+            _Confirm.addEventListener('click', function () {
+                Next();
+                _Confirm.remove();
+                var _Confirm_ = confirm("Are you Sure to Finally Submit ? This Action can't be Undone ❗ ");
+                if ( _Confirm_ ) {
+                    location.href = "./OS_Test.html";
+                } else {
+                    location.reload();
+                }
+            });
+
+        } else {
+            check.remove();
+        }
+    }
+
+    document_data.onerror = function () {
+        console.log( document_data.error );
+    }
+
+}
+
+function Next() {
+
+    var file_data = new Array();
+    file_data = JSON.parse( sessionStorage.getItem("Certificate") );
+    
+    if ( ! ( file_data[0] == '--- Start ---' && file_data[file_data.length - 1] == '--- End ---') ) {
+
+        alert("The Certificate is not Suitable for your System...");
+        location.reload();
+        
+    } else {
+        
+        for (var msi = 0; msi < file_data.length; msi++) {
+            Program( file_data[msi] );
+        }
+
+    }
+
+}
+
+function Program(Code) {
+    
+    var part = null;
+
+    if ( Code.toLowerCase().includes('User.BIOS.set <===> '.toLowerCase() ) ) {
+        
+        part = Code.slice(20);
+        sessionStorage.setItem("BIOS", part);
+
+    } else if ( Code.toLowerCase().includes('User.Certify <===> '.toLowerCase() ) ) {
+        
+        part = Code.slice(19);
+        var option = document.getElementById('OS_select');
+        option = option.value;
+        var file = document.getElementById('OS_File');
+        file = file.files[0].name;
+        file = file.slice(0, -4);
+        var Certificate = document.getElementById('OS_Certificate');
+        Certificate = file.files[0].name;
+        Certificate = Certificate.slice(0, -4);
+        
+        if ( part == file) {
+            
+            if ( part == option ) {
+                
+                if ( part == Certificate ) {
+                    sessionStorage.setItem("OS", part);
+                } else {
+                    alert('Your Uploaded OS Certificate is not Correct...');
+                    location.reload();
+                }
+
+            } else {
+                alert('Your Selected OS is not Correct...');
+                location.reload();
+            }
+
+        } else {
+            alert('Your Uploaded OS File is not Valid...');
+            location.reload();
+        }
+
+    }
+
 }
