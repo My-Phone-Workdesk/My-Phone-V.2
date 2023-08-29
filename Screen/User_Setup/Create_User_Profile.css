@@ -1,0 +1,41 @@
+body {
+    width: 97vw;
+    height: 97vh;
+}
+
+input, button {
+    width: 25vw;
+    height: 8vh;
+    background-color: white;
+    border: black solid 0.75rem;
+    color: black;
+    font-weight: 800;
+    font-size: 1.2rem;
+    right: 2rem;
+    position: fixed;
+}
+
+#user_profile {
+    bottom: 30rem;
+}
+
+#user_password {
+    bottom: 20rem;
+}
+
+#Submit {
+    bottom: 4rem;
+    height: 5rem;
+    right: 2.5rem;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+#Password_Strength {
+    bottom: 15rem;
+    height: 4rem;
+    right: 2.5rem;
+    background-color: red;
+}

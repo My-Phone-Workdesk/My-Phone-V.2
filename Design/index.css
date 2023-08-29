@@ -25,6 +25,7 @@ color: black;
 }
 body {
     background-color: white;
+    width: 98vw;
 }
 h1 {
     font-size: 5rem;
@@ -99,4 +100,29 @@ td {
 }
 .different:hover {
     cursor: pointer;
+}
+textarea {
+    width: 95vw;
+    height: 26vh;
+    font-size: 1rem;
+    color: black;
+    background-color: white;
+    font-weight: 200;
+    text-align: center;
+    display: block;
+    word-wrap: break-word;
+    border: 1.2rem black solid;
+    align-self: center;
+}
+p {
+    font-weight: 700;
+    font-size: 4rem;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+p:hover {
+    cursor: not-allowed;
 }

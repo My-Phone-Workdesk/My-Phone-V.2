@@ -1,6 +1,7 @@
 function OS_Options() {
+    sessionStorage.setItem( "device_type", localStorage.getItem("device_type") );
     let OS_Select = document.getElementById('OS_select');
-    let device_type = localStorage.getItem("device_type");
+    let device_type = sessionStorage.getItem("device_type");
     if (device_type == "Desktop" || device_type == "Laptop" || device_type == "Notepad") {
         let Windows = document.createElement('option');
         Windows.text = "Windows";
@@ -22,8 +23,8 @@ function OS_Options() {
         IOS.text = "IOS";
         OS_Select.add(IOS);
     }
-    localStorage.setItem("device_type", false);
-    localStorage.setItem("Amount_MB", false);
+    sessionStorage.setItem("device_type", false);
+    sessionStorage.setItem("Amount_MB", false);
 }
 
 function Check_OS() {
@@ -32,10 +33,10 @@ function Check_OS() {
     let text = document.getElementById('display_text');
     if ( value.slice(-4) == '.bin' ) {
         text.innerHTML = "Valid File, Supported ✅";
-        localStorage.setItem('device_type', true);
+        sessionStorage.setItem('device_type', true);
     } else {
         text.innerHTML = "Invalid File, Not Supported...!!! ❌";
-        localStorage.setItem('device_type', false);
+        sessionStorage.setItem('device_type', false);
     }
 }
 
@@ -45,17 +46,17 @@ function Check_Certificate() {
     let text = document.getElementById('text');
     if ( value.slice(-4) == '.txt' ) {
         text.innerHTML = "Valid File, Supported ✅";
-        localStorage.setItem('Amount_MB', true);
+        sessionStorage.setItem('Amount_MB', true);
     } else {
         text.innerHTML = "Invalid File, Not Supported...!!! ❌";
-        localStorage.setItem('Amount_MB', false);
+        sessionStorage.setItem('Amount_MB', false);
     }
 }
 
 function Submit_OS() {
     let text = document.getElementById('Response');
-    var OS = localStorage.getItem("device_type");
-    var Certificate = localStorage.getItem("Amount_MB");
+    var OS = sessionStorage.getItem("device_type");
+    var Certificate = sessionStorage.getItem("Amount_MB");
     if ( OS == 'true' && Certificate == 'true' ) {
 
         text.innerHTML = "File Uploaded to Server...";
@@ -111,11 +112,15 @@ function Check_Document() {
             _Confirm.addEventListener('click', function () {
                 Next();
                 _Confirm.remove();
-                var _Confirm_ = confirm("Are you Sure to Finally Submit ? This Action can't be Undone ❗ ");
-                if ( _Confirm_ ) {
-                    location.href = "./OS_Test.html";
+                if ( sessionStorage.getItem("Check") != 'false' ) {
+                    var _Confirm_ = confirm("Are you Sure to Finally Submit ? This Action can't be Undone ❗ ");
+                    if ( _Confirm_ ) {
+                        location.href = "../../Screen/User_Setup/Create_User_Profile.html";
+                    } else {
+                        location.reload();
+                    }
                 } else {
-                    location.reload();
+                    sessionStorage.setItem("Check", true);
                 }
             });
 
@@ -138,6 +143,7 @@ function Next() {
     if ( ! ( file_data[0] == '--- Start ---' && file_data[file_data.length - 1] == '--- End ---') ) {
 
         alert("The Certificate is not Suitable for your System...");
+        sessionStorage.setItem("Check", false);
         location.reload();
         
     } else {
@@ -168,7 +174,7 @@ function Program(Code) {
         file = file.files[0].name;
         file = file.slice(0, -4);
         var Certificate = document.getElementById('OS_Certificate');
-        Certificate = file.files[0].name;
+        Certificate = Certificate.files[0].name;
         Certificate = Certificate.slice(0, -4);
         
         if ( part == file) {
@@ -179,16 +185,19 @@ function Program(Code) {
                     sessionStorage.setItem("OS", part);
                 } else {
                     alert('Your Uploaded OS Certificate is not Correct...');
+                    sessionStorage.setItem("Check", false);
                     location.reload();
                 }
 
             } else {
                 alert('Your Selected OS is not Correct...');
+                sessionStorage.setItem("Check", false);
                 location.reload();
             }
 
         } else {
             alert('Your Uploaded OS File is not Valid...');
+            sessionStorage.setItem("Check", false);
             location.reload();
         }
 
