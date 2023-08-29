@@ -24,11 +24,13 @@ function Check_Password_Strength() {
     Strong_Char = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+', '=', '`', '~', ',', '.', '<', '>', '/', '?', ':', ';', '[', ']', '{', '}', '|', '"', "'"];
     if ( password.length >= 8 ) {
         Check_Box.style.backgroundColor = 'yellow';
-    }
-    for (var no = 0; no < Strong_Char.length; no++) {
-        if (password.includes( Strong_Char[no] ) ) {
-            Check_Box.style.backgroundColor = 'green';
-            return "Strong";
-        }
+        for (var no = 0; no < Strong_Char.length; no++) {
+            if (password.includes( Strong_Char[no] ) ) {
+                Check_Box.style.backgroundColor = 'green';
+                return "Strong";
+            }
+        }   
+    } else {
+        Check_Box.style.backgroundColor = 'red';
     }
 }
