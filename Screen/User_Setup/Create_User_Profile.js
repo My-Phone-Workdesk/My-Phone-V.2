@@ -25,9 +25,10 @@ function Check_Password_Strength() {
     if ( password.length >= 8 ) {
         Check_Box.style.backgroundColor = 'yellow';
     }
-    for (var no = 0; no < password.length; no++) {
-        if ( password.charAt(no) ) {
-
+    for (var no = 0; no < Strong_Char.length; no++) {
+        if (password.includes( Strong_Char[no] ) ) {
+            Check_Box.style.backgroundColor = 'green';
+            return "Strong";
         }
     }
 }
