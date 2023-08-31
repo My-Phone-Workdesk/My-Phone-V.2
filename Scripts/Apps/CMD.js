@@ -30,10 +30,10 @@ function Scripting() {
         code_array = JSON.parse( localStorage.getItem("Code") );
         var field = "normal";
         var print = "nothing";
-        document.write("<h1 style='text-align: center; text-decoration: underline; '> " + localStorage.getItem("device_type") + localStorage.getItem("Code_Ext") + " </h1>");
+        document.write("<hr><h1 style='text-align: center; text-decoration: underline;'> " + localStorage.getItem("device_type") + localStorage.getItem("Code_Ext") + " </h1><hr>");
         document.write("<br>");
         document.write("<br>");
-        document.write( "<h2> " + "-".repeat(45) + " Compilation and Errors " + "-".repeat(45) + " </h2>" );
+        document.write( "<h2> " + "-".repeat(46) + " Compilation and Errors " + "-".repeat(46) + " </h2>" );
         document.title = localStorage.getItem("device_type");
         document.write("<br>");
         for (var line = 0; line < code_array.length; line++) {
@@ -48,7 +48,7 @@ function Scripting() {
         }   //Here the Compilation Finishes...
         setTimeout( () => {
             document.write("<br>");
-            document.write( "<h2> " + "-".repeat(45) + " Output " + "-".repeat(45) + " </h2>" );
+            document.write( "<h2> " + "-".repeat(57) + " Output " + "-".repeat(57) + " </h2>" );
             for (var line = 0; line < code_array.length; line++) {
                 Run_Code( code_array[line] );
             }

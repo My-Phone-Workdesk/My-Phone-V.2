@@ -8,9 +8,13 @@ function Start_Up() {
         BIOS_List = JSON.parse( localStorage.getItem("OS") );
         window.BIOS = localStorage.getItem("Amount_MB");
         var OS = BIOS_List[BIOS - 1];
+        document.body.style.backgroundSize = "60vw 55vh";
+        document.body.style.backgroundRepeat = "no-repeat";
+        document.body.style.backgroundPosition = "center center";
         switch (OS) {
             case "Windows":
                 document.body.style.backgroundImage = "url('../OS_Package/Windows.jpg')";
+                document.body.style.backgroundPosition = "top center";
                 break;
             case "Mac":
                 document.body.style.backgroundImage = "url('../OS_Package/Mac.jpg')";
@@ -31,9 +35,6 @@ function Start_Up() {
                 document.body.style.backgroundImage = "url('../OS_Package/Linux.jpg')";
                 break;
         }
-        document.body.style.backgroundSize = "75vw 75vh";
-        document.body.style.backgroundRepeat = "no-repeat";
-        document.body.style.backgroundPosition = "center center";
         setTimeout( function () {
             document.body.style.backgroundImage = "";
         }, BIOS * 2000 );
