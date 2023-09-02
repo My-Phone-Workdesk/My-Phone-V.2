@@ -34,13 +34,6 @@ function check_storage() {
     }   //Function Done with No Error...
 }
 
-/* वेसे तो ये काम नहीं करता पर फिर भी क्या पता काम आ जाए ॥
-async function Get_Data() {
-    let n = await fetch('https://script.google.com/macros/s/AKfycbykj7egp6Z2N150ZBGs6NlwssPyw6-Cs5XjRqPZeBgeDwMCUdshtU10ewA9KFRpU3uDJA/exec');
-    let resp = await n.json();
-    console.log(resp, n);
-} */
-
 function Common_Method(process) {
     process = localStorage.getItem( process );
     return process;
