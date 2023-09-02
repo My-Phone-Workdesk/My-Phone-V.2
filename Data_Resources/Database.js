@@ -34,19 +34,20 @@ function check_storage() {
     }   //Function Done with No Error...
 }
 
-function Common_Method(process) {
-    process = localStorage.getItem( process );
-    return process;
-}
-
 /* वेसे तो ये काम नहीं करता पर फिर भी क्या पता काम आ जाए ॥
 async function Get_Data() {
     let n = await fetch('https://script.google.com/macros/s/AKfycbykj7egp6Z2N150ZBGs6NlwssPyw6-Cs5XjRqPZeBgeDwMCUdshtU10ewA9KFRpU3uDJA/exec');
     let resp = await n.json();
     console.log(resp, n);
+} */
+
+function Common_Method(process) {
+    process = localStorage.getItem( process );
+    return process;
 }
 
-Common API KEY == https://sheetdb.io/api/v1/qhlszwbu7dxp7
+
+/* Common API KEY == https://sheetdb.io/api/v1/qhlszwbu7dxp7
 Just add Sheet name after the API...
 To Select a range add after sheet name += &limit=(Number of Rows)
 To pass the range between two rows add after limit += &offset= (After which row means row number...)
@@ -89,3 +90,18 @@ To add data you have to change the request to POST and just add common api key a
 
 To delete Data records you need to change the request to DELETE and the format would be same as Update one but here it will delete the whole row instead of updating the row's value...*/
 
+function Database_Data(sheet, arguments) {
+    const request = new XMLHttpRequest();
+    const Database = 'https://sheetdb.io/api/v1/qhlszwbu7dxp7';
+    var Database_URL = Database + arguments + sheet;
+    request.open("GET", Database_URL);
+    request.send();
+
+    request.onreadystatechange = function () {
+        if ( this.readyState == 4 && this.status == 200 ) {
+            sessionStorage.setItem("Data", request.responseText);
+        } else {
+            console.log( request.status, request.readyState, request.responseText );
+        }
+    }
+}
