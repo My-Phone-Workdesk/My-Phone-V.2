@@ -50,23 +50,37 @@ function Mother_Board() {
 function Payment_MB() {
     try {
         var a = new Array();
-        a = JSON.parse(localStorage.getItem("Security_Code"));
+        a = JSON.parse(localStorage.getItem("Accounts_Data"));
+        var Data_list = new Array();
+        for (var b = 0; b < a.length; b++) {
+            var c = a[b];
+            Data_list.push( c["Security_Code"] );
+        }
+        a = Data_list;
+        Data_list = null;
         var b = document.getElementById('input_code').value;
         var d = a.length;
         setTimeout( function () {
             for (var c = 0; c <= d; c = c ) {
                 if (a[c] == b) {
                     if (c > 0) {
-                        a = JSON.parse(localStorage.getItem("Money") );
+                        a = JSON.parse(sessionStorage.getItem("Accounts_Data") );
+                        Data_list = new Array();
+                        for (var ab = 0; ab < a.length; ab++) {
+                            var ac = a[ab];
+                            Data_list.push( ac["Money"] );
+                        }
+                        a = Data_list;
+                        Data_list = null;
                         d = localStorage.getItem("Amount_MB");
                         if (a[c] >= d) {
-                            a[c] -= d;
-                            a = JSON.stringify(a);
-                            localStorage.setItem("Money", a);
-                            var device_config = JSON.parse(localStorage.getItem("Devices"));
-                            device_config.push(localStorage.getItem("device_type"));
-                            device_config = JSON.stringify(device_config);
-                            localStorage.setItem("Devices", device_config)
+                            // a[c] -= d;
+                            // a = JSON.stringify(a);
+                            // localStorage.setItem("Money", a);
+                            // var device_config = JSON.parse(localStorage.getItem("Devices"));
+                            // device_config.push(localStorage.getItem("device_type"));
+                            // device_config = JSON.stringify(device_config);
+                            // localStorage.setItem("Devices", device_config);
                             alert("Payment Successful");
                             location.reload();
                             location.href = "../../OS_Package/OS_Setup/OS.html";

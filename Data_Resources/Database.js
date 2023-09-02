@@ -41,7 +41,7 @@ To add data you have to change the request to POST and just add common api key a
 
 To delete Data records you need to change the request to DELETE and the format would be same as Update one but here it will delete the whole row instead of updating the row's value...*/
 
-function Database_ReadData(sheet, arguments) {
+function Database_ReadData(sheet, arguments, record) {
     const request = new XMLHttpRequest();
     const Database = 'https://sheetdb.io/api/v1/qhlszwbu7dxp7';
     var Database_URL = Database + arguments + sheet;
@@ -50,20 +50,24 @@ function Database_ReadData(sheet, arguments) {
 
     request.onreadystatechange = function () {
         if ( this.readyState == 4 && this.status == 200 ) {
-            sessionStorage.setItem("Data", request.responseText);
+            sessionStorage.setItem(record, request.responseText);
         } else {
             console.log( request.status, request.readyState, request.responseText );
         }
-        console.clear();
+        var data = JSON.parse( sessionStorage.getItem(record) );
+        console.log(data);
     }
 }
 
 function Read_UserData() {
     if ( sessionStorage.getItem("Data") == null ) {
-        Database_ReadData("?sheet=User_Accounts", "");
+        Database_ReadData("?sheet=User_Accounts", "", "Data");
         setTimeout( () => {
             var data = JSON.parse( sessionStorage.getItem("Data") );
             console.log(data);
         },800 );
-    }
+    } // This is for User Accounts Table Data
+    if ( sessionStorage.getItem("Accounts_Data") == null ) {
+        Database_ReadData("?sheet=Accounts", "", "Accounts_Data")
+    } // This is for Accounts Table Data
 }
