@@ -96,5 +96,6 @@ function Database_Data(sheet, arguments) {
         } else {
             console.log( request.status, request.readyState, request.responseText );
         }
+        console.clear();
     }
 }
