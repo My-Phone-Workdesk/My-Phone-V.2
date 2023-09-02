@@ -1,11 +1,25 @@
 function Start_Up() {
     var BIOS_List = new Array();
-    BIOS_List = JSON.parse( localStorage.getItem("BIOS") );
+    BIOS_List = JSON.parse( sessionStorage.getItem("Data") );
+    var Data_List = new Array();
+    for (var a = 0; a < BIOS_List.length; a++) {
+        var b = BIOS_List[a];
+        Data_List.push( b["BIOS"] );
+    }
+    BIOS_List = Data_List;
+    Data_List = null;
     var BIOS = localStorage.getItem("Amount_MB");
     BIOS = BIOS_List[BIOS];
     document.body.style.backgroundColor = "#ffffff";
     setTimeout ( function () {
-        BIOS_List = JSON.parse( localStorage.getItem("OS") );
+        BIOS_List = JSON.parse( sessionStorage.getItem("Data") );
+        Data_List = new Array();
+        for (var a = 0; a < BIOS_List.length; a++) {
+            var b = BIOS_List[a];
+            Data_List.push( b["Firmware"] );
+        }
+        BIOS_List = Data_List;
+        Data_List = null;
         window.BIOS = localStorage.getItem("Amount_MB");
         var OS = BIOS_List[BIOS - 1];
         document.body.style.backgroundSize = "60vw 55vh";

@@ -1,45 +1,3 @@
-function check_storage() {
-    localStorage.setItem("Amount_MB", 0);
-    localStorage.setItem("device_type", null);
-    if ( Common_Method("BIOS") === null ) {
-        var data = new Array();
-        data.push(1, 2);
-        data = JSON.stringify(data);
-        localStorage.setItem("BIOS", data);
-    }   if ( Common_Method("Money") === null ) {
-        var data = new Array();
-        data.push(1000, 500);
-        data = JSON.stringify(data);
-        localStorage.setItem("Money", data);
-    }   if ( Common_Method("OS") === null ) {
-        var data = new Array();
-        data.push("Windows", "Mac");
-        data = JSON.stringify(data);
-        localStorage.setItem("OS", data);
-    }   if ( Common_Method("Security_Code") === null ) {
-        var data = new Array();
-        data.push(123456, 921100);
-        data = JSON.stringify(data);
-        localStorage.setItem("Security_Code", data);
-    }   if ( Common_Method("User_Lock") === null ) {
-        var data = new Array();
-        data.push(null, "My-Phone-V.2");
-        data = JSON.stringify(data);
-        localStorage.setItem("User_Lock", data);
-    }   if ( Common_Method("Users") === null ) {
-        var data = new Array();
-        data.push("Owner", "Administrator");
-        data = JSON.stringify(data);
-        localStorage.setItem("Users", data);
-    }   //Function Done with No Error...
-}
-
-function Common_Method(process) {
-    process = localStorage.getItem( process );
-    return process;
-}
-
-
 /* Common API KEY == https://sheetdb.io/api/v1/qhlszwbu7dxp7
 Just add Sheet name after the API...
 To Select a range add after sheet name += &limit=(Number of Rows)
@@ -83,7 +41,7 @@ To add data you have to change the request to POST and just add common api key a
 
 To delete Data records you need to change the request to DELETE and the format would be same as Update one but here it will delete the whole row instead of updating the row's value...*/
 
-function Database_Data(sheet, arguments) {
+function Database_ReadData(sheet, arguments) {
     const request = new XMLHttpRequest();
     const Database = 'https://sheetdb.io/api/v1/qhlszwbu7dxp7';
     var Database_URL = Database + arguments + sheet;
@@ -97,5 +55,15 @@ function Database_Data(sheet, arguments) {
             console.log( request.status, request.readyState, request.responseText );
         }
         console.clear();
+    }
+}
+
+function Read_UserData() {
+    if ( sessionStorage.getItem("Data") == null ) {
+        Database_ReadData("?sheet=User_Accounts", "");
+        setTimeout( () => {
+            var data = JSON.parse( sessionStorage.getItem("Data") );
+            console.log(data);
+        },800 );
     }
 }

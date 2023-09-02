@@ -29,18 +29,23 @@ function power_off() {
 
 function Users() {
 
-    check_Data();
+    setTimeout( () => {
 
-    var b = new Array();
-    b = JSON.parse(localStorage.getItem("Users"));
-    let table = document.querySelector('table');
-    var c = b.length;
-    
-    c--; let d = 0;
-    
-    for (var a = 0; a <= c; a++) {
-        table.insertRow(a + 1).insertCell(0).innerHTML = b[a];
-    }
+        var b = new Array();
+        var d = new Array();
+        b = JSON.parse(sessionStorage.getItem("Data"));
+        for (var id = 0; id < b.length; id++) {
+            var e = b[id];
+            d.push( e["User"] );
+        }
+        let table = document.querySelector('table');
+        var c = d.length; c--;
+        
+        for (var a = 0; a <= c; a++) {
+            table.insertRow(a + 1).insertCell(0).innerHTML = d[a];
+        }
+
+    },1000 );
 
 }
 
@@ -57,20 +62,34 @@ function runOnStart() {
             location.href = "index.html";
         }
     }
-  }
+}
 
 function Login() {
     var answer = prompt("Login to an Existing User by its User Id", "Owner");
     if (answer != null) {
         var list = new Array();
-        list = JSON.parse( localStorage.getItem("Users") );
+        list = JSON.parse( sessionStorage.getItem("Data") );
+        var User_list = new Array();
+        for (var a = 0; a < list.length; a++) {
+            var b = list[a];
+            User_list.push( b["User"] );
+        }
+        list = User_list;
+        User_list = null;
         for (var check = 0; check <= (list.length - 1); check++) {
             var respond = list[check];
             if ( respond.toLowerCase() == answer.toLowerCase() ) {
                 //The User Passed Away
                 if ( ! ( answer.toLowerCase() == "owner" ) ) {
                     var locks_hash = new Array();
-                    locks_hash = JSON.parse( localStorage.getItem("User_Lock") );
+                    locks_hash = JSON.parse( sessionStorage.getItem("Data") );
+                    User_list = new Array();
+                    for (var a = 0; a < locks_hash.length; a++) {
+                        var b = locks_hash[a];
+                        User_list.push( b["User_Lock"] );
+                    }
+                    locks_hash = User_list;
+                    User_list = null;
                     do {
                         var user_lock = prompt("Enter the User Lock of the User " + answer, "");
                         if ( user_lock != null ) {
@@ -98,86 +117,5 @@ function Login() {
             } //Do not Return Anything just add 1 to check variable
         }
         alert("User ID not Available");
-    }
-}
-
-function check_Data() {
-
-    if ( localStorage.getItem('Amount_MB') == null ) {
-        localStorage.setItem('Amount_MB', 0);
-    } else {
-        // Read the comment on the last else of this function
-    }
-
-    if ( localStorage.getItem('device_type') == null ) {
-        localStorage.setItem('device_type', "--None--");
-    } else {
-        // Read the comment on the last else of this function
-    }
-
-    if ( localStorage.getItem('BIOS') == null ) {
-        var data = new Array();
-        data.push(1, 2);
-        data = JSON.stringify(data);
-        localStorage.setItem('Money', data);
-    } else {
-        // Read the comment on the last else of this function
-    }
-
-    if ( localStorage.getItem('Money') == null ) {
-        var data = new Array();
-        data.push(1000, 500);
-        data = JSON.stringify(data);
-        localStorage.setItem('BIOS', data);
-    } else {
-        // Read the comment on the last else of this function
-    }
-
-    if ( localStorage.getItem('OS') == null ) {
-        var data = new Array();
-        data.push("Windows", "Mac");
-        data = JSON.stringify(data);
-        localStorage.setItem('OS', data);
-    } else {
-        // Read the comment on the last else of this function
-    }
-
-    if ( localStorage.getItem('Security_Code') == null ) {
-        var data = new Array();
-        data.push(123456, 921100);
-        data = JSON.stringify(data);
-        localStorage.setItem('Security_Code', data);
-    } else {
-        // Read the comment on the last else of this function
-    }
-
-    if ( localStorage.getItem('User_Lock') == null ) {
-        var data = new Array();
-        data.push(null, "My-Phone-V.2");
-        data = JSON.stringify(data);
-        localStorage.setItem('User_Lock', data);
-    } else {
-        // Read the comment on the last else of this function
-    }
-
-    if ( localStorage.getItem('Users') == null ) {
-        var data = new Array();
-        data.push("Owner", "Administrator");
-        data = JSON.stringify(data);
-        localStorage.setItem('Users', data);
-    } else {
-        /* This will never be excuted because the false statement in this
-        if then else will never come as this situation will never come
-        according to the advanced code done here...
-
-        It can be executed if the system is Hacked but it is not easy
-        to hack it as it has multi layers of protection and security
-        Hence, This Situation is almost Waste for us...
-        
-        But still Do not erase or delete it as per for the porpose to
-        give the code a structure and let the code looks in a coding
-        manner of advanced developers... So, the Condition statement
-        sequence is if, else if, else and so that the else should not
-        be avoided or ignored this Waste situation is made... */
     }
 }
