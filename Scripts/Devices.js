@@ -50,7 +50,7 @@ function Mother_Board() {
 function Payment_MB() {
     try {
         var a = new Array();
-        a = JSON.parse(localStorage.getItem("Accounts_Data"));
+        a = JSON.parse(sessionStorage.getItem("Accounts_Data"));
         var Data_list = new Array();
         for (var b = 0; b < a.length; b++) {
             var c = a[b];
