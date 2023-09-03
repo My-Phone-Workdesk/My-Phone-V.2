@@ -15,6 +15,15 @@ input, button {
     position: fixed;
 }
 
+h1 {
+    background-color: white;
+    color: black;
+    right: 5rem;
+    top: 2rem;
+    font-size: 50px;
+    position: fixed;
+}
+
 #user_profile {
     bottom: 30rem;
 }

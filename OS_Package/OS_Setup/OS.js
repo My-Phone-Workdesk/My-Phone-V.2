@@ -23,8 +23,8 @@ function OS_Options() {
         IOS.text = "IOS";
         OS_Select.add(IOS);
     }
-    sessionStorage.setItem("device_type", false);
-    sessionStorage.setItem("Amount_MB", false);
+    sessionStorage.removeItem("device_type");
+    sessionStorage.removeItem("Amount_MB");
 }
 
 function Check_OS() {
@@ -44,7 +44,7 @@ function Check_Certificate() {
     let file = document.getElementById('OS_Certificate');
     let value = file.files[0].name;
     let text = document.getElementById('text');
-    if ( value.slice(-4) == '.txt' ) {
+    if ( value.slice(-4) == '.txt' || value.slice(-4) == '.crt' ) {
         text.innerHTML = "Valid File, Supported ✅";
         sessionStorage.setItem('Amount_MB', true);
     } else {
