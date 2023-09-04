@@ -41,10 +41,11 @@ To add data you have to change the request to POST and just add common api key a
 
 To delete Data records you need to change the request to DELETE and the format would be same as Update one but here it will delete the whole row instead of updating the row's value...*/
 
-function Database_ReadData(sheet, arguments, record) {
-    const request = new XMLHttpRequest();
-    const Database = 'https://sheetdb.io/api/v1/qhlszwbu7dxp7';
-    var Database_URL = Database + arguments + sheet;
+const request = new XMLHttpRequest();
+const Database = 'https://sheetdb.io/api/v1/qhlszwbu7dxp7';
+
+function Database_ReadData(sheet, record) {
+    var Database_URL = Database + sheet;
     request.open("GET", Database_URL);
     request.send();
 
@@ -61,13 +62,43 @@ function Database_ReadData(sheet, arguments, record) {
 
 function Read_UserData() {
     if ( sessionStorage.getItem("Data") == null ) {
-        Database_ReadData("?sheet=User_Accounts", "", "Data");
+        Database_ReadData("?sheet=User_Accounts", "Data");
         setTimeout( () => {
             var data = JSON.parse( sessionStorage.getItem("Data") );
             console.log(data);
         },800 );
     } // This is for User Accounts Table Data
     if ( sessionStorage.getItem("Accounts_Data") == null ) {
-        Database_ReadData("?sheet=Accounts", "", "Accounts_Data")
+        Database_ReadData("?sheet=Accounts", "Accounts_Data")
     } // This is for Accounts Table Data
+}
+
+function Database_UpdateData(sheet, arguments, record) {
+    var Database_URL = Database + arguments + sheet;
+    request.open("PUT", Database_URL);
+    request.setRequestHeader('Content-type','application/json; charset=utf-8');
+    request.onload = () => {
+        console.log(request.status);
+        console.clear();
+    }; request.send(record);
+}
+
+function Database_CreateData(sheet, record) {
+    var Database_URL = Database + sheet;
+    request.open("POST", Database_URL);
+    request.setRequestHeader('Content-type','application/json; charset=utf-8');
+    request.onload = () => {
+        console.log(request.status);
+        console.clear();
+    }; request.send(record);
+}
+
+function Database_DeleteData(sheet, arguments) {
+    var Database_URL = Database + arguments + sheet;
+    request.open("DELETE", Database_URL);
+    request.setRequestHeader('Content-type','application/json; charset=utf-8');
+    request.onload = () => {
+        console.log(request.status);
+        console.clear();
+    }; request.send(null);
 }
