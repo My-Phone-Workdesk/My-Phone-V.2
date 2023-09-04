@@ -73,8 +73,8 @@ function Read_UserData() {
     } // This is for Accounts Table Data
 }
 
-function Database_UpdateData(sheet, arguments, record) {
-    var Database_URL = Database + arguments + sheet;
+function Database_UpdateData(sheet, argument, record) {
+    var Database_URL = Database + argument + sheet;
     request.open("PUT", Database_URL);
     request.setRequestHeader('Content-type','application/json; charset=utf-8');
     request.onload = () => {
@@ -93,8 +93,8 @@ function Database_CreateData(sheet, record) {
     }; request.send(record);
 }
 
-function Database_DeleteData(sheet, arguments) {
-    var Database_URL = Database + arguments + sheet;
+function Database_DeleteData(sheet, argument) {
+    var Database_URL = Database + argument + sheet;
     request.open("DELETE", Database_URL);
     request.setRequestHeader('Content-type','application/json; charset=utf-8');
     request.onload = () => {

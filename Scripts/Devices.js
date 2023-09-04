@@ -1,3 +1,20 @@
+// Exported Functions From Database ==>
+
+const request = new XMLHttpRequest();
+const Database = 'https://sheetdb.io/api/v1/qhlszwbu7dxp7';
+
+function Database_UpdateData(sheet, argument, record) {
+    var Database_URL = Database + argument + sheet;
+    request.open("PUT", Database_URL);
+    request.setRequestHeader('Content-type','application/json; charset=utf-8');
+    request.onload = () => {
+        console.log(request.status);
+        console.clear();
+    }; request.send(record);
+}
+
+// Real Script Starts from Below ==>
+
 function show_hide() {
     let input = document.getElementById("input_code");
     let eye = document.getElementById("show/hide");
@@ -74,13 +91,16 @@ function Payment_MB() {
                         Data_list = null;
                         d = localStorage.getItem("Amount_MB");
                         if (a[c] >= d) {
-                            // a[c] -= d;
-                            // a = JSON.stringify(a);
-                            // localStorage.setItem("Money", a);
-                            // var device_config = JSON.parse(localStorage.getItem("Devices"));
-                            // device_config.push(localStorage.getItem("device_type"));
-                            // device_config = JSON.stringify(device_config);
-                            // localStorage.setItem("Devices", device_config);
+                            a[c] -= d;
+                            d = new Object();
+                            d.Money = a[c];
+                            d = JSON.stringify(d);
+                            a = null;
+                            Database_UpdateData("?sheet=Accounts", '/ID/' + c, d)
+                            var Account = new Object();
+                            Account.Device = localStorage.getItem("device_type");
+                            Account = JSON.stringify(Account);
+                            localStorage.setItem("Add_User", Account);
                             alert("Payment Successful");
                             location.reload();
                             location.href = "../../OS_Package/OS_Setup/OS.html";
