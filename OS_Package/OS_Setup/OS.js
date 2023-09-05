@@ -30,7 +30,7 @@ function OS_Options() {
 function Check_OS() {
     let file = document.getElementById('OS_File');
     let value = file.files[0].name;
-    let text = document.getElementById('display_text');
+    let text = document.getElementById('display_text_os');
     if ( value.slice(-4) == '.bin' ) {
         text.innerHTML = "Valid File, Supported ✅";
         sessionStorage.setItem('device_type', true);
@@ -43,7 +43,7 @@ function Check_OS() {
 function Check_Certificate() {
     let file = document.getElementById('OS_Certificate');
     let value = file.files[0].name;
-    let text = document.getElementById('text');
+    let text = document.getElementById('display_text_cert');
     if ( value.slice(-4) == '.txt' || value.slice(-4) == '.crt' ) {
         text.innerHTML = "Valid File, Supported ✅";
         sessionStorage.setItem('Amount_MB', true);
@@ -53,12 +53,18 @@ function Check_Certificate() {
     }
 }
 
+function No_Cert() {
+
+}
+function No_OS() {
+
+}
+
 function Submit_OS() {
     let text = document.getElementById('Response');
     var OS = sessionStorage.getItem("device_type");
     var Certificate = sessionStorage.getItem("Amount_MB");
     if ( OS == 'true' && Certificate == 'true' ) {
-
         text.innerHTML = "File Uploaded to Server...";
         var check = document.getElementById('continue.com');
         if (check == null) {
@@ -75,9 +81,8 @@ function Submit_OS() {
                 remove.remove();
             }
         }
-
     } else {
-        text.innerHTML = "Accesss to Server have been Denied...";
+        text.innerHTML = "Access to Server have been Denied...";
     }
 }
 

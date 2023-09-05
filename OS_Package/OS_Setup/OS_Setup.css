@@ -29,7 +29,8 @@ input {
 input:hover, button:hover {
     cursor: pointer;
 }
-#display_text, #text, #Response {
+
+#display_text_os, #display_text_cert, #Response {
     color: grey;
 }
 button {
