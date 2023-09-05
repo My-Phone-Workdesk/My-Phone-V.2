@@ -9,7 +9,7 @@ function Restart() {
         document.body.style.backgroundImage = "url('../Images/Start_Up_Logo.jpg')";
         document.body.style.backgroundSize = "100vw 100vh";
         document.body.style.backgroundRepeat = "no-repeat";
-    }, 5000);
+    }, 0);
     setTimeout ( function zoom() {
         document.body.style.backgroundColor = "#ffffff";
         document.getElementById("Load_Back").style.visibility = "hidden";
