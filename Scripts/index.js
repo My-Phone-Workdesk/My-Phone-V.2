@@ -34,18 +34,23 @@ function Users() {
         var b = new Array();
         var d = new Array();
         b = JSON.parse(sessionStorage.getItem("Data"));
-        for (var id = 0; id < b.length; id++) {
-            var e = b[id];
-            d.push( e["User"] );
-        }
-        let table = document.querySelector('table');
-        var c = d.length; c--;
         
-        for (var a = 0; a <= c; a++) {
-            table.insertRow(a + 1).insertCell(0).innerHTML = d[a];
+        if ( b != null ) {
+
+            for (var id = 0; id < b.length; id++) {
+                var e = b[id];
+                d.push( e["User"] );
+            }
+            let table = document.querySelector('table');
+            var c = d.length; c--;
+            
+            for (var a = 0; a <= c; a++) {
+                table.insertRow(a + 1).insertCell(0).innerHTML = d[a];
+            }
+
         }
 
-    },1000 );
+    },3000 );
 
 }
 
