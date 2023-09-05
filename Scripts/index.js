@@ -29,9 +29,7 @@ function power_off() {
 
 function Users() {
 
-    setTimeout( () => {
-
-        var b = new Array();
+    var b = new Array();
         var d = new Array();
         b = JSON.parse(sessionStorage.getItem("Data"));
         
@@ -49,8 +47,6 @@ function Users() {
             }
 
         }
-
-    },3000 );
 
 }
 

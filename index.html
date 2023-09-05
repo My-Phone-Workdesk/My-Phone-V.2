@@ -3,32 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Phone V.2</title>
-    <link rel="Icon" type="image/x-icon" href="./Icons/Favicon.ico">
-    <link rel="stylesheet" href="./Design/index.css">
-    <link rel="stylesheet" type="text/css" href="./Icons/fontawesome-pro/css/all.css">
-    <script src="Scripts/index.js"></script>
-    <script src="Data_Resources/Database.js"></script>
+    <title>Loading Screen</title>
+    <link rel="Icon" type="Image/X-Icon" href="./Icons/Loading.ico" />
+    <link rel="stylesheet" href="./Icons/fontawesome-pro/css/all.css" />
+    <style>
+        body {
+            background-color: black;
+            width: 98vw;
+            height: 97vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        i {
+            font-size: 15rem;
+            color: white;
+            animation: Roll 1.5s ease 0.3s 4 normal none;
+        }
+        @keyframes Roll {
+            0% {transform: rotate(0deg)}
+            100% {transform: rotate(360deg)}
+        }
+    </style>
+    <script src="./Data_Resources/Database.js"></script>
 </head>
 <body onload="Read_UserData();">
-    <h1>Users</h1><hr>
-    <a href="Screen/Add_User.html">
-        <div>
-            <i class="fa-solid fa-user-plus"></i>
-            <h2 class="Options">Add a New User</h2>
-        </div>
-    </a>
-    <hr class="Options-Line">
-    <div class="different" onclick="Login();"><!-- different == "Login User whole Div or Box" -->
-        <i class="fa-solid fa-user-magnifying-glass"></i>
-        <h2 class="Options" id="Login-Div">Login to an existing User</h2>
-    </div>
-    <hr class="Options-Line">
-    <table>
-        <th>Users</th>
-    </table>
-    <p>Comment Dialog Box Below...</p>
-    <textarea placeholder="For any Issue Just Leave a Comment on us..." rows="5" cols="50">Lala Hi I am a Lala that is a Lala but not a Very good lala I am having a problem in Lala that I am not able to say Lala and still not getting how to make an account for the name Lala as I am a Lala But not really a Lala but still I am called to be a Lala as I am a Lala... I want to ask you that how to create an account for the name Lala as The Add User is saying to upload Os and Certificate... I have done the payment but not having the certificate and Os so how would I will be able to get my money back or You can suggest me another way for Lala named Account making or creating as I am a Lala but you are not a Lala But if you may be a Lala and If you are a Lala so do my work innocently else I would do Lala Action on your company as I am a Lala and You waste my 1000 Rupees so I must spend 2,00,000 Rupees to shut down your Company because I am a Lala and I am Smart means OverSamrt too... Hahahahahahahha.... I Laughed so much that I cannot tell you in words or this comment so Take my words seriously else you would get punishment on your own fault and mistake that you are doing continuously with me and many People including all Lala's like me...!!!</textarea>
-    <!-- Nesthub max === 1280 x 800 -->
+    <i class="fa-solid fa-spinner"></i>
 </body>
 </html>

@@ -16,25 +16,31 @@ function Database_ReadData(sheet, record) {
     request.open("GET", Database_URL);
     request.send();
 
-    request.onreadystatechange = function () { sessionStorage.setItem(record, request.responseText); return true; }
+    request.onreadystatechange = () => {
+        if ( request.responseText != null && request.responseText != '' ) {
+            sessionStorage.setItem(record, request.responseText);
+        }
+    }
 
 }
 
 function Read_UserData() {
 
-    if ( sessionStorage.getItem("Data") == null ) {
+    if ( sessionStorage.getItem("Accounts_Data") == null ) {
 
-        Database_ReadData("?sheet=User_Accounts", "Data"); // This is for User Accounts Table Data
+        Database_ReadData("?sheet=Accounts", "Accounts_Data"); // This is for Accounts Table Data
+        setTimeout( () => { location.reload(); },2000 );
 
-    }; if ( sessionStorage.getItem("Accounts_Data") == null ) {
+    }; if ( sessionStorage.getItem("Data") == null ) {
 
-        window.setTimeout( () => {
+        Database_ReadData("?sheet=User_Accounts", "Data"); // This is for User Accounts Table 
+        setTimeout( () => { location.reload(); },2000 );
 
-            Database_ReadData("?sheet=Accounts", "Accounts_Data");
-            
-        },2000 ); // This is for Accounts Table Data
+    }; if ( sessionStorage.getItem("Data") != null && sessionStorage.getItem("Accounts_Data") != null ) {
 
-    }; // return "All Data Extracted from the Server"...!!!
+        location.href = "./Main_Screen.html";
+
+    } // return "All Data Extracted from the Server"...!!!
 
 }
 
