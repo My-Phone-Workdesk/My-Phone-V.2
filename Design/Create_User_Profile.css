@@ -19,13 +19,13 @@ h1 {
     background-color: white;
     color: black;
     right: 5rem;
-    top: 2rem;
-    font-size: 50px;
+    top: 0;
+    font-size: 45px;
     position: fixed;
 }
 
 #user_profile {
-    bottom: 30rem;
+    top: 6.5rem;
 }
 
 #user_password {

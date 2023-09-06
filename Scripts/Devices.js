@@ -77,8 +77,8 @@ function Payment_MB() {
         Data_list = null;
         var b = document.getElementById('input_code').value;
         var d = a.length;
-        setTimeout( function () {
-            for (var c = 0; c <= d; c = c ) {
+
+        for (var c = 0; c <= d; c = c ) {
                 if (a[c] == b) {
                     if (c > 0) {
                         a = JSON.parse(sessionStorage.getItem("Accounts_Data") );
@@ -96,15 +96,31 @@ function Payment_MB() {
                             d.Money = a[c];
                             d = JSON.stringify(d);
                             a = null;
-                            Database_UpdateData("?sheet=Accounts", '/ID/' + c, d)
-                            var Account = new Object();
-                            Account.Device = localStorage.getItem("device_type");
-                            Account = JSON.stringify(Account);
-                            localStorage.setItem("Add_User", Account);
-                            alert("Payment Successful");
-                            location.reload();
-                            location.href = "../../OS_Package/OS_Setup/OS.html";
-                            return 1;
+                            
+                            Database_UpdateData("?sheet=Accounts", '/ID/' + c, d);
+
+                            document.body.style.cursor = "Progress";
+
+                            setTimeout( () => {
+
+                                var Account = new Object();
+                                Account.Device = localStorage.getItem("device_type");
+                                Account = JSON.stringify(Account);
+                                localStorage.setItem("Add_User", Account);
+
+                                var update = JSON.parse( sessionStorage.getItem("Accounts_Data") );
+                                (update[c]).Money = ( JSON.parse(d) ).Money;
+                                update = JSON.stringify( update );
+                                sessionStorage.setItem("Accounts_Data", update);
+
+                                alert("Payment Successful");
+                                location.reload();
+                                location.href = "../../OS_Package/OS_Setup/OS.html";
+
+                                document.body.style.cursor = "Default";
+
+                            },2000 ); return 1;
+                            
                         } else {
                             alert("Sorry, You can't Proceed ahead due to insufficient Account Balance");
                             location.reload();
@@ -118,11 +134,9 @@ function Payment_MB() {
                 } else {
                     c++;
                 }
-            }
-            alert("Wrong Security Code");
-            location.reload();
-            return -1;
-        }, 500);
+
+            }; alert("Wrong Security Code"); location.reload(); return -1;
+
     } catch (error) {
         alert(error.message);
     }
