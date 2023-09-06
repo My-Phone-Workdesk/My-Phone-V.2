@@ -5,11 +5,9 @@ function scroll() {
 
 function Restart() {
     document.body.style.backgroundColor = "#000000";
-    setTimeout ( function restart_time_delay() {
-        document.body.style.backgroundImage = "url('../Images/Start_Up_Logo.jpg')";
-        document.body.style.backgroundSize = "100vw 100vh";
-        document.body.style.backgroundRepeat = "no-repeat";
-    }, 0);
+    document.body.style.backgroundImage = "url('../Images/Start_Up_Logo.jpg')";
+    document.body.style.backgroundSize = "100vw 100vh";
+    document.body.style.backgroundRepeat = "no-repeat";
     setTimeout ( function zoom() {
         document.body.style.backgroundColor = "#ffffff";
         document.getElementById("Load_Back").style.visibility = "hidden";

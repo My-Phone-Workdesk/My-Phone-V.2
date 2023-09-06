@@ -53,13 +53,6 @@ function Check_Certificate() {
     }
 }
 
-function No_Cert() {
-
-}
-function No_OS() {
-
-}
-
 function Submit_OS() {
     let text = document.getElementById('Response');
     var OS = sessionStorage.getItem("device_type");
