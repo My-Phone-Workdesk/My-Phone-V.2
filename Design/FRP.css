@@ -1,0 +1,40 @@
+body {
+    width: 95vw;
+    height: 92vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: aqua;
+    flex-wrap: wrap;
+    border: 1rem solid blue;
+}
+
+i {
+    font-size: 9rem;
+    color: chocolate;
+    display: inline-block;
+}
+
+h1 {
+    font-size: 10rem;
+    color: black;
+    display: inline-block;
+}
+
+h2 {
+    font-size: 6rem;
+    color: chocolate;
+}
+
+#Click:hover {
+    cursor: pointer;
+}
+
+#Click {
+    height: 10rem;
+    width: 80vw;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+}

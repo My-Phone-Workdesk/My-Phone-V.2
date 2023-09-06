@@ -19,7 +19,7 @@ function Submit_Details() {
     obj.User_Profile = document.getElementById("user_profile").value;
     obj.User_Password = document.getElementById("user_password").value;
     obj = JSON.stringify(obj); localStorage.setItem("Add_User", obj);
-    return true;
+    location.href = "./FRP.html"; return true;
 }
 
 function Check_Password_Strength() {
