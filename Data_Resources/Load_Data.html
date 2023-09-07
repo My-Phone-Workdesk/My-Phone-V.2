@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Screen</title>
+    <link rel="Icon" type="Image/X-Icon" href="../Icons/Loading.ico" />
+    <link rel="stylesheet" href="../Icons/fontawesome-pro/css/all.css" />
+    <style>
+        body {
+            background-color: black;
+            width: 98vw;
+            height: 97vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        i {
+            font-size: 15rem;
+            color: white;
+            animation: Roll 1.5s ease 0.3s 4 normal none;
+        }
+    </style>
+    <script src="./Database.js"></script>
+</head>
+<body onload="Read_UserData();">
+    <i class="fa-duotone fa-spinner-third fa-spin"></i>
+</body>
+</html>

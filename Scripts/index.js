@@ -181,7 +181,7 @@ function Send_Feedback() {
 
 function Check_Data() {
     if ( ( sessionStorage.getItem("Data") == null ) || ( sessionStorage.getItem("Accounts_Data") == null ) ) {
-        location.href = "./index.html";
+        location.href = "./Data_Resources/Load_Data.html";
     } else {
         Users(); runOnStart(); // Else All Good...
     }
