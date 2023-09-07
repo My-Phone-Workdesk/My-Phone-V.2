@@ -1,3 +1,20 @@
+// Exported Functions From Database ==>
+
+const request = new XMLHttpRequest();
+const Database = 'https://sheetdb.io/api/v1/qhlszwbu7dxp7';
+
+function Database_CreateData(sheet, record) {
+    var Database_URL = Database + sheet;
+    request.open("POST", Database_URL);
+    request.setRequestHeader('Content-type','application/json; charset=utf-8');
+    request.onload = () => {
+        console.log(request.status);
+        console.clear();
+    }; request.send(record);
+}
+
+// Real Script Starts from Below ==>
+
 function scroll() {
     document.body.scrollTop = 0; //For Safari Browser if so...
     document.documentElement.scrollTop = 0; //For other browsers like FIrefox, Chrome, Edge, etc...
@@ -117,4 +134,39 @@ function Login() {
         }
         alert("User ID not Available");
     }
+}
+
+function Send_Feedback() {
+
+    // Comment == Feedback { returns --> True };
+    let Comment = document.querySelector('textarea').value;
+    var Send = confirm("Confirm to Send Feedback ?");
+    if ( Send ) {
+        
+        var name = prompt("Please Enter your Name", "");
+        if ( name == null ) {
+            alert("Feedback Failed to Send..."); // Failed to Send
+        } else if ( name == "" ) {
+            alert("Please Enter a Name..."); // Empty Response
+        } else {
+            var Contact = prompt("Please Enter your Contact Information, So that We can Contact you ! It can be Mobile Number, email, address, etc... But it shoould be Real One ! ", "");
+            if ( Contact == null ) {
+                alert("Feedback Failed to Send..."); // Failed to Send
+            } else if ( Contact == "" ) {
+                alert("Please Enter a valid Contact Information..."); // Empty Response
+            } else {
+                var Feedback = new Object();
+                Feedback["Name"] = name;
+                Feedback["Contact"] = Contact;
+                Feedback["Comment"] = Comment;
+                Feedback = JSON.stringify(Feedback);
+                Database_CreateData("?sheet=Feedback", Feedback) // Send Feedback
+                setTimeout( () => { return; },2000 ); // Exit ( Comment Sent )
+            }
+        }
+
+    } else {
+        return; // Exit ( Do not Send Comment )
+    }
+
 }
