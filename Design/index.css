@@ -108,7 +108,7 @@ td {
 }
 
 textarea {
-    width: 95vw;
+    width: 96.432vw;
     height: 26vh;
     font-size: 1rem;
     color: black;
@@ -118,7 +118,9 @@ textarea {
     display: block;
     word-wrap: break-word;
     border: 1.2rem black solid;
-    align-self: center;
+    padding: 0;
+    margin: 0;
+    border-top: 0;
 }
 
 p {
@@ -126,6 +128,7 @@ p {
     font-size: 4rem;
     padding: 0;
     margin: 0;
+    width: 98.932vw;
     text-align: center;
     background-color: black;
     color: white;
@@ -136,12 +139,13 @@ p:hover {
 }
 
 .fa-paper-plane-top {
-    color: blue;
+    color: rgb(0, 0, 0);
     margin: 0;
-    padding: 8px;
-    border: black solid 0.7rem;
+    margin-top: 1rem;
+    margin-left: 72.5rem;
+    padding: 12px;
+    border: black solid 0.5rem;
     position: absolute;
-    left: 2rem;
-    font-size: 3rem;
+    font-size: 2rem;
     border-radius: 10%;
 }

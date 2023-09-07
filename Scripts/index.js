@@ -155,7 +155,7 @@ function Send_Feedback() {
             } else if ( name == "" ) {
                 alert("Please Enter a Name..."); // Empty Response
             } else {
-                var Contact = prompt("Please Enter your Contact Information, So that We can Contact you ! It can be Mobile Number, email, address, etc... But it shoould be Real One ! ", "");
+                var Contact = prompt("Please Enter your Contact Information so that We can Contact you. It can be a Mobile Number, email, address, etc... But it should be Real! ", "");
                 if ( Contact == null ) {
                     alert("Feedback Failed to Send..."); // Failed to Send
                 } else if ( Contact == "" ) {
