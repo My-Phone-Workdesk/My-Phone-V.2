@@ -108,7 +108,7 @@ td {
 }
 
 textarea {
-    width: 96.432vw;
+    width: 95vw;
     height: 26vh;
     font-size: 1rem;
     color: black;
@@ -128,7 +128,7 @@ p {
     font-size: 4rem;
     padding: 0;
     margin: 0;
-    width: 98.932vw;
+    width: 97.8vw;
     text-align: center;
     background-color: black;
     color: white;
@@ -142,7 +142,7 @@ p:hover {
     color: rgb(0, 0, 0);
     margin: 0;
     margin-top: 1rem;
-    margin-left: 72.5rem;
+    margin-left: 60rem;
     padding: 12px;
     border: black solid 0.5rem;
     position: absolute;

@@ -113,6 +113,10 @@ function Check_Document() {
                 if ( sessionStorage.getItem("Check") != 'false' ) {
                     var _Confirm_ = confirm("Are you Sure to Finally Submit ? This Action can't be Undone ❗ ");
                     if ( _Confirm_ ) {
+                        sessionStorage.removeItem("Check");
+                        sessionStorage.removeItem("device_type");
+                        sessionStorage.removeItem("Amount_MB");
+                        sessionStorage.removeItem("Certificate");
                         location.href = "../../Screen/User_Setup/Create_User_Profile.html";
                     } else {
                         location.reload();
@@ -161,7 +165,10 @@ function Program(Code) {
     if ( Code.toLowerCase().includes('User.BIOS.set <===> '.toLowerCase() ) ) {
         
         part = Code.slice(20);
-        sessionStorage.setItem("BIOS", part);
+        var put = JSON.parse( localStorage.getItem("Add_User") );
+        put["BIOS"] = part;
+        put = JSON.stringify(put);
+        localStorage.setItem("Add_User", put);
 
     } else if ( Code.toLowerCase().includes('User.Certify <===> '.toLowerCase() ) ) {
         
@@ -180,7 +187,12 @@ function Program(Code) {
             if ( part == option ) {
                 
                 if ( part == Certificate ) {
-                    sessionStorage.setItem("OS", part);
+
+                    var put = JSON.parse( localStorage.getItem("Add_User") );
+                    put["Firmware"] = part;
+                    put = JSON.stringify(put);
+                    localStorage.setItem("Add_User", put);
+
                 } else {
                     alert('Your Uploaded OS Certificate is not Correct...');
                     sessionStorage.setItem("Check", false);
@@ -198,6 +210,14 @@ function Program(Code) {
             sessionStorage.setItem("Check", false);
             location.reload();
         }
+
+    } else if ( Code.toLowerCase().includes('User.Version <===> '.toLowerCase() ) ) {
+
+        part = Code.slice(19);
+        var put = JSON.parse( localStorage.getItem("Add_User") );
+        put["Firmware_Version"] = part;
+        put = JSON.stringify(put);
+        localStorage.setItem("Add_User", put);
 
     }
 

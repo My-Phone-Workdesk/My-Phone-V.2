@@ -1,0 +1,38 @@
+body {
+    background-color: black;
+}
+
+h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin-left: 1rem;
+}
+
+input {
+    width: 80vw;
+    height: 10vh;
+    border: white solid 1rem;
+    background-color: black;
+    color: white;
+    font-size: 2rem;
+    margin: 1rem;
+}
+
+button {
+    font-size: 2rem;
+    margin: 1rem;
+    background-color: white;
+    color: black;
+    border: 1rem grey solid;
+    padding: 1rem;
+    font-weight: 900;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 0, 0.85);
+}
+
+h1:hover {
+    cursor: not-allowed;
+}

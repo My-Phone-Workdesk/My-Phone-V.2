@@ -1,6 +1,6 @@
 function Create_User_Profile() {
-    var OS = sessionStorage.getItem("OS");
-    var BIOS = sessionStorage.getItem("BIOS");
+    var OS = ( JSON.parse( localStorage.getItem("Add_User") ) )["OS"];
+    var BIOS = ( JSON.parse( localStorage.getItem("Add_User") ) )["BIOS"];
     document.body.style.backgroundPosition = "center left";
     document.body.style.backgroundSize = "contain";
     document.body.style.backgroundRepeat = "no-repeat";
@@ -16,10 +16,10 @@ function Create_User_Profile() {
 function Submit_Details() {
    
     var obj = JSON.parse( localStorage.getItem("Add_User") );
-    obj.User_Profile = document.getElementById("user_profile").value;
-    obj.User_Password = document.getElementById("user_password").value;
+    obj.User = document.getElementById("user_profile").value;
+    obj.User_Lock= document.getElementById("user_password").value;
     obj = JSON.stringify(obj); localStorage.setItem("Add_User", obj);
-    location.href = "./FRP.html"; return true;
+    location.href = "./FRP/FRP.html"; return true;
 }
 
 function Check_Password_Strength() {
