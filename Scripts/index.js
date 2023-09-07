@@ -140,33 +140,49 @@ function Send_Feedback() {
 
     // Comment == Feedback { returns --> True };
     let Comment = document.querySelector('textarea').value;
-    var Send = confirm("Confirm to Send Feedback ?");
-    if ( Send ) {
-        
-        var name = prompt("Please Enter your Name", "");
-        if ( name == null ) {
-            alert("Feedback Failed to Send..."); // Failed to Send
-        } else if ( name == "" ) {
-            alert("Please Enter a Name..."); // Empty Response
-        } else {
-            var Contact = prompt("Please Enter your Contact Information, So that We can Contact you ! It can be Mobile Number, email, address, etc... But it shoould be Real One ! ", "");
-            if ( Contact == null ) {
+    if ( Comment == '' ) {
+        alert("Cannot Send Empty Comment...!!! "); // Empty Comment
+    } else if ( Comment.length <= 35 ) {
+        alert("Too Short Comment...");
+    } else {
+
+        var Send = confirm("Confirm to Send Feedback ?");
+        if ( Send ) {
+            
+            var name = prompt("Please Enter your Name", "");
+            if ( name == null ) {
                 alert("Feedback Failed to Send..."); // Failed to Send
-            } else if ( Contact == "" ) {
-                alert("Please Enter a valid Contact Information..."); // Empty Response
+            } else if ( name == "" ) {
+                alert("Please Enter a Name..."); // Empty Response
             } else {
-                var Feedback = new Object();
-                Feedback["Name"] = name;
-                Feedback["Contact"] = Contact;
-                Feedback["Comment"] = Comment;
-                Feedback = JSON.stringify(Feedback);
-                Database_CreateData("?sheet=Feedback", Feedback) // Send Feedback
-                setTimeout( () => { return; },2000 ); // Exit ( Comment Sent )
+                var Contact = prompt("Please Enter your Contact Information, So that We can Contact you ! It can be Mobile Number, email, address, etc... But it shoould be Real One ! ", "");
+                if ( Contact == null ) {
+                    alert("Feedback Failed to Send..."); // Failed to Send
+                } else if ( Contact == "" ) {
+                    alert("Please Enter a valid Contact Information..."); // Empty Response
+                } else {
+                    var Feedback = new Object();
+                    Feedback["Name"] = name;
+                    Feedback["Contact"] = Contact;
+                    Feedback["Comment"] = Comment;
+                    Feedback = JSON.stringify(Feedback);
+                    Database_CreateData("?sheet=Feedback", Feedback) // Send Feedback
+                    setTimeout( () => { return; },2000 ); // Exit ( Comment Sent )
+                }
             }
+
+        } else {
+            return; // Exit ( Do not Send Comment )
         }
 
-    } else {
-        return; // Exit ( Do not Send Comment )
     }
 
+}
+
+function Check_Data() {
+    if ( ( sessionStorage.getItem("Data") == null ) || ( sessionStorage.getItem("Accounts_Data") == null ) ) {
+        location.href = "./index.html";
+    } else {
+        Users(); runOnStart(); // Else All Good...
+    }
 }
