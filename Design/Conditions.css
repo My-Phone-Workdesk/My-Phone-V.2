@@ -1,12 +1,36 @@
 h2 input {
-    border: 5px black solid;
     height: 15px;
     width: 15px;
     margin-right: 12px;
     margin-left: 9px;
-    border-radius: 50%;
 }
 
 h2 {
     margin-top: 2rem;
+    font-weight: 500;
+}
+
+p {
+    font-size: 2rem;
+    font-weight: 400;
+    font-style: italic;
+}
+
+h1 {
+    font-weight: 900;
+    text-decoration: underline;
+}
+
+button {
+    font-size: 2rem;
+    margin: 1rem;
+}
+
+a {
+    text-decoration: none;
+    visibility: hidden;
+}
+
+button:hover {
+    cursor: pointer;
 }
