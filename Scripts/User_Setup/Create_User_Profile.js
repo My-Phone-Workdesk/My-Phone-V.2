@@ -1,5 +1,5 @@
 function Create_User_Profile() {
-    var OS = ( JSON.parse( localStorage.getItem("Add_User") ) )["OS"];
+    var OS = ( JSON.parse( localStorage.getItem("Add_User") ) )["Firmware"];
     var BIOS = ( JSON.parse( localStorage.getItem("Add_User") ) )["BIOS"];
     document.body.style.backgroundPosition = "center left";
     document.body.style.backgroundSize = "contain";
