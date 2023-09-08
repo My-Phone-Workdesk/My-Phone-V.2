@@ -13,9 +13,9 @@ function Database_CreateData(sheet, record) {
     }; request.send(record);
 }
 
-function Database_ReadData(sheet, record, argument) {
+function Database_ReadData(sheet, record) {
 
-    var Database_URL = Database + argument + sheet;
+    var Database_URL = Database + sheet;
     request.open("GET", Database_URL);
     request.send();
 
@@ -54,6 +54,27 @@ function Account() {
     let email = details[0].value;
     let password = details[1].value;
     let Data = JSON.parse( sessionStorage.getItem("Accounts_Data") );
+
+    let Emails = new Array();
+    let Users_Data = JSON.parse( sessionStorage.getItem("Data") );
+
+    if ( Users_Data == null ) {
+
+        alert("Missing Data Please Go to Home Page...");
+        return false;
+
+    } else {
+
+        for ( var u = 0; u < Users_Data.length; u++ ) { Emails.push( Users_Data[u]["Account"] ); }
+        
+        if ( Users_Data.includes(email) ) {
+
+            alert("Please Use a New E-mail... This E-mail is already in use !!! ");
+            return false;
+
+        }
+
+    }
 
     if ( Data == null ) {
 
@@ -104,42 +125,81 @@ function Account() {
 
 function Finish() {
 
-    var details = new Array();
-    details.push( "Account" );
-    details.push( "BIOS" );
-    details.push( "Device" );
-    details.push( "Firmware" );
-    details.push( "Firmware_Version" );
-    details.push( "User" );
-    details.push( "User_Lock" );
-    
-    let Data = JSON.parse( localStorage.getItem("Add_User") );
-    
-    for ( var v = 0; v < Object.keys( Data ).length; v++) {
-
-        if ( ( Object.keys( Data ).indexOf( details[v] ) ) == -1 ) {
-            alert("Your Some Data is Missing ! May be you have left some steps... Please Restart Add User from Home Page... Your Money would be Lost :( ");
-            return false;
-        }; // To check that all Data is present or Not !
-
-    }; Database_ReadData("?sheet=User_Accounts", "User_ID", "/count" );
+    document.body.style.backgroundColor = "#000000";
 
     setTimeout( () => {
 
-        Data.User_ID = ( JSON.parse( sessionStorage.getItem("User_ID") ) )["rows"];
-        sessionStorage.removeItem("User_ID");
-        Data = JSON.stringify( Data );
+        var details = new Array();
+        details.push( "Account" );
+        details.push( "BIOS" );
+        details.push( "Device" );
+        details.push( "Firmware" );
+        details.push( "Firmware_Version" );
+        details.push( "User" );
+        details.push( "User_Lock" );
 
-        Database_CreateData("?sheet=User_Accounts", Data )
+        document.writeln("<p>Connecting to the Server...</p>");
+        
+        let Data = JSON.parse( localStorage.getItem("Add_User") );
+        
+        for ( var v = 0; v < Object.keys( Data ).length; v++) {
+
+            if ( ( Object.keys( Data ).indexOf( details[v] ) ) == -1 ) {
+                alert("Your Some Data is Missing ! May be you have left some steps... Please Restart Add User from Home Page... Your Money would be Lost :( ");
+                location.href = "../../../index.html";
+                return false;
+            }; // To check that all Data is present or Not !
+
+        }; Database_ReadData("/count?sheet=User_Accounts", "User_ID" );
 
         setTimeout( () => {
 
-            alert("Congratulations ! Your User Successfully Created on Server");
-            location.href = "../../../index.html";
-            return true;
+            document.writeln("<p>Connected to Server Successfully !!! </p>");
+            document.writeln("<br>");
+            document.writeln("<p>All Details Packed in Package...</p>");
+            document.writeln("<p>Size = 7 MB</p>");
+            document.writeln("<br>");
 
-        },3000 );
+            Data.User_ID = ( JSON.parse( sessionStorage.getItem("User_ID") ) )["rows"];
+            Data = JSON.stringify( Data );
 
-    },2000 );
+            Database_CreateData("?sheet=User_Accounts", Data )
+
+            setTimeout( () => {
+
+                document.writeln("<p>Adding 1 MB File in Package</p>");
+                document.writeln("<p>Setting Up User Details as a Package</p>");
+                document.writeln("<p>Unzipping Package to Database</p>");
+                document.writeln("<br>");
+
+                setTimeout( () => {
+
+                    document.writeln("<p>All Operation Done Successfully !!! </p>");
+                    document.writeln("<p>User Created Successfully to the Server</p>");
+                    document.writeln("<br>");
+                    document.writeln("<p>Disconnecting From the Server...</p>");
+
+                    setTimeout( () => {
+
+                        document.writeln("<p>Disconnected From the Server !!! </p>");
+
+                        setTimeout( () => {
+
+                            sessionStorage.removeItem("User_ID");
+                            alert("Congratulations ! Your User Successfully Created on Server");
+                            sessionStorage.clear();
+                            location.href = "../../../index.html"; return true;
+
+                        },1000 );
+
+                    },2000 );
+
+                },1000 );
+
+            },3000 );
+
+        },2000 );
+
+    },1500 );
 
 }

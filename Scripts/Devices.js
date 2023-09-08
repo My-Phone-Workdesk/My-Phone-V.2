@@ -78,7 +78,7 @@ function Payment_MB() {
         var b = document.getElementById('input_code').value;
         var d = a.length;
 
-        for (var c = 0; c <= d; c = c ) {
+        for (var c = 0; c < d; c = c ) {
                 if (a[c] == b) {
                     if (c > 0) {
                         a = JSON.parse(sessionStorage.getItem("Accounts_Data") );
@@ -90,7 +90,9 @@ function Payment_MB() {
                         a = Data_list;
                         Data_list = null;
                         d = localStorage.getItem("Amount_MB");
-                        if (a[c] >= d) {
+                        d = parseFloat(d);
+                        a[c] = parseFloat( a[c] );
+                        if ( a[c] >= d ) {
                             a[c] -= d;
                             d = new Object();
                             d.Money = a[c];

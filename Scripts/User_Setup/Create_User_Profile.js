@@ -7,19 +7,36 @@ function Create_User_Profile() {
     document.getElementById("Submit").style.visibility = 'hidden';
     setTimeout( () => {
         document.body.style.backgroundImage = "url('../../OS_Package/" + OS + ".jpg" + "')";
-        setTimeout( () => {
-            // document.body.style.backgroundImage = '';
-        }, BIOS * 2000 );
+        setTimeout( () => { return true; }, BIOS * 2000 );
     }, BIOS * 1000 );
 }
 
 function Submit_Details() {
-   
-    var obj = JSON.parse( localStorage.getItem("Add_User") );
-    obj.User = document.getElementById("user_profile").value;
-    obj.User_Lock= document.getElementById("user_password").value;
-    obj = JSON.stringify(obj); localStorage.setItem("Add_User", obj);
-    location.href = "./FRP/FRP.html"; return true;
+
+    let user_profile = document.getElementById("user_profile").value;
+    let Data = JSON.parse( sessionStorage.getItem("Data") );
+    let users_list = new Array();
+
+    for ( var v = 0; v < Data.length; v++ ) { users_list.push( Data[v]["User"] ); }
+    Data = null;
+
+    if ( user_profile == null || user_profile == '' ) {
+
+        alert("Please Fill User Profile Name..."); return false;
+
+    } else if ( users_list.includes(user_profile) ) {
+
+        alert("This User Profile Name is already taken ! Try Another One..."); return false;
+
+    } else {
+
+        var obj = JSON.parse( localStorage.getItem("Add_User") );
+        obj.User = user_profile;
+        obj.User_Lock= document.getElementById("user_password").value;
+        obj = JSON.stringify(obj); localStorage.setItem("Add_User", obj);
+        location.href = "./FRP/FRP.html"; return true;
+
+    }
 }
 
 function Check_Password_Strength() {
