@@ -113,7 +113,7 @@ function Finish() {
     details.push( "User" );
     details.push( "User_Lock" );
     
-    let Data = localStorage.getItem("Add_User");
+    let Data = JSON.parse( localStorage.getItem("Add_User") );
     
     for ( var v = 0; v < Object.keys( Data ).length; v++) {
 
@@ -135,6 +135,7 @@ function Finish() {
         setTimeout( () => {
 
             alert("Congratulations ! Your User Successfully Created on Server");
+            location.href = "../../../index.html";
             return true;
 
         },3000 );
