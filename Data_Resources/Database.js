@@ -38,7 +38,7 @@ function Read_UserData() {
 
     }; if ( sessionStorage.getItem("Data") != null && sessionStorage.getItem("Accounts_Data") != null ) {
 
-        location.href = "../index.html";
+        localStorage.removeItem("Add_User"); location.href = "../index.html";
 
     } // return "All Data Extracted from the Server"...!!!
 
