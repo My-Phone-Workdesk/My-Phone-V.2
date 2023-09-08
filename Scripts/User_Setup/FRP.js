@@ -1,3 +1,34 @@
+// Exported Functions From Database ==>
+
+const request = new XMLHttpRequest();
+const Database = 'https://sheetdb.io/api/v1/qhlszwbu7dxp7';
+
+function Database_CreateData(sheet, record) {
+    var Database_URL = Database + sheet;
+    request.open("POST", Database_URL);
+    request.setRequestHeader('Content-type','application/json; charset=utf-8');
+    request.onload = () => {
+        console.log(request.status);
+        console.clear();
+    }; request.send(record);
+}
+
+function Database_ReadData(sheet, record, argument) {
+
+    var Database_URL = Database + argument + sheet;
+    request.open("GET", Database_URL);
+    request.send();
+
+    request.onreadystatechange = () => {
+        if ( request.responseText != null && request.responseText != '' ) {
+            sessionStorage.setItem(record, request.responseText);
+        }
+    }
+
+}
+
+// Real Script Starts from Below ==>
+
 function Welcome() {
     location.href = "./Conditions.html";
 }
@@ -27,6 +58,12 @@ function Account() {
     if ( Data == null ) {
 
         alert("Missing Data Please Go to Home Page...");
+        return false;
+
+    } else if ( email == '' || email == null || password == null || password == '' ) {
+
+        alert("Please Fill Both the Information 'Username' and 'Password' ..!! ");
+        return false;
 
     } else {
 
@@ -48,13 +85,60 @@ function Account() {
 
                     var put = JSON.parse( localStorage.getItem("Add_User") );
                     put.Account = email; put = JSON.stringify( put );
-                    localStorage.setItem("Account", put);
+                    localStorage.setItem("Add_User", put);
                     location.href = "./Finish.html";
+                    return true;
 
-                } else { alert("Incorrect Password ! Please Try Again..."); };
+                } else {
+
+                    alert("Incorrect Password ! Please Try Again...");
+                    return false;
+
+                };
 
             }; // Move ahead this was not the email matched...
         }; alert("Sorry this Email wasn't Found on the Server..."); location.reload();
 
     }
+}
+
+function Finish() {
+
+    var details = new Array();
+    details.push( "Account" );
+    details.push( "BIOS" );
+    details.push( "Device" );
+    details.push( "Firmware" );
+    details.push( "Firmware_Version" );
+    details.push( "User" );
+    details.push( "User_Lock" );
+    
+    let Data = localStorage.getItem("Add_User");
+    
+    for ( var v = 0; v < Object.keys( Data ).length; v++) {
+
+        if ( ( Object.keys( Data ).indexOf( details[v] ) ) == -1 ) {
+            alert("Your Some Data is Missing ! May be you have left some steps... Please Restart Add User from Home Page... Your Money would be Lost :( ");
+            return false;
+        }; // To check that all Data is present or Not !
+
+    }; Database_ReadData("?sheet=User_Accounts", "User_ID", "/count" );
+
+    setTimeout( () => {
+
+        Data.User_ID = ( JSON.parse( sessionStorage.getItem("User_ID") ) )["rows"];
+        sessionStorage.removeItem("User_ID");
+        Data = JSON.stringify( Data );
+
+        Database_CreateData("?sheet=User_Accounts", Data )
+
+        setTimeout( () => {
+
+            alert("Congratulations ! Your User Successfully Created on Server");
+            return true;
+
+        },3000 );
+
+    },2000 );
+
 }
