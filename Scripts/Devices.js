@@ -143,3 +143,51 @@ function Payment_MB() {
         alert(error.message);
     }
 }
+
+function Skip() {
+
+    if ( Redo == null || Redo == '' ) {
+
+        var ok = confirm("Are you Sure to Skip adding Mother Board... ( This Step can't be undone ❗ ) ");
+
+    }; if ( ok ) {
+
+        var command = prompt("Any Command for Boot ?", "No");
+
+        if ( command == "No" ) {
+
+            setTimeout( () => { location.href = "../../OS_Package/OS_Setup/OS.html"; },2000 );
+
+        } else if ( command == "Yes" ) {
+
+            do {
+                
+                var command = prompt("Enter your Command to Boot...");
+                var returned_value = Check_Command( command );
+
+                if ( returned_value == false ) { alert("This is not a valid Command for Boot ❌ "); } 
+                else if ( returned_value == true ) { alert("The Command was Successful"); };
+
+            } while ( command == '/exit' ); location.href = "../../index.html";
+
+        } else {
+
+            alert("Not an appropreate answer"); var Redo = "Yes"; Skip();
+
+        }
+
+    }; return false; // The User don't want to command to Boot...
+
+}
+
+function Check_Command( command ) {
+
+    if ( command == null || command == "" ) {
+        
+        alert("Please Enter a Command... Can't access empty command box...");
+        return null;
+
+    } if ( command == '/exit' ) { sessionStorage.clear(); }
+    else if ( command == "" ) {}
+
+}
