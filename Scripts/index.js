@@ -26,20 +26,19 @@ function Restart() {
     document.body.style.backgroundSize = "100vw 100vh";
     document.body.style.backgroundRepeat = "no-repeat";
     setTimeout ( function zoom() {
+
         document.body.style.backgroundColor = "#ffffff";
         document.getElementById("Load_Back").style.visibility = "hidden";
         document.getElementById("Load_Line").style.visibility = "hidden";   
-    }, 15575);
-    setTimeout (power_off, 18000);
-}
+        
+    }, 15575); setTimeout ( () => {
 
-function power_off() {
-    document.body.style.backgroundImage = "none";
-    document.body.style.background = "none";
-    document.body.style.backgroundColor = "#000000";
-    setTimeout ( function Devices_screen() {
+        document.body.style.backgroundImage = "none";
+        document.body.style.background = "none";
+        document.body.style.backgroundColor = "#000000";
         location.href = "../Screen/User_Setup/Devices.html";
-    }, 0);
+
+    }, 18000);
 }
 
 function Users() {

@@ -146,35 +146,46 @@ function Payment_MB() {
 
 function Skip() {
 
-    if ( Redo == null || Redo == '' ) {
+    var ok = confirm("Are you Sure to Skip adding Mother Board... ( This Step can't be undone ❗ ) ");
 
-        var ok = confirm("Are you Sure to Skip adding Mother Board... ( This Step can't be undone ❗ ) ");
+    if ( ok ) {
 
-    }; if ( ok ) {
+        do {
+            
+            var command = prompt("Any Command for Boot ?", "No");
 
-        var command = prompt("Any Command for Boot ?", "No");
+            if ( command == "No" ) {
 
-        if ( command == "No" ) {
+                document.body.style.cursor = "Progress";
+                setTimeout( () => {
 
-            setTimeout( () => { location.href = "../../OS_Package/OS_Setup/OS.html"; },2000 );
+                    document.body.style.cursor = "Default";
+                    location.href = "../../OS_Package/OS_Setup/OS.html"; 
 
-        } else if ( command == "Yes" ) {
+                },2000 );
 
-            do {
-                
-                var command = prompt("Enter your Command to Boot...");
-                var returned_value = Check_Command( command );
+            } else if ( command == "Yes" ) {
 
-                if ( returned_value == false ) { alert("This is not a valid Command for Boot ❌ "); } 
-                else if ( returned_value == true ) { alert("The Command was Successful"); };
+                do {
+                    
+                    var command = prompt("Enter your Command to Boot...");
+                    var returned_value = Check_Command( command );
 
-            } while ( command == '/exit' ); location.href = "../../index.html";
+                    if ( returned_value == false ) { alert("This is not a valid Command for Boot ❌ "); } 
+                    else if ( returned_value == true ) { alert("The Command was Successful"); };
 
-        } else {
+                } while ( command != '/exit' && command != '/reboot' && command != '/restart' && command != '/power off' );
 
-            alert("Not an appropreate answer"); var Redo = "Yes"; Skip();
+                if ( command == '/reboot' ) {  location.href = "../../index.html"; }
 
-        }
+            } else if ( command == null ) {} else {
+
+                alert("Not an appropriate answer");
+
+            }
+
+
+        } while ( command != "No" && command != '/exit' && command != null && command != '/reboot' && command != '/restart' && command != '/power off' );
 
     }; return false; // The User don't want to command to Boot...
 
@@ -187,7 +198,8 @@ function Check_Command( command ) {
         alert("Please Enter a Command... Can't access empty command box...");
         return null;
 
-    } if ( command == '/exit' ) { sessionStorage.clear(); }
-    else if ( command == "" ) {}
+    } else if ( command == '/exit' || command == '/reboot' ) { sessionStorage.clear(); }
+    else if ( command == "/restart" ) { location.href = "../System/Restart.html"; }
+    else if ( command == '/power off' ) { location.href = "../System/Power_Off.html" }
 
 }
