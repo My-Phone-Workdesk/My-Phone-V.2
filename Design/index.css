@@ -2,7 +2,6 @@ a {
     text-decoration: none;
     color: black;
 }
-
 * {
     font-weight: 900;
     margin: 0;
@@ -12,12 +11,10 @@ a {
     text-decoration: none;
     text-align: left;
 }
-
 body {
     background-color: white;
     width: 98vw;
 }
-
 h1 {
     font-size: 5rem;
     position: relative;
@@ -25,42 +22,34 @@ h1 {
     text-decoration: underline;
     width: 90vw;
 }
-
 h2 {
     font-size: 3rem;
 }
-
 hr {
     margin-bottom: 0;
     height: 1rem;
     color: black;
     background-color: black;
 }
-
 .Options-Line {
     height: 0.5rem;
 }
-
 .Options {
     position: relative;
     left: 6rem;
 }
-
 .extra-space {
     visibility: visible;
 }
-
 div {
     display: flex;
     justify-content: left;
     height: 4rem;
 }
-
 i {
     font-size: 4rem;
     margin-left: 3rem;
 }
-
 #Login-Div {
     left: 6rem;
     display: flex;
@@ -69,11 +58,9 @@ i {
     position: relative;
     bottom: -2rem;
 }
-
 .different {
     height: 5rem;
 }
-
 table {
     color: black;
     border: 0.2rem black solid;
@@ -84,34 +71,30 @@ table {
     position: relative;
     left: 5rem;
 }
-
 th {
     text-align: center;
     font-size: 5rem;
     font-weight: 900;
     background-color: lightgrey;
 }
-
 tr {
     color: black;
 }
-
 td {
     text-align: center;
     font-size: 4rem;
     border: 0.4rem black solid;
     background-color: white;
 }
-
 .different:hover, .fa-paper-plane-top:hover {
     cursor: pointer;
 }
 
 textarea {
-    width: 95vw;
+    width: 96.432vw;
     height: 26vh;
     font-size: 1rem;
-    color: black;
+    color: black;  
     background-color: white;
     font-weight: 200;
     text-align: center;
@@ -128,12 +111,11 @@ p {
     font-size: 4rem;
     padding: 0;
     margin: 0;
-    width: 97.8vw;
+    width: 98.932vw;
     text-align: center;
     background-color: black;
-    color: white;
+    color: white;  
 }
-
 p:hover {
     cursor: not-allowed;
 }
@@ -142,7 +124,7 @@ p:hover {
     color: rgb(0, 0, 0);
     margin: 0;
     margin-top: 1rem;
-    margin-left: 60rem;
+    margin-left: 72.5rem;
     padding: 12px;
     border: black solid 0.5rem;
     position: absolute;
