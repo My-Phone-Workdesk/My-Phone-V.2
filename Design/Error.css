@@ -1,0 +1,46 @@
+body {
+    background-color: #342435;
+}
+
+h1 {
+    font-weight: 900;
+    font-size: 5rem;
+    margin-top: 5rem;
+}
+
+h2 {
+    font-weight: 800;
+    font-size: 3rem;
+}
+
+h3 {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+h1,h2,h3 {
+    color: #EEB4B3;
+}
+
+section {
+    background-color: black;
+    width: 100vw;
+    height: 5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+div {
+    background-color: transparent;
+    color: white;
+    display: inline-block;
+    font-size: 2rem;
+}
+
+div:hover {
+    cursor: pointer;
+}
