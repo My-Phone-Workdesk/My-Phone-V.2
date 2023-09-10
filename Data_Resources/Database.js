@@ -17,9 +17,18 @@ function Database_ReadData(sheet, record) {
     request.send();
 
     request.onreadystatechange = () => {
+
         if ( request.responseText != null && request.responseText != '' ) {
+
             sessionStorage.setItem(record, request.responseText);
+
+        } else if ( request.status == 429 ) {
+
+            sessionStorage.clear();
+            location.href = "./Error.html";
+
         }
+
     }
 
 }
