@@ -1,32 +1,4 @@
 // Exported Functions From Database ==>
-
-const request = new XMLHttpRequest();
-const Database = 'https://sheetdb.io/api/v1/qhlszwbu7dxp7';
-
-function Database_CreateData(sheet, record) {
-    var Database_URL = Database + sheet;
-    request.open("POST", Database_URL);
-    request.setRequestHeader('Content-type','application/json; charset=utf-8');
-    request.onload = () => {
-        console.log(request.status);
-        console.clear();
-    }; request.send(record);
-}
-
-function Database_ReadData(sheet, record) {
-
-    var Database_URL = Database + sheet;
-    request.open("GET", Database_URL);
-    request.send();
-
-    request.onreadystatechange = () => {
-        if ( request.responseText != null && request.responseText != '' ) {
-            sessionStorage.setItem(record, request.responseText);
-        }
-    }
-
-}
-
 // Real Script Starts from Below ==>
 
 function Welcome() {
@@ -150,7 +122,7 @@ function Finish() {
                 return false;
             }; // To check that all Data is present or Not !
 
-        }; Database_ReadData("/count?sheet=User_Accounts", "User_ID" );
+        }; // Database_ReadData("/count?sheet=User_Accounts", "User_ID" );
 
         setTimeout( () => {
 
@@ -163,7 +135,7 @@ function Finish() {
             Data.User_ID = ( JSON.parse( sessionStorage.getItem("User_ID") ) )["rows"];
             Data = JSON.stringify( Data );
 
-            Database_CreateData("?sheet=User_Accounts", Data )
+            // Database_CreateData("?sheet=User_Accounts", Data )
 
             setTimeout( () => {
 

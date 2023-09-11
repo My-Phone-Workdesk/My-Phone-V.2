@@ -1,18 +1,4 @@
 // Exported Functions From Database ==>
-
-const request = new XMLHttpRequest();
-const Database = 'https://sheetdb.io/api/v1/qhlszwbu7dxp7';
-
-function Database_UpdateData(sheet, argument, record) {
-    var Database_URL = Database + argument + sheet;
-    request.open("PUT", Database_URL);
-    request.setRequestHeader('Content-type','application/json; charset=utf-8');
-    request.onload = () => {
-        console.log(request.status);
-        console.clear();
-    }; request.send(record);
-}
-
 // Real Script Starts from Below ==>
 
 function show_hide() {
@@ -99,7 +85,7 @@ function Payment_MB() {
                             d = JSON.stringify(d);
                             a = null;
                             
-                            Database_UpdateData("?sheet=Accounts", '/ID/' + c, d);
+                            // Database_UpdateData("?sheet=Accounts", '/ID/' + c, d);
 
                             document.body.style.cursor = "Progress";
 

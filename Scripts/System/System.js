@@ -1,18 +1,4 @@
 // Exported Functions From Database ==>
-
-const request = new XMLHttpRequest();
-const Database = 'https://sheetdb.io/api/v1/qhlszwbu7dxp7';
-
-function Database_UpdateData(sheet, argument, record) {
-    var Database_URL = Database + argument + sheet;
-    request.open("PUT", Database_URL);
-    request.setRequestHeader('Content-type','application/json; charset=utf-8');
-    request.onload = () => {
-        console.log(request.status);
-        console.clear();
-    }; request.send(record);
-}
-
 // Real Script Starts from Below ==>
 
 function Restart() {
@@ -61,8 +47,13 @@ function Upload_Storage( data, user ) {
 
     data = JSON.stringify( data );
 
-    Database_UpdateData("?sheet=Files", "/User/" + user, data);
+    // Database_UpdateData("?sheet=Files", "/User/" + user, data);
 
     setTimeout( () => {},2000 );
 
 }
+
+/* 1 - System.js
+2 - FRP.js
+3 - Devices.js
+4 - index.js */
