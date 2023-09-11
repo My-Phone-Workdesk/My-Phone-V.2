@@ -6,6 +6,12 @@
     <title>Loading Screen</title>
     <link rel="Icon" type="Image/X-Icon" href="../Icons/Loading.ico" />
     <link rel="stylesheet" href="../Icons/fontawesome-pro/css/all.css" />
+
+    <script src="./Database.js"></script>
+
+    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+
     <style>
         body {
             background-color: black;
@@ -21,9 +27,11 @@
             animation: Roll 1.5s ease 0.3s 4 normal none;
         }
     </style>
-    <script src="./Database.js"></script>
+
 </head>
+
 <body onload="Read_UserData();">
     <i class="fa-duotone fa-spinner-third fa-spin"></i>
 </body>
+
 </html>
