@@ -1,0 +1,40 @@
+{
+    "API": "Database.api/v1/my-phone-v.2/com.api.package",
+
+    "Description": "This Format will be used in Files to Store all the Files data into a single cell of data so called an object which has 'Data' Property and its value will be the actual User's Files Data... The Data is an whole array inside which there are arrays those are folders ad drives and the objects inside teh drives are the actual files which has there own data in form of an object's properties and the whole object will be a file... and while storing it to server we will store it in the form of string using JSON.stringfy and after taking or getting data from server we will JSON.parse it... So Simple !!!",
+
+    "From": "Ayush / Ujjwal", "To": "Arnav / Lucky",
+
+    "Data": [
+
+        [
+
+            "Drive A:",
+            
+            {
+                "Name": "File",
+                "Last_Modified": "September-10-2023 12:00",
+                "File_Created": "September-9-2023 22:45",
+                "Extention": ".cmd",
+                "Full_Name": "File.cmd"
+            }
+
+        ], [
+
+            "Drive B:", { "Name": "Data" }, [
+
+                "Folder_Name = Database",
+
+                {
+                    "Name": "Database_Connector",
+                    "Extention": ".dmd",
+                    "Full_Name": "Database_Connector.dmd"
+                }
+
+            ]
+
+        ]
+
+    ]
+
+}

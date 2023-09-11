@@ -66,5 +66,3 @@ function Upload_Storage( data, user ) {
     setTimeout( () => {},2000 );
 
 }
-
-function Email() {  }
