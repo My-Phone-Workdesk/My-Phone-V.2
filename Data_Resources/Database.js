@@ -90,3 +90,14 @@ async function listData(sheet_name, path) { let response;
     }; Final_Data = JSON.stringify(Final_Data); sessionStorage.setItem(path, Final_Data); }
 
 async function updateData() { alert("I do not work at all!"); }
+
+function Request_Data() {
+
+    var request_type = sessionStorage.getItem('Request');
+    request_type = JSON.parse(request_type);
+    
+    if ( request_type["TYPE"] == "GET" ) { // On GET Request...
+    listData( request_type["LOCATION"], request_type["PATH"] );
+    } else { return; }
+    
+}

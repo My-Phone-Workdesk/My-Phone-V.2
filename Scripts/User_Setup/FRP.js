@@ -96,9 +96,7 @@ function Account() {
 }
 
 function Finish() {
-
-    document.body.style.backgroundColor = "#000000";
-
+    
     setTimeout( () => {
 
         var details = new Array();
@@ -110,7 +108,10 @@ function Finish() {
         details.push( "User" );
         details.push( "User_Lock" );
 
-        document.writeln("<p>Connecting to the Server...</p>");
+        let para = undefined;
+        para = document.createElement('p');
+        para.innerHTML = 'Connecting to the Server...'
+        document.body.appendChild(para);
         
         let Data = JSON.parse( localStorage.getItem("Add_User") );
         
@@ -122,38 +123,60 @@ function Finish() {
                 return false;
             }; // To check that all Data is present or Not !
 
-        }; // Database_ReadData("/count?sheet=User_Accounts", "User_ID" );
+        }; sessionStorage.setItem("User_ID", ( JSON.parse( sessionStorage.getItem("Data") ) ).length );
 
         setTimeout( () => {
 
-            document.writeln("<p>Connected to Server Successfully !!! </p>");
-            document.writeln("<br>");
-            document.writeln("<p>All Details Packed in Package...</p>");
-            document.writeln("<p>Size = 7 MB</p>");
-            document.writeln("<br>");
+            para = document.createElement('p');
+            para.innerHTML = 'Connected to Server Successfully !!! ';
+            document.body.appendChild(para);
 
-            Data.User_ID = ( JSON.parse( sessionStorage.getItem("User_ID") ) )["rows"];
+            para = document.createElement('p');
+            para.innerHTML = 'All Details Packed in Package...';
+            document.body.appendChild(para);
+
+            para = document.createElement('p');
+            para.innerHTML = 'Size = 7 MB';
+            document.body.appendChild(para);
+
+            Data.User_ID = ( JSON.parse( sessionStorage.getItem("User_ID") ) );
             Data = JSON.stringify( Data );
 
             // Database_CreateData("?sheet=User_Accounts", Data )
 
             setTimeout( () => {
 
-                document.writeln("<p>Adding 1 MB File in Package</p>");
-                document.writeln("<p>Setting Up User Details as a Package</p>");
-                document.writeln("<p>Unzipping Package to Database</p>");
-                document.writeln("<br>");
+                para = document.createElement('p');
+                para.innerHTML = 'Adding 1 MB File in Package';
+                document.body.appendChild(para);
+
+                para = document.createElement('p');
+                para.innerHTML = 'Setting Up User Details as a Package';
+                document.body.appendChild(para);
+
+                para = document.createElement('p');
+                para.innerHTML = 'Unzipping Package to Database';
+                document.body.appendChild(para);
 
                 setTimeout( () => {
 
-                    document.writeln("<p>All Operation Done Successfully !!! </p>");
-                    document.writeln("<p>User Created Successfully to the Server</p>");
-                    document.writeln("<br>");
-                    document.writeln("<p>Disconnecting From the Server...</p>");
+                    para = document.createElement('p');
+                    para.innerHTML = 'All Operation Done Successfully !!! ';
+                    document.body.appendChild(para);
+
+                    para = document.createElement('p');
+                    para.innerHTML = 'User Created Successfully to the Server';
+                    document.body.appendChild(para);
+
+                    para = document.createElement('p');
+                    para.innerHTML = 'Disconnecting From the Server...';
+                    document.body.appendChild(para);
 
                     setTimeout( () => {
 
-                        document.writeln("<p>Disconnected From the Server !!! </p>");
+                        para = document.createElement('p');
+                        para.innerHTML = 'Disconnected From the Server !!! ';
+                        document.body.appendChild(para);
 
                         setTimeout( () => {
 
@@ -172,6 +195,6 @@ function Finish() {
 
         },2000 );
 
-    },1500 );
+    },3000 );
 
 }
