@@ -44,37 +44,49 @@ function gisLoaded() {
 }; // These are the imported functions from NET...
 
 async function listData(sheet_name, path) { let response;
+
     try {
+
         response = await gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: '1-jMb9tOG--iC9_onIXqK1LTWKGqs0H7iOTXDTu7W1gs',
-        range: sheet_name,
-        });
+        range: sheet_name });
+
     } catch (err) {
+
         console.warn(err); return;
-    }
-    const range = response.result;
+
+    }; const range = response.result;
+
     if (!range || !range.values || range.values.length == 0) {
+
         console.warn("An Error Takes Place..."); return;
-    }
-    const output = range.values.reduce((str, row) => `${str}\n${row}`);
+
+    }; const output = range.values.reduce((str, row) => `${str}\n${row}`); // Please explain this...
+
     var result = new Array(); result = output.split('\n');
     var Headers = new Array(); Headers = result[0].split(',');
     var Final_Data = new Array();
     Single_User_Data = new Array(); All_User_Data = new Array();
+
     for ( var v = 1; v < result.length; v++ ) {
+
         All_User_Data.push( result[v].split(',') );
+
     }; for ( var a = 0; a < All_User_Data.length; a++ ) {
+
         Single_User_Data = All_User_Data[a];
+
         if ( Single_User_Data.length == Headers.length ) {
+
             var classify = new Object();
+
             for ( var s = 0; s < Headers.length; s++ ) {
+
                 classify[Headers[s]] = Single_User_Data[s];
+
             }; Final_Data.push(classify);
-        } else {
-            console.log("Error : Missing Details...");
-        }
+
+        } else { console.log("Error : Missing Details..."); }
     }; Final_Data = JSON.stringify(Final_Data); sessionStorage.setItem(path, Final_Data); }
 
-async function updateData() {
-    alert("I do not work at all!");
-}
+async function updateData() { alert("I do not work at all!"); }
