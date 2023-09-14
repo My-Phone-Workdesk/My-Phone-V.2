@@ -1,9 +1,4 @@
-// Exported Functions From Database ==>
-// Real Script Starts from Below ==>
-
-function Welcome() {
-    location.href = "./Conditions.html";
-}
+function Welcome() { location.href = "./Conditions.html"; }
 
 function Check() {
 
@@ -100,13 +95,13 @@ function Finish() {
     setTimeout( () => {
 
         var details = new Array();
-        details.push( "Account" );
-        details.push( "BIOS" );
-        details.push( "Device" );
-        details.push( "Firmware" );
-        details.push( "Firmware_Version" );
         details.push( "User" );
         details.push( "User_Lock" );
+        details.push( "BIOS" );
+        details.push( "Firmware" );
+        details.push( "Firmware_Version" );
+        details.push( "Device" );
+        details.push( "Account" );
 
         let para = undefined;
         para = document.createElement('p');
@@ -123,7 +118,15 @@ function Finish() {
                 return false;
             }; // To check that all Data is present or Not !
 
-        }; sessionStorage.setItem("User_ID", ( JSON.parse( sessionStorage.getItem("Data") ) ).length );
+        }; var _User_ID_ = ( JSON.parse( sessionStorage.getItem("Data") ) ).length;
+
+        var order = new Array();
+
+        for ( var f = 0; f < Object.keys( Data ).length; f++ ) {
+            
+            order.push( Data[ details[f] ] );
+
+        }; Data = order; order = null; Data.unshift(_User_ID_);
 
         setTimeout( () => {
 
@@ -139,19 +142,18 @@ function Finish() {
             para.innerHTML = 'Size = 7 MB';
             document.body.appendChild(para);
 
-            Data.User_ID = ( JSON.parse( sessionStorage.getItem("User_ID") ) );
-            Data = JSON.stringify( Data );
-
-            // Database_CreateData("?sheet=User_Accounts", Data )
-
             setTimeout( () => {
+
+                var Request = {
+                    TYPE: "POST",
+                    LOCATION: "User_Accounts",
+                    WINDOW: 'index.html',
+                    DATA: Data
+                }; Request = JSON.stringify( Request );
+                sessionStorage.setItem('Request', Request);
 
                 para = document.createElement('p');
                 para.innerHTML = 'Adding 1 MB File in Package';
-                document.body.appendChild(para);
-
-                para = document.createElement('p');
-                para.innerHTML = 'Setting Up User Details as a Package';
                 document.body.appendChild(para);
 
                 para = document.createElement('p');
@@ -180,10 +182,9 @@ function Finish() {
 
                         setTimeout( () => {
 
-                            sessionStorage.removeItem("User_ID");
                             alert("Congratulations ! Your User Successfully Created on Server");
-                            sessionStorage.clear();
-                            location.href = "../../../index.html"; return true;
+                            
+                            location.href = "../../../Data_Resources/Requests_Page.html"; return true;
 
                         },1000 );
 

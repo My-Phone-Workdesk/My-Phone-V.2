@@ -132,7 +132,7 @@ function Request_Data() {
 
         } else { return; }
         
-        setTimeout( () => { location.href = "../" + request_type["WINDOW"]; },1500 );
+        setTimeout( () => { location.href = '../' + request_type["WINDOW"]; },1500 );
 
     },1000 );
 

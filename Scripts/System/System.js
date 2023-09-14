@@ -1,6 +1,3 @@
-// Exported Functions From Database ==>
-// Real Script Starts from Below ==>
-
 function Restart() {
 
     document.body.style.backgroundColor = "#000000";
@@ -37,23 +34,34 @@ function Files( value ) {
 
 }
 
-function Upload_Storage( data, user ) {
+function Upload_Storage( data, user, Initial_Location, Final_Location ) {
 
     data = JSON.stringify( data );
 
     data = Files( data );
 
-    data = { "Data": data };
+    var User_No = JSON.parse( sessionStorage.getItem("Data") );
+    
+    for ( var u = 0; u > -1 ; u++ ) {
 
-    data = JSON.stringify( data );
+        if ( User_No[u]["User"] == user ) { User_No = User_No[u]["User_ID"]; }
 
-    // Database_UpdateData("?sheet=Files", "/User/" + user, data);
+    }
 
-    setTimeout( () => {},2000 );
+    var Request = {
+        TYPE: "PUT",
+        LOCATION: "Files",
+        WINDOW: Final_Location,
+        COLUMN: "B",
+        ROW: User_No,
+        DATA: data
+    }; Request = JSON.stringify( Request );
+
+    sessionStorage.setItem( 'Request', Request );
+
+    location.href = Initial_Location + 'Data_Resources/Requests_Page.html';
 
 }
 
-/* 1 - System.js
-2 - FRP.js
-3 - Devices.js
-4 - index.js */
+/* 1 - Devices.js
+2 - index.js */
