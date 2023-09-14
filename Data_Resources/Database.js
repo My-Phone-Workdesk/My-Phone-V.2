@@ -29,11 +29,15 @@ let gisInited = false;
 function gapiLoaded() { gapi.load('client', initializeGapiClient); }
 
 async function initializeGapiClient() {
-    await gapi.client.init({
-        apiKey: API_KEY,
-        discoveryDocs: [DISCOVERY_DOC]
-    });
-    gapiInited = true;
+    try {
+        await gapi.client.init({
+            apiKey: [API_KEY],
+            discoveryDocs: [DISCOVERY_DOC]
+        });
+        gapiInited = true;
+    } catch (error) {
+       console.log(error); return;
+    }
 }
 
 function gisLoaded() {
@@ -46,7 +50,6 @@ function gisLoaded() {
 } // These are the imported functions from NET...
 
 async function Read_Data(sheet_name, path) { let response;
-
     try {
 
         response = await gapi.client.sheets.spreadsheets.values.get({
@@ -54,8 +57,7 @@ async function Read_Data(sheet_name, path) { let response;
         range: sheet_name });
 
     } catch (err) {
-
-        console.warn(err); return;
+        console.log(err); return;
 
     }; const range = response.result;
 
