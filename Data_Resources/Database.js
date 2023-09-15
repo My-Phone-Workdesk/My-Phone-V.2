@@ -18,13 +18,11 @@ function Read_UserData() {
 }
 
 const spreadsheet_Id = '1-jMb9tOG--iC9_onIXqK1LTWKGqs0H7iOTXDTu7W1gs';
-const CLIENT_ID = '463724458932-eeagdhubnlq301h6656v042vk4t645c2.apps.googleusercontent.com';
 const API_KEY = 'AIzaSyAXdwGN4T6QDFVz6aIC4YnKY-iVvUttqRM';
 const DISCOVERY_DOC = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
 const SCOPES = 'https://www.googleapis.com/auth/spreadsheets';
 let tokenClient;
 let gapiInited = false;
-let gisInited = false;
 
 function gapiLoaded() { gapi.load('client', initializeGapiClient); }
 
@@ -39,15 +37,6 @@ async function initializeGapiClient() {
        console.log(error); return;
     }
 }
-
-function gisLoaded() {
-    tokenClient = google.accounts.oauth2.initTokenClient({
-        client_id: CLIENT_ID,
-        scope: SCOPES,
-        callback: ''
-    });
-    gisInited = true;
-} // These are the imported functions from NET...
 
 async function Read_Data(sheet_name, path) { let response;
     try {
