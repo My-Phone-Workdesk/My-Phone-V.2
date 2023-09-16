@@ -33,9 +33,7 @@ async function initializeGapiClient() {
             discoveryDocs: [DISCOVERY_DOC]
         });
         gapiInited = true;
-    } catch (error) {
-       console.log(error); return;
-    }
+    } catch (err) { console.warn(err.message); return; }
 }
 
 async function Read_Data(sheet_name, path) { let response;
@@ -45,10 +43,9 @@ async function Read_Data(sheet_name, path) { let response;
         spreadsheetId: spreadsheet_Id,
         range: sheet_name });
 
-    } catch (err) {
-        console.log(err); return;
+    } catch (err) { console.warn(err.message); return; };
 
-    }; const range = response.result;
+    const range = response.result;
 
     if (!range || !range.values || range.values.length == 0) {
 
@@ -95,7 +92,7 @@ async function Update_Data( sheet_name, Column, Row, Data ) {
 
         });
 
-    } catch ( err ) { console.warn(err); }
+    } catch (err) { console.warn(err.message); }
 }
 
 function Request_Data() {
@@ -179,7 +176,7 @@ async function Create_Data( sheet_name, Data ) {
             values: [ Data ]
 
         });
-    } catch (err) { console.warn(err) }
+    } catch (err) { console.warn(err.message) }
 }
 
 async function Clear_Data( sheet_name, COLUMN, ROW ) {
@@ -192,5 +189,5 @@ async function Clear_Data( sheet_name, COLUMN, ROW ) {
 
         });
 
-    } catch ( err ) { console.warn( err ) }
+    } catch (err) { console.warn(err.message) }
 }
