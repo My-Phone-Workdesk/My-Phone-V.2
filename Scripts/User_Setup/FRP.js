@@ -13,7 +13,7 @@ function Check() {
         document.querySelector('a').style.visibility = "hidden";
     }; return true;
 
-}
+};
 
 function Account() {
 
@@ -88,7 +88,7 @@ function Account() {
         }; alert("Sorry this Email wasn't Found on the Server..."); location.reload();
 
     }
-}
+};
 
 function Finish() {
     
@@ -114,8 +114,9 @@ function Finish() {
 
             if ( ( Object.keys( Data ).indexOf( details[v] ) ) == -1 ) {
                 alert("Your Some Data is Missing ! May be you have left some steps... Please Restart Add User from Home Page... Your Money would be Lost :( ");
-                location.href = "../../../index.html";
-                return false;
+
+                location.href = "../../../index.html"; return;
+
             }; // To check that all Data is present or Not !
 
         }; var _User_ID_ = ( JSON.parse( sessionStorage.getItem("Data") ) ).length;
@@ -126,7 +127,7 @@ function Finish() {
             
             order.push( Data[ details[f] ] );
 
-        }; Data = order; order = null; Data.unshift(_User_ID_);
+        }; Data = order; order = null; Data.unshift( _User_ID_ );
 
         setTimeout( () => {
 
@@ -143,14 +144,6 @@ function Finish() {
             document.body.appendChild(para);
 
             setTimeout( () => {
-
-                var Request = {
-                    TYPE: "POST",
-                    LOCATION: "User_Accounts",
-                    WINDOW: 'index.html',
-                    DATA: Data
-                }; Request = JSON.stringify( Request );
-                sessionStorage.setItem('Request', Request);
 
                 para = document.createElement('p');
                 para.innerHTML = 'Adding 1 MB File in Package';
@@ -183,8 +176,6 @@ function Finish() {
                         setTimeout( () => {
 
                             alert("Congratulations ! Your User Successfully Created on Server");
-                            
-                            location.href = "../../../Data_Resources/Requests_Page.html"; return true;
 
                         },1000 );
 
@@ -198,4 +189,4 @@ function Finish() {
 
     },3000 );
 
-}
+};

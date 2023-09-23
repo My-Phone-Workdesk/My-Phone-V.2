@@ -9,7 +9,7 @@ function Create_User_Profile() {
         document.body.style.backgroundImage = "url('../../OS_Package/" + OS + ".jpg" + "')";
         setTimeout( () => { return true; }, BIOS * 2000 );
     }, BIOS * 1000 );
-}
+};
 
 function Submit_Details() {
 
@@ -37,7 +37,7 @@ function Submit_Details() {
         location.href = "./FRP/FRP.html"; return true;
 
     }
-}
+};
 
 function Check_Password_Strength() {
     let Check_Box = document.getElementById("Password_Strength");
@@ -84,4 +84,4 @@ function Check_Password_Strength() {
 
         }
     }
-}
+};

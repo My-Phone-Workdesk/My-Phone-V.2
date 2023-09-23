@@ -18,7 +18,7 @@ function Restart() {
            
     }, 15575);
 
-}
+};
 
 function Files( value ) {
 
@@ -32,36 +32,4 @@ function Files( value ) {
 
     }; return new_value;
 
-}
-
-function Upload_Storage( data, user, Initial_Location, Final_Location ) {
-
-    data = JSON.stringify( data );
-
-    data = Files( data );
-
-    var User_No = JSON.parse( sessionStorage.getItem("Data") );
-    
-    for ( var u = 0; u > -1 ; u++ ) {
-
-        if ( User_No[u]["User"] == user ) { User_No = User_No[u]["User_ID"]; }
-
-    }
-
-    var Request = {
-        TYPE: "PUT",
-        LOCATION: "Files",
-        WINDOW: Final_Location,
-        COLUMN: "B",
-        ROW: User_No,
-        DATA: data
-    }; Request = JSON.stringify( Request );
-
-    sessionStorage.setItem( 'Request', Request );
-
-    location.href = Initial_Location + 'Data_Resources/Requests_Page.html';
-
-}
-
-/* 1 - Devices.js
-2 - index.js */
+};

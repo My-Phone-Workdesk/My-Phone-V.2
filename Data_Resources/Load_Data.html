@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loading Screen</title>
@@ -9,9 +10,8 @@
 
     <script src="./Database.js"></script>
 
-    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
-
     <style>
+
         body {
             background-color: black;
             width: 98vw;
@@ -25,12 +25,15 @@
             color: white;
             animation: Roll 1.5s ease 0.3s 4 normal none;
         }
+
     </style>
 
 </head>
 
-<body onload="Read_UserData();">
+<body>
+
     <i class="fa-duotone fa-spinner-third fa-spin"></i>
+
 </body>
 
 </html>
