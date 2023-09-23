@@ -124,27 +124,27 @@ const Database = {
     
         } catch (err) { console.warn(err.result.error) }
 
+    },
+
+    gapiLoaded: () => {
+
+        gapi.load('client', initializeGapiClient);
+
+        async function initializeGapiClient() {
+
+            try {
+        
+                await gapi.client.init({
+                    apiKey: [ Database.Authorization.API_KEY ],
+                    discoveryDocs: [ Database.Authorization.DISCOVERY_DOC ],
+                    sheets: [ Database.Authorization.SCOPES ]
+                });
+        
+            } catch (err) { console.warn(err.result.error); return; }
+        
+        };
+
     }
-
-};
-
-function gapiLoaded() {
-    
-    gapi.load('client', initializeGapiClient);
-
-    async function initializeGapiClient() {
-
-        try {
-    
-            await gapi.client.init({
-                apiKey: [ Database.Authorization.API_KEY ],
-                discoveryDocs: [ Database.Authorization.DISCOVERY_DOC ],
-                sheets: [ Database.Authorization.SCOPES ]
-            });
-    
-        } catch (err) { console.warn(err.result.error); return; }
-    
-    };
 
 };
 
@@ -199,7 +199,7 @@ window.onload = () => {
         script.defer = true;
         script.src = "https://apis.google.com/js/api.js";
 
-        script.onload = () => { gapiLoaded(); };
+        script.onload = () => { Database.gapiLoaded(); };
 
         Read_UserData();
 
@@ -207,4 +207,4 @@ window.onload = () => {
 
 };
 
-export { Database, gapiLoaded };
+export { Database };

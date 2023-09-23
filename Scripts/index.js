@@ -1,6 +1,6 @@
 // Imported Functions From Database ==>
 
-import { Database, gapiLoaded } from "../Data_Resources/Database.js";
+import { Database } from "../Data_Resources/Database.js";
 
 // Real Script Starts from Below ==>
 
@@ -25,7 +25,7 @@ window.onload = () => {
         script.defer = true;
         script.src = "https://apis.google.com/js/api.js";
 
-        script.onload = () => { gapiLoaded(); };
+        script.onload = () => { Database.gapiLoaded(); };
 
     };
 
