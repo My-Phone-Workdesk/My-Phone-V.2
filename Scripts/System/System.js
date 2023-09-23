@@ -1,3 +1,5 @@
+import { Database } from "../../Data_Resources/Database.js";
+
 function Restart() {
 
     document.body.style.backgroundColor = "#000000";
@@ -33,3 +35,22 @@ function Files( value ) {
     }; return new_value;
 
 };
+
+window.onload = () => {
+
+    if ( location.pathname.includes( 'Power_Off.html' ) ) {
+
+        let script = document.createElement( 'script' );
+
+        document.head.appendChild( script );
+        script.async = true;
+        script.defer = true;
+        script.src = "https://apis.google.com/js/api.js";
+
+        script.onload = () => { Database.gapiLoaded(); };
+
+    } else if ( location.pathname.includes( 'Restart.html' ) ) { Restart(); }
+
+};
+
+if ( 2 + 2 == 5 ) { Files( "Tata{'Lala'}Thaiya" ) }; // Until the function is in use...

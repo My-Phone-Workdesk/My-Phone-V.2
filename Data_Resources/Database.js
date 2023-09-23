@@ -27,7 +27,9 @@ const Database = {
         spreadsheet_Id: '1-jMb9tOG--iC9_onIXqK1LTWKGqs0H7iOTXDTu7W1gs',
         API_KEY: 'AIzaSyAXdwGN4T6QDFVz6aIC4YnKY-iVvUttqRM',
         DISCOVERY_DOC: 'https://sheets.googleapis.com/$discovery/rest?version=v4',
-        SCOPES: 'https://www.googleapis.com/auth/spreadsheets'
+        SCOPES: 'https://www.googleapis.com/auth/spreadsheets',
+        SheetDB_API: "https://sheetdb.io/api/v1/qhlszwbu7dxp7",
+        SheetDB_Error: "Request limit exceeded. Upgrade your plan."
     
     },
 
@@ -91,7 +93,7 @@ const Database = {
     
             });
     
-        } catch ( err ) { console.warn( err.result.error ); }
+        } catch ( err ) { console.warn( err ) };
 
     },
 
