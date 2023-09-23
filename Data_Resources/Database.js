@@ -17,26 +17,26 @@ function Read_UserData() {
 
 };
 
-const Authorization = {
-
-    spreadsheet_Id: '1-jMb9tOG--iC9_onIXqK1LTWKGqs0H7iOTXDTu7W1gs',
-    API_KEY: 'AIzaSyAXdwGN4T6QDFVz6aIC4YnKY-iVvUttqRM',
-    DISCOVERY_DOC: 'https://sheets.googleapis.com/$discovery/rest?version=v4',
-    SCOPES: 'https://www.googleapis.com/auth/spreadsheets'
-
-};
-
 // let tokenClient; ( This is declared but not used in the script... )
 // let gapiInited = false; ( This is declared but its value is never read... )
 
 const Database = {
+
+    Authorization: {
+
+        spreadsheet_Id: '1-jMb9tOG--iC9_onIXqK1LTWKGqs0H7iOTXDTu7W1gs',
+        API_KEY: 'AIzaSyAXdwGN4T6QDFVz6aIC4YnKY-iVvUttqRM',
+        DISCOVERY_DOC: 'https://sheets.googleapis.com/$discovery/rest?version=v4',
+        SCOPES: 'https://www.googleapis.com/auth/spreadsheets'
+    
+    },
 
     Read_Data: async (sheet_name, path) => { let response;
 
         try {
     
             response = await gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: Authorization.spreadsheet_Id,
+            spreadsheetId: Database.Authorization.spreadsheet_Id,
             range: sheet_name });
     
         } catch (err) { console.warn(err.result.error); return; };
@@ -73,6 +73,7 @@ const Database = {
                 }; Final_Data.push(classify);
     
             } else { console.log("Error : Missing Details..."); }
+
         }; Final_Data = JSON.stringify(Final_Data); sessionStorage.setItem(path, Final_Data);
     
     },
@@ -83,7 +84,7 @@ const Database = {
 
             await gapi.client.sheets.spreadsheets.values.update({
     
-                spreadsheetId: Authorization.spreadsheet_Id,
+                spreadsheetId: Database.Authorization.spreadsheet_Id,
                 range: ( sheet_name + '!' + Column + Row ),
                 valueInputOption: 'RAW',
                 values: [ [ Data ] ] // Data to Update in the Cell...
@@ -100,7 +101,7 @@ const Database = {
 
             await gapi.client.sheets.spreadsheets.values.append({
     
-                spreadsheetId: Authorization.spreadsheet_Id,
+                spreadsheetId: Database.Authorization.spreadsheet_Id,
                 range: sheet_name,
                 valueInputOption: 'RAW',
                 values: [ Data ]
@@ -116,7 +117,7 @@ const Database = {
 
             await gapi.client.sheets.spreadsheets.values.clear({
     
-                spreadsheetId: Authorization.spreadsheet_Id,
+                spreadsheetId: Database.Authorization.spreadsheet_Id,
                 range: sheet_name + '!' + COLUMN + ROW,
     
             });
@@ -134,8 +135,8 @@ async function initializeGapiClient() {
     try {
 
         await gapi.client.init({
-            apiKey: [ Authorization.API_KEY ],
-            discoveryDocs: [ Authorization.DISCOVERY_DOC ]
+            apiKey: [ Database.Authorization.API_KEY ],
+            discoveryDocs: [ Database.Authorization.DISCOVERY_DOC ]
         });
 
     } catch (err) { console.warn(err.result.error); return; }
@@ -201,4 +202,4 @@ window.onload = () => {
 
 };
 
-export { Database, Authorization };
+export { Database };

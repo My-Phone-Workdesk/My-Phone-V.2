@@ -1,35 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Phone V.2</title>
+
     <link rel="Icon" type="image/x-icon" href="./Icons/Favicon.ico">
     <link rel="stylesheet" href="./Design/index.css">
     <link rel="stylesheet" type="text/css" href="./Icons/fontawesome-pro/css/all.css">
-    <script src="./Scripts/index.js"></script>
+
+    <script src="./Scripts/index.js" type="module" ></script>
+
 </head>
 
-<body onload="Check_Data();">
+<body>
+
     <h1>Users</h1><hr>
+
     <a href="Screen/Add_User.html">
+
         <div>
+
             <i class="fa-solid fa-user-plus"></i>
             <h2 class="Options">Add a New User</h2>
+
         </div>
+
     </a>
+
     <hr class="Options-Line">
-    <div class="different" onclick="Login();"><!-- different == "Login User whole Div or Box" -->
+
+    <div id="different"><!-- different == "Login User whole Div or Box" -->
+
         <i class="fa-solid fa-user-magnifying-glass"></i>
         <h2 class="Options" id="Login-Div">Login to an existing User</h2>
+
     </div>
+
     <hr class="Options-Line">
+
     <table>
+
         <th>Users</th>
+
     </table>
+
     <p>Comment</p>
+
     <textarea placeholder="For any Issue Just Leave a Comment on us..." rows="5" cols="50"></textarea>
-    <i class="fa-solid fa-paper-plane-top" onclick="Send_Feedback();"> Send Feedback </i>
+
+    <i class="fa-solid fa-paper-plane-top" id="Send_Feed"> Send Feedback </i>
+
 </body>
 
 </html>

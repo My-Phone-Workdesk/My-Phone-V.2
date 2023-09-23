@@ -1,12 +1,29 @@
-// Exported Functions From Database ==>
+// Imported Functions From Database ==>
+
+import { Database } from "../Data_Resources/Database";
+
 // Real Script Starts from Below ==>
 
-function scroll() {
-    document.body.scrollTop = 0; //For Safari Browser if so...
-    document.documentElement.scrollTop = 0; //For other browsers like FIrefox, Chrome, Edge, etc...
-}
+window.onload = () => {
+
+    if ( location.pathname.includes( 'Device_Not_Eligible.html' ) ) { runOnStart(); }
+    else if ( location.pathname.includes( 'Add_User.html' ) ) { Restart(); }
+    else { // For index.html
+
+        Check_Data();
+
+        let Login_button = document.getElementById( 'different' );
+        Login_button.addEventListener( 'click', () => { Login(); });
+
+        let Send_Feedback_button = document.getElementById( 'Send_Feed' );
+        Send_Feedback_button.addEventListener( 'click', () => { Send_Feedback(); });
+
+    };
+
+};
 
 function Restart() {
+
     document.body.style.backgroundColor = "#000000";
     document.body.style.backgroundImage = "url('../Images/Start_Up_Logo.jpg')";
     document.body.style.backgroundSize = "100vw 100vh";
@@ -25,7 +42,8 @@ function Restart() {
         location.href = "../Screen/User_Setup/Devices.html";
 
     }, 18000);
-}
+
+};
 
 function Users() {
 
@@ -48,7 +66,7 @@ function Users() {
 
         }
 
-}
+};
 
 function runOnStart() {
     const minwidth = window.matchMedia("(min-width: 0px)");
@@ -63,7 +81,7 @@ function runOnStart() {
             location.href = "index.html";
         }
     }
-}
+};
 
 function Login() {
     var answer = prompt("Login to an Existing User by its User Id", "Owner");
@@ -119,55 +137,86 @@ function Login() {
         }
         alert("User ID not Available");
     }
-}
+};
 
 function Send_Feedback() {
 
+    Database.Read_Data( 'Feedback!A:A', 'Feedback' );
+    
+    var Feedback_length = JSON.parse( sessionStorage.getItem( 'Feedback' ) );
+    Feedback_length = Feedback.length + 1;
+
+    sessionStorage.removeItem( 'Feedback' );
+
+    console.log( Feedback_length );
+
     // Comment == Feedback { returns --> True };
+
     let Comment = document.querySelector('textarea').value;
+
     if ( Comment == '' ) {
+
         alert("Cannot Send Empty Comment...!!! "); // Empty Comment
-    } else if ( Comment.length <= 35 ) {
-        alert("Too Short Comment...");
-    } else {
+
+    } else if ( Comment.length <= 35 ) { alert("Too Short Comment..."); }
+
+    else {
 
         var Send = confirm("Confirm to Send Feedback ?");
+
         if ( Send ) {
             
             var name = prompt("Please Enter your Name", "");
+
             if ( name == null ) {
+
                 alert("Feedback Failed to Send..."); // Failed to Send
+
             } else if ( name == "" ) {
+
                 alert("Please Enter a Name..."); // Empty Response
+
             } else {
+
                 var Contact = prompt("Please Enter your Contact Information so that We can Contact you. It can be a Mobile Number, email, address, etc... But it should be Real! ", "");
+
                 if ( Contact == null ) {
+
                     alert("Feedback Failed to Send..."); // Failed to Send
+
                 } else if ( Contact == "" ) {
+
                     alert("Please Enter a valid Contact Information..."); // Empty Response
+
                 } else {
-                    var Feedback = new Object();
-                    Feedback["Name"] = name;
-                    Feedback["Contact"] = Contact;
-                    Feedback["Comment"] = Comment;
-                    Feedback = JSON.stringify(Feedback);
-                    // Database_CreateData("?sheet=Feedback", Feedback) // Send Feedback
+
+                    var Feedback = [ name, Contact, '', Comment, '', '', '',
+                    ( '=IF(REGEXMATCH(F' + Feedback_length + ', "(?i)BAD"), "Inappropriate User", "Appropriate User")' ) ];
+
+                    console.log( Feedback );
+
+                    Database.Create_Data( 'Feedback', Feedback );
+
                     setTimeout( () => { return; },2000 ); // Exit ( Comment Sent )
                 }
             }
 
-        } else {
-            return; // Exit ( Do not Send Comment )
-        }
+        } else { return; }  // Exit ( Do not Send Comment )
 
     }
 
-}
+};
 
 function Check_Data() {
+
     if ( ( sessionStorage.getItem("Data") == null ) || ( sessionStorage.getItem("Accounts_Data") == null ) ) {
+
         location.href = "./Data_Resources/Load_Data.html";
+
     } else {
+
         Users(); runOnStart(); // Else All Good...
+
     }
-}
+
+};

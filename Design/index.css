@@ -58,7 +58,7 @@ i {
     position: relative;
     bottom: -2rem;
 }
-.different {
+#different {
     height: 5rem;
 }
 table {
@@ -86,7 +86,7 @@ td {
     border: 0.4rem black solid;
     background-color: white;
 }
-.different:hover, .fa-paper-plane-top:hover {
+#different:hover, .fa-paper-plane-top:hover {
     cursor: pointer;
 }
 
