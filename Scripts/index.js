@@ -1,6 +1,6 @@
 // Imported Functions From Database ==>
 
-import { Database } from "../Data_Resources/Database";
+import { Database, gapiLoaded } from "../Data_Resources/Database.js";
 
 // Real Script Starts from Below ==>
 
@@ -17,6 +17,15 @@ window.onload = () => {
 
         let Send_Feedback_button = document.getElementById( 'Send_Feed' );
         Send_Feedback_button.addEventListener( 'click', () => { Send_Feedback(); });
+
+        let script = document.createElement( 'script' );
+
+        document.head.appendChild( script );
+        script.async = true;
+        script.defer = true;
+        script.src = "https://apis.google.com/js/api.js";
+
+        script.onload = () => { gapiLoaded(); };
 
     };
 
@@ -144,11 +153,9 @@ function Send_Feedback() {
     Database.Read_Data( 'Feedback!A:A', 'Feedback' );
     
     var Feedback_length = JSON.parse( sessionStorage.getItem( 'Feedback' ) );
-    Feedback_length = Feedback.length + 1;
+    Feedback_length = Feedback_length.length + 2;
 
     sessionStorage.removeItem( 'Feedback' );
-
-    console.log( Feedback_length );
 
     // Comment == Feedback { returns --> True };
 
@@ -193,17 +200,17 @@ function Send_Feedback() {
                     var Feedback = [ name, Contact, '', Comment, '', '', '',
                     ( '=IF(REGEXMATCH(F' + Feedback_length + ', "(?i)BAD"), "Inappropriate User", "Appropriate User")' ) ];
 
-                    console.log( Feedback );
-
                     Database.Create_Data( 'Feedback', Feedback );
 
                     setTimeout( () => { return; },2000 ); // Exit ( Comment Sent )
-                }
-            }
+
+                };
+
+            };
 
         } else { return; }  // Exit ( Do not Send Comment )
 
-    }
+    };
 
 };
 

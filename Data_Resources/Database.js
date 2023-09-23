@@ -13,7 +13,7 @@ function Read_UserData() {
 
         },2000 );
 
-    },1000 );
+    },3000 );
 
 };
 
@@ -39,7 +39,7 @@ const Database = {
             spreadsheetId: Database.Authorization.spreadsheet_Id,
             range: sheet_name });
     
-        } catch (err) { console.warn(err.result.error); return; };
+        } catch (err) { console.warn( err ); return; };
     
         const range = response.result;
     
@@ -52,7 +52,7 @@ const Database = {
         var result = new Array(); result = output.split('\n');
         var Headers = new Array(); Headers = result[0].split(',');
         var Final_Data = new Array();
-        Single_User_Data = new Array(); All_User_Data = new Array();
+        var Single_User_Data = new Array(); var All_User_Data = new Array();
     
         for ( var v = 1; v < result.length; v++ ) {
     
@@ -128,18 +128,23 @@ const Database = {
 
 };
 
-function gapiLoaded() { gapi.load('client', initializeGapiClient); }
+function gapiLoaded() {
+    
+    gapi.load('client', initializeGapiClient);
 
-async function initializeGapiClient() {
+    async function initializeGapiClient() {
 
-    try {
-
-        await gapi.client.init({
-            apiKey: [ Database.Authorization.API_KEY ],
-            discoveryDocs: [ Database.Authorization.DISCOVERY_DOC ]
-        });
-
-    } catch (err) { console.warn(err.result.error); return; }
+        try {
+    
+            await gapi.client.init({
+                apiKey: [ Database.Authorization.API_KEY ],
+                discoveryDocs: [ Database.Authorization.DISCOVERY_DOC ],
+                sheets: [ Database.Authorization.SCOPES ]
+            });
+    
+        } catch (err) { console.warn(err.result.error); return; }
+    
+    };
 
 };
 
@@ -202,4 +207,4 @@ window.onload = () => {
 
 };
 
-export { Database };
+export { Database, gapiLoaded };
