@@ -8,7 +8,7 @@
     <button id="Read" onclick="Read_Data(prompt('Please enter the sheet name'), prompt('Please enter the path or heading'));" style="visibility: hidden;" >Read Data</button>
     <button id="Update" onclick="Update_Data(prompt('Please enter the sheet name'), prompt('Please enter the column', 'A'), prompt('Please enter the row', '1'), prompt('Please enter the data to update', 'LALA'));"style="visibility: hidden;" >Update Data</button>
     <button id="Clear" onclick="Clear_Data(prompt('Please enter the sheet name'), prompt('Please enter the column', 'A'), prompt('Please enter the row', '1'));" style="visibility: hidden;" >Clear Data</button>
-    <button id="Create" onclick="Create_Data(prompt('Please enter the sheet name')); alert('As data is not working by using prompt, so data is passed internally(in function). -By LL(luckylala)');" style="visibility: hidden;" >Create Data</button>
+    <button id="Create" onclick="Create_Data(); alert('As data is not working by using prompt, so data is passed internally(in function). -By LL(luckylala)');" style="visibility: hidden;" >Create Data</button>
 
     <pre id="content" style="white-space: pre-wrap;"></pre>
 
@@ -66,8 +66,9 @@
         }
       }
       //async function Create_Data( sheet_name, Data ) {
-        async function Create_Data( sheet_name ) {
+        async function Create_Data() {
           try {
+              var sheet_name = 'Accounts';
               var LALA = 'LALA';
               var Data = [LALA,LALA,LALA,LALA,LALA,LALA,LALA,LALA,LALA,LALA];
               await gapi.client.sheets.spreadsheets.values.append({
