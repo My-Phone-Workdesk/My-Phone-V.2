@@ -106,6 +106,7 @@ const Database = {
                 spreadsheetId: Database.Authorization.spreadsheet_Id,
                 range: sheet_name,
                 valueInputOption: 'RAW',
+                insertDataOption: 'INSERT_ROWS',
                 values: [ Data ]
     
             });
