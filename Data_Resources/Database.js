@@ -21,6 +21,14 @@ function Read_UserData() {
         
                             localStorage.removeItem("Add_User"); location.href = "../index.html";
         
+                        } else {
+
+                            setTimeout( () => {
+
+                                localStorage.removeItem( "Add_User" ); location.href = '../index.html';
+
+                            },5000 );
+
                         }; /* return "All Data Extracted from the Server"...!!! */
         
                     },2000 );
