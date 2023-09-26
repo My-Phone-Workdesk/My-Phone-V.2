@@ -6,30 +6,30 @@ function Read_UserData() {
 
             Database.Read_Data( 'Accounts_Data', 'Accounts' );
 
-        };
-
-        setTimeout( () => {
-
-            if ( sessionStorage.getItem("Data") == null ) {
-
-                Database.Read_Data( 'Data', 'User_Accounts' );
-
-            };
-        
             setTimeout( () => {
 
-                if ( sessionStorage.getItem("Data") != null &&
-                sessionStorage.getItem("Accounts_Data") != null )
+                if ( sessionStorage.getItem("Data") == null ) {
+    
+                    Database.Read_Data( 'Data', 'User_Accounts' );
 
-                {
-
-                    localStorage.removeItem("Add_User"); location.href = "../index.html";
-
-                }; /* return "All Data Extracted from the Server"...!!! */
-
+                    setTimeout( () => {
+    
+                        if ( sessionStorage.getItem("Data") != null &&
+                        sessionStorage.getItem("Accounts_Data") != null )
+        
+                        {
+        
+                            localStorage.removeItem("Add_User"); location.href = "../index.html";
+        
+                        }; /* return "All Data Extracted from the Server"...!!! */
+        
+                    },2000 );
+    
+                };
+    
             },1000 );
-
-        },1000 );
+    
+        };
 
     },1000 );
 
