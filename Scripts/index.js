@@ -18,15 +18,6 @@ window.onload = () => {
         let Send_Feedback_button = document.getElementById( 'Send_Feed' );
         Send_Feedback_button.addEventListener( 'click', () => { Send_Feedback(); });
 
-        let script = document.createElement( 'script' );
-
-        document.head.appendChild( script );
-        script.async = true;
-        script.defer = true;
-        script.src = "https://apis.google.com/js/api.js";
-
-        script.onload = () => { Database.gapiLoaded(); };
-
     };
 
 };
@@ -150,67 +141,117 @@ function Login() {
 
 function Send_Feedback() {
 
-    Database.Read_Data( 'Feedback!A:A', 'Feedback' );
-    
-    var Feedback_length = JSON.parse( sessionStorage.getItem( 'Feedback' ) );
-    Feedback_length = Feedback_length.length + 2;
+    document.body.style.cursor = 'progress';
 
-    sessionStorage.removeItem( 'Feedback' );
+    Database.Read_Data( 'Feedback', 'Feedback' );
 
-    // Comment == Feedback { returns --> True };
+    setTimeout( () => {
 
-    let Comment = document.querySelector('textarea').value;
+        document.body.style.cursor = 'Default';
 
-    if ( Comment == '' ) {
+        var Feedback_length = JSON.parse( sessionStorage.getItem( 'Feedback' ) );
+        Feedback_length = Feedback_length.length + 2;
 
-        alert("Cannot Send Empty Comment...!!! "); // Empty Comment
+        sessionStorage.removeItem( 'Feedback' );
 
-    } else if ( Comment.length <= 35 ) { alert("Too Short Comment..."); }
+        // Comment == Feedback { returns --> True };
 
-    else {
+        let Comment = document.querySelector('textarea').value;
 
-        var Send = confirm("Confirm to Send Feedback ?");
+        if ( Comment == '' ) {
 
-        if ( Send ) {
-            
-            var name = prompt("Please Enter your Name", "");
+            alert("Cannot Send Empty Comment...!!! "); // Empty Comment
 
-            if ( name == null ) {
+        } else if ( Comment.length <= 35 ) { alert("Too Short Comment..."); }
 
-                alert("Feedback Failed to Send..."); // Failed to Send
+        else {
 
-            } else if ( name == "" ) {
+            var Send = confirm("Confirm to Send Feedback ?");
 
-                alert("Please Enter a Name..."); // Empty Response
+            if ( Send ) {
+                
+                var name = prompt("Please Enter your Name", "");
 
-            } else {
-
-                var Contact = prompt("Please Enter your Contact Information so that We can Contact you. It can be a Mobile Number, email, address, etc... But it should be Real! ", "");
-
-                if ( Contact == null ) {
+                if ( name == null ) {
 
                     alert("Feedback Failed to Send..."); // Failed to Send
 
-                } else if ( Contact == "" ) {
+                } else if ( name == "" ) {
 
-                    alert("Please Enter a valid Contact Information..."); // Empty Response
+                    alert("Please Enter a Name..."); // Empty Response
 
                 } else {
 
-                    var Feedback = [ name, Contact, '', Comment, '', '', '',
-                    ( '=IF(REGEXMATCH(F' + Feedback_length + ', "(?i)BAD"), "Inappropriate User", "Appropriate User")' ) ];
+                    var Contact = prompt("Please Enter your Contact Information so that We can Contact you. It can be a Mobile Number, email, address, etc... But it should be Real! ", "");
 
-                    Database.Create_Data( 'Feedback', Feedback );
+                    if ( Contact == null ) {
 
-                    setTimeout( () => { return; },2000 ); // Exit ( Comment Sent )
+                        alert("Feedback Failed to Send..."); // Failed to Send
+
+                    } else if ( Contact == "" ) {
+
+                        alert("Please Enter a valid Contact Information..."); // Empty Response
+
+                    } else {
+
+                        var Existing_User = prompt( "Do you have any of your Existing User ? If Yes ! Then Please Enter the User's Name or If No ! Then you can enter Owner too", 'Owner' )
+                        
+                        if ( Existing_User == null ) {
+
+                            alert( 'Feedback Failed to Send...' ); // Failed to Send
+
+                        } else {
+
+                            var Users = sessionStorage.getItem( 'Data' );
+                            Users = JSON.parse( Users );
+
+                            var only_Users = new Array();
+
+                            for ( var a = 0; a < Users.length; a++ ) {
+
+                                only_Users.push( Users[a]['User'] );
+
+                            }; Users = only_Users; only_Users = null;
+
+                            if ( Users.indexOf( Existing_User ) != -1 ) {
+
+                                var Feedback = [
+
+                                    name, Contact, Existing_User, Comment,
+
+                                    'Empty', 'Empty', 'Empty',
+
+                                    ( '=IF(REGEXMATCH(F' + Feedback_length +
+                                    ', "(?i)BAD"), "Inappropriate User", "Appropriate User")' )
+
+                                ];
+
+                                Database.Create_Data( 'Feedback', Feedback );
+
+                                setTimeout( () => {
+
+                                    alert( 'Thank You for your Feedback...' );
+                                    return true;
+
+                                },1000 ); // Exit ( Comment Sent )
+
+                            } else {
+
+                                alert( 'Sorry ! This User does not Exists...' );
+
+                            };
+
+                        };
+
+                    };
 
                 };
 
-            };
+            } else { return; }  // Exit ( Do not Send Comment )
 
-        } else { return; }  // Exit ( Do not Send Comment )
+        };
 
-    };
+    },2500 );
 
 };
 

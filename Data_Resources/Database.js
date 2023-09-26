@@ -2,212 +2,160 @@ function Read_UserData() {
 
     setTimeout( () => {
 
-        if ( sessionStorage.getItem("Accounts_Data") == null ) { Database.Read_Data('Accounts', 'Accounts_Data') }
-        if ( sessionStorage.getItem("Data") == null ) { Database.Read_Data('User_Accounts', 'Data') }
-        
+        if ( sessionStorage.getItem("Accounts_Data") == null ) {
+
+            Database.Read_Data( 'Accounts_Data', 'Accounts' );
+
+        };
+
         setTimeout( () => {
 
-            if ( sessionStorage.getItem("Data") != null && sessionStorage.getItem("Accounts_Data") != null ) { 
-                localStorage.removeItem("Add_User"); location.href = "../index.html";
-            }; /* return "All Data Extracted from the Server"...!!! */
+            if ( sessionStorage.getItem("Data") == null ) {
 
-        },2000 );
+                Database.Read_Data( 'Data', 'User_Accounts' );
 
-    },3000 );
+            };
+        
+            setTimeout( () => {
+
+                if ( sessionStorage.getItem("Data") != null &&
+                sessionStorage.getItem("Accounts_Data") != null )
+
+                {
+
+                    localStorage.removeItem("Add_User"); location.href = "../index.html";
+
+                }; /* return "All Data Extracted from the Server"...!!! */
+
+            },1000 );
+
+        },1000 );
+
+    },1000 );
 
 };
 
-// let tokenClient; ( This is declared but not used in the script... )
-// let gapiInited = false; ( This is declared but its value is never read... )
-
 const Database = {
 
-    Authorization: {
+    request_url: 'https://script.google.com/macros/s/AKfycbzaGAA1k5GC0xTqEDn68zonSABMBIzg_enYnuMOE8py7WoEd6MPtsCrCBbRb2_WlJ8/exec',
 
-        spreadsheet_Id: '1-jMb9tOG--iC9_onIXqK1LTWKGqs0H7iOTXDTu7W1gs',
-        API_KEY: 'AIzaSyAXdwGN4T6QDFVz6aIC4YnKY-iVvUttqRM',
-        DISCOVERY_DOC: 'https://sheets.googleapis.com/$discovery/rest?version=v4',
-        SCOPES: 'https://www.googleapis.com/auth/spreadsheets',
-        SheetDB_API: "https://sheetdb.io/api/v1/qhlszwbu7dxp7",
-        SheetDB_Error: "Request limit exceeded. Upgrade your plan."
-    
-    },
+    Send_request: ( data_type, store_data, _arguments_ ) => {
 
-    Read_Data: async (sheet_name, path) => { let response;
+        const request = new XMLHttpRequest();
 
-        try {
-    
-            response = await gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: Database.Authorization.spreadsheet_Id,
-            range: sheet_name });
-    
-        } catch (err) { console.warn( err ); return; };
-    
-        const range = response.result;
-    
-        if (!range || !range.values || range.values.length == 0) {
-    
-            console.warn("An Error Takes Place..."); return;
-    
-        }; const output = range.values.reduce((str, row) => `${str}\n${row}`); // Please explain this...
-    
-        var result = new Array(); result = output.split('\n');
-        var Headers = new Array(); Headers = result[0].split(',');
-        var Final_Data = new Array();
-        var Single_User_Data = new Array(); var All_User_Data = new Array();
-    
-        for ( var v = 1; v < result.length; v++ ) {
-    
-            All_User_Data.push( result[v].split(',') );
-    
-        }; for ( var a = 0; a < All_User_Data.length; a++ ) {
-    
-            Single_User_Data = All_User_Data[a];
-    
-            if ( Single_User_Data.length == Headers.length ) {
-    
-                var classify = new Object();
-    
-                for ( var s = 0; s < Headers.length; s++ ) {
-    
-                    classify[Headers[s]] = Single_User_Data[s];
-    
-                }; Final_Data.push(classify);
-    
-            } else { console.log("Error : Missing Details..."); }
+        request.open( "GET", Database.request_url + '?type=' + data_type + _arguments_ );
 
-        }; Final_Data = JSON.stringify(Final_Data); sessionStorage.setItem(path, Final_Data);
-    
-    },
+        request.onload = () => { sessionStorage.setItem( store_data, request.responseText ); };
 
-    Update_Data: async ( sheet_name, Column, Row, Data ) => {
-
-        try {
-
-            await gapi.client.sheets.spreadsheets.values.update({
-    
-                spreadsheetId: Database.Authorization.spreadsheet_Id,
-                range: ( sheet_name + '!' + Column + Row ),
-                valueInputOption: 'RAW',
-                values: [ [ Data ] ] // Data to Update in the Cell...
-    
-            });
-    
-        } catch ( err ) { console.warn( err ) };
+        request.send( null );
 
     },
 
-    Create_Data: async ( sheet_name, Data ) => {
+    Read_Data: ( data_location, category ) => {
 
-        try {
-
-            await gapi.client.sheets.spreadsheets.values.append({
-    
-                spreadsheetId: Database.Authorization.spreadsheet_Id,
-                range: sheet_name,
-                valueInputOption: 'RAW',
-                insertDataOption: 'INSERT_ROWS',
-                values: [ Data ]
-    
-            });
-        } catch (err) { console.warn(err.result.error) }
+        Database.Send_request( 'Read', data_location, '&category=' + category );
 
     },
 
-    Clear_Data: async ( sheet_name, COLUMN, ROW ) => {
+    Update_Data: ( category, cell, data ) => {
 
-        try {
+        Database.Send_request( 'Update', 'DATABASE', '&category=' + category + '&cell=' + cell
+        + '&data=' + data );
 
-            await gapi.client.sheets.spreadsheets.values.clear({
-    
-                spreadsheetId: Database.Authorization.spreadsheet_Id,
-                range: sheet_name + '!' + COLUMN + ROW,
-    
-            });
-    
-        } catch (err) { console.warn(err.result.error) }
+        setTimeout( () => { sessionStorage.removeItem( 'DATABASE' ); },1000 );
 
     },
 
-    gapiLoaded: () => {
+    Create_Data: ( category, data ) => {
 
-        gapi.load('client', initializeGapiClient);
+        Database.Send_request( 'Create', 'DATABASE', '&category=' + category + '&data=' +
+        Database.Json.stringify( data ) );
 
-        async function initializeGapiClient() {
+        setTimeout( () => { sessionStorage.removeItem( 'DATABASE' ); },1000 );
 
-            try {
-        
-                await gapi.client.init({
-                    apiKey: [ Database.Authorization.API_KEY ],
-                    discoveryDocs: [ Database.Authorization.DISCOVERY_DOC ],
-                    sheets: [ Database.Authorization.SCOPES ]
-                });
-        
-            } catch (err) { console.warn(err.result.error); return; }
-        
-        };
+    },
+
+    Delete_Data: ( category, cell ) => {
+
+        Database.Send_request( 'Delete', 'DATABASE', '&category=' + category + '&cell=' + cell );
+
+        setTimeout( () => { sessionStorage.removeItem( 'DATABASE' ); },1000 );
+
+    },
+
+    Json: {
+
+        parse: ( Data ) => {
+
+            var new_text = '';
+            var new_array = new Array();
+
+            for ( var a = 1; a < Data.length - 1; a++ ) {
+
+                if ( Data.charAt(a) == '~' ) { new_array.push( new_text ); new_text = ''; }
+                else if ( Data.charAt(a) == '`' ) { new_text += ' '; }
+                else { new_text += Data.charAt( a ); }
+
+            }; new_array.push( new_text ); return new_array;
+
+        },
+
+        stringify: ( data ) => {
+
+            var text = '';
+            var changed_data = new Array();
+
+            for ( var b = 0; b < data.length; b++ ) {
+
+                text = '';
+
+                for ( var c = 0; c < data[b].length; c++ ) {
+
+                    if ( data[ b ].charAt( c ) == ' ' ) { text += '`' }
+                    else { text += data[ b ].charAt( c ); }
+
+                }; changed_data.push( text );
+
+            }; data = changed_data; changed_data = null;
+            
+            var new_data = '[';
+
+            for ( var a = 0; a < data.length - 1; a++ ) {
+                
+                new_data += data[a];
+                new_data += '~';
+
+            }; new_data += data[ data.length - 1 ] + ']';
+
+            return new_data;
+
+        }
 
     }
 
 };
 
-/* IMPORTANT PROPERTIES OF 'Request' Data ( sessionStorage ) -->
+/* category is the Sheet's Name
 
-    COMMON PROPERTIES >>
+cell is use in Update and Delete...
 
-    ---------------------------------
-    
-    "TYPE" ==> "GET" / "PUT" / "POST" / "DELETE" !
+In Update the Cell should be Column + Row i.e.. for example --> B2, C12, F34, etc
 
-    "LOCATION" ==> This will be the Sheet's Name...
+In Delete the cell should be Row like 5, 1, 4, 9, etc but cell > 0 and the cell should be user id + 2
+because that is the Row number of the Sheet...
 
-    "WINDOW" ==> After the Process of Request is been done then the Screen will be on this Location i.e.. HTML Screen !!!
+In Update the cell's row should be like the delete one only...!!!
 
-    ------------------------------------
+data is use in Update and Create...
 
-    In Type "GET" Extra Properties >>
+In Update the data can be only a single word, sentence or a number that can be placed in the cell...
 
-    -------------------------------------
+In Create the data should be a Json.stringified ( Database.Json.stringify ) formatted array...
+In Which the length of the array should be == the length of the Columns is that shhet you entered in
+the category parameter...
 
-    "PATH" ==> The Data will store in a Key of sesssionStorage so this will be the Key's name...
+In Create data the data will be appended as a new row at the last of the "category" sheet */
 
-    ---------------------------------------
-
-    In Type "PUT" Extra Properties >>
-
-    ---------------------------------------
-
-    "COLUMN" ==> The Column Name of the Database Sheet i.e.. in Single Alphabets
-
-    "ROW" ==> The Row Number of the Database Sheet i.e.. INT type Row number !!!
-
-    "DATA" ==> The Data here will be a Single String i.e.. the data that has to be updated at the location of the sheet where Column and Row intersecting !!!
-
-    --------------------------------------------
-
-    In Type "POST" Extra Properties >>
-
-    --------------------------------------------
-
-    "Data" ==> The Data here will be an array or a list of strings... The array's length should be equal to the Number of Columns on that particular 'LOCATION' of the Sheet or Table !!! */ 
-
-window.onload = () => {
-
-    if ( location.pathname.includes( 'Load_Data.html' ) ) {
-
-        let script = document.createElement( 'script' );
-
-        document.head.appendChild( script );
-        script.async = true;
-        script.defer = true;
-        script.src = "https://apis.google.com/js/api.js";
-
-        script.onload = () => { Database.gapiLoaded(); };
-
-        Read_UserData();
-
-    };
-
-};
+window.onload = () => { if ( location.pathname.includes( 'Load_Data.html' ) ) { Read_UserData(); }; };
 
 export { Database };
