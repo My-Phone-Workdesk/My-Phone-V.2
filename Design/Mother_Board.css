@@ -71,7 +71,7 @@ button {
     border: 0.4rem black dashed;
     padding: 0.7rem;
 }
-.Skip {
+#Skip {
     left: 0.5rem;
     bottom: 0.5rem;
     padding: 0;
@@ -80,7 +80,7 @@ button {
     border-style: solid;
     font-size: 2rem;
 }
-.Payment {
+#Payment {
     padding: 0;
     width: 9rem;
     height: fit-content;

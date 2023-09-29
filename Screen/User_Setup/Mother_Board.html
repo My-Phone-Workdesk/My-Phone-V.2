@@ -1,28 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mother Board</title>
+
     <link rel="stylesheet" type="text/css" href="../../Icons/fontawesome-pro/css/all.css">
-    <script src="../../Scripts/Devices.js"></script>
+
+    <script src="../../Scripts/Devices.js" type="module" ></script>
+
     <link rel="stylesheet" href="../../Design/Mother_Board.css" />
     <link rel="Icon" type="image/x-icon" href="../../Icons/Mother_Board.ico" />
+
 </head>
-<body onload="Mother_Board();">
+
+<body>
+
     <div id="back_cover">
+
         <div id="heading">Enter your Security Code below to <br/> make payment of Motherboard:</div>
+
         <input id="input_code" title="Security Code Must be of 6 Digits..." type="password" placeholder=" Enter your Security Code Here...">
+
         <pre>    </pre>
-        <i id="show/hide" class="fa-solid fa-eye" onclick="show_hide();"></i>
+
+        <i id="show/hide" class="fa-solid fa-eye"></i>
+
         <p></p><br>
+
         <span></span>
+
     </div>
-    <button class="Payment" onclick="Payment_MB();">
+
+    <button id="Payment" >
+
         Pay <i class="fa-solid fa-money-bill"></i>
+
     </button>
-    <button class="Skip" onclick="Skip();">
+
+    <button id="Skip" >
+
         Skip <i class="fa-solid fa-forward"></i>
+
     </button>
+
 </body>
+
 </html>

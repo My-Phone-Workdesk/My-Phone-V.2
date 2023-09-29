@@ -1,50 +1,23 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-body {
-    background-color: black;
-}
-.all {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-evenly;
-    height: 98vh;
-    width: 95vw;
-    z-index: 0;
-}
-.Device {
-    height: 40vh;
-    width: 25vw;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    flex-basis: 33.33%;
-    z-index: 1;
-}
-#Desktop {
-    background-image: url(../OS_Package/OS_Selector/Desktop.jpg);
-}
-#Laptop {
-    background-image: url(../OS_Package/OS_Selector/Laptop.jpg);
-}
-#Notepad {
-    background-image: url(../OS_Package/OS_Selector/Notepad.jpg);
-}
-#Foldable {
-    background-image: url(../OS_Package/OS_Selector/Foldable.jpg);
-}
-#Tablet {
-    background-image: url(../OS_Package/OS_Selector/Tablet.jpg);
-}
-#Phone {
-    background-image: url(../OS_Package/OS_Selector/Phone.jpg);
-}
-button {
-    width: 25vw;
-    height: 40vh;
-}
-button:hover {
-    cursor: pointer;
-}
+* { margin: 0; padding: 0; }
+
+body { background-color: black; }
+
+.all { display: flex; align-items: center; flex-wrap: wrap; flex-direction: row; z-index: 0;
+    height: 98vh; width: 95vw; justify-content: space-evenly; }
+
+.Device { height: 40vh; width: 25vw; background-repeat: no-repeat; background-size: 100% 100%;
+    flex-basis: 33.33%; z-index: 1; }
+
+.Device:hover { cursor: pointer; }
+
+#Desktop { background-image: url(../OS_Package/OS_Selector/Desktop.jpg); }
+
+#Laptop { background-image: url(../OS_Package/OS_Selector/Laptop.jpg); }
+
+#Notepad { background-image: url(../OS_Package/OS_Selector/Notepad.jpg); }
+
+#Foldable { background-image: url(../OS_Package/OS_Selector/Foldable.jpg); }
+
+#Tablet { background-image: url(../OS_Package/OS_Selector/Tablet.jpg); }
+
+#Phone { background-image: url(../OS_Package/OS_Selector/Phone.jpg); }
