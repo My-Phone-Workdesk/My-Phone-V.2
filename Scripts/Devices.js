@@ -179,9 +179,19 @@ function Payment_MB() {
 
                         if ( a[c] >= d ) {
 
-                            a[c] -= d; d = a[c]; a = null;
+                            a[c] -= d; d = a[c];
+
+                            a = Database.Json.Stringify_Column( 'Money', 'Accounts_Data' );
+
+                            if ( a == -1 ) {
+
+                                alert( 'Sorry ! An Error Occured, But your Money will not lose' );
+                                alert( 'We are Redirecting you to Home Screen...' );
+                                location.href = '../../index.html'; return -3;
+
+                            };
                             
-                            Database.Update_Data( 'Accounts', 'J' + ( c + 2 ), d );
+                            Database.Update_Data( 'Accounts', a + ( c + 2 ), d );
 
                             document.body.style.cursor = "Progress";
 

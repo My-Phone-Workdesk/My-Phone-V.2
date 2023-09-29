@@ -137,7 +137,25 @@ const Database = {
 
             return new_data;
 
-        }
+        },
+
+        Stringify_Column: ( Column_Name, data_location ) => {
+
+            var data = JSON.parse( sessionStorage.getItem( data_location ) );
+
+            if ( data == null ) { return -1; };
+
+            data = data[0];
+
+            data = Object.keys( data ).indexOf( Column_Name );
+
+            if ( data < 0 || data >= Database.Json.alphabets.length ) { return -1; };
+
+            return Database.Json.alphabets[ data ];
+
+        },
+
+        alphabets: [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L' ]
 
     }
 
