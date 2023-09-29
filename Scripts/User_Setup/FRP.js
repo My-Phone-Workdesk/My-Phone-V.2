@@ -197,8 +197,6 @@ function Finish() {
                 para.innerHTML = 'Unzipping Package to Database';
                 document.body.appendChild(para);
 
-                Data = Database.Json.stringify( Data );
-
                 setTimeout( () => {
 
                     para = document.createElement('p');
@@ -226,6 +224,9 @@ function Finish() {
                             alert("Congratulations ! Your User Successfully Created on Server");
 
                             sessionStorage.removeItem( 'DATABASE' );
+                            sessionStorage.removeItem( 'Data' );
+                            sessionStorage.removeItem( 'Accounts_Data' );
+                            
                             location.href = '../../../index.html';
 
                         },1000 );
