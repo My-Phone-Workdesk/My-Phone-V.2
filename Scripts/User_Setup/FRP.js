@@ -1,16 +1,57 @@
+// Imported Functions From Database ==>
+
+import { Database } from "../../Data_Resources/Database.js";
+
+// Real Script Starts from Below ==>
+
+window.onload = () => {
+
+    if ( location.pathname.includes( 'Finish.html' ) ) { Finish(); }
+
+    else if ( location.pathname.includes( 'Conditions.html' ) ) {
+
+        let check_boxes = document.querySelectorAll( '#check_rule' );
+        
+        for ( var a = 0; a < check_boxes.length; a++ ) {
+
+            check_boxes[ a ].addEventListener( 'click', Check );
+
+        };
+
+    } else if ( location.pathname.includes( 'FRP.html' ) ) {
+
+        let Click = document.getElementById( 'Click' );
+        Click.addEventListener( 'click', Welcome );
+
+    } else if ( location.pathname.includes( 'Account.html' ) ) {
+
+        let Account_Button = document.getElementById( 'Account_Button' );
+        Account_Button.addEventListener( 'click', Account );
+
+    };
+
+};
+
 function Welcome() { location.href = "./Conditions.html"; }
 
 function Check() {
 
     let all = document.querySelectorAll('input');
+
     if ( all[3].checked == true ) {
+
         all[0].checked = true;
         all[1].checked = true;
         all[2].checked = true;
+
     }; if ( ( all[0].checked == true ) && ( all[1].checked == true ) && ( all[2].checked == true ) ) {
+
         document.querySelector('a').style.visibility = "visible";
+
     } else {
+
         document.querySelector('a').style.visibility = "hidden";
+
     }; return true;
 
 };
@@ -39,9 +80,9 @@ function Account() {
             alert("Please Use a New E-mail... This E-mail is already in use !!! ");
             return false;
 
-        }
+        };
 
-    }
+    };
 
     if ( Data == null ) {
 
@@ -85,9 +126,11 @@ function Account() {
                 };
 
             }; // Move ahead this was not the email matched...
+
         }; alert("Sorry this Email wasn't Found on the Server..."); location.reload();
 
-    }
+    };
+
 };
 
 function Finish() {
@@ -113,6 +156,7 @@ function Finish() {
         for ( var v = 0; v < Object.keys( Data ).length; v++) {
 
             if ( ( Object.keys( Data ).indexOf( details[v] ) ) == -1 ) {
+
                 alert("Your Some Data is Missing ! May be you have left some steps... Please Restart Add User from Home Page... Your Money would be Lost :( ");
 
                 location.href = "../../../index.html"; return;
@@ -153,6 +197,8 @@ function Finish() {
                 para.innerHTML = 'Unzipping Package to Database';
                 document.body.appendChild(para);
 
+                Data = Database.Json.stringify( Data );
+
                 setTimeout( () => {
 
                     para = document.createElement('p');
@@ -167,6 +213,8 @@ function Finish() {
                     para.innerHTML = 'Disconnecting From the Server...';
                     document.body.appendChild(para);
 
+                    Database.Create_Data( 'User_Accounts', Data );
+
                     setTimeout( () => {
 
                         para = document.createElement('p');
@@ -176,6 +224,9 @@ function Finish() {
                         setTimeout( () => {
 
                             alert("Congratulations ! Your User Successfully Created on Server");
+
+                            sessionStorage.removeItem( 'DATABASE' );
+                            location.href = '../../../index.html';
 
                         },1000 );
 
