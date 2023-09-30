@@ -100,7 +100,7 @@ textarea {
     text-align: center;
     display: block;
     word-wrap: break-word;
-    border: 10% black double;
+    border: 1rem black double;
     padding: 0;
     margin: 0;
     border-top: 0;
