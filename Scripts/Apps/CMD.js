@@ -1,3 +1,14 @@
+window.onload = () => {
+
+    if ( location.pathname.includes( 'CMD.html' ) ) {
+
+        let Compile = document.getElementById( 'Compile' );
+        Compile.addEventListener( 'click', Compilation );
+
+    } else if ( location.pathname.includes( 'Run.html' ) ) { Run(); };
+
+};
+
 function Run() {
     document.write("Compiling your Code File Please Wait...");
     setTimeout( () => {
@@ -8,7 +19,7 @@ function Run() {
             Scripting();
         }, 2000 );
     }, ( 1 + ( Math.round( Math.random() ) ) * 3000 )  );
-}
+};
 
 function Compilation() {
     let file_extention = document.getElementById("File-Extention");
@@ -21,7 +32,7 @@ function Compilation() {
     var input_title = document.getElementById('input');
     localStorage.setItem("device_type", input_title.value);
     location.href = './Run.html';
-}
+};
 
 function Scripting() {
     if ( localStorage.getItem("Code_Ext") == ".cmd" ) {
@@ -55,7 +66,7 @@ function Scripting() {
         },2000 );
 
     }
-}
+};
 
 function check_Syntax_Array(Syntax, line) {
 
@@ -110,7 +121,7 @@ function check_Syntax_Array(Syntax, line) {
     }
     return "Syntax of Line : " + line + " : Successfully Compiled...";
     
-}
+};
 
 function Run_Code(statement) {
 
@@ -288,7 +299,7 @@ function Run_Code(statement) {
         }
     }
     
-}
+};
 
 function Identify_Type(variable) {
     var alphabets = new Array();
@@ -301,7 +312,7 @@ function Identify_Type(variable) {
         }
     }
     return "int";
-}
+};
 
 function Type_Identification(variable) {
 
@@ -311,4 +322,4 @@ function Type_Identification(variable) {
         return "String";
     }
 
-}
+};
