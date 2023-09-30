@@ -21,8 +21,6 @@ function Load_Home_Screen() {
 
     //Clicking on App Icons -->
 
-    CMD.addEventListener('click', function () {
-        location.href = "./Apps/CMD/CMD.html";
-    });
+    CMD.addEventListener('click', () => { location.href = "./Apps/CMD/CMD.html"; });
 
 };
