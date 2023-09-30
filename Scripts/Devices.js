@@ -92,7 +92,7 @@ function Setup() {
 
     var know = localStorage.getItem("device_type");
 
-    switch (know) {
+    switch ( know ) {
 
         case "Desktop":
 
@@ -199,6 +199,7 @@ function Payment_MB() {
 
                                 var Account = new Object();
                                 Account.Device = localStorage.getItem("device_type");
+                                Account.Payment = true;
                                 Account = JSON.stringify(Account);
                                 localStorage.setItem("Add_User", Account);
 
@@ -249,6 +250,12 @@ function Skip() {
             if ( command == "No" ) {
 
                 document.body.style.cursor = "Progress";
+
+                var Account = new Object();
+                Account.Device = localStorage.getItem( 'device_type' );
+                Account.Payment = false;
+                Account = JSON.stringify( Account );
+                localStorage.setItem( 'Add_User', Account );
 
                 setTimeout( () => {
 

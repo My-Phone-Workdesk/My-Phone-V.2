@@ -1,3 +1,9 @@
+// Exported Functions From Database ==>
+
+import { Database } from '../../Data_Resources/Database.js';
+
+// Real Script Starts from Below ==>
+
 window.onload = () => {
 
     if ( location.pathname.includes( 'OS.html' ) ) {
@@ -205,7 +211,19 @@ function Next() {
 
         sessionStorage.setItem( 'Check' , false ); location.reload();
         
-    } else { for (var msi = 0; msi < file_data.length; msi++) { Program( file_data[msi] ); } };
+    } else {
+
+        for (var msi = 0; msi < file_data.length; msi++) { Program( file_data[msi] ); }
+
+        var Account = localStorage.getItem( 'Add_User' );
+        Account = JSON.parse( Account );
+
+        delete Account.Payment;
+
+        Account = JSON.stringify( Account );
+        localStorage.setItem( 'Add_User', Account );
+    
+    };
 
 };
 
@@ -277,6 +295,113 @@ function Program( Code ) {
         put["Firmware_Version"] = part;
         put = JSON.stringify(put);
         localStorage.setItem("Add_User", put);
+
+    } else if ( Code.toLowerCase().includes( 'User.Mother-Board.Type <===> '.toLowerCase() ) ) {
+
+        part = Code.slice( 29 );
+
+        var Account = localStorage.getItem( 'Add_User' );
+        Account = JSON.parse( Account );
+        Account = Account.Device;
+
+        if ( part == 'v500' && Account == 'Phone' ) { Set_Mother_Board_v( 500 ); }
+        else if ( part == 'v800' && Account == 'Tablet' ) { Set_Mother_Board_v( 800 ); }
+        else if ( part == 'v1000' && Account == 'Foldable' ) { Set_Mother_Board_v( 1000 ); }
+        else if ( part == 'v1500' && Account == 'Notepad' ) { Set_Mother_Board_v( 1500 ); }
+        else if ( part == 'v2000' && Account == 'Laptop' ) { Set_Mother_Board_v( 2000 ); }
+        else if ( part == 'v4000' && Account == 'Desktop' ) { Set_Mother_Board_v( 4000 ); }
+        else if ( part == 'v5000' && Account == 'Administrative Device' ) { Set_Mother_Board_v( 5000 ); }
+        else {
+
+            alert( 'The Mother Board of ' + part + ' is not suitable for your Device : ' + Account );
+
+            alert( 'We are reloading this Screen so that you can edit or upload suitable OS again...' );
+
+            location.reload();
+        
+        };
+
+        function Set_Mother_Board_v( v ) {
+
+            var Access_Account = localStorage.getItem( 'Add_User' );
+            Access_Account = JSON.parse( Access_Account );
+
+            Access_Account.Payment = v * 0.1;
+
+            Access_Account = JSON.stringify( Access_Account );
+            localStorage.setItem( 'Add_User', Access_Account );
+
+        };
+
+    } else if ( Code.toLowerCase().includes( 'User.Mother-Board.Access-Security-Code <==> '.toLowerCase() ) ) {
+
+        part = Code.slice( 44 );
+
+        var Access_Account = localStorage.getItem( 'Add_User' );
+        Access_Account = JSON.parse( Access_Account );
+        Access_Account = Access_Account.Payment;
+
+        if ( sessionStorage.getItem( 'Accounts_Data' ) != null ) {
+
+            var Security_Codes = sessionStorage.getItem( 'Accounts_Data' );
+            Security_Codes = JSON.parse( Security_Codes );
+            
+            var Security_Codes_Data = new Array();
+
+            for ( var a = 0; a < Security_Codes.length; a++ ) {
+                
+                Security_Codes_Data.push( Security_Codes[ a ][ 'Security_Code' ] );
+            
+            }; if ( Security_Codes_Data.indexOf( part ) == -1 ) {
+
+                alert( 'The Mother Board Access Security Code is not Valid... Try changing that ❗ ' );
+                location.reload();
+
+            } else if ( Security_Codes_Data.indexOf( part ) == 0 ) {
+
+                alert( 'You cannot use Government Financial Security Code for that...' );
+                location.reload();
+
+            } else {
+
+                var Money = Security_Codes[ Security_Codes_Data.indexOf( part ) ][ 'Money' ];
+                Money = parseFloat( Money );
+
+                if ( Money >= Access_Account ) {
+
+                    Money -= Access_Account;
+                    Access_Account = Database.Json.Stringify_Column( 'Money', 'Accounts_Data' );
+
+                    if ( Access_Account == -1 ) {
+
+                        alert( 'Sorry ! An Error Occured, But your Money will not lose' );
+                        alert( 'We are Redirecting you to Home Screen...' );
+                        location.href = '../../index.html'; return -3;
+
+                    };
+
+                    Database.Update_Data( 'Accounts', Access_Account + ( Security_Codes_Data.indexOf( part ) + 2 ), Money );
+
+                    Access_Account = null;
+
+                } else {
+
+                    alert( "Sorry, You can't Proceed ahead due to insufficient Account Balance" );
+                    location.reload();
+
+                };
+
+            };
+
+        } else {
+
+            alert( 'Sorry ! But due to your "/exit" command the data has been wipe out...' );
+
+            alert( 'So, You need to do the Setup from the Starting as your Money will not lose :)' );
+
+            sessionStorage.clear(); location.href = '../../index.html';
+        
+        };
 
     } else { /* Ignore as a Commentary Statement */ };
 
