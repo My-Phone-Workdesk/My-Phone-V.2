@@ -15,7 +15,7 @@ function Start_Up() {
     Data_List = null;
 
     var BIOS = localStorage.getItem("Amount_MB");
-    BIOS = BIOS_List[BIOS];
+    BIOS = BIOS_List[ BIOS ];
 
     document.body.style.backgroundColor = "#ffffff";
 
@@ -32,8 +32,7 @@ function Start_Up() {
         }; BIOS_List = Data_List;
         Data_List = null;
 
-        window.BIOS = localStorage.getItem("Amount_MB");
-        var OS = BIOS_List[BIOS - 1];
+        var OS = BIOS_List[ localStorage.getItem("Amount_MB") ];
 
         document.body.style.backgroundSize = "60vw 55vh";
         document.body.style.backgroundRepeat = "no-repeat";
@@ -68,7 +67,7 @@ function Start_Up() {
 
             default:
 
-                document.body.style.backgroundImage = "url('../OS_Package/Linux.jpg')"; break;
+                document.body.style.backgroundImage = "url('../Images/Error.jpg')"; break;
 
         }; setTimeout( () => {
 

@@ -113,6 +113,8 @@ const Database = {
             var text = '';
             var changed_data = new Array();
 
+            for ( var d = 0; d < data.length; d++ ) { data[ d ] = ( data[ d ] ).toString(); };
+
             for ( var b = 0; b < data.length; b++ ) {
 
                 text = '';
