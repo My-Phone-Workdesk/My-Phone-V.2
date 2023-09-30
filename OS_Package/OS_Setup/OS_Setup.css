@@ -1,43 +1,17 @@
-select {
-    border: 0.5rem black solid;
-    background-color: white;
-    color: black;
-    padding: 0;
-    margin: 0;
-    font-size: 4rem;
-    font-weight: 600;
-    font-style: italic;
-}
-option {
-    background-color: black;
-    color: white;
-    border: 0.2rem white solid;
-    padding: 0.2rem;
-    margin-bottom: 0.1rem;
-    font-size: 2rem;
-}
-h1 {
-    font-size: 4rem;
-}
-input {
-    font-size: 2rem;
-    font-weight: 500;
-    border: 1rem black solid;
-    background-color: rgba(0, 0, 255, 0.4);
-    color: rgba(255, 50, 40, 0.8);
-}
-input:hover, button:hover {
-    cursor: pointer;
-}
+select { border: 0.5rem black solid; background-color: white; color: black; padding: 0;
+    margin: 0; font-size: 4rem; font-weight: 600; font-style: italic; }
 
-#display_text_os, #display_text_cert, #Response {
-    color: grey;
-}
-button {
-    background-color: black;
-    border: 1rem solid grey;
-    font-size: 3rem;
-    color: white;
-    padding: 0.4rem;
-    margin-bottom: 3rem;
-}
+option { background-color: black; color: white; border: 0.2rem white solid; padding: 0.2rem;
+    margin-bottom: 0.1rem; font-size: 2rem; }
+
+h1 { font-size: 4rem; }
+
+input { font-size: 2rem; font-weight: 500; border: 1rem black solid;
+    background-color: rgba(0, 0, 255, 0.4); color: rgba(255, 50, 40, 0.8); }
+
+input:hover, button:hover { cursor: pointer; }
+
+#display_text_os, #display_text_cert, #Response { color: grey; }
+
+button { background-color: black; border: 1rem solid grey; font-size: 3rem; color: white;
+    padding: 0.4rem; margin-bottom: 3rem; }
