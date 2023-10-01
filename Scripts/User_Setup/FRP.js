@@ -189,7 +189,7 @@ function Finish() {
 
         }; Data = order; order = null; Data.unshift( _User_ID_ );
 
-        Database.Read_Data( 'Files', 'Files' );
+        if ( sessionStorage.getItem( 'Files' ) == null ) { Database.Read_Data( 'Files', 'Files' ); };
 
         setTimeout( () => {
 
@@ -228,6 +228,9 @@ function Finish() {
             }; Files.push( used_space[ 0 ] );
 
             var this_row = sessionStorage.getItem( 'Files' );
+
+            if ( this_row == null ) { location.reload(); };
+
             this_row = JSON.parse( this_row );
             this_row = this_row.length + 2;
 
