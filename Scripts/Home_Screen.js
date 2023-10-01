@@ -1,3 +1,15 @@
+// Imported Functions From File Explorer ==>
+
+import { List_Data } from "./Apps/File_Explorer.js";
+
+// Real Script Starts from Below ==>
+
+window.onload = () => {
+
+    if ( location.pathname.includes( 'Home_Screen.html' ) ) { Load_Home_Screen(); };
+
+};
+
 function Load_Home_Screen() {
 
     const User_ID = localStorage.getItem( 'Amount_MB' );
@@ -40,5 +52,7 @@ function Load_Home_Screen() {
     File_Explorer.title = 'File Explorer -- System App';
 
     //Clicking on App Icons -->
+
+    File_Explorer.addEventListener( 'click', List_Data );
 
 };
