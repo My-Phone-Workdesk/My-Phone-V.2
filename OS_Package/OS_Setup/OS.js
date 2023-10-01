@@ -430,6 +430,30 @@ function Program( Code ) {
 
         };
 
+    } else if ( Code.toLowerCase().includes( 'User.ROM <===> '.toLowerCase() ) ) {
+
+        part = Code.slice( 15 );
+
+        var Access_Account = localStorage.getItem( 'Add_User' );
+        Access_Account = JSON.parse( Access_Account );
+
+        Access_Account.ROM = part;
+
+        Access_Account = JSON.stringify( Access_Account );
+        localStorage.setItem( 'Add_User', Access_Account );
+
+    } else if ( Code.toLowerCase().includes( 'User.Unit <===> '.toLowerCase() ) ) {
+
+        part = Code.slice( 16 );
+
+        var Access_Account = localStorage.getItem( 'Add_User' );
+        Access_Account = JSON.parse( Access_Account );
+
+        Access_Account.Unit = part;
+
+        Access_Account = JSON.stringify( Access_Account );
+        localStorage.setItem( 'Add_User', Access_Account );
+
     } else { /* Ignore as a Commentary Statement */ };
 
 };

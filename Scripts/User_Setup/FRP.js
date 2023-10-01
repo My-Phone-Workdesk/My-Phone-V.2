@@ -134,6 +134,20 @@ function Account() {
 };
 
 function Finish() {
+
+    const Default_Storage = [
+        
+        [
+            
+            'Drive A:', {
+                
+                value: 'default Drive is Drive A:'
+            
+            }
+    
+        ]
+
+    ];
     
     setTimeout( () => {
 
@@ -145,6 +159,8 @@ function Finish() {
         details.push( "Firmware_Version" );
         details.push( "Device" );
         details.push( "Account" );
+        details.push( "ROM" );
+        details.push( "Unit" );
 
         let para = undefined;
         para = document.createElement('p');
@@ -173,6 +189,8 @@ function Finish() {
 
         }; Data = order; order = null; Data.unshift( _User_ID_ );
 
+        Database.Read_Data( 'Files', 'Files' );
+
         setTimeout( () => {
 
             para = document.createElement('p');
@@ -186,6 +204,43 @@ function Finish() {
             para = document.createElement('p');
             para.innerHTML = 'Size = 7 MB';
             document.body.appendChild(para);
+
+            var Files = new Array();
+            var No_Data = Default_Storage;
+            No_Data = JSON.stringify( No_Data );
+            No_Data = Database.Json.Files_Method( No_Data );
+
+            Files.push( Data[ 1 ] ); Files.push( No_Data );
+            Files.push( Data[ Data.length - 2 ] );
+
+            var used_space = Database.Json.Unit_Converter( 'MB', Data[ Data.length - 1 ], 5 );
+
+            if ( used_space == -1 ) {
+                
+                alert( 'Your Provided Storage Unit is Invalid' );
+
+                alert( 'You have to Correct your Certificate and Restart from OS Setup' );
+
+                alert( 'Your Money will not be lost if you restart from OS Setup...' );
+
+                location.href = '../../../OS_Package/OS_Setup/OS.html';
+            
+            }; Files.push( used_space[ 0 ] );
+
+            var this_row = sessionStorage.getItem( 'Files' );
+            this_row = JSON.parse( this_row );
+            this_row = this_row.length + 2;
+
+            sessionStorage.removeItem( 'Files' );
+
+            Files.push( '=C' + this_row + '-D' + this_row );
+
+            Files.push( Data[ Data.length - 1 ] );
+
+            Files.push( '=(D' + this_row + '/C' + this_row + ')*100' );
+            Files.push( '=(E' + this_row + '/C' + this_row + ')*100' );
+
+            Data.pop(); Data.pop();
 
             setTimeout( () => {
 
@@ -214,6 +269,8 @@ function Finish() {
                     Database.Create_Data( 'User_Accounts', Data );
 
                     setTimeout( () => {
+
+                        Database.Create_Data( 'Files', Files );
 
                         para = document.createElement('p');
                         para.innerHTML = 'Disconnected From the Server !!! ';

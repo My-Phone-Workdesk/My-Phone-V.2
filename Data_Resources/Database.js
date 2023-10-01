@@ -157,7 +157,38 @@ const Database = {
 
         },
 
-        alphabets: [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L' ]
+        Files_Method: ( value ) => {
+
+            var new_value = '';
+        
+            for ( var v = 0; v <= value.length; v++ ) {
+        
+                if ( value.charAt(v) == '"' ) { new_value += "'"; }
+                else if ( value.charAt(v) == "'" ) { new_value += '"' }
+                else { new_value += value.charAt(v) }
+        
+            }; return new_value;
+        
+        },
+
+        Unit_Converter: ( from, to, amount ) => {
+
+            if ( Database.Json.Units.indexOf( from ) == -1 ) { return -1; }
+
+            if ( Database.Json.Units.indexOf( to ) == -1 ) { return -1; }
+
+            from = Database.Json.Units.indexOf( from );
+            to = Database.Json.Units.indexOf( to );
+
+            if ( from > to ) { return [ amount * ( ( from - to ) * 1024 ), Database.Json.Units[ to ] ]; }
+            else if ( to > from ) { return [ amount / ( ( to - from ) * 1024 ), Database.Json.Units[ to ] ]; }
+            else { return [ amount, Database.Json.Units[ to ] ]; }
+
+        },
+
+        alphabets: [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L' ],
+
+        Units: [ 'B', 'KB', 'MB', 'GB', 'TB', 'PB' ]
 
     }
 

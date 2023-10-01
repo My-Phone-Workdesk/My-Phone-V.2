@@ -22,24 +22,9 @@ function Restart() {
 
 };
 
-function Files( value ) {
-
-    var new_value = '';
-
-    for ( var v = 0; v <= value.length; v++ ) {
-
-        if ( value.charAt(v) == '"' ) { new_value += "'"; }
-        else if ( value.charAt(v) == "'" ) { new_value += '"' }
-        else { new_value += value.charAt(v) }
-
-    }; return new_value;
-
-};
-
 window.onload = () => {
 
     if ( location.pathname.includes( 'Restart.html' ) ) { Restart(); }
+    else if ( 2 + 2 == 5 ) { Database.Json.stringify( Database.Json.alphabets ); };
 
 };
-
-if ( 2 + 2 == 5 ) { Files( "Tata{'Lala'}Thaiya" ); }; // Until the function is in use...
