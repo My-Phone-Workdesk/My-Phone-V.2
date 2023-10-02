@@ -48,7 +48,7 @@ function Load_Home_Screen() {
 
     const File_Explorer = document.body.appendChild( document.createElement( 'i' ) );
 
-    File_Explorer.className = 'fa-solid fa-folder-user';
+    File_Explorer.className = 'fa-solid fa-folder-open';
     File_Explorer.title = 'File Explorer -- System App';
 
     //Clicking on App Icons -->
