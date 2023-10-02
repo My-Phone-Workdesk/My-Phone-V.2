@@ -60,7 +60,11 @@ function List_Data() {
 
         sessionStorage.setItem( 'Files_temp_Data', JSON.stringify( Data ) );
 
+        var Name_Data = true;
+
         for ( var b = 0; b < Data.length; b++ ) {
+
+            Name_Data = true;
 
             var File_or_Folder = null;
 
@@ -71,37 +75,47 @@ function List_Data() {
                 File_or_Folder.className = 'fa-solid fa-folders';
                 File_or_Folder.id = b;
                 
+                var span = document.createElement( 'span' );
+                span.innerHTML = Data[ b ][ 0 ];
+
+                File_or_Folder.appendChild( span );
+                
                 File_or_Folder.addEventListener( 'click', ( event ) => {
 
-                    Location_Folder( event.clientX, event.clientY );
+                    Location_Folder( event.target.id );
 
                 });
             
-            } else { File_or_Folder.className = 'fa-sharp fa-solid fa-file'; }
+            } else if ( typeof( Data[ b ] ) === 'object' ) {
+                
+                File_or_Folder.className = 'fa-solid fa-file';
+                
+                var span = document.createElement( 'span' );
+                span.innerHTML = Data[ b ][ 'Name' ];
 
-            document.body.appendChild( File_or_Folder );
+                File_or_Folder.appendChild( span );
+            
+            } else { Name_Data = false; };
+            
+            if ( Name_Data === true ) { document.body.appendChild( File_or_Folder ); };
 
         };
 
-    }; function Location_Folder( mouse_X, mouse_Y ) {
+    }; function Location_Folder( id ) {
 
-        const Click_Folder = 0; // This is not fully Solved...
+        const Old_Data = JSON.parse( sessionStorage.getItem( 'Files_temp_Data' ) );
 
-        var All = document.body.querySelectorAll( 'i' );
+        const Data = Old_Data[ id ];
 
-        var Data = new Array();
-        
-        for ( var c = 0; c < All.length; c++ ) {
-
-            if ( All[ c ].className == 'fa-solid fa-folders' ) { Data.push( All[ c ] ); };
-
-        }; var Old_Data = JSON.parse( sessionStorage.getItem( 'Files_temp_Data' ) );
-
-        Data = Old_Data[ All.indexOf( Data[ Click_Folder ] ) ];
+        sessionStorage.setItem( 'Files_temp_Data', JSON.stringify( Data ) );
 
         document.body.innerHTML = '';
 
+        var Name_Data = true;
+
         for ( var b = 0; b < Data.length; b++ ) {
+
+            Name_Data = true;
 
             var File_or_Folder = null;
 
@@ -110,17 +124,31 @@ function List_Data() {
             if ( Array.isArray( Data[ b ] ) ) {
                 
                 File_or_Folder.className = 'fa-solid fa-folders';
-                File_or_Folder.setAttribute( 'name', Data[ b ] );
+                File_or_Folder.id = b;
+                
+                var span = document.createElement( 'span' );
+                span.innerHTML = Data[ b ][ 0 ];
 
+                File_or_Folder.appendChild( span );
+                
                 File_or_Folder.addEventListener( 'click', ( event ) => {
 
-                    Location_Folder( event.clientX, event.clientY );
+                    Location_Folder( event.target.id );
 
                 });
             
-            } else { File_or_Folder.className = 'fa-sharp fa-solid fa-file'; }
+            } else if ( typeof( Data[ b ] ) === 'object' ) {
+                
+                File_or_Folder.className = 'fa-solid fa-file';
+                
+                var span = document.createElement( 'span' );
+                span.innerHTML = Data[ b ][ 'Name' ];
 
-            document.body.appendChild( File_or_Folder );
+                File_or_Folder.appendChild( span );
+            
+            } else { Name_Data = false; };
+
+            if ( Name_Data === true ) { document.body.appendChild( File_or_Folder ); };
 
         };
 
