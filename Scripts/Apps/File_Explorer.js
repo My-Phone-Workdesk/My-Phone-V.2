@@ -84,7 +84,7 @@ function List_Data() {
 
                     Location_Folder( event.target.id );
 
-                });
+                }); File_or_Folder.addEventListener( 'contextmenu', Open_Dialog_Box );
             
             } else if ( typeof( Data[ b ] ) === 'object' ) {
                 
@@ -94,6 +94,8 @@ function List_Data() {
                 span.innerHTML = Data[ b ][ 'Name' ];
 
                 File_or_Folder.appendChild( span );
+
+                File_or_Folder.addEventListener( 'contextmenu', Open_Dialog_Box );
             
             } else { Name_Data = false; };
             
@@ -135,7 +137,7 @@ function List_Data() {
 
                     Location_Folder( event.target.id );
 
-                });
+                }); File_or_Folder.addEventListener( 'contextmenu', Open_Dialog_Box );
             
             } else if ( typeof( Data[ b ] ) === 'object' ) {
                 
@@ -145,10 +147,74 @@ function List_Data() {
                 span.innerHTML = Data[ b ][ 'Name' ];
 
                 File_or_Folder.appendChild( span );
+
+                File_or_Folder.addEventListener( 'contextmenu', Open_Dialog_Box );
             
             } else { Name_Data = false; };
 
             if ( Name_Data === true ) { document.body.appendChild( File_or_Folder ); };
+
+        };
+
+    }; function Open_Dialog_Box() {
+
+        let Dialog_Box = document.createElement( 'div' );
+        Dialog_Box.style.width = '76vw';
+        Dialog_Box.style.height = '76vh';
+        Dialog_Box.style.position = 'absolute';
+        Dialog_Box.style.left = '10vw';
+        Dialog_Box.style.top = '10vh';
+        Dialog_Box.style.backgroundColor = '#ffffff';
+        Dialog_Box.style.display = 'flex';
+        Dialog_Box.style.alignItems = 'top';
+        Dialog_Box.style.justifyContent = 'space-evenly';
+        Dialog_Box.style.flexWrap = 'wrap';
+        Dialog_Box.style.borderColor = 'red';
+        Dialog_Box.style.borderStyle = 'solid';
+        Dialog_Box.style.borderWidth = '10px';
+        Dialog_Box.style.paddingLeft = '2vw';
+        Dialog_Box.style.paddingRight = '2vw';
+        Dialog_Box.style.paddingTop = '2vh';
+        Dialog_Box.style.paddingBottom = '2vh';
+
+        Dialog_Box.addEventListener( 'dblclick', () => {
+
+            document.body.removeChild( Dialog_Box );
+            Dialog_Box.remove();
+
+        });
+
+        Create_Option( 'Rename File/Folder', Rename_Objects );
+        Create_Option( 'Delete File/Folder', Delete_Objects );
+        
+        document.body.appendChild( Dialog_Box );
+
+        function Rename_Objects() {
+
+            alert( 'The File/Folder Renamed ! ' );
+
+        }; function Create_Option( option, work ) {
+
+            let Rename = document.createElement( 'div' );
+            Rename.innerHTML = option;
+            Rename.style.borderColor = '#000000';
+            Rename.style.borderStyle = 'solid';
+            Rename.style.borderWidth = '5px';
+            Rename.style.height = '4vh';
+            Rename.style.width = '15vw';
+            Rename.style.textAlign = 'center';
+            Rename.style.fontSize = '1.3rem';
+            Rename.style.fontWeight = '600';
+            Rename.style.cursor = 'pointer';
+            Rename.style.flexBasis = '40%';
+
+            Rename.addEventListener( 'click', work );
+            
+            Dialog_Box.appendChild( Rename );
+
+        }; function Delete_Objects() {
+
+            alert( 'The File/Folder Successfully Deleted ! ' );
 
         };
 
