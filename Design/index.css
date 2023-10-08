@@ -1,8 +1,5 @@
-a {
-    text-decoration: none;
-    color: black;
-}
 * {
+    font-family: 'main';
     font-weight: 900;
     margin: 0;
     margin-bottom: 5rem;
@@ -10,6 +7,10 @@ a {
     padding: 0;
     text-decoration: none;
     text-align: left;
+}
+a {
+    text-decoration: none;
+    color: black;
 }
 body {
     background-color: white;

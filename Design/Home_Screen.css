@@ -1,3 +1,6 @@
+* {
+    font-family: 'main';
+}
 body { height: 95vh; width: 98vw; background-color: black; display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr; grid-template-rows: 1fr 1fr 1fr; }
 
