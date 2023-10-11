@@ -12,5 +12,6 @@
          url('./Design/Product_Sans_Regular.ttf') format('truetype'),          /* Safari, Android, iOS */
          url('./Design/Product_Sans_Regular.ttf') format('svg');               /* Legacy iOS */
       
-}
+    }
+
 </style> <!--- For HTML -->
