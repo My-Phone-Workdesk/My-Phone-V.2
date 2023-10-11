@@ -1,3 +1,9 @@
+window.onload = () => {
+
+    if ( location.pathname.includes( 'Login_User.html' ) ) { Start_Up(); };
+
+};
+
 function Start_Up() {
 
     var BIOS_List = new Array();

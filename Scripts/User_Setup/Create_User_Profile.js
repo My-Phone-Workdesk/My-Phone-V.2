@@ -1,3 +1,19 @@
+window.onload = () => {
+
+    if ( location.pathname.includes( 'Create_User_Profile.html' ) ) {
+
+        Create_User_Profile();
+
+        let Submit_button = document.getElementById( 'Submit' );
+        Submit_button.addEventListener( 'click', Submit_Details );
+
+        let Password_Strength = document.getElementById( 'Password_Strength' );
+        Password_Strength.addEventListener( 'click', Check_Password_Strength );
+
+    };
+
+}; 
+
 function Create_User_Profile() {
 
     var OS = ( JSON.parse( localStorage.getItem("Add_User") ) )["Firmware"];

@@ -1,28 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="Icon" type="image/x-icon" href="../../Icons/Upload_to_Cloud.ico" />
     <link rel="stylesheet" href="../../Design/Create_User_Profile.css" />
+
     <script src="../../Scripts/User_Setup/Create_User_Profile.js"></script>
+
     <title>Create User Profile</title>
+
 </head>
+
 <style>
+
     @font-face {
+
     font-family: 'main';
+
     src: url('./Design/Product_Sans_Regular.ttf') format('embedded-opentype'), /* Internet Explorer */
          url('./Design/Product_Sans_Regular.ttf') format('woff2'),             /* Super Modern Browsers */
          url('./Design/Product_Sans_Regular.ttf') format('woff'),              /* Pretty Modern Browsers */
          url('./Design/Product_Sans_Regular.ttf') format('truetype'),          /* Safari, Android, iOS */
          url('./Design/Product_Sans_Regular.ttf') format('svg');               /* Legacy iOS */
-}
+
+    }
+
 </style>
-<body onload="Create_User_Profile();">
+
+<body>
+
     <hr><h1>Create a Profile</h1>
+
     <input type="text" id="user_profile" placeholder="Enter your new User Name" />
     <input type="password" id="user_password" placeholder="Enter your new Password" />
-    <button id="Submit" onclick="Submit_Details();">Submit</button>
-    <button id="Password_Strength" onclick="Check_Password_Strength();">Check Password Strength</button>
+
+    <button id="Submit">Submit</button>
+
+    <button id="Password_Strength">Check Password Strength</button>
+
 </body>
+
 </html>
