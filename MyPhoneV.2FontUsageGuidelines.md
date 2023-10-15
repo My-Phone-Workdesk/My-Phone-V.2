@@ -5,7 +5,7 @@
 We use Product Sans Regular by Google LLC licensed by [befonts.com](https://befonts.com/product-sans-font.html)
 
 ## How to Use
-To use this font.. You have to [download this ttf](https://github.com/My-Phone-Workdesk/My-Phone-V.2/raw/main/Design/Product_Sans_Regular.ttf) and put it wherever you like
+To use this font.. You have to [download this ttf](https://github.com/My-Phone-Workdesk/My-Phone-V.2/raw/main/Design/Product_Sans_Regular.ttf) and put it wherever you like   
 Then create a css file and add the following code in it
 
     @font-face {
