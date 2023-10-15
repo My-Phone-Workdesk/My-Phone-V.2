@@ -84,7 +84,11 @@ function List_Data() {
 
                     Location_Folder( event.target.id );
 
-                }); File_or_Folder.addEventListener( 'contextmenu', Open_Dialog_Box );
+                }); File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+
+                    Open_Dialog_Box( event.target.id );
+
+                });
             
             } else if ( typeof( Data[ b ] ) === 'object' ) {
                 
@@ -95,7 +99,11 @@ function List_Data() {
 
                 File_or_Folder.appendChild( span );
 
-                File_or_Folder.addEventListener( 'contextmenu', Open_Dialog_Box );
+                File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+
+                    Open_Dialog_Box( event.target.id );
+
+                });
             
             } else { Name_Data = false; };
             
@@ -137,7 +145,11 @@ function List_Data() {
 
                     Location_Folder( event.target.id );
 
-                }); File_or_Folder.addEventListener( 'contextmenu', Open_Dialog_Box );
+                }); File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+
+                    Open_Dialog_Box( event.target.id );
+
+                });
             
             } else if ( typeof( Data[ b ] ) === 'object' ) {
                 
@@ -148,7 +160,11 @@ function List_Data() {
 
                 File_or_Folder.appendChild( span );
 
-                File_or_Folder.addEventListener( 'contextmenu', Open_Dialog_Box );
+                File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+
+                    Open_Dialog_Box( event.target.id );
+
+                });
             
             } else { Name_Data = false; };
 
@@ -156,7 +172,7 @@ function List_Data() {
 
         };
 
-    }; function Open_Dialog_Box() {
+    }; function Open_Dialog_Box( id ) {
 
         let Dialog_Box = document.createElement( 'div' );
         Dialog_Box.style.width = '76vw';
