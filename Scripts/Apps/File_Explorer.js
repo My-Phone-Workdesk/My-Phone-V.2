@@ -18,16 +18,20 @@ function List_Data() {
 
     var User = User_Data[ 'User' ];
 
-    Take_Cloud_Files_Data();
+    if ( sessionStorage.getItem( 'Files' ) == null ) {
+        
+        Database.Read_Data( 'Files', 'Files' );
+
+        setTimeout( () => { Take_Cloud_Files_Data(); },1000 );
+    
+    } else { Data_Verification(); };
 
     function Take_Cloud_Files_Data() {
 
-        if ( sessionStorage.getItem( 'Files' ) == null ) { Database.Read_Data( 'Files', 'Files' ); };
-
         setTimeout( () => {
 
-            if ( sessionStorage.getItem( 'Files' ) == null ) { Take_Cloud_Files_Data(); }
-            else { Data_Verification(); };
+            if ( sessionStorage.getItem( 'Files' ) == null ) { return Take_Cloud_Files_Data(); }
+            else { return Data_Verification(); };
 
         },2000 );
 
@@ -60,7 +64,7 @@ function List_Data() {
 
         sessionStorage.setItem( 'Files_temp_Data', JSON.stringify( Data ) );
 
-        var Name_Data = true;
+        var Name_Data = true; document.body.innerHTML = '';
 
         for ( var b = 0; b < Data.length; b++ ) {
 
@@ -207,7 +211,61 @@ function List_Data() {
 
         function Rename_Objects() {
 
-            alert( 'The File/Folder Renamed ! ' );
+            var Old_Data = JSON.parse( sessionStorage.getItem( 'Files_temp_Data' ) );
+            const Data = Old_Data[ id ];
+
+            if ( Array.isArray( Data ) ) {
+
+                if ( Data[ 0 ].toLowerCase().includes( 'drive' ) ) {
+
+                    var new_name; do { new_name = prompt( 'Rename this Drive as...' );
+
+                    if ( new_name.length != 1 ) {
+
+                        alert( 'Drive name must be of an Single Character...' );
+
+                    }; } while ( new_name.length != 1 );
+
+                    for ( var a = 0; a < Old_Data.length; a++ ) {
+
+                        if ( Old_Data[ a ][ 0 ].toLowerCase().includes( 'drive' ) ) {
+
+                            if ( Old_Data[ a ][ 0 ].slice( -2, -1 ).toLowerCase() == new_name.toLowerCase() )
+                            
+                            { return alert( 'This Drive already exists...' ); };
+
+                        };
+
+                    }; Old_Data[ id ][ 0 ] = 'Drive ' + new_name + ':';
+
+                    Old_Data = JSON.stringify( Old_Data );
+
+                    Old_Data = Database.Json.Files_Method( Old_Data );
+
+                    var Overall_Files = JSON.parse( sessionStorage.getItem( 'Files' ) );
+
+                    var All_Usernames = new Array();
+        
+                    for ( var a = 0; a < Overall_Files.length; a++ ) {
+                        
+                        All_Usernames.push( Overall_Files[ a ][ 'User' ] );
+                    
+                    }; const cell = Database.Json.Stringify_Column( 'Data', 'Files' ) 
+                    + ( All_Usernames.indexOf( User ) + 2 );
+
+                    Database.Update_Data( 'Files', cell, Old_Data );
+
+                    Overall_Files[ All_Usernames.indexOf( User ) ][ 'Data' ] = Old_Data;
+
+                    Overall_Files = JSON.stringify( Overall_Files );
+
+                    sessionStorage.setItem( 'Files', Overall_Files );
+
+                    return Data_Verification();
+
+                } else { const new_name = prompt( 'Rename this Folder as...' ); };
+
+            }; alert( 'The File/Folder Renamed ! ' );
 
         }; function Create_Option( option, work ) {
 

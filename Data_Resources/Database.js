@@ -143,9 +143,9 @@ const Database = {
 
         Stringify_Column: ( Column_Name, data_location ) => {
 
-            var data = JSON.parse( sessionStorage.getItem( data_location ) );
+            if ( sessionStorage.getItem( data_location ) == null ) { return -1; };
 
-            if ( data == null ) { return -1; };
+            var data = JSON.parse( sessionStorage.getItem( data_location ) );
 
             data = data[0];
 
