@@ -2,11 +2,11 @@
 
     font-family: 'main';
     
-    src: url('./Product_Sans_Regular.ttf') format('embedded-opentype'), /* Internet Explorer */
-         url('./Product_Sans_Regular.ttf') format('woff2'),             /* Super Modern Browsers */
-         url('./Product_Sans_Regular.ttf') format('woff'),              /* Pretty Modern Browsers */
-         url('./Product_Sans_Regular.ttf') format('truetype'),          /* Safari, Android, iOS */
-         url('./Product_Sans_Regular.ttf') format('svg');               /* Legacy iOS */
+    src: url('Product_Sans_Regular.ttf') format('embedded-opentype'), /* Internet Explorer */
+         url('Product_Sans_Regular.ttf') format('woff2'),             /* Super Modern Browsers */
+         url('Product_Sans_Regular.ttf') format('woff'),              /* Pretty Modern Browsers */
+         url('Product_Sans_Regular.ttf') format('truetype'),          /* Safari, Android, iOS */
+         url('Product_Sans_Regular.ttf') format('svg');               /* Legacy iOS */
     
     }
 	
