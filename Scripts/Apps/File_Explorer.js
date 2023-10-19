@@ -96,7 +96,12 @@ function List_Data() {
                 File_or_Folder.className = 'fa-solid fa-file';
                 
                 var span = document.createElement( 'span' );
-                span.innerHTML = Data[ b ][ 'Name' ];
+
+                if (Data[ b ][ 'Name' ] == undefined){
+                    span.innerHTML = "No Data";
+                } else {
+                    span.innerHTML = Data[ b ][ 'Name' ];
+                }
 
                 File_or_Folder.appendChild( span );
 
