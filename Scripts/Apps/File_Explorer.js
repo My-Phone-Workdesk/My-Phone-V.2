@@ -77,7 +77,11 @@ function List_Data() {
                 File_or_Folder.id = b;
                 
                 var span = document.createElement( 'span' );
-                span.innerHTML = Data[ b ][ 0 ];
+                if ((Data[ b ][ 0 ]) == undefined){
+                    span.innerHTML = "No Data";
+                } else {
+                    span.innerHTML = Data[ b ][ 0 ].toString();
+                }
 
                 File_or_Folder.appendChild( span );
                 
@@ -97,10 +101,10 @@ function List_Data() {
                 
                 var span = document.createElement( 'span' );
 
-                if (Data[ b ][ 'Name' ] == undefined){
+                if ((Data[ b ][ 'Name' ]) == undefined){
                     span.innerHTML = "No Data";
                 } else {
-                    span.innerHTML = Data[ b ][ 'Name' ];
+                    span.innerHTML = Data[ b ][ 'Name' ].toString();
                 }
 
                 File_or_Folder.appendChild( span );
@@ -143,7 +147,11 @@ function List_Data() {
                 File_or_Folder.id = b;
                 
                 var span = document.createElement( 'span' );
-                span.innerHTML = Data[ b ][ 0 ];
+                if ((Data[ b ][ 0 ]) == undefined){
+                    span.innerHTML = "No Data";
+                } else {
+                    span.innerHTML = Data[ b ][ 0 ].toString();
+                }
 
                 File_or_Folder.appendChild( span );
                 
@@ -162,8 +170,12 @@ function List_Data() {
                 File_or_Folder.className = 'fa-solid fa-file';
                 
                 var span = document.createElement( 'span' );
-                span.innerHTML = Data[ b ][ 'Name' ];
-
+                
+                if ((Data[ b ][ 'Name' ]) == undefined){
+                    span.innerHTML = "No Data";
+                } else {
+                    span.innerHTML = Data[ b ][ 'Name' ].toString();
+                }
                 File_or_Folder.appendChild( span );
 
                 File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
