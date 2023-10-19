@@ -39,25 +39,22 @@ function List_Data() {
 
         document.body.style.cursor = 'Default';
 
-        var Files_Data = sessionStorage.getItem( 'Files' );
-        Files_Data = JSON.parse( Files_Data );
+        var Files_Data = JSON.parse(sessionStorage.getItem( 'Files' ));
 
-        var All_Usernames = new Array();
-        
-        for ( var a = 0; a < Files_Data.length; a++ ) { All_Usernames.push( Files_Data[ a ][ 'User' ] ); };
-
-        if ( All_Usernames.indexOf( User ) == -1 ) {
+        if ((Files_Data.slice(localStorage.getItem( 'Amount_MB' ) - 1)).includes("No Data")) {
 
             alert( 'Your User has No Data... Please Contact My Phone V.2 about that from Comment Section ! ' );
         
         } else {
+            var All_Usernames = new Array();
+        
+            for ( var a = 0; a < Files_Data.length; a++ ) { All_Usernames.push( Files_Data[ a ][ 'User' ] ); };
 
             Files_Data = Files_Data[ All_Usernames.indexOf( User ) ][ 'Data' ];
             Files_Data = Files_Data.toString();
             Files_Data = Database.Json.Files_Method( Files_Data );
             Files_Data = JSON.parse( Files_Data );
             Arrange_Files_and_Folders( Files_Data );
-
         };
 
     }; function Arrange_Files_and_Folders( Data ) {
