@@ -79,7 +79,11 @@ function List_Data() {
                 var span = document.createElement( 'span' );
                 if ((Data[ b ][ 0 ]) == undefined){
                     span.innerHTML = "No Data";
+                    File_or_Folder.className="fa-solid fa-empty-set";
                 } else {
+                    if ((Data[ b ][ 0 ]).includes("Drive")){
+                        File_or_Folder.className = 'fa-duotone fa-hard-drive';
+                    }
                     span.innerHTML = Data[ b ][ 0 ].toString();
                 }
 
@@ -103,6 +107,7 @@ function List_Data() {
 
                 if ((Data[ b ][ 'Name' ]) == undefined){
                     span.innerHTML = "No Data";
+                    File_or_Folder.className="fa-solid fa-empty-set"
                 } else {
                     span.innerHTML = Data[ b ][ 'Name' ].toString();
                 }
@@ -149,6 +154,7 @@ function List_Data() {
                 var span = document.createElement( 'span' );
                 if ((Data[ b ][ 0 ]) == undefined){
                     span.innerHTML = "No Data";
+                    File_or_Folder.className="fa-solid fa-empty-set"
                 } else {
                     span.innerHTML = Data[ b ][ 0 ].toString();
                 }
@@ -173,6 +179,7 @@ function List_Data() {
                 
                 if ((Data[ b ][ 'Name' ]) == undefined){
                     span.innerHTML = "No Data";
+                    File_or_Folder.className="fa-solid fa-empty-set"
                 } else {
                     span.innerHTML = Data[ b ][ 'Name' ].toString();
                 }
