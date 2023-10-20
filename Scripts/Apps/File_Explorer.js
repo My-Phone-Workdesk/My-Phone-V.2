@@ -18,13 +18,11 @@ function List_Data() {
 
     var User = User_Data[ 'User' ];
 
-    if ( sessionStorage.getItem( 'Files' ) == null ) {
-        
-        Database.Read_Data( 'Files', 'Files' );
+    Database.Read_Data( 'Files', 'Files' );
 
-        setTimeout( () => { Take_Cloud_Files_Data(); },1000 );
+    setTimeout( () => { Take_Cloud_Files_Data(); },1000 );
     
-    } else { Data_Verification(); };
+    Data_Verification();
 
     function Take_Cloud_Files_Data() {
 
