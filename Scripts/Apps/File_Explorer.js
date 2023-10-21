@@ -75,8 +75,11 @@ function List_Data() {
                 
                 var span = document.createElement( 'span' );
                 if ((Data[ b ][ 0 ]) == undefined){
-                    span.innerHTML = "No Data";
+                    span.innerHTML = "No Data, double click cross to go back";
                     File_or_Folder.className="fa-solid fa-empty-set";
+                    File_or_Folder.addEventListener( 'dblclick', ( event ) => {
+                        location.reload(event.target.id);
+                    });
                 } else {
                     if ((Data[ b ][ 0 ]).includes("Drive")){
                         File_or_Folder.className = 'fa-duotone fa-hard-drive';
@@ -103,8 +106,11 @@ function List_Data() {
                 var span = document.createElement( 'span' );
 
                 if ((Data[ b ][ 'Name' ]) == undefined){
-                    span.innerHTML = "No Data";
-                    File_or_Folder.className="fa-solid fa-empty-set"
+                    span.innerHTML = "No Data, double click cross to go back";
+                    File_or_Folder.className="fa-solid fa-empty-set";
+                    File_or_Folder.addEventListener( 'dblclick', ( event ) => {
+                        location.reload(event.target.id);
+                    });
                 } else {
                     span.innerHTML = Data[ b ][ 'Name' ].toString();
                 }
@@ -150,8 +156,11 @@ function List_Data() {
                 
                 var span = document.createElement( 'span' );
                 if ((Data[ b ][ 0 ]) == undefined){
-                    span.innerHTML = "No Data";
+                    span.innerHTML = "No Data, double click cross to go back";
                     File_or_Folder.className="fa-solid fa-empty-set";
+                    File_or_Folder.addEventListener( 'dblclick', ( event ) => {
+                        location.reload(event.target.id);
+                    });
                 } else {
                     if ((Data[ b ][ 0 ]).includes("Drive")){
                         File_or_Folder.className = 'fa-duotone fa-hard-drive';
@@ -178,8 +187,11 @@ function List_Data() {
                 var span = document.createElement( 'span' );
 
                 if ((Data[ b ][ 'Name' ]) == undefined){
-                    span.innerHTML = "No Data";
-                    File_or_Folder.className="fa-solid fa-empty-set"
+                    span.innerHTML = "No Data, double click cross to go back";
+                    File_or_Folder.className="fa-solid fa-empty-set";
+                    File_or_Folder.addEventListener( 'dblclick', ( event ) => {
+                        location.reload(event.target.id);
+                    });
                 } else {
                     span.innerHTML = Data[ b ][ 'Name' ].toString();
                 }
