@@ -22,7 +22,6 @@ function List_Data() {
 
     setTimeout( () => { Take_Cloud_Files_Data(); },1000 );
     
-    Data_Verification();
 
     function Take_Cloud_Files_Data() {
 
