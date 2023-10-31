@@ -18,31 +18,42 @@ function List_Data() {
 
     var User = User_Data[ 'User' ];
 
-    Database.Read_Data( 'Files', 'Files' );
+    if ( sessionStorage.getItem( 'Files' ) == null ) {
 
-    setTimeout( () => { Take_Cloud_Files_Data(); },1000 );
+        Database.Read_Data( 'Files', 'Files' );
+
+        setTimeout( () => { Take_Cloud_Files_Data(); },1000 );
+
+    } else { Data_Verification(); };
     
 
     function Take_Cloud_Files_Data() {
 
-        setTimeout( () => {
+        if ( sessionStorage.getItem( 'Files' ) == null ) {
+            
+            setTimeout( () => {
 
-            if ( sessionStorage.getItem( 'Files' ) == null ) { return Take_Cloud_Files_Data(); }
-            else { return Data_Verification(); };
+                return Take_Cloud_Files_Data();
 
-        },2000 );
+            },2000 );
+        
+        } else { return Data_Verification(); };
 
     }; function Data_Verification() {
 
         document.body.style.cursor = 'Default';
 
-        var Files_Data = JSON.parse(sessionStorage.getItem( 'Files' ));
+        var Files_Data = JSON.parse( sessionStorage.getItem( 'Files' ) );
 
-        if ((Files_Data.slice(localStorage.getItem( 'Amount_MB' ) - 1)).includes("No Data")) {
+        if ( ( Files_Data.slice( localStorage.getItem( 'Amount_MB' ) - 1 ) ).includes( "No Data" ) ) {
 
-            alert( 'Your User has No Data... Please Contact My Phone V.2 about that from Comment Section ! ' );
+            return alert( 'Your User has No Data... Please Contact My Phone V.2 about that from' +
+            'Comment Section ! ' );
+
+            // This is only for under Development... Will be Replaced Later !
         
         } else {
+
             var All_Usernames = new Array();
         
             for ( var a = 0; a < Files_Data.length; a++ ) { All_Usernames.push( Files_Data[ a ][ 'User' ] ); };
@@ -51,18 +62,20 @@ function List_Data() {
             Files_Data = Files_Data.toString();
             Files_Data = Database.Json.Files_Method( Files_Data );
             Files_Data = JSON.parse( Files_Data );
-            Arrange_Files_and_Folders( Files_Data );
+
+            return Arrange_Files_and_Folders( Files_Data );
+
         };
 
     }; function Arrange_Files_and_Folders( Data ) {
 
         sessionStorage.setItem( 'Files_temp_Data', JSON.stringify( Data ) );
 
-        var Name_Data = true; document.body.innerHTML = '';
+        var Name_Data = true; document.body.innerHTML = ''; var No_Data = false;
 
         for ( var b = 0; b < Data.length; b++ ) {
 
-            Name_Data = true;
+            Name_Data = true; No_Data = false;
 
             var File_or_Folder = null;
 
@@ -74,30 +87,41 @@ function List_Data() {
                 File_or_Folder.id = b;
                 
                 var span = document.createElement( 'span' );
-                if ((Data[ b ][ 0 ]) == undefined){
-                    span.innerHTML = "No Data, double click cross to go back";
-                    File_or_Folder.className="fa-solid fa-empty-set";
-                    File_or_Folder.addEventListener( 'dblclick', ( event ) => {
-                        location.reload(event.target.id);
-                    });
-                } else {
-                    if ((Data[ b ][ 0 ]).includes("Drive")){
-                        File_or_Folder.className = 'fa-duotone fa-hard-drive';
-                    }
-                    span.innerHTML = Data[ b ][ 0 ].toString();
-                }
 
-                File_or_Folder.appendChild( span );
+                if ( Data[ b ][ 0 ] == undefined ) {
+
+                    span.innerHTML = "No Data, double click cross to go back";
+                    File_or_Folder.className = "fa-solid fa-empty-set";
+
+                    File_or_Folder.addEventListener( 'dblclick', ( event ) => {
+
+                        location.reload( event.target.id );
+
+                    }); No_Data = true;
+
+                } else {
+
+                    if ( Data[ b ][ 0 ].toLowerCase().includes( "drive" ) ) {
+
+                        File_or_Folder.className = 'fa-duotone fa-hard-drive';
+
+                    }; span.innerHTML = Data[ b ][ 0 ].toString();
+
+                }; File_or_Folder.appendChild( span );
                 
                 File_or_Folder.addEventListener( 'click', ( event ) => {
 
                     Location_Folder( event.target.id );
 
-                }); File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+                }); if ( ! ( No_Data ) ) {
 
-                    Open_Dialog_Box( event.target.id );
+                    File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
 
-                });
+                        Open_Dialog_Box( event.target.id );
+    
+                    });
+
+                };
             
             } else if ( typeof( Data[ b ] ) === 'object' ) {
                 
@@ -105,23 +129,32 @@ function List_Data() {
                 
                 var span = document.createElement( 'span' );
 
-                if ((Data[ b ][ 'Name' ]) == undefined){
+                if ( Data[ b ][ 'Name' ] == undefined ) {
+
                     span.innerHTML = "No Data, double click cross to go back";
                     File_or_Folder.className="fa-solid fa-empty-set";
+
                     File_or_Folder.addEventListener( 'dblclick', ( event ) => {
-                        location.reload(event.target.id);
-                    });
+
+                        location.reload( event.target.id );
+
+                    }); No_Data = true;
+
                 } else {
+
                     span.innerHTML = Data[ b ][ 'Name' ].toString();
-                }
 
-                File_or_Folder.appendChild( span );
+                }; File_or_Folder.appendChild( span );
 
-                File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+                if ( ! ( No_Data ) ) {
 
-                    Open_Dialog_Box( event.target.id );
+                    File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
 
-                });
+                        Open_Dialog_Box( event.target.id );
+    
+                    });
+
+                };
             
             } else { Name_Data = false; };
             
@@ -139,11 +172,11 @@ function List_Data() {
 
         document.body.innerHTML = '';
 
-        var Name_Data = true;
+        var Name_Data = true; var No_Data = false;
 
         for ( var b = 0; b < Data.length; b++ ) {
 
-            Name_Data = true;
+            Name_Data = true; No_Data = false;
 
             var File_or_Folder = null;
 
@@ -155,30 +188,41 @@ function List_Data() {
                 File_or_Folder.id = b;
                 
                 var span = document.createElement( 'span' );
-                if ((Data[ b ][ 0 ]) == undefined){
+
+                if ( Data[ b ][ 0 ] == undefined ) {
+
                     span.innerHTML = "No Data, double click cross to go back";
                     File_or_Folder.className="fa-solid fa-empty-set";
-                    File_or_Folder.addEventListener( 'dblclick', ( event ) => {
-                        location.reload(event.target.id);
-                    });
-                } else {
-                    if ((Data[ b ][ 0 ]).includes("Drive")){
-                        File_or_Folder.className = 'fa-duotone fa-hard-drive';
-                    }
-                    span.innerHTML = Data[ b ][ 0 ].toString();
-                }
 
-                File_or_Folder.appendChild( span );
+                    File_or_Folder.addEventListener( 'dblclick', ( event ) => {
+
+                        location.reload(event.target.id);
+
+                    }); No_Data = true;
+
+                } else {
+
+                    if ( Data[ b ][ 0 ].toLowerCase().includes( "drive" ) ) {
+
+                        File_or_Folder.className = 'fa-duotone fa-hard-drive';
+
+                    }; span.innerHTML = Data[ b ][ 0 ].toString();
+                
+                }; File_or_Folder.appendChild( span );
                 
                 File_or_Folder.addEventListener( 'click', ( event ) => {
 
                     Location_Folder( event.target.id );
 
-                }); File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+                }); if ( ! ( No_Data ) ) {
 
-                    Open_Dialog_Box( event.target.id );
+                    File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
 
-                });
+                        Open_Dialog_Box( event.target.id );
+    
+                    });
+
+                };
             
             } else if ( typeof( Data[ b ] ) === 'object' ) {
                 
@@ -186,23 +230,32 @@ function List_Data() {
                 
                 var span = document.createElement( 'span' );
 
-                if ((Data[ b ][ 'Name' ]) == undefined){
+                if ( Data[ b ][ 'Name' ] == undefined ) {
+
                     span.innerHTML = "No Data, double click cross to go back";
                     File_or_Folder.className="fa-solid fa-empty-set";
+
                     File_or_Folder.addEventListener( 'dblclick', ( event ) => {
+
                         location.reload(event.target.id);
-                    });
+
+                    }); No_Data = true;
+
                 } else {
+
                     span.innerHTML = Data[ b ][ 'Name' ].toString();
-                }
 
-                File_or_Folder.appendChild( span );
+                }; File_or_Folder.appendChild( span );
 
-                File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+                if ( ! ( No_Data ) ) {
 
-                    Open_Dialog_Box( event.target.id );
+                    File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
 
-                });
+                        Open_Dialog_Box( event.target.id );
+    
+                    });
+
+                };
             
             } else { Name_Data = false; };
 
@@ -295,11 +348,13 @@ function List_Data() {
 
                     sessionStorage.setItem( 'Files', Overall_Files );
 
+                    alert( 'The Drive Renamed Successfully ! ' );
+
                     return Data_Verification();
 
                 } else { const new_name = prompt( 'Rename this Folder as...' ); };
 
-            }; alert( 'The File/Folder Renamed ! ' );
+            }; return alert( 'The File/Folder Renamed ! ' );
 
         }; function Create_Option( option, work ) {
 
