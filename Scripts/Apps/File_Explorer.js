@@ -45,10 +45,10 @@ function List_Data() {
 
         var Files_Data = JSON.parse( sessionStorage.getItem( 'Files' ) );
 
-        if ( ( Files_Data.slice( localStorage.getItem( 'Amount_MB' ) - 1 ) ).includes( "No Data" ) ) {
+        if ((Files_Data[localStorage.getItem('Amount_MB')]["Data"] === "No Data")) {
 
-            return alert( 'Your User has No Data... Please Contact My Phone V.2 about that from' +
-            'Comment Section ! ' );
+            return alert( 'Your User has No Data... ' + 
+            'Please Contact My Phone V.2 about that from Comment Section!' );
 
             // This is only for under Development... Will be Replaced Later !
         
