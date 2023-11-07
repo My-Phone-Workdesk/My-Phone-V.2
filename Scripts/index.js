@@ -115,7 +115,7 @@ function Login() {
                             if ( user_lock == locks_hash[check] ) {
                                 //Correct User Lock Entered... User Recognised...!!!
                                 localStorage.setItem("Amount_MB", check);
-                                location.href = "Screen/Login_User.html";
+                                location.href = "Screen/OS_Loader.html";
                             } else if ( user_lock.toLowerCase() == "./exit" ) {
                                 //Stop it and return
                                 return 9211;
@@ -130,7 +130,7 @@ function Login() {
                 } else {
                     //No User Lock for the Public User Owner...
                     localStorage.setItem("Amount_MB", 0);
-                    location.href = "Screen/Login_User.html";
+                    location.href = "Screen/OS_Loader.html";
                 }
                 return;
             } //Do not Return Anything just add 1 to check variable
