@@ -142,7 +142,7 @@ function List_Data() {
 
                 } else {
 
-                    span.innerHTML = Data[ b ][ 'Name' ].toString();
+                    span.innerHTML = Data[ b ][ 'Name' ].toString(); span.id = b;
 
                 }; File_or_Folder.appendChild( span );
 
@@ -243,7 +243,7 @@ function List_Data() {
 
                 } else {
 
-                    span.innerHTML = Data[ b ][ 'Name' ].toString();
+                    span.innerHTML = Data[ b ][ 'Name' ].toString(); span.id = b;
 
                 }; File_or_Folder.appendChild( span );
 
@@ -298,6 +298,29 @@ function List_Data() {
 
         function Rename_Objects() {
 
+            function Update_Services( Service_Data ) {
+
+                var Overall_Files = JSON.parse( sessionStorage.getItem( 'Files' ) );
+
+                var All_Usernames = new Array();
+    
+                for ( var a = 0; a < Overall_Files.length; a++ ) {
+                    
+                    All_Usernames.push( Overall_Files[ a ][ 'User' ] );
+                
+                }; const cell = Database.Json.Stringify_Column( 'Data', 'Files' ) 
+                + ( All_Usernames.indexOf( User ) + 2 );
+
+                Database.Update_Data( 'Files', cell, Service_Data );
+
+                Overall_Files[ All_Usernames.indexOf( User ) ][ 'Data' ] = Service_Data;
+
+                Overall_Files = JSON.stringify( Overall_Files );
+
+                sessionStorage.setItem( 'Files', Overall_Files );
+
+            };
+
             var Old_Data = JSON.parse( sessionStorage.getItem( 'Files_temp_Data' ) );
             const Data = Old_Data[ id ];
 
@@ -307,7 +330,12 @@ function List_Data() {
 
                     var new_name; do { new_name = prompt( 'Rename this Drive as...' );
 
-                    if ( new_name.length != 1 ) {
+                    if ( new_name == null ) {
+                    
+                        document.body.removeChild( Dialog_Box );
+                        return Dialog_Box.remove();
+
+                    } else if ( new_name.length != 1 ) {
 
                         alert( 'Drive name must be of an Single Character...' );
 
@@ -329,32 +357,101 @@ function List_Data() {
 
                     Old_Data = Database.Json.Files_Method( Old_Data );
 
-                    var Overall_Files = JSON.parse( sessionStorage.getItem( 'Files' ) );
-
-                    var All_Usernames = new Array();
-        
-                    for ( var a = 0; a < Overall_Files.length; a++ ) {
-                        
-                        All_Usernames.push( Overall_Files[ a ][ 'User' ] );
-                    
-                    }; const cell = Database.Json.Stringify_Column( 'Data', 'Files' ) 
-                    + ( All_Usernames.indexOf( User ) + 2 );
-
-                    Database.Update_Data( 'Files', cell, Old_Data );
-
-                    Overall_Files[ All_Usernames.indexOf( User ) ][ 'Data' ] = Old_Data;
-
-                    Overall_Files = JSON.stringify( Overall_Files );
-
-                    sessionStorage.setItem( 'Files', Overall_Files );
+                    Update_Services( Old_Data );
 
                     alert( 'The Drive Renamed Successfully ! ' );
 
                     return Data_Verification();
 
-                } else { const new_name = prompt( 'Rename this Folder as...' ); };
+                } else {
+                    
+                    const new_name = prompt( 'Rename this Folder as...' );
 
-            }; return alert( 'The File/Folder Renamed ! ' );
+                    if ( new_name == null ) {
+
+                        document.body.removeChild( Dialog_Box );
+                        return Dialog_Box.remove();
+
+                    } else if ( new_name == '' ) {
+
+                        return alert( 'Folder Name should be atleast a single character...' );
+
+                    } else {
+
+                        for ( var a = 0; a < Old_Data.length; a++ ) {
+
+                            if ( Array.isArray( Old_Data[ a ] ) ) {
+    
+                                if ( Old_Data[ a ][ 0 ].toLowerCase() == new_name.toLowerCase() )
+                                
+                                { return alert( 'The Folder with this name already exists...' ); };
+    
+                            };
+    
+                        }; Old_Data[ id ][ 0 ] = new_name;
+
+                        Old_Data = JSON.stringify( Old_Data );
+                        
+                        Old_Data = Database.Json.Files_Method( Old_Data );
+
+                        Update_Services( Old_Data );
+
+                        alert( 'The Folder Renamed Successfully ! ' );
+
+                        return Data_Verification();
+
+                    };
+
+                };
+
+            } else if ( typeof( Data ) === 'object' ) {
+
+                const new_name = prompt( 'Rename this File as...' );
+
+                if ( new_name == null ) {
+
+                    document.body.removeChild( Dialog_Box );
+                    return Dialog_Box.remove();
+
+                } else if ( new_name == '' ) {
+
+                    return alert( 'File Name should be atleast a single character...' );
+
+                } else {
+
+                    for ( var a = 0; a < Old_Data.length; a++ ) {
+
+                        if ( typeof( Old_Data[ a ] ) === 'object' ) {
+
+                            if ( Old_Data[ a ][ 'Name' ].toLowerCase() == new_name.toLowerCase() )
+                            
+                            { return alert( 'The File with this name already exists...' ); };
+
+                            // This would be extended more by LalaCoder only !
+
+                        };
+
+                    }; Old_Data[ id ][ 'Name' ] = new_name;
+
+                    Old_Data = JSON.stringify( Old_Data );
+                        
+                    Old_Data = Database.Json.Files_Method( Old_Data );
+
+                    Update_Services( Old_Data );
+
+                    alert( 'The File Renamed Successfully ! ' );
+
+                    return Data_Verification();
+
+                };
+
+            } else {
+                
+                alert( 'This File is Corrupted Hence, Cannot be Renamed...!!!' );
+
+                return console.log( typeof( Data ), Data );
+            
+            };
 
         }; function Create_Option( option, work ) {
 
