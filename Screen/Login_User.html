@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Login to an existing User</title>
-
+    <title>Login to an existing user</title>
+    <link rel="stylesheet" href="../Design/Login.css">
     <link rel="Icon" type="image/X-icon" href="/Icons/Login_User.ico">
-    <link rel="stylesheet" href="../Design/DEVELOPMENT.css" />
-
-    <script src="../Scripts/DEVELOPMENT.js"></script>
-
+    <script src="../Scripts/Login.js"></script>
 </head>
-
 <body>
-
-    <hr>
-    <h1>THIS PAGE IS NOT YET DEVELOPED...</h1>
-    <h3>--My Phone V.2 Developer</h3>
-    <hr>
-
+        <div class="box">
+                <h2>Sign In</h2>
+                <p>My Phone V.2</p>
+                  <div class="inputBox">
+                    <input type="text" id="username" required onkeyup="this.setAttribute('value', this.value);"  value="">
+                    <label>User ID</label>
+                  </div>
+                  <div class="inputBox">
+                        <input type="password" id="userlock" required onkeyup="this.setAttribute('value', this.value);" value="">
+                        <label>User Lock (leave blank when user is Owner)</label>
+                      </div>
+                  <input type="submit" name="sign-in" value="Sign In" onclick="Login();">
+              </div>
 </body>
-
 </html>
