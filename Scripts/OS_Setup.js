@@ -131,7 +131,7 @@ function Submit_OS() {
 
         };
 
-    } else { text.innerHTML = "Access to Server have been Denied..."; }
+    } else { text.innerHTML = "Cert/OS Setup file is not present or is corrupted"; }
 
 };
 

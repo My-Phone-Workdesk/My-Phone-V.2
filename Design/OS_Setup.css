@@ -1,17 +1,87 @@
-select { border: 0.5rem black solid; background-color: white; color: black; padding: 0;
-    margin: 0; font-size: 4rem; font-weight: 600; font-style: italic; }
+@font-face {
+    font-family: 'main';
+    src: url('Product_Sans_Regular.ttf') format('embedded-opentype'),
+         url('Product_Sans_Regular.ttf') format('woff2'),
+         url('Product_Sans_Regular.ttf') format('woff'),
+         url('Product_Sans_Regular.ttf') format('truetype'),
+         url('Product_Sans_Regular.ttf') format('svg');
+}
 
-option { background-color: black; color: white; border: 0.2rem white solid; padding: 0.2rem;
-    margin-bottom: 0.1rem; font-size: 2rem; }
+body {
+    font-family: 'main';
+    border-radius: 1rem;
+    margin: 0;
+    padding: 0;
+    background-color: #373737;
+}
 
-h1 { font-size: 4rem; }
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 0.5rem black solid;
+    background-color: whitesmoke;
+}
 
-input { font-size: 2rem; font-weight: 500; border: 1rem black solid;
-    background-color: rgba(0, 0, 255, 0.4); color: rgba(255, 50, 40, 0.8); }
+select {
+    width: 100%;
+    border: 0.5rem black solid;
+    background-color: white;
+    color: black;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
 
-input:hover, button:hover { cursor: pointer; }
+option {
+    background-color: black;
+    color: white;
+    border: 0.2rem white solid;
+    padding: 0.2rem;
+    margin-bottom: 0.1rem;
+    font-size: 2rem;
+}
 
-#display_text_os, #display_text_cert, #Response { color: grey; }
+h1, h2, h3 {
+    font-size: 2rem;
+    margin: 10px 0;
+}
 
-button { background-color: black; border: 1rem solid grey; font-size: 3rem; color: white;
-    padding: 0.4rem; margin-bottom: 3rem; }
+input {
+    width: 100%;
+    font-size: 2rem;
+    font-weight: 500;
+    border: 1rem black solid;
+    background-color: rgba(0, 0, 255, 0.4);
+    color: rgba(255, 50, 40, 0.8);
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+input:hover, button:hover {
+    cursor: pointer;
+}
+
+#display_text_os, #display_text_cert, #Response {
+    color: grey;
+}
+
+button {
+    width: 100%;
+    background-color: black;
+    border: 1rem solid grey;
+    font-size: 3rem;
+    color: white;
+    padding: 0.4rem;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+}
+
+.divider {
+    height: 10px;
+    border: none;
+    color: #333;
+    background-color: #333;
+    margin: 20px 0;
+}

@@ -18,6 +18,7 @@ body {
     margin: 0;
     padding: 0;
     background-size: cover;
+    background-color: #2d2d2d;
   }
   
   .box {
@@ -31,6 +32,7 @@ body {
     border: 1px solid #dadce0;
     -webkit-border-radius: 8px;
     border-radius: 8px;
+    background-color: white;
 
   }
   

@@ -12,6 +12,7 @@
 	
 * {
     font-family: 'main';
+    border-radius: 1rem;
 }
 body {
     width: 98vw;
@@ -20,7 +21,7 @@ body {
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
-    background-color: rgba(130, 210, 60, 0.8);
+    background-color: #bdbdbd;
 }
 textarea {
     width: 95vw;
@@ -30,8 +31,8 @@ textarea {
     word-wrap: break-word;
     resize: none;
     display: block;
-    background-color: black;
-    color: white;
+    background-color: #464646;
+    color: whitesmoke;
 }
 input {
     width: 30rem;
@@ -41,8 +42,8 @@ input {
     position: fixed;
     left: 2rem;
     bottom: 4rem;
-    background-color: blue;
-    color: yellow;
+    background-color: #373737;
+    color: whitesmoke;
 }
 select, button {
     position: fixed;
@@ -59,8 +60,8 @@ button {
     width: 24rem;
     right: 15rem;
     height: 6rem;
-    background-color: black;
-    color: red;
+    background-color: #373737;
+    color: whitesmoke;
     padding: 3rem;
     text-align: center;
     display: flex;
@@ -76,8 +77,8 @@ button:hover {
 }
 button:active {
     cursor: progress;
-    background-color: purple;
-    color: yellow;
-    border: 0.5rem dashed green;
+    background-color: black;
+    color: white;
+    border: 0.5rem dashed #373737;
     transform: scale(1.4);
 }

@@ -1,43 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OS Setup</title>
-
     <link rel="stylesheet" href="../../Design/OS_Setup.css" />
-    <link rel="Icon" type="image/x-icon" href="../../Icons/OS.ico" />
-
-    <script src="../../Scripts/OS_Setup.js" type="module" ></script>
-
+    <link rel="icon" type="image/x-icon" href="../../Icons/OS.ico" />
+    <script src="../../Scripts/OS_Setup.js" type="module"></script>
 </head>
-
 <body>
-
-    <h1>Select an OS for your Device</h1>
-
-    <select id="OS_select"></select>
-    <br><br><br><br><br><br><br><br>
-
-    <h1>Import Your OS Setup File Here Below...</h1>
-
-    <input type="file" id="OS_File" title="Only .bin Files Allowed" accept=".bin"/>
-
-    <h2 id="display_text_os">Select a File</h2>
-
-    <h1>Import Your OS Related Certificate Here...</h1>
-
-    <input type="file" id="OS_Certificate" title="Certificate for your OS" accept=".txt , .crt"/>
-
-    <h2 id="display_text_cert">Select a File</h2>
-    <br><br><br><br><br><br><br><br>
-
-    <button id="Submit">Upload File</button>
-
-    <h1 id="Response">Click to Upload OS File and Certificate...</h1>
-
+    <div class="container">
+        <h1>Select an OS for your Device</h1>
+        <select id="OS_select"></select>
+        <hr class="divider">
+        <h1>Import Your OS Setup File Here Below...</h1>
+        <input type="file" id="OS_File" title="Only .bin Files Allowed" accept=".bin"/>
+        <h2 id="display_text_os">Select a File</h2>
+        <h1>Import Your OS Related Certificate Here...</h1>
+        <input type="file" id="OS_Certificate" title="Certificate for your OS" accept=".txt , .crt"/>
+        <h2 id="display_text_cert">Select a File</h2>
+        <hr class="divider">
+        <button id="Submit">Upload File</button>
+        <h3 id="Response">Click to Upload OS File and Certificate...</h3>
+    </div>
 </body>
-
 </html>
