@@ -6,7 +6,7 @@ import { Database } from '../../Data_Resources/Database.js';
 
 window.onload = () => {
 
-    if ( location.pathname.includes( 'OS.html' ) ) {
+    if ( location.pathname.includes( 'OS_Setup.html' ) ) {
 
         OS_Options();
 

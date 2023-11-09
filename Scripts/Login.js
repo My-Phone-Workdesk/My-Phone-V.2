@@ -36,6 +36,7 @@ function Login() {
                                 return 9211;
                             } else {
                                 alert("Incorrect User Lock Entered...");
+                                return;
                             }
                         } else {
                             return 9211;

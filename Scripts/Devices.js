@@ -209,7 +209,7 @@ function Payment_MB() {
                                 sessionStorage.setItem("Accounts_Data", update);
 
                                 alert("Payment Successful");
-                                location.href = "../../OS_Package/OS_Setup/OS.html";
+                                location.href = "../../OS_Package/OS_Setup/OS_Setup.html";
 
                                 document.body.style.cursor = "Default";
 
@@ -260,7 +260,7 @@ function Skip() {
                 setTimeout( () => {
 
                     document.body.style.cursor = "Default";
-                    location.href = "../../OS_Package/OS_Setup/OS.html"; 
+                    location.href = "../../OS_Package/OS_Setup/OS_Setup.html"; 
 
                 },2000 );
 

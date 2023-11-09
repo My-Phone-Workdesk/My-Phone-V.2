@@ -223,7 +223,7 @@ function Finish() {
 
                 alert( 'Your Money will not be lost if you restart from OS Setup...' );
 
-                location.href = '../../../OS_Package/OS_Setup/OS.html';
+                location.href = '../../../OS_Package/OS_Setup/OS_Setup.html';
             
             }; Files.push( used_space[ 0 ] );
 
