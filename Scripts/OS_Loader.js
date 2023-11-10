@@ -61,7 +61,7 @@ function Start_Up() {
 
             case "IOS":
 
-                document.body.style.backgroundImage = "url('../OS_Package/IOS.jpg')"; break;
+                document.body.style.backgroundImage = "url('../OS_Package/iOS.jpg')"; break;
 
             case "Android":
 
