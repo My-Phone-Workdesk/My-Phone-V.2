@@ -54,3 +54,8 @@ function Login() {
         alert("User ID not Available");
     }
 };
+
+function LoginToOwner() {
+    localStorage.setItem("Amount_MB", 0);
+    location.href = "OS_Loader.html";
+}

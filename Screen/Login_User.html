@@ -18,9 +18,10 @@
                   </div>
                   <div class="inputBox">
                         <input type="password" id="userlock" required onkeyup="this.setAttribute('value', this.value);" value="">
-                        <label>User Lock (leave blank when user is Owner)</label>
+                        <label>User Lock</label>
                       </div>
                   <input type="submit" name="sign-in" value="Sign In" onclick="Login();">
+                  <input type="submit" name="sign-in-to-owner" id="owner-signin" value="Sign In to Owner" onclick="LoginToOwner();">
               </div>
 </body>
 </html>
