@@ -1,6 +1,6 @@
 // Exported Functions From Database ==>
 
-import { Database } from '../../Data_Resources/Database.js';
+import { Database } from '../Data_Resources/Database.js';
 
 // Real Script Starts from Below ==>
 
