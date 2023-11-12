@@ -63,3 +63,11 @@ button:hover {
     right: 2.5rem;
     background-color: red;
 }
+
+label[ name='Firmware_display' ] { bottom: 11rem; right: 3.5rem; }
+
+label[ name='Version_display' ] { bottom: 7rem; right: 3.5rem; }
+
+label { text-decoration: underline; font-size: 3rem; font-weight: 900; position: fixed; }
+
+label#version { bottom: 1.5rem; right: 4.5rem; text-decoration: none; color: blue; }

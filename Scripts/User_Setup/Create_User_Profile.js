@@ -16,8 +16,9 @@ window.onload = () => {
 
 function Create_User_Profile() {
 
-    var OS = ( JSON.parse( localStorage.getItem("Add_User") ) )["Firmware"];
-    var BIOS = ( JSON.parse( localStorage.getItem("Add_User") ) )["BIOS"];
+    var OS = ( JSON.parse( localStorage.getItem( "Add_User" ) ) )[ "Firmware" ];
+    var BIOS = ( JSON.parse( localStorage.getItem( "Add_User" ) ) )[ "BIOS" ];
+    var version = ( JSON.parse( localStorage.getItem( "Add_User" ) ) )[ "Firmware_Version" ];
 
     document.body.style.backgroundPosition = "center left";
     document.body.style.backgroundSize = "contain";
@@ -28,6 +29,9 @@ function Create_User_Profile() {
     setTimeout( () => {
 
         document.body.style.backgroundImage = "url('../../OS_Package/" + OS + ".jpg" + "')";
+
+        let version_output = document.getElementById( 'version' );
+        version_output.innerHTML = version;
 
         setTimeout( () => { return true; }, BIOS * 2000 );
 
