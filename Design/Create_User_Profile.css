@@ -8,15 +8,11 @@
          url('Product_Sans_Regular.ttf') format('truetype'),          /* Safari, Android, iOS */
          url('Product_Sans_Regular.ttf') format('svg');               /* Legacy iOS */
     
-    }
+}
 	
-* {
-    font-family: 'main';
-}
-body {
-    width: 97vw;
-    height: 97vh;
-}
+* { font-family: 'main'; }
+
+body { width: 97vw; height: 97vh; }
 
 input, button {
     width: 25vw;
@@ -47,11 +43,7 @@ h1 {
     bottom: 20rem;
 }
 
-#Submit {
-    bottom: 4rem;
-    height: 5rem;
-    right: 2.5rem;
-}
+#Submit { bottom: 2rem; height: 5rem; left: 2.5rem; width: 40rem; }
 
 button:hover {
     cursor: pointer;
