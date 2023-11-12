@@ -40,6 +40,20 @@ function Start_Up() {
 
         var OS = BIOS_List[ localStorage.getItem("Amount_MB") ];
 
+        BIOS_List = JSON.parse( sessionStorage.getItem( 'Data' ) );
+        Data_List = new Array();
+
+        for ( var a = 0; a < BIOS_List.length; a++ ) {
+
+            Data_List.push( BIOS_List[ a ][ 'Firmware_Version' ] );
+
+        }; BIOS_List = Data_List; Data_List = null;
+
+        var Firmware_Version = BIOS_List[ localStorage.getItem( 'Amount_MB' ) ];
+
+        var version = document.getElementById( 'version' );
+        version.innerHTML = Firmware_Version;
+
         document.body.style.backgroundSize = "60vw 55vh";
         document.body.style.backgroundRepeat = "no-repeat";
         document.body.style.backgroundPosition = "center center";
