@@ -90,7 +90,7 @@ function List_Data() {
 
                 if ( Data[ b ][ 0 ] == undefined ) {
 
-                    span.innerHTML = "No Data, double click cross to go back";
+                    span.innerHTML = "No Data, double click icon to go back";
                     File_or_Folder.className = "fa-solid fa-empty-set";
 
                     File_or_Folder.addEventListener( 'dblclick', ( event ) => {
@@ -131,7 +131,7 @@ function List_Data() {
 
                 if ( Data[ b ][ 'Name' ] == undefined ) {
 
-                    span.innerHTML = "No Data, double click cross to go back";
+                    span.innerHTML = "No Data, double click icon to go back";
                     File_or_Folder.className="fa-solid fa-empty-set";
 
                     File_or_Folder.addEventListener( 'dblclick', ( event ) => {
@@ -191,7 +191,7 @@ function List_Data() {
 
                 if ( Data[ b ][ 0 ] == undefined ) {
 
-                    span.innerHTML = "No Data, double click cross to go back";
+                    span.innerHTML = "No Data, double click icon to go back";
                     File_or_Folder.className="fa-solid fa-empty-set";
 
                     File_or_Folder.addEventListener( 'dblclick', ( event ) => {
@@ -232,7 +232,7 @@ function List_Data() {
 
                 if ( Data[ b ][ 'Name' ] == undefined ) {
 
-                    span.innerHTML = "No Data, double click cross to go back";
+                    span.innerHTML = "No Data, double click icon to go back";
                     File_or_Folder.className="fa-solid fa-empty-set";
 
                     File_or_Folder.addEventListener( 'dblclick', ( event ) => {

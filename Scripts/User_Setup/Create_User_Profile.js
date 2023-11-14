@@ -31,7 +31,7 @@ function Create_User_Profile() {
         document.body.style.backgroundImage = "url('../../OS_Package/" + OS + ".jpg" + "')";
 
         let version_output = document.getElementById( 'version' );
-        version_output.innerHTML = version;
+        version_output.innerHTML = "Version:" + version;
 
         setTimeout( () => { return true; }, BIOS * 2000 );
 
