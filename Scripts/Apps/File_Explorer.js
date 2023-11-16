@@ -196,7 +196,7 @@ function List_Data() {
 
                     File_or_Folder.addEventListener( 'dblclick', ( event ) => {
 
-                        location.reload(event.target.id);
+                        location.reload( event.target.id ) ;
 
                     }); No_Data = true;
 
