@@ -14,14 +14,4 @@
 
 body { width: 98vw; height: 90vh; display: flex; justify-content: center; align-items: end; }
 
-.os_loader { background-color: white; border: 1.5rem solid gray; border-radius: 50%;
-    border-top-color: black; border-bottom-color: black; width: 120px; height: 120px;
-    animation: Load_OS 2s ease 0.4s infinite normal none; }
-
-@keyframes Load_OS { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-label { font-weight: 900; font-size: 5rem; position: fixed; bottom: 3rem; right: 4rem; }
-
-label[ name = 'Firmware_display' ] { bottom: 18rem; text-decoration: underline; right: 1.5rem; }
-
-label[ name = 'Version_display' ] { bottom: 12rem; text-decoration: underline; }
+label { font-weight: 100; font-size: 2rem; position: fixed; bottom: 1rem; right: 2rem; font-family: Consolas,monaco,monospace;}

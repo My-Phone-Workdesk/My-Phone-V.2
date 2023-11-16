@@ -52,41 +52,41 @@ function Start_Up() {
         var Firmware_Version = BIOS_List[ localStorage.getItem( 'Amount_MB' ) ];
 
         var version = document.getElementById( 'version' );
-        version.innerHTML = Firmware_Version;
+        version.innerHTML =  "Version:" + Firmware_Version;
 
-        document.body.style.backgroundSize = "60vw 55vh";
         document.body.style.backgroundRepeat = "no-repeat";
-        document.body.style.backgroundPosition = "center center";
+        document.body.style.backgroundPosition = "top center";
+        document.body.style.backgroundSize = "300px 300px";
 
         switch ( OS ) {
 
             case "Windows":
 
-                document.body.style.backgroundImage = "url('../OS_Package/Windows.jpg')";
-                document.body.style.backgroundPosition = "top center"; break;
+                 document.body.style.backgroundImage = "url('../OS_Package/Windows.jpg')"; break;
 
-            case "Mac":
+             case "Mac":
 
-                document.body.style.backgroundImage = "url('../OS_Package/Mac.jpg')"; break;
+                 document.body.style.backgroundImage = "url('../OS_Package/Mac.jpg')"; break;
 
-            case "Linux":
+             case "Linux":
 
-                document.body.style.backgroundImage = "url('../OS_Package/Linux.jpg')"; break;
+                 document.body.style.backgroundImage = "url('../OS_Package/Linux.jpg')"; break;
 
-            case "IOS":
+             case "IOS":
 
-                document.body.style.backgroundImage = "url('../OS_Package/iOS.jpg')"; break;
+                 document.body.style.backgroundImage = "url('../OS_Package/iOS.jpg')"; break;
 
-            case "Android":
+             case "Android":
 
-                document.body.style.backgroundImage = "url('../OS_Package/Android.jpg')"; break;
+                 document.body.style.backgroundImage = "url('../OS_Package/Android.jpg')"; break;
 
-            case "Andos":
+             case "Andos":
 
-                document.body.style.backgroundImage = "url('../OS_Package/Andos.jpg')"; break;
+                 document.body.style.backgroundImage = "url('../OS_Package/Andos.jpg')"; break;
 
             default:
 
+                document.body.style.backgroundSize = "60vw 80vh";
                 document.body.style.backgroundImage = "url('../Images/Error.jpg')"; break;
 
         }; setTimeout( () => {
