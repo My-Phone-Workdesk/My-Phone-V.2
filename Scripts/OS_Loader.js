@@ -92,14 +92,9 @@ function Start_Up() {
         }; setTimeout( () => {
 
             document.body.style.backgroundImage = "";
-
-        }, BIOS * 2000 );
-
-        setTimeout ( () => {
-
             location.href = "./Home_Screen.html";
 
-        } , BIOS * 3000 );
+        }, BIOS * 2000 );
 
     }, BIOS * 1000);
 
