@@ -1,0 +1,133 @@
+@font-face {
+
+    font-family: 'main';
+    
+    src: url('Product_Sans_Regular.ttf') format('embedded-opentype'), /* Internet Explorer */
+         url('Product_Sans_Regular.ttf') format('woff2'),             /* Super Modern Browsers */
+         url('Product_Sans_Regular.ttf') format('woff'),              /* Pretty Modern Browsers */
+         url('Product_Sans_Regular.ttf') format('truetype'),          /* Safari, Android, iOS */
+         url('Product_Sans_Regular.ttf') format('svg');               /* Legacy iOS */
+    
+}
+	
+* { font-family: 'main'; }
+
+/* General styles */
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+/* Header styles */
+
+.header {
+    background-color: black;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.header-logo {
+    flex: 1;
+}
+
+.header-search {
+    flex: 2;
+    display: flex;
+    align-items: center;
+}
+
+.header-search input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    width: 100%;
+}
+
+.header-search button {
+    padding: 10px 20px;
+    background-color: gray;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Featured Apps section styles */
+
+.featured-apps {
+    padding: 20px;
+}
+
+.featured-apps h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.featured-apps-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.app {
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+.app img {
+    border-radius: 5px;
+}
+
+.app-details {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.app-details h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.app-details p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.app-details button {
+    padding: 10px 20px;
+    background-color: gray;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Footer styles */
+
+.footer {
+    background-color: black;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
