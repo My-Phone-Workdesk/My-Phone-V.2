@@ -1,0 +1,31 @@
+body {
+  font-family: sans-serif;
+}
+
+.app-banner {
+  background-color: #f0f0f0;
+  padding: 20px;
+  text-align: center;
+}
+
+.app-banner img {
+  width: 100px;
+  height: 100px;
+}
+
+.app-banner h1 {
+  font-size: 24px;
+}
+
+.app-overview {
+  padding: 20px;
+}
+
+.app-overview h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.app-details {
+  padding: 20px
+}
