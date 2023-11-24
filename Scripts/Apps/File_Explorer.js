@@ -2,6 +2,8 @@
 
 import { Database } from "../../Data_Resources/Database.js";
 
+import { Run_Function } from 'https://lalacoder.github.io/Modules/Module_for_JS.js';
+
 // Real Script Starts from Below ==>
 
 function List_Data() {
@@ -142,7 +144,8 @@ function List_Data() {
 
                 } else {
 
-                    span.innerHTML = Data[ b ][ 'Name' ].toString(); span.id = b;
+                    span.innerHTML = Data[ b ][ 'Name' ].toString();
+                    File_or_Folder.id = b;
 
                 }; File_or_Folder.appendChild( span );
 
@@ -243,7 +246,8 @@ function List_Data() {
 
                 } else {
 
-                    span.innerHTML = Data[ b ][ 'Name' ].toString(); span.id = b;
+                    span.innerHTML = Data[ b ][ 'Name' ].toString();
+                    File_or_Folder.id = b;
 
                 }; File_or_Folder.appendChild( span );
 
@@ -291,35 +295,35 @@ function List_Data() {
 
         });
 
+        function Update_Services( Service_Data ) {
+
+            var Overall_Files = JSON.parse( sessionStorage.getItem( 'Files' ) );
+
+            var All_Usernames = new Array();
+
+            for ( var a = 0; a < Overall_Files.length; a++ ) {
+                
+                All_Usernames.push( Overall_Files[ a ][ 'User' ] );
+            
+            }; const cell = Database.Json.Stringify_Column( 'Data', 'Files' ) 
+            + ( All_Usernames.indexOf( User ) + 2 );
+
+            Database.Update_Data( 'Files', cell, Service_Data );
+
+            Overall_Files[ All_Usernames.indexOf( User ) ][ 'Data' ] = Service_Data;
+
+            Overall_Files = JSON.stringify( Overall_Files );
+
+            sessionStorage.setItem( 'Files', Overall_Files );
+
+        };
+
         Create_Option( 'Rename File/Folder', Rename_Objects );
         Create_Option( 'Delete File/Folder', Delete_Objects );
         
         document.body.appendChild( Dialog_Box );
 
         function Rename_Objects() {
-
-            function Update_Services( Service_Data ) {
-
-                var Overall_Files = JSON.parse( sessionStorage.getItem( 'Files' ) );
-
-                var All_Usernames = new Array();
-    
-                for ( var a = 0; a < Overall_Files.length; a++ ) {
-                    
-                    All_Usernames.push( Overall_Files[ a ][ 'User' ] );
-                
-                }; const cell = Database.Json.Stringify_Column( 'Data', 'Files' ) 
-                + ( All_Usernames.indexOf( User ) + 2 );
-
-                Database.Update_Data( 'Files', cell, Service_Data );
-
-                Overall_Files[ All_Usernames.indexOf( User ) ][ 'Data' ] = Service_Data;
-
-                Overall_Files = JSON.stringify( Overall_Files );
-
-                sessionStorage.setItem( 'Files', Overall_Files );
-
-            };
 
             var Old_Data = JSON.parse( sessionStorage.getItem( 'Files_temp_Data' ) );
             const Data = Old_Data[ id ];
@@ -427,8 +431,6 @@ function List_Data() {
                             
                             { return alert( 'The File with this name already exists...' ); };
 
-                            // This would be extended more by LalaCoder only !
-
                         };
 
                     }; Old_Data[ id ][ 'Name' ] = new_name;
@@ -449,7 +451,7 @@ function List_Data() {
                 
                 alert( 'This File is Corrupted Hence, Cannot be Renamed...!!!' );
 
-                return console.log( typeof( Data ), Data );
+                return console.log( typeof( Data ), Data, id );
             
             };
 
@@ -474,7 +476,61 @@ function List_Data() {
 
         }; function Delete_Objects() {
 
-            alert( 'The File/Folder Successfully Deleted ! ' );
+            var Old_Data = JSON.parse( sessionStorage.getItem( 'Files_temp_Data' ) );
+            const Data = Old_Data[ id ];
+
+            if ( Array.isArray( Data ) ) {
+
+                if ( Data[ 0 ].toString().toLowerCase().includes( 'drive' ) ) {
+
+                    return alert( 'You cannot Delete a Drive... To do so go to Disk Management ! ' );
+
+                };
+
+                var Sure = confirm( 'Are you Sure to Permanently Delete this Folder ?' + '\n'
+                + '\n' + '( Note : You Cannot be able to backup this Folder again and All ' +
+                'your sub folders and files in it will be Permanently Deleted ! )' + '\n' );
+
+                if ( Sure ) {
+
+                    Permanently_Delete( Old_Data, id );
+
+                    alert( 'The Folder Successfully Deleted ! ' );
+
+                    document.body.removeChild( Dialog_Box );
+                    return Dialog_Box.remove();
+
+                };
+
+            } else if ( typeof( Data ) === 'object' ) {
+
+                var Sure = confirm( 'Are you Sure to Permanently Delete this File ?' + '\n'
+                + '\n' + '( Note : You Cannot be able to backup this File again ! )' + '\n' );
+
+                if ( Sure ) {
+
+                    Permanently_Delete( Old_Data, id );
+
+                    alert( 'The File Successfully Deleted ! ' );
+
+                    document.body.removeChild( Dialog_Box );
+                    return Dialog_Box.remove();
+
+                };
+
+            }; function Permanently_Delete( All_Data, Data_to_Delete ) {
+
+                var new_data = Run_Function.array.RAPEFA( All_Data, Data_to_Delete );
+
+                new_data = JSON.stringify( new_data );
+
+                new_data = Database.Json.Files_Method( new_data );
+
+                Update_Services( new_data );
+
+                return Data_Verification();
+
+            };
 
         };
 
