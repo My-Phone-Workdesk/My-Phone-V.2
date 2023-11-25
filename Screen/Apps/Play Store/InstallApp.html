@@ -1,72 +1,27 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../../Icons/fontawesome-pro/css/all.css">
     <title>Install App</title>
     <link rel="stylesheet" href="../../../Design/InstallApp.css">
-
+    <script src="../../../Scripts/Apps/PlayStore.js"></script>
 </head>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LALA</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="header">
-    <div class="header-logo">
-      <img src="app-logo.png" alt="App Logo">
-      <h1>LALA</h1>
+<body onload="setInfo();">
+    <div class="app-container">
+        <div class="app-details">
+            <img src="" alt="App Icon" id="icon">
+            <div class="info">
+                <h1 id="name"></h1>
+                <p id="size"></p>
+                <p id="downloads"></p>
+                <p id="rating"></p>
+            </div>
+        </div>
+        <div class="install-button">
+            <button onclick="Install();">Install</button>
+        </div>
     </div>
-    <div class="header-actions">
-      <button class="install-button">Install</button>
-    </div>
-  </header>
-
-  <main class="app-info">
-    <section class="app-banner">
-      <img src="app-screenshot.png" alt="App Screenshot">
-    </section>
-
-    <section class="app-overview">
-      <h2>Overview</h2>
-      <p>LALA is the ultimate tool for managing your tasks, organizing your life, and achieving your goals.</p>
-    </section>
-
-    <section class="app-details">
-      <h2>App Details</h2>
-      <ul>
-        <li>
-          <span>Category:</span> Productivity
-        </li>
-        <li>
-          <span>Developer:</span> My Awesome Apps
-        </li>
-        <li>
-          <span>Version:</span> 1.0
-        </li>
-        <li>
-          <span>Size:</span> 10 MB
-        </li>
-        <li>
-          <span>Compatibility:</span> Android 5.0+
-        </li>
-        <li>
-          <span>Language Support:</span> English, Spanish, French
-        </li>
-        <li>
-          <span>Update History:</span> Regularly updated
-        </li>
-      </ul>
-    </section>
-  </main>
 </body>
 </html>
-    

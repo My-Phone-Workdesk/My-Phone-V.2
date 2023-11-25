@@ -1,31 +1,60 @@
+@font-face {
+
+    font-family: 'main';
+    
+    src: url('Product_Sans_Regular.ttf') format('embedded-opentype'), /* Internet Explorer */
+         url('Product_Sans_Regular.ttf') format('woff2'),             /* Super Modern Browsers */
+         url('Product_Sans_Regular.ttf') format('woff'),              /* Pretty Modern Browsers */
+         url('Product_Sans_Regular.ttf') format('truetype'),          /* Safari, Android, iOS */
+         url('Product_Sans_Regular.ttf') format('svg');               /* Legacy iOS */
+    
+}
+
+* { font-family: 'main'; }
+
 body {
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: black;
 }
 
-.app-banner {
-  background-color: #f0f0f0;
-  padding: 20px;
-  text-align: center;
-}
-
-.app-banner img {
-  width: 100px;
-  height: 100px;
-}
-
-.app-banner h1 {
-  font-size: 24px;
-}
-
-.app-overview {
-  padding: 20px;
-}
-
-.app-overview h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
+.app-container {
+    max-width: 600px;
+    margin: 100px auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border-radius: 1rem;
 }
 
 .app-details {
-  padding: 20px
+    display: flex;
+    align-items: center;
+}
+
+img {
+    max-width: 100px;
+    height: auto;
+    margin-right: 20px;
+    border: black 5px solid;
+    border-radius: 1rem;
+}
+
+.info {
+    max-width: 400px;
+}
+
+.install-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
