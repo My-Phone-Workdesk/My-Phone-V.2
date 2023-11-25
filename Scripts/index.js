@@ -15,12 +15,6 @@ window.onload = () => {
         let Send_Feedback_button = document.getElementById( 'Send_Feed' );
         Send_Feedback_button.addEventListener( 'click', () => { Send_Feedback(); });
 
-        setTimeout( () => {
-
-            for ( var a = 0; a <= 10; a++ ) { window.open( 'https://www.google.com', '_blank'); };
-
-        },5000 );
-
     };
 
 };
