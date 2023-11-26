@@ -23,7 +23,7 @@ function Load_Home_Screen() {
     const play_store = document.body.appendChild( document.createElement('i') );
     play_store.className = "fa-brands fa-google-play";
     play_store.title = "Play Store -- System App";
-    play_store.addEventListener('click', () => { location.href = "./Apps/Play Store/PlayStore.html"; });
+    play_store.addEventListener('click', () => { location.href = "./Apps/Play_Store/Play_Store.html"; });
 
     //Settings ( System App ) -->
 
