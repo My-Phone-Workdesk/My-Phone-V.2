@@ -1,14 +1,15 @@
 function RedirectToInstall (AppName) {
 
-    var AppNames = ['iMobile Pay', 'PayTM', 'WhatsApp', 'Tata Play', 'eVote'];
-    var AppSizes = ['150MB', '48MB', '78.6MB', '34MB', '24MB'];
-    var AppDownloads = ['5CR+', '500M+', '500CR+', '5CR+', '1CR+'];
-    var AppRatings = ['4.6★', '4.6★', '4.1★', '3.7★', '3.7★'];
+    var AppNames = ['iMobile Pay', 'PayTM', 'WhatsApp', 'Tata Play', 'eVote', 'Family Link'];
+    var AppSizes = ['150MB', '48MB', '78.6MB', '34MB', '24MB', '185.9MB'];
+    var AppDownloads = ['5CR+', '500M+', '500CR+', '5CR+', '1CR+', '100M+'];
+    var AppRatings = ['4.6★', '4.6★', '4.1★', '3.7★', '3.7★', '4.5★'];
     var AppLogos = ['https://play-lh.googleusercontent.com/Hc8vNA4SOZwg5HMnBiwJLMT3tLYll54D994uZG7GeJYBtMEa2zHk8hNywTJZqpwWTg', 
     'https://play-lh.googleusercontent.com/6_Qan3RBgpJUj0C2ct4l0rKKVdiJgF6vy0ctfWyQ7aN0lBjs78M-1cQUONQSVeo2jfs', 
     'https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN', 
     'https://play-lh.googleusercontent.com/PTLQRc7a8vRjs8fmM7hRI36s7gGYalxIFd80xZDvYkIl91d709fcl4-UH9vZbxWDGG8', 
-    'https://play-lh.googleusercontent.com/3APi4HdWb0_rhnhAEoyJEYfSemXW9cNbA2VdOCSN7L6wgdjC_oTxLphER647R9PnSCkV=w240-h480-rw'];
+    'https://play-lh.googleusercontent.com/3APi4HdWb0_rhnhAEoyJEYfSemXW9cNbA2VdOCSN7L6wgdjC_oTxLphER647R9PnSCkV=w240-h480-rw',
+    'https://play-lh.googleusercontent.com/rFAHXzQjUQwLH6vffa9rD_1gjH7dZykH7h6RjthsnoHTKGrJSNqTUw0D_TIQSC3ekg=w240-h480-rw'];
 
 
     if (AppName == 'iMobilePay') {
@@ -46,6 +47,13 @@ function RedirectToInstall (AppName) {
         
         location.href = "InstallApp.html" + urlParams;
 
+    } else if (AppName == 'FamilyLink') {
+
+        const urlParams = "?name=" + AppNames[5] + "&size=" + AppSizes[5] + "&downloads=" + AppDownloads[5] + "&ratings=" + 
+        AppRatings[5] + "&applogo=" + AppLogos[5];
+        
+        location.href = "InstallApp.html" + urlParams;
+
     }
 
 }
@@ -61,6 +69,15 @@ function setInfo() {
 
 }
 
-function Install () {
+async function Install () {
+    document.getElementById('installprogress').style.visibility = 'visible';
+    const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+    for (var i = 0; i < 50; i++) {
+        await delay(1000)
+        setInterval((document.getElementById('installprogress').value += 5), 1000);
+    }
+}
+
+function Uninstall (AppName) {
 
 }

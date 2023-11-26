@@ -57,6 +57,15 @@ img {
     flex: 1;
 }
 
+.header-installedapps button {
+    padding: 10px 20px;
+    background-color: gray;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 1rem;
+}
+
 /* Featured Apps section styles */
 
 .featured-apps {
