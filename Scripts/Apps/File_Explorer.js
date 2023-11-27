@@ -47,7 +47,7 @@ function List_Data() {
 
         var Files_Data = JSON.parse( sessionStorage.getItem( 'Files' ) );
 
-        if ((Files_Data[localStorage.getItem('Amount_MB')]["Data"] === "No Data")) {
+        if ( ( Files_Data[ User_ID ]["Data"] === "No Data" ) ) {
 
             return alert( 'Your User has No Data... ' + 
             'Please Contact My Phone V.2 about that from Comment Section!' );
@@ -71,7 +71,8 @@ function List_Data() {
 
     }; function Arrange_Files_and_Folders( Data ) {
 
-        sessionStorage.setItem( 'Files_temp_Data', JSON.stringify( Data ) );
+        sessionStorage.setItem( 'Files_User_Data', JSON.stringify( Data ) );
+        sessionStorage.setItem( 'Files_Current_Folder_location', JSON.stringify( new Array( 0 ) ) );
 
         var Name_Data = true; document.body.innerHTML = ''; var No_Data = false;
 
@@ -167,11 +168,17 @@ function List_Data() {
 
     }; function Location_Folder( id ) {
 
-        const Old_Data = JSON.parse( sessionStorage.getItem( 'Files_temp_Data' ) );
+        var Files_Current_Folder_location = sessionStorage.getItem( 'Files_Current_Folder_location' );
+        Files_Current_Folder_location = JSON.parse( Files_Current_Folder_location );
+        Files_Current_Folder_location.push( id );
+        Files_Current_Folder_location = JSON.stringify( Files_Current_Folder_location );
+        sessionStorage.setItem( 'Files_Current_Folder_location', Files_Current_Folder_location );
+
+        const Old_Data = JSON.parse( sessionStorage.getItem( 'Files_User_Data' ) );
 
         const Data = Old_Data[ id ];
 
-        sessionStorage.setItem( 'Files_temp_Data', JSON.stringify( Data ) );
+        sessionStorage.setItem( 'Files_User_Data', JSON.stringify( Data ) );
 
         document.body.innerHTML = '';
 
@@ -325,7 +332,7 @@ function List_Data() {
 
         function Rename_Objects() {
 
-            var Old_Data = JSON.parse( sessionStorage.getItem( 'Files_temp_Data' ) );
+            var Old_Data = JSON.parse( sessionStorage.getItem( 'Files_User_Data' ) );
             const Data = Old_Data[ id ];
 
             if ( Array.isArray( Data ) ) {
@@ -476,7 +483,7 @@ function List_Data() {
 
         }; function Delete_Objects() {
 
-            var Old_Data = JSON.parse( sessionStorage.getItem( 'Files_temp_Data' ) );
+            var Old_Data = JSON.parse( sessionStorage.getItem( 'Files_User_Data' ) );
             const Data = Old_Data[ id ];
 
             if ( Array.isArray( Data ) ) {
