@@ -56,7 +56,7 @@ function RedirectToInstall (AppName) {
 
     }
 
-}
+};
 
 function setInfo() {
 
@@ -67,17 +67,26 @@ function setInfo() {
     document.getElementById('downloads').innerText = "Downloads: " + urlParams.get('downloads') + "+";
     document.getElementById('rating').innerText = "Ratings: " + urlParams.get('ratings');
 
-}
+};
 
 async function Install () {
+
+    // Can you please explain me what is the work of await delay and time Interval here ?
+
     document.getElementById('installprogress').style.visibility = 'visible';
     const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+
     for (var i = 0; i < 50; i++) {
-        await delay(1000)
-        setInterval((document.getElementById('installprogress').value += 5), 1000);
-    }
-}
 
-function Uninstall (AppName) {
+        await delay(1000);
+        setInterval( (document.getElementById('installprogress').value += 5), 1000 );
 
-}
+    };
+
+};
+
+function Uninstall ( AppName ) {
+
+    
+
+};
