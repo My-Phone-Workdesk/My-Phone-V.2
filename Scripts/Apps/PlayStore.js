@@ -69,17 +69,29 @@ function setInfo() {
 
 };
 
+function ListInstalledApps () {
+    document.getElementById('iMobilePay').remove();
+    document.getElementById('PayTM').remove();
+    document.getElementById('WhatsApp').remove();
+    document.getElementById('TataPlay').remove();
+    document.getElementById('eVote').remove();
+    document.getElementById('FamilyLink').remove();
+}
+
 async function Install () {
 
     // Can you please explain me what is the work of await delay and time Interval here ?
 
     document.getElementById('installprogress').style.visibility = 'visible';
+    document.getElementById('installpercent').style.visibility = 'visible';
+
     const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
     for (var i = 0; i < 50; i++) {
 
         await delay(1000);
-        setInterval( (document.getElementById('installprogress').value += 5), 1000 );
+        setInterval( ((document.getElementById('installprogress').value += 5),(document.getElementById('installpercent').innerText=document.getElementById('installprogress').value + "%")), 1000 );
+
 
     };
 

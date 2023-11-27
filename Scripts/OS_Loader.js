@@ -25,77 +25,72 @@ function Start_Up() {
 
     document.body.style.backgroundColor = "#ffffff";
 
-    setTimeout ( () => {
+    BIOS_List = JSON.parse( sessionStorage.getItem("Data") );
 
-        BIOS_List = JSON.parse( sessionStorage.getItem("Data") );
+    Data_List = new Array();
 
-        Data_List = new Array();
+    for ( var a = 0; a < BIOS_List.length; a++ ) {
 
-        for ( var a = 0; a < BIOS_List.length; a++ ) {
+        var b = BIOS_List[a]; Data_List.push( b["Firmware"] );
 
-            var b = BIOS_List[a]; Data_List.push( b["Firmware"] );
+    }; BIOS_List = Data_List;
+    Data_List = null;
 
-        }; BIOS_List = Data_List;
-        Data_List = null;
+    var OS = BIOS_List[ localStorage.getItem("Amount_MB") ];
 
-        var OS = BIOS_List[ localStorage.getItem("Amount_MB") ];
+    BIOS_List = JSON.parse( sessionStorage.getItem( 'Data' ) );
+    Data_List = new Array();
 
-        BIOS_List = JSON.parse( sessionStorage.getItem( 'Data' ) );
-        Data_List = new Array();
+    for ( var a = 0; a < BIOS_List.length; a++ ) {
 
-        for ( var a = 0; a < BIOS_List.length; a++ ) {
+        Data_List.push( BIOS_List[ a ][ 'Firmware_Version' ] );
 
-            Data_List.push( BIOS_List[ a ][ 'Firmware_Version' ] );
+    }; BIOS_List = Data_List; Data_List = null;
 
-        }; BIOS_List = Data_List; Data_List = null;
+    var Firmware_Version = BIOS_List[ localStorage.getItem( 'Amount_MB' ) ];
 
-        var Firmware_Version = BIOS_List[ localStorage.getItem( 'Amount_MB' ) ];
+    var version = document.getElementById( 'version' );
+    version.innerHTML =  "Version:" + Firmware_Version;
 
-        var version = document.getElementById( 'version' );
-        version.innerHTML =  "Version:" + Firmware_Version;
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundPosition = "top center";
+    document.body.style.backgroundSize = "300px 300px";
+    document.body.style.backgroundImage = "";
 
-        document.body.style.backgroundRepeat = "no-repeat";
-        document.body.style.backgroundPosition = "top center";
-        document.body.style.backgroundSize = "300px 300px";
+    switch ( OS ) {
 
-        switch ( OS ) {
+        case "Windows":
 
-            case "Windows":
+                document.body.style.backgroundImage = "url('../OS_Package/Windows.jpg')"; break;
 
-                 document.body.style.backgroundImage = "url('../OS_Package/Windows.jpg')"; break;
+            case "Mac":
 
-             case "Mac":
+                document.body.style.backgroundImage = "url('../OS_Package/Mac.jpg')"; break;
 
-                 document.body.style.backgroundImage = "url('../OS_Package/Mac.jpg')"; break;
+            case "Linux":
 
-             case "Linux":
+                document.body.style.backgroundImage = "url('../OS_Package/Linux.jpg')"; break;
 
-                 document.body.style.backgroundImage = "url('../OS_Package/Linux.jpg')"; break;
+            case "IOS":
 
-             case "IOS":
+                document.body.style.backgroundImage = "url('../OS_Package/iOS.jpg')"; break;
 
-                 document.body.style.backgroundImage = "url('../OS_Package/iOS.jpg')"; break;
+            case "Android":
 
-             case "Android":
+                document.body.style.backgroundImage = "url('../OS_Package/Android.jpg')"; break;
 
-                 document.body.style.backgroundImage = "url('../OS_Package/Android.jpg')"; break;
+            case "Andos":
 
-             case "Andos":
+                document.body.style.backgroundImage = "url('../OS_Package/Andos.jpg')"; break;
 
-                 document.body.style.backgroundImage = "url('../OS_Package/Andos.jpg')"; break;
+        default:
 
-            default:
+            document.body.style.backgroundSize = "60vw 80vh";
+            document.body.style.backgroundImage = "url('../Images/Error.jpg')"; break;
 
-                document.body.style.backgroundSize = "60vw 80vh";
-                document.body.style.backgroundImage = "url('../Images/Error.jpg')"; break;
+    }; setTimeout( () => {
 
-        }; setTimeout( () => {
+        location.href = "./Home_Screen.html";
 
-            document.body.style.backgroundImage = "";
-            location.href = "./Home_Screen.html";
-
-        }, BIOS * 2000 );
-
-    }, BIOS * 1000);
-
+    }, BIOS * 2000 );
 };
