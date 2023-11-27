@@ -68,16 +68,16 @@ img {
 
 /* Featured Apps section styles */
 
-.featured-apps {
+.apps {
     padding: 20px;
 }
 
-.featured-apps h2 {
+.apps h2 {
     font-size: 24px;
     margin-bottom: 20px;
 }
 
-.featured-apps-container {
+.apps-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

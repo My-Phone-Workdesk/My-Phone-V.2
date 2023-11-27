@@ -15,7 +15,7 @@
 
 </head>
 
-<body>
+<body onload="ListInstalledApps();">
 
     <header class="header">
 
@@ -25,15 +25,21 @@
 
         </div>
 
+        <div class="header-installedapps">
+
+            <button onclick = "window.location.assign('Play_Store.html');" >Back</button>
+            
+        </div>
+
     </header>
 
-    <section class="featured-apps">
+    <section class="apps">
 
         <h2>Installed Apps</h2>
 
-        <div class="featured-apps-container">
+        <div class="apps-container">
 
-            <div class="app">
+            <div class="app" id="iMobilePay">
 
                 <img src="https://play-lh.googleusercontent.com/Hc8vNA4SOZwg5HMnBiwJLMT3tLYll54D994uZG7GeJYBtMEa2zHk8hNywTJZqpwWTg" alt="iMobile Pay">
 
@@ -45,7 +51,7 @@
 
             </div>
 
-            <div class="app">
+            <div class="app" id="PayTM">
 
                 <img src="https://play-lh.googleusercontent.com/6_Qan3RBgpJUj0C2ct4l0rKKVdiJgF6vy0ctfWyQ7aN0lBjs78M-1cQUONQSVeo2jfs" alt="PayTM">
 
@@ -57,7 +63,7 @@
 
             </div>
 
-            <div class="app">
+            <div class="app" id="WhatsApp">
 
                 <img src="https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN" alt="WhatsApp">
 
@@ -69,7 +75,7 @@
 
             </div>
 
-            <div class="app">
+            <div class="app" id="TataPlay">
 
                 <img src="https://play-lh.googleusercontent.com/PTLQRc7a8vRjs8fmM7hRI36s7gGYalxIFd80xZDvYkIl91d709fcl4-UH9vZbxWDGG8" alt="Tata Play">
 
@@ -81,7 +87,7 @@
 
             </div>
 
-            <div class="app">
+            <div class="app" id="eVote">
 
                 <img src="https://play-lh.googleusercontent.com/3APi4HdWb0_rhnhAEoyJEYfSemXW9cNbA2VdOCSN7L6wgdjC_oTxLphER647R9PnSCkV=w240-h480-rw" alt="eVoter Helpline">
 
@@ -93,7 +99,7 @@
 
             </div>
 
-            <div class="app">
+            <div class="app" id="FamilyLink">
 
                 <img src="https://play-lh.googleusercontent.com/rFAHXzQjUQwLH6vffa9rD_1gjH7dZykH7h6RjthsnoHTKGrJSNqTUw0D_TIQSC3ekg=w240-h480-rw" alt="Family Link">
 
