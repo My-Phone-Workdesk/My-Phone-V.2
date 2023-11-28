@@ -170,7 +170,7 @@ function List_Data() {
 
         var Files_Current_Folder_location = sessionStorage.getItem( 'Files_Current_Folder_location' );
         Files_Current_Folder_location = JSON.parse( Files_Current_Folder_location );
-        Files_Current_Folder_location.push( id );
+        Files_Current_Folder_location.push( parseFloat( id ) );
         Files_Current_Folder_location = JSON.stringify( Files_Current_Folder_location );
         sessionStorage.setItem( 'Files_Current_Folder_location', Files_Current_Folder_location );
 
@@ -275,6 +275,8 @@ function List_Data() {
         };
 
     }; function Open_Dialog_Box( id ) {
+
+        id = parseFloat( id );
 
         let Dialog_Box = document.createElement( 'div' );
         Dialog_Box.style.width = '76vw';
@@ -500,12 +502,14 @@ function List_Data() {
 
                 if ( Sure ) {
 
-                    Permanently_Delete( Old_Data, id );
+                    Permanently_Delete();
 
                     alert( 'The Folder Successfully Deleted ! ' );
 
                     document.body.removeChild( Dialog_Box );
-                    return Dialog_Box.remove();
+                    Dialog_Box.remove();
+
+                    return Data_Verification();
 
                 };
 
@@ -516,26 +520,56 @@ function List_Data() {
 
                 if ( Sure ) {
 
-                    Permanently_Delete( Old_Data, id );
+                    Permanently_Delete();
 
                     alert( 'The File Successfully Deleted ! ' );
 
                     document.body.removeChild( Dialog_Box );
-                    return Dialog_Box.remove();
+                    Dialog_Box.remove();
+
+                    return Data_Verification();
 
                 };
 
-            }; function Permanently_Delete( All_Data, Data_to_Delete ) {
+            }; function Permanently_Delete() {
 
-                var new_data = Run_Function.array.RAPEFA( All_Data, Data_to_Delete );
+                Old_Data = Run_Function.array.RAPEFA( Old_Data, id );
 
-                new_data = JSON.stringify( new_data );
+                const C_F_L = JSON.parse( sessionStorage.getItem( 'Files_Current_Folder_location' ) );
 
-                new_data = Database.Json.Files_Method( new_data );
+                var Overall_Files = JSON.parse( sessionStorage.getItem( 'Files' ) );
 
-                Update_Services( new_data );
+                var All_Usernames = new Array();
 
-                return Data_Verification();
+                for ( var a = 0; a < Overall_Files.length; a++ ) {
+                    
+                    All_Usernames.push( Overall_Files[ a ][ 'User' ] );
+                
+                }; var Current_User_Files_Data = JSON.parse(
+
+                    Database.Json.Files_Method(
+
+                        ( Overall_Files[ All_Usernames.indexOf( User ) ][ 'Data' ] ).toString()
+
+                    )
+
+                ); console.log( Current_User_Files_Data ); var b = null;
+
+                for ( var a = 0; a < C_F_L.length - 1; a++ ) {
+
+                    b = Current_User_Files_Data[ C_F_L[ a ] ];
+                    
+                }; if ( b != null ) {
+
+                    b[ C_F_L[ C_F_L.length - 1 ] ] = Old_Data;
+
+                } else { Current_User_Files_Data[ C_F_L[ C_F_L.length - 1 ] ] = Old_Data; };
+
+                Old_Data = JSON.stringify( Current_User_Files_Data );
+
+                Old_Data = Database.Json.Files_Method( Old_Data );
+
+                return Update_Services( Old_Data );
 
             };
 

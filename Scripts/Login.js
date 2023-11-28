@@ -42,7 +42,7 @@ function Login() {
 
     var answer = document.getElementById('username').value;
 
-    if (answer != null) {
+    if ( answer != null ) {
 
         var list = new Array();
         list = JSON.parse( sessionStorage.getItem("Data") );
@@ -60,7 +60,7 @@ function Login() {
 
             if ( respond.toLowerCase() == answer.toLowerCase() ) {
 
-                //The User Passed Away
+                //The User Passed Away ! OM Shanti 😞
 
                 if ( ! ( answer.toLowerCase() == "owner" ) ) {
 
@@ -84,8 +84,14 @@ function Login() {
 
                                 //Correct User Lock Entered... User Recognised...!!!
 
+                                if ( sessionStorage.getItem( 'Files' ) ) {
+
+                                    sessionStorage.removeItem( 'Files' );
+
+                                };
+
                                 localStorage.setItem("Amount_MB", check);
-                                location.href = "OS_Loader.html";
+                                location.href = "./OS_Loader.html";
 
                             } else if ( user_lock.toLowerCase() == "./exit" ) {
 
