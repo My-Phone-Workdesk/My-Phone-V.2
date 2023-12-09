@@ -329,6 +329,7 @@ function List_Data() {
 
         Create_Option( 'Rename File/Folder', Rename_Objects );
         Create_Option( 'Delete File/Folder', Delete_Objects );
+        Create_Option( 'Move This File/Folder to...', Move_Data );
         
         document.body.appendChild( Dialog_Box );
 
@@ -570,6 +571,65 @@ function List_Data() {
                 Old_Data = Database.Json.Files_Method( Old_Data );
 
                 return Update_Services( Old_Data );
+
+            };
+
+        }; function Move_Data() {
+
+            const new_location = prompt( '\n' + 'You want to move this File/Folder to...' + '\n' + '\n' +
+            'New Location -->' + '\n' );
+
+            if ( new_location.includes( '//' ) ) {
+
+                const read_location = new_location.split( '//' );
+
+                var current_location = JSON.parse( sessionStorage.getItem( 'Files' ) );
+
+                var All_Usernames = new Array();
+        
+                for ( var a = 0; a < current_location.length; a++ )
+                { All_Usernames.push( current_location[ a ][ 'User' ] ); };
+
+                current_location = current_location[ All_Usernames.indexOf( User ) ][ 'Data' ];
+                current_location = current_location.toString();
+                current_location = Database.Json.Files_Method( current_location );
+                current_location = JSON.parse( current_location );
+
+                var user_data = current_location;
+
+                console.log( user_data );
+
+                for ( var a = 0; a < read_location.length; a++ ) {
+
+                    for ( var b = 0; b < current_location.length; b++ ) {
+
+                        if ( Array.isArray( current_location ) ) {
+
+                            /* if ( current_location[ b ][ 0 ].toLowerCase() == read_location[ a ].toLowerCase() )
+                            
+                            {
+
+                                current_location = current_location[ b ];
+
+                            } else {
+
+                                return alert( 'This Location is not Found !' );
+
+                            }; <-- This to be Done in further progress i.e.. afterwards */
+
+                        } else {
+
+                            return alert( 'You cannot Transfer a File/Folder into a File...!!!' );
+
+                        };
+
+                    };
+
+                }; return alert( 'The Location Found Successfully 👍' );
+
+            } else {
+
+                return alert( 'The Location is not Formatted... It should be formatted before use !!' );
 
             };
 

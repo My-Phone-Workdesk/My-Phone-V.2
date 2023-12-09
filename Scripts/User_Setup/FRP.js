@@ -139,11 +139,39 @@ function Finish() {
         
         [
             
-            'Drive A:', {
-                
-                value: 'default Drive is Drive A:'
-            
-            }
+            'Drive C:', [
+
+                'Apps Data', {
+
+                    Name:'Play Store',
+                    Size:'100 MB',
+                    Data:'https://system_app.cmd/Play_Store.code',
+                    File_extention:'.exe'
+
+                }, {
+
+                    Name:'Settings',
+                    Size:'240 MB',
+                    Data:'https://system_app.cmd/Play_Store.code',
+                    File_extention:'.exe'
+
+                }, {
+
+                    Name:'File Manager',
+                    Size:'158 MB',
+                    Data:'https://system_app.cmd/File_Manager.code',
+                    File_extention:'.exe'
+
+                }, {
+
+                    Name:'CMD',
+                    Size:'580 MB',
+                    Data:'https://system_app.cmd/CMD.code',
+                    File_extention:'.exe'
+
+                }
+
+            ]
     
         ]
 
