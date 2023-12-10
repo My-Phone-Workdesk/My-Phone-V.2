@@ -47,7 +47,7 @@ function List_Data() {
 
         var Files_Data = JSON.parse( sessionStorage.getItem( 'Files' ) );
 
-        if ( ( Files_Data[ User_ID ]["Data"] === "No Data" ) ) {
+        if ( ( Files_Data[ User_ID ][ "Data" ] === "No Data" ) ) {
 
             return alert( 'Your User has No Data... ' + 
             'Please Contact My Phone V.2 about that from Comment Section!' );
@@ -329,6 +329,7 @@ function List_Data() {
 
         Create_Option( 'Rename File/Folder', Rename_Objects );
         Create_Option( 'Delete File/Folder', Delete_Objects );
+        Create_Option( 'Copy This File/Folder to...', Copy_Data );
         Create_Option( 'Move This File/Folder to...', Move_Data );
         
         document.body.appendChild( Dialog_Box );
@@ -574,9 +575,9 @@ function List_Data() {
 
             };
 
-        }; function Move_Data() {
+        }; function Copy_Data() {
 
-            const new_location = prompt( '\n' + 'You want to move this File/Folder to...' + '\n' + '\n' +
+            const new_location = prompt( '\n' + 'You want to Copy this File/Folder to...' + '\n' + '\n' +
             'New Location -->' + '\n' );
 
             if ( new_location.includes( '//' ) ) {
@@ -597,25 +598,29 @@ function List_Data() {
 
                 var user_data = current_location;
 
-                console.log( user_data );
-
                 for ( var a = 0; a < read_location.length; a++ ) {
+
+                    var found_status = false;
 
                     for ( var b = 0; b < current_location.length; b++ ) {
 
                         if ( Array.isArray( current_location ) ) {
 
-                            /* if ( current_location[ b ][ 0 ].toLowerCase() == read_location[ a ].toLowerCase() )
-                            
-                            {
+                            if ( Array.isArray( current_location[ b ] ) ) {
 
-                                current_location = current_location[ b ];
+                                if (
 
-                            } else {
+                                    current_location[b][0].toLowerCase() == read_location[a].toLowerCase()
 
-                                return alert( 'This Location is not Found !' );
+                                ) {
 
-                            }; <-- This to be Done in further progress i.e.. afterwards */
+                                    current_location = current_location[ b ];
+
+                                    b = current_location.length; found_status = true;
+
+                                };
+
+                            };
 
                         } else {
 
@@ -623,15 +628,77 @@ function List_Data() {
 
                         };
 
+                    }; if ( found_status == false ) {
+
+                        return alert( 'This Location is not Found !' );
+
                     };
 
-                }; return alert( 'The Location Found Successfully 👍' );
+                }; // The Location Found Successfully 👍 ==>
+
+                // Accessing the File/Folder to Copy...
+
+                var Files_Current_Folder_location = sessionStorage.getItem( 'Files_Current_Folder_location' );
+                Files_Current_Folder_location = JSON.parse( Files_Current_Folder_location );
+
+                current_location = user_data;
+
+                for ( var c = 0; c < Files_Current_Folder_location.length; c++ ) {
+
+                    current_location = current_location[ Files_Current_Folder_location[ c ] ];
+
+                }; current_location = current_location[ id ];
+
+                // Now Accessing the New Location...
+
+                var final_data = user_data;
+
+                for ( var d = 0; d < read_location.length; d++ ) {
+
+                    for ( var e = 0; e < user_data.length; e++ ) {
+
+                        if ( Array.isArray( user_data[ e ] ) ) {
+
+                            if ( user_data[ e ][ 0 ].toLowerCase() == read_location[ d ].toLowerCase() ) {
+
+                                user_data = user_data[ e ];
+
+                            };
+
+                        };
+
+                    };
+
+                }; // Now Coping the Final Data...
+
+                user_data.push( current_location );
+
+                final_data = JSON.stringify( final_data );
+                final_data = Database.Json.Files_Method( final_data );
+
+                Update_Services( final_data );
+
+                alert( 'The File/Folder Copied Successfully 👍' );
+
+                return Data_Verification();
 
             } else {
 
                 return alert( 'The Location is not Formatted... It should be formatted before use !!' );
 
             };
+
+        }; function Move_Data() {
+
+            // Move Data Function = Copy Data + Delete the Previous Data that is copied...
+
+            // So I will use Copy Data function here to reduce code...
+
+            // I will do it tomorrow or may be in Further Progresses...
+
+            // I think Enough for Today... 😀 So, Bye 👋
+
+            return alert( 'Sorry ! Under Development...' );
 
         };
 
