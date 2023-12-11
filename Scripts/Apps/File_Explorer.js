@@ -329,8 +329,24 @@ function List_Data() {
 
         Create_Option( 'Rename File/Folder', Rename_Objects );
         Create_Option( 'Delete File/Folder', Delete_Objects );
-        Create_Option( 'Copy This File/Folder to...', Copy_Data );
+        Create_Option( 'Copy This File/Folder to...', () => { Copy_Data( 'Copy' ); });
         Create_Option( 'Move This File/Folder to...', Move_Data );
+        
+        const check = JSON.parse( sessionStorage.getItem( 'Files_User_Data' ) );
+        
+        if ( Array.isArray( check[ id ] ) ) {
+
+            if ( ! ( check[ id ][ 0 ].toLowerCase().includes( 'drive' ) ) ) {
+
+                Create_Option( 'Edit Properties of File/Folder', () => { Property_Panel( 'Folder' ); });
+                
+            };
+            
+        } else if ( typeof( check[ id ] ) === 'object' ) {
+
+            Create_Option( 'Edit Properties of File/Folder', () => { Property_Panel( 'File' ); });
+
+        };
         
         document.body.appendChild( Dialog_Box );
 
@@ -575,12 +591,16 @@ function List_Data() {
 
             };
 
-        }; function Copy_Data() {
+        }; function Copy_Data( advance ) {
 
-            const new_location = prompt( '\n' + 'You want to Copy this File/Folder to...' + '\n' + '\n' +
-            'New Location -->' + '\n' );
+            const new_location = prompt( '\n' + 'You want to ' + advance + ' this File/Folder to...' +
+            '\n' + '\n' + 'New Location -->' + '\n' );
 
-            if ( new_location.includes( '//' ) ) {
+            if ( new_location == null ) {
+
+                return null;
+
+            } else if ( new_location.includes( '//' ) ) {
 
                 const read_location = new_location.split( '//' );
 
@@ -622,9 +642,13 @@ function List_Data() {
 
                             };
 
+                        } else if ( advance == 'Copy' ) {
+
+                            return alert( 'You cannot Copy a File/Folder into a File...!!!' );
+
                         } else {
 
-                            return alert( 'You cannot Transfer a File/Folder into a File...!!!' );
+                            return alert( 'You cannot Move a File/Folder into a File...!!!' );
 
                         };
 
@@ -673,14 +697,21 @@ function List_Data() {
 
                 user_data.push( current_location );
 
-                final_data = JSON.stringify( final_data );
-                final_data = Database.Json.Files_Method( final_data );
+                if ( advance == 'Copy' ) {
 
-                Update_Services( final_data );
+                    final_data = JSON.stringify( final_data );
+                    final_data = Database.Json.Files_Method( final_data );
 
-                alert( 'The File/Folder Copied Successfully 👍' );
+                    Update_Services( final_data );
 
-                return Data_Verification();
+                    alert( 'The File/Folder Copied Successfully 👍' );
+
+                    document.body.removeChild( Dialog_Box );
+                    Dialog_Box.remove();
+
+                    return Data_Verification();
+
+                } else { return [ final_data, Files_Current_Folder_location, id ]; };
 
             } else {
 
@@ -690,15 +721,45 @@ function List_Data() {
 
         }; function Move_Data() {
 
-            // Move Data Function = Copy Data + Delete the Previous Data that is copied...
+            var action_data = Copy_Data( 'Move' );
 
-            // So I will use Copy Data function here to reduce code...
+            if ( action_data == null ) { return null; };
 
-            // I will do it tomorrow or may be in Further Progresses...
+            setTimeout( () => {
 
-            // I think Enough for Today... 😀 So, Bye 👋
+                var data = action_data[ 0 ];
+                var final_data = data;
 
-            return alert( 'Sorry ! Under Development...' );
+                const Files_Current_Folder_location = action_data[ 1 ];
+                const id = action_data[ 2 ];
+
+                for ( var a = 0; a < Files_Current_Folder_location.length; a++ ) {
+
+                    data = data[ Files_Current_Folder_location[ a ] ];
+
+                }; data.splice( id, 1 );
+
+                final_data = JSON.stringify( final_data );
+                final_data = Database.Json.Files_Method( final_data );
+
+                Update_Services( final_data );
+
+                alert( 'The File/Folder Moved Successfully 👍' );
+
+                document.body.removeChild( Dialog_Box );
+                Dialog_Box.remove();
+
+                return Data_Verification();
+
+            }, 1000 );
+
+        }; function Property_Panel( data_set_type ) {
+
+            var Properties_Panel = Dialog_Box.cloneNode( true ); console.log( Properties_Panel );
+
+            document.body.removeChild( Dialog_Box ); Dialog_Box.remove();
+
+            return alert( 'Sorry ! Under Development...' + '\n' + '\n' + 'This is a ' + data_set_type );
 
         };
 
