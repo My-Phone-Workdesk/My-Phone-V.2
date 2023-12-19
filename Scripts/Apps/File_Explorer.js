@@ -327,10 +327,10 @@ function List_Data() {
 
         };
 
-        Create_Option( 'Rename File/Folder', Rename_Objects );
-        Create_Option( 'Delete File/Folder', Delete_Objects );
-        Create_Option( 'Copy This File/Folder to...', () => { Copy_Data( 'Copy' ); });
-        Create_Option( 'Move This File/Folder to...', Move_Data );
+        Create_Option( Dialog_Box, 'Rename File/Folder', Rename_Objects );
+        Create_Option( Dialog_Box, 'Delete File/Folder', Delete_Objects );
+        Create_Option( Dialog_Box, 'Copy This File/Folder to...', () => { Copy_Data( 'Copy' ); });
+        Create_Option( Dialog_Box, 'Move This File/Folder to...', Move_Data );
         
         const check = JSON.parse( sessionStorage.getItem( 'Files_User_Data' ) );
         
@@ -338,13 +338,13 @@ function List_Data() {
 
             if ( ! ( check[ id ][ 0 ].toLowerCase().includes( 'drive' ) ) ) {
 
-                Create_Option( 'Edit Properties of File/Folder', () => { Property_Panel( 'Folder' ); });
+                Create_Option( Dialog_Box, 'Edit Properties of File/Folder', () => { Property_Panel( 'Folder' ); });
                 
             };
             
         } else if ( typeof( check[ id ] ) === 'object' ) {
 
-            Create_Option( 'Edit Properties of File/Folder', () => { Property_Panel( 'File' ); });
+            Create_Option( Dialog_Box, 'Edit Properties of File/Folder', () => { Property_Panel( 'File' ); });
 
         };
         
@@ -482,7 +482,7 @@ function List_Data() {
             
             };
 
-        }; function Create_Option( option, work ) {
+        }; function Create_Option( type, option, work ) {
 
             let Rename = document.createElement( 'div' );
             Rename.innerHTML = option;
@@ -499,7 +499,9 @@ function List_Data() {
 
             Rename.addEventListener( 'click', work );
             
-            Dialog_Box.appendChild( Rename );
+            type.appendChild( Rename );
+
+            return Rename;
 
         }; function Delete_Objects() {
 
@@ -755,11 +757,81 @@ function List_Data() {
 
         }; function Property_Panel( data_set_type ) {
 
-            var Properties_Panel = Dialog_Box.cloneNode( true ); console.log( Properties_Panel );
+            var Properties_Panel = Dialog_Box.cloneNode( true );
+
+            document.body.appendChild( Properties_Panel );
 
             document.body.removeChild( Dialog_Box ); Dialog_Box.remove();
 
-            return alert( 'Sorry ! Under Development...' + '\n' + '\n' + 'This is a ' + data_set_type );
+            var Remove_Extra_Clone = Properties_Panel.childNodes;
+
+            const count = Remove_Extra_Clone.length;
+
+            for ( var a = 0; a < count; a++ ) {
+
+                Remove_Extra_Clone[ 0 ].remove();
+
+            }; var Old_Data = JSON.parse( sessionStorage.getItem( 'Files_User_Data' ) );
+            
+            const Data = Old_Data[ id ];
+            
+            if ( data_set_type == 'File' ) {
+
+                Create_Option( Properties_Panel, 'File Name : ' + Data[ 'Name' ], () => {
+
+                    return alert( 'How there you touch Me ! ' );
+
+                });
+
+                var check_box = document.createElement( 'input' );
+                check_box.type = 'checkbox';
+                check_box.checked = false;
+
+                check_box.style.marginLeft = '35px';
+                check_box.style.width = '20px';
+                check_box.style.height = '20px';
+                check_box.style.marginBottom = '20px';
+
+                var hidden = Create_Option( Properties_Panel, 'Hidden File', () => {
+
+                    if ( check_box.checked == true ) {
+
+                        check_box.checked = false;
+
+                    } else {
+
+                        check_box.checked = true;
+
+                    };
+
+                }); hidden.appendChild( check_box );
+
+            } else if ( data_set_type == 'Folder' ) {
+
+                Create_Option( Properties_Panel, 'Folder Name : ' + Data[ 0 ], () => {
+
+                    return alert( 'How to touch Me ? ' );
+                    
+                });
+
+            } else {
+
+                alert( 'Sorry ! An Unexpected Error Occured...' );
+
+                document.body.removeChild( Properties_Panel );
+
+                return Properties_Panel.remove();
+
+            }; setTimeout( () => {
+
+                Create_Option( Properties_Panel, 'Close ❌', () => {
+
+                    document.body.removeChild( Properties_Panel );
+                    Properties_Panel.remove();
+    
+                });
+
+            }, 1000 );
 
         };
 
