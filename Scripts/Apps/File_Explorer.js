@@ -12,6 +12,8 @@ function List_Data() {
 
     document.body.style.cursor = 'Progress';
 
+    document.body.addEventListener( 'contextmenu', Create_New );
+
     const User_ID = localStorage.getItem( 'Amount_MB' );
 
     var User_Data = sessionStorage.getItem( 'Data' );
@@ -19,6 +21,8 @@ function List_Data() {
     User_Data = User_Data[ User_ID ];
 
     var User = User_Data[ 'User' ];
+
+    var tasks = 0;
 
     if ( sessionStorage.getItem( 'Files' ) == null ) {
 
@@ -45,9 +49,11 @@ function List_Data() {
 
         document.body.style.cursor = 'Default';
 
-        var Files_Data = JSON.parse( sessionStorage.getItem( 'Files' ) );
+        const imported_data = Extract_Current_User_Details();
 
-        if ( ( Files_Data[ User_ID ][ "Data" ] === "No Data" ) ) {
+        var Files_Data = imported_data[ 1 ];
+
+        if ( ( Files_Data[ imported_data[ 0 ] ][ 'Data' ] === 'No Data' ) ) {
 
             return alert( 'Your User has No Data... ' + 
             'Please Contact My Phone V.2 about that from Comment Section!' );
@@ -56,11 +62,7 @@ function List_Data() {
         
         } else {
 
-            var All_Usernames = new Array();
-        
-            for ( var a = 0; a < Files_Data.length; a++ ) { All_Usernames.push( Files_Data[ a ][ 'User' ] ); };
-
-            Files_Data = Files_Data[ All_Usernames.indexOf( User ) ][ 'Data' ];
+            Files_Data = Files_Data[ imported_data[ 0 ] ][ 'Data' ];
             Files_Data = Files_Data.toString();
             Files_Data = Database.Json.Files_Method( Files_Data );
             Files_Data = JSON.parse( Files_Data );
@@ -276,7 +278,7 @@ function List_Data() {
 
     }; function Open_Dialog_Box( id ) {
 
-        id = parseFloat( id );
+        id = parseFloat( id ); tasks = 1;
 
         let Dialog_Box = document.createElement( 'div' );
         Dialog_Box.style.width = '76vw';
@@ -300,26 +302,22 @@ function List_Data() {
         Dialog_Box.addEventListener( 'dblclick', () => {
 
             document.body.removeChild( Dialog_Box );
-            Dialog_Box.remove();
+            Dialog_Box.remove(); return tasks = 0;
 
         });
 
         function Update_Services( Service_Data ) {
 
-            var Overall_Files = JSON.parse( sessionStorage.getItem( 'Files' ) );
+            const imported_data = Extract_Current_User_Details();
 
-            var All_Usernames = new Array();
-
-            for ( var a = 0; a < Overall_Files.length; a++ ) {
-                
-                All_Usernames.push( Overall_Files[ a ][ 'User' ] );
-            
-            }; const cell = Database.Json.Stringify_Column( 'Data', 'Files' ) 
-            + ( All_Usernames.indexOf( User ) + 2 );
+            const cell = Database.Json.Stringify_Column( 'Data', 'Files' ) 
+            + ( imported_data[ 0 ] + 2 );
 
             Database.Update_Data( 'Files', cell, Service_Data );
 
-            Overall_Files[ All_Usernames.indexOf( User ) ][ 'Data' ] = Service_Data;
+            var Overall_Files = imported_data[ 1 ];
+
+            Overall_Files[ imported_data[ 0 ] ][ 'Data' ] = Service_Data;
 
             Overall_Files = JSON.stringify( Overall_Files );
 
@@ -364,7 +362,7 @@ function List_Data() {
                     if ( new_name == null ) {
                     
                         document.body.removeChild( Dialog_Box );
-                        return Dialog_Box.remove();
+                        Dialog_Box.remove(); return tasks = 0;
 
                     } else if ( new_name.length != 1 ) {
 
@@ -401,7 +399,7 @@ function List_Data() {
                     if ( new_name == null ) {
 
                         document.body.removeChild( Dialog_Box );
-                        return Dialog_Box.remove();
+                        Dialog_Box.remove(); return tasks = 0;
 
                     } else if ( new_name == '' ) {
 
@@ -442,7 +440,7 @@ function List_Data() {
                 if ( new_name == null ) {
 
                     document.body.removeChild( Dialog_Box );
-                    return Dialog_Box.remove();
+                    Dialog_Box.remove(); return tasks = 0;
 
                 } else if ( new_name == '' ) {
 
@@ -527,7 +525,7 @@ function List_Data() {
                     alert( 'The Folder Successfully Deleted ! ' );
 
                     document.body.removeChild( Dialog_Box );
-                    Dialog_Box.remove();
+                    Dialog_Box.remove(); return tasks = 0;
 
                     return Data_Verification();
 
@@ -545,7 +543,7 @@ function List_Data() {
                     alert( 'The File Successfully Deleted ! ' );
 
                     document.body.removeChild( Dialog_Box );
-                    Dialog_Box.remove();
+                    Dialog_Box.remove(); return tasks = 0;
 
                     return Data_Verification();
 
@@ -557,23 +555,19 @@ function List_Data() {
 
                 const C_F_L = JSON.parse( sessionStorage.getItem( 'Files_Current_Folder_location' ) );
 
-                var Overall_Files = JSON.parse( sessionStorage.getItem( 'Files' ) );
+                const imported_data = Extract_Current_User_Details();
 
-                var All_Usernames = new Array();
+                var Overall_Files = imported_data[ 1 ];
 
-                for ( var a = 0; a < Overall_Files.length; a++ ) {
-                    
-                    All_Usernames.push( Overall_Files[ a ][ 'User' ] );
-                
-                }; var Current_User_Files_Data = JSON.parse(
+                var Current_User_Files_Data = JSON.parse(
 
                     Database.Json.Files_Method(
 
-                        ( Overall_Files[ All_Usernames.indexOf( User ) ][ 'Data' ] ).toString()
+                        ( Overall_Files[ imported_data[ 0 ] ][ 'Data' ] ).toString()
 
                     )
 
-                ); console.log( Current_User_Files_Data ); var b = null;
+                ); var b = null;
 
                 for ( var a = 0; a < C_F_L.length - 1; a++ ) {
 
@@ -606,14 +600,11 @@ function List_Data() {
 
                 const read_location = new_location.split( '//' );
 
-                var current_location = JSON.parse( sessionStorage.getItem( 'Files' ) );
+                const imported_data = Extract_Current_User_Details();
 
-                var All_Usernames = new Array();
-        
-                for ( var a = 0; a < current_location.length; a++ )
-                { All_Usernames.push( current_location[ a ][ 'User' ] ); };
+                var current_location = imported_data[ 1 ];
 
-                current_location = current_location[ All_Usernames.indexOf( User ) ][ 'Data' ];
+                current_location = current_location[ imported_data[ 0 ] ][ 'Data' ];
                 current_location = current_location.toString();
                 current_location = Database.Json.Files_Method( current_location );
                 current_location = JSON.parse( current_location );
@@ -709,7 +700,7 @@ function List_Data() {
                     alert( 'The File/Folder Copied Successfully 👍' );
 
                     document.body.removeChild( Dialog_Box );
-                    Dialog_Box.remove();
+                    Dialog_Box.remove(); return tasks = 0;
 
                     return Data_Verification();
 
@@ -749,7 +740,7 @@ function List_Data() {
                 alert( 'The File/Folder Moved Successfully 👍' );
 
                 document.body.removeChild( Dialog_Box );
-                Dialog_Box.remove();
+                Dialog_Box.remove(); return tasks = 0;
 
                 return Data_Verification();
 
@@ -761,7 +752,7 @@ function List_Data() {
 
             document.body.appendChild( Properties_Panel );
 
-            document.body.removeChild( Dialog_Box ); Dialog_Box.remove();
+            document.body.removeChild( Dialog_Box ); Dialog_Box.remove(); return tasks = 0;
 
             var Remove_Extra_Clone = Properties_Panel.childNodes;
 
@@ -834,6 +825,148 @@ function List_Data() {
             }, 1000 );
 
         };
+
+    }; function Create_New() {
+
+        let Option_Box = null;
+
+        if ( tasks == 1 ) {
+
+            if ( Option_Box == null || Option_Box == undefined ) {
+
+                return null;
+
+            };
+
+            document.body.removeChild( Option_Box );
+            return Option_Box.remove();
+
+        };
+
+        Option_Box = document.createElement( 'div' );
+        Option_Box.style.width = '42vw';
+        Option_Box.style.height = '16vh';
+        Option_Box.style.position = 'absolute';
+        Option_Box.style.left = '25vw';
+        Option_Box.style.top = '40vh';
+        Option_Box.style.backgroundColor = '#ffffff';
+        Option_Box.style.display = 'flex';
+        Option_Box.style.alignItems = 'center';
+        Option_Box.style.justifyContent = 'space-evenly';
+        Option_Box.style.flexWrap = 'wrap';
+        Option_Box.style.borderColor = 'blue';
+        Option_Box.style.borderStyle = 'solid';
+        Option_Box.style.borderWidth = '10px';
+        Option_Box.style.paddingLeft = '1.5vw';
+        Option_Box.style.paddingRight = '1.5vw';
+        Option_Box.style.paddingTop = '1.5vh';
+        Option_Box.style.paddingBottom = '1.5vh';
+
+        Option_Box.addEventListener( 'dblclick', () => {
+
+            document.body.removeChild( Option_Box );
+            Option_Box.remove();
+
+        }); document.body.appendChild( Option_Box );
+
+        Create_Sub_Options( 'Create New File Here', File );
+        Create_Sub_Options( 'Create New Folder Here', Folder );
+
+        function Create_Sub_Options( option, work ) {
+
+            let Sub_Option = document.createElement( 'div' );
+            Sub_Option.innerHTML = option;
+            Sub_Option.style.borderColor = '#000000';
+            Sub_Option.style.borderStyle = 'solid';
+            Sub_Option.style.borderWidth = '5px';
+            Sub_Option.style.height = '4vh';
+            Sub_Option.style.width = '15vw';
+            Sub_Option.style.textAlign = 'center';
+            Sub_Option.style.fontSize = '1.3rem';
+            Sub_Option.style.fontWeight = '600';
+            Sub_Option.style.cursor = 'pointer';
+            Sub_Option.style.flexBasis = '40%';
+
+            Sub_Option.addEventListener( 'click', work );
+            
+            Option_Box.appendChild( Sub_Option );
+
+            return Sub_Option;
+
+        }; function File() {
+
+            return alert( 'Sorry ! Under Development... May be developed tomorrrow' );
+
+        }; function Folder() {
+
+            return alert( 'Sorry ! Under Construction... May be developed till tomorrow' );
+
+            const Current_Location = JSON.parse( sessionStorage.getItem( 'Files_Current_Folder_location' ) );
+            const Current_Data = JSON.parse( sessionStorage.getItem( 'Files_User_Data' ) );
+
+            const imported_data = Extract_Current_User_Details();
+            
+            var Current_User_Data = imported_data[ 1 ][ imported_data[ 0 ] ][ 'Data' ];
+
+            if ( Current_Location.length == 0 ) {
+
+                return alert( 'Sorry ! But you cannot Create a Folder in the Drive Section ! ' );
+
+            } else {
+
+                var Added_Data = Current_User_Data;
+
+                for ( var a = 0; a < Current_Location.length; a++ ) {
+
+                    Added_Data = Added_Data[ Current_Location[ a ] ];
+
+                }; const new_folder_name = prompt(
+
+                    '\n' + "What will be your New Folder's Name ? " + '\n',
+
+                    'New Folder'
+
+                );
+                
+                for ( var b = 0; b < Current_Data.length; b++ ) {
+
+                    if ( Array.isArray( Current_Data[ b ] ) ) {
+
+                        if ( Current_Data[ b ][ 0 ].includes( 'New Folder' ) ) {
+
+                            if ( Current_Data[ b ][ 0 ] == 'New Folder' ) {
+
+                                if ( assignment_number == 0 ) {
+
+                                    assignment_number = 1;
+
+                                };
+
+                            } else {};
+
+                        };
+
+                    };
+
+                };
+
+            };
+
+        };
+
+    }; function Extract_Current_User_Details() {
+
+        var Overall_Files = JSON.parse( sessionStorage.getItem( 'Files' ) );
+
+        var All_Usernames = new Array();
+
+        for ( var a = 0; a < Overall_Files.length; a++ ) {
+            
+            All_Usernames.push( Overall_Files[ a ][ 'User' ] );
+        
+        };
+
+        return [ All_Usernames.indexOf( User ), Overall_Files ];
 
     };
 
