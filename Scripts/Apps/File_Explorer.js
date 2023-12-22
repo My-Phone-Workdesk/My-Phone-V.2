@@ -22,7 +22,7 @@ function List_Data() {
 
     var User = User_Data[ 'User' ];
 
-    var tasks = 0;
+    var tasks = 0; var view = 'normal';
 
     if ( sessionStorage.getItem( 'Files' ) == null ) {
 
@@ -84,87 +84,123 @@ function List_Data() {
 
             var File_or_Folder = null;
 
-            File_or_Folder = document.createElement( 'i' );
-            
-            if ( Array.isArray( Data[ b ] ) ) {
+            if ( view == 'normal' ) {
+
+                if ( typeof( Data[ b ] ) === 'object' ) {
                 
-                File_or_Folder.className = 'fa-solid fa-folders';
-                File_or_Folder.id = b;
-                
-                var span = document.createElement( 'span' );
+                    if ( ! ( Array.isArray( Data[ b ] ) ) ) {
+                    
+                        if ( ! ( Data[ b ][ 'Hidden' ] == 'true' ) ) {
+                        
+                            File_or_Folder = document.createElement( 'i' );
 
-                if ( Data[ b ][ 0 ] == undefined ) {
+                            Show_Data();
 
-                    span.innerHTML = "No Data, double click icon to go back";
-                    File_or_Folder.className = "fa-solid fa-empty-set";
+                        };
+                    
+                    } else {
 
-                    File_or_Folder.addEventListener( 'dblclick', ( event ) => {
+                        File_or_Folder = document.createElement( 'i' );
 
-                        location.reload( event.target.id );
+                        Show_Data();
 
-                    }); No_Data = true;
-
-                } else {
-
-                    if ( Data[ b ][ 0 ].toLowerCase().includes( "drive" ) ) {
-
-                        File_or_Folder.className = 'fa-duotone fa-hard-drive';
-
-                    }; span.innerHTML = Data[ b ][ 0 ].toString();
-
-                }; File_or_Folder.appendChild( span );
-                
-                File_or_Folder.addEventListener( 'click', ( event ) => {
-
-                    Location_Folder( event.target.id );
-
-                }); if ( ! ( No_Data ) ) {
-
-                    File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
-
-                        Open_Dialog_Box( event.target.id );
-    
-                    });
+                    };
 
                 };
+
+            } else if ( view == 'hidden' ) {
+
+                File_or_Folder = document.createElement( 'i' );
+
+                Show_Data();
+
+            };
             
-            } else if ( typeof( Data[ b ] ) === 'object' ) {
+            function Show_Data() {
+
+                if ( Array.isArray( Data[ b ] ) ) {
                 
-                File_or_Folder.className = 'fa-solid fa-file';
-                
-                var span = document.createElement( 'span' );
-
-                if ( Data[ b ][ 'Name' ] == undefined ) {
-
-                    span.innerHTML = "No Data, double click icon to go back";
-                    File_or_Folder.className="fa-solid fa-empty-set";
-
-                    File_or_Folder.addEventListener( 'dblclick', ( event ) => {
-
-                        location.reload( event.target.id );
-
-                    }); No_Data = true;
-
-                } else {
-
-                    span.innerHTML = Data[ b ][ 'Name' ].toString();
+                    File_or_Folder.className = 'fa-solid fa-folders';
                     File_or_Folder.id = b;
-
-                }; File_or_Folder.appendChild( span );
-
-                if ( ! ( No_Data ) ) {
-
-                    File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
-
-                        Open_Dialog_Box( event.target.id );
+                    
+                    var span = document.createElement( 'span' );
+    
+                    if ( Data[ b ][ 0 ] == undefined ) {
+    
+                        span.innerHTML = "No Data, double click icon to go back";
+                        File_or_Folder.className = "fa-solid fa-empty-set";
+    
+                        File_or_Folder.addEventListener( 'dblclick', ( event ) => {
+    
+                            location.reload( event.target.id );
+    
+                        }); No_Data = true;
+    
+                    } else {
+    
+                        if ( Data[ b ][ 0 ].toLowerCase().includes( "drive" ) ) {
+    
+                            File_or_Folder.className = 'fa-duotone fa-hard-drive';
+    
+                        }; span.innerHTML = Data[ b ][ 0 ].toString();
+    
+                    }; File_or_Folder.appendChild( span );
+                    
+                    File_or_Folder.addEventListener( 'click', ( event ) => {
+    
+                        Location_Folder( event.target.id );
     
                     });
+                    
+                    if ( ! ( No_Data ) ) {
+    
+                        File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+    
+                            Open_Dialog_Box( event.target.id );
+        
+                        });
+    
+                    };
+                
+                } else if ( typeof( Data[ b ] ) === 'object' ) {
+                    
+                    File_or_Folder.className = 'fa-solid fa-file';
+                    
+                    var span = document.createElement( 'span' );
+    
+                    if ( Data[ b ][ 'Name' ] == undefined ) { // Doubt on its Looping of evry file...
+    
+                        span.innerHTML = "No Data, double click icon to go back";
+                        File_or_Folder.className="fa-solid fa-empty-set";
+    
+                        File_or_Folder.addEventListener( 'dblclick', ( event ) => {
+    
+                            location.reload( event.target.id );
+    
+                        }); No_Data = true;
+    
+                    } else {
+    
+                        span.innerHTML = Data[ b ][ 'Name' ].toString();
+                        File_or_Folder.id = b;
+    
+                    }; File_or_Folder.appendChild( span );
+    
+                    if ( ! ( No_Data ) ) {
+    
+                        File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+    
+                            Open_Dialog_Box( event.target.id );
+        
+                        });
+    
+                    };
+                
+                } else { Name_Data = false; };
+                
+                if ( Name_Data === true ) { document.body.appendChild( File_or_Folder ); };
 
-                };
-            
-            } else { Name_Data = false; };
-            
-            if ( Name_Data === true ) { document.body.appendChild( File_or_Folder ); };
+            };
 
         };
 
@@ -192,87 +228,121 @@ function List_Data() {
 
             var File_or_Folder = null;
 
-            File_or_Folder = document.createElement( 'i' );
-            
-            if ( Array.isArray( Data[ b ] ) ) {
+            if ( view == 'normal' ) {
+
+                if ( typeof( Data[ b ] ) === 'object' ) {
                 
-                File_or_Folder.className = 'fa-solid fa-folders';
-                File_or_Folder.id = b;
-                
-                var span = document.createElement( 'span' );
+                    if ( ! ( Array.isArray( Data[ b ] ) ) ) {
+                    
+                        if ( ! ( Data[ b ][ 'Hidden' ] == 'true' ) ) {
+                        
+                            File_or_Folder = document.createElement( 'i' );
 
-                if ( Data[ b ][ 0 ] == undefined ) {
+                            Show_Data();
 
-                    span.innerHTML = "No Data, double click icon to go back";
-                    File_or_Folder.className="fa-solid fa-empty-set";
+                        };
+                    
+                    } else {
 
-                    File_or_Folder.addEventListener( 'dblclick', ( event ) => {
+                        File_or_Folder = document.createElement( 'i' );
 
-                        location.reload( event.target.id ) ;
+                        Show_Data();
 
-                    }); No_Data = true;
-
-                } else {
-
-                    if ( Data[ b ][ 0 ].toLowerCase().includes( "drive" ) ) {
-
-                        File_or_Folder.className = 'fa-duotone fa-hard-drive';
-
-                    }; span.innerHTML = Data[ b ][ 0 ].toString();
-                
-                }; File_or_Folder.appendChild( span );
-                
-                File_or_Folder.addEventListener( 'click', ( event ) => {
-
-                    Location_Folder( event.target.id );
-
-                }); if ( ! ( No_Data ) ) {
-
-                    File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
-
-                        Open_Dialog_Box( event.target.id );
-    
-                    });
+                    };
 
                 };
+
+            } else if ( view == 'hidden' ) {
+
+                File_or_Folder = document.createElement( 'i' );
+
+                Show_Data();
+
+            };
             
-            } else if ( typeof( Data[ b ] ) === 'object' ) {
+            function Show_Data() {
+
+                if ( Array.isArray( Data[ b ] ) ) {
                 
-                File_or_Folder.className = 'fa-solid fa-file';
-                
-                var span = document.createElement( 'span' );
-
-                if ( Data[ b ][ 'Name' ] == undefined ) {
-
-                    span.innerHTML = "No Data, double click icon to go back";
-                    File_or_Folder.className="fa-solid fa-empty-set";
-
-                    File_or_Folder.addEventListener( 'dblclick', ( event ) => {
-
-                        location.reload(event.target.id);
-
-                    }); No_Data = true;
-
-                } else {
-
-                    span.innerHTML = Data[ b ][ 'Name' ].toString();
+                    File_or_Folder.className = 'fa-solid fa-folders';
                     File_or_Folder.id = b;
-
-                }; File_or_Folder.appendChild( span );
-
-                if ( ! ( No_Data ) ) {
-
-                    File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
-
-                        Open_Dialog_Box( event.target.id );
+                    
+                    var span = document.createElement( 'span' );
     
-                    });
+                    if ( Data[ b ][ 0 ] == undefined ) {
+    
+                        span.innerHTML = "No Data, double click icon to go back";
+                        File_or_Folder.className="fa-solid fa-empty-set";
+    
+                        File_or_Folder.addEventListener( 'dblclick', ( event ) => {
+    
+                            location.reload( event.target.id ) ;
+    
+                        }); No_Data = true;
+    
+                    } else {
+    
+                        if ( Data[ b ][ 0 ].toLowerCase().includes( "drive" ) ) {
+    
+                            File_or_Folder.className = 'fa-duotone fa-hard-drive';
+    
+                        }; span.innerHTML = Data[ b ][ 0 ].toString();
+                    
+                    }; File_or_Folder.appendChild( span );
+                    
+                    File_or_Folder.addEventListener( 'click', ( event ) => {
+    
+                        Location_Folder( event.target.id );
+    
+                    }); if ( ! ( No_Data ) ) {
+    
+                        File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+    
+                            Open_Dialog_Box( event.target.id );
+        
+                        });
+    
+                    };
+                
+                } else if ( typeof( Data[ b ] ) === 'object' ) {
+                    
+                    File_or_Folder.className = 'fa-solid fa-file';
+                    
+                    var span = document.createElement( 'span' );
+    
+                    if ( Data[ b ][ 'Name' ] == undefined ) {
+    
+                        span.innerHTML = "No Data, double click icon to go back";
+                        File_or_Folder.className="fa-solid fa-empty-set";
+    
+                        File_or_Folder.addEventListener( 'dblclick', ( event ) => {
+    
+                            location.reload(event.target.id);
+    
+                        }); No_Data = true;
+    
+                    } else {
+    
+                        span.innerHTML = Data[ b ][ 'Name' ].toString();
+                        File_or_Folder.id = b;
+    
+                    }; File_or_Folder.appendChild( span );
+    
+                    if ( ! ( No_Data ) ) {
+    
+                        File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+    
+                            Open_Dialog_Box( event.target.id );
+        
+                        });
+    
+                    };
+                
+                } else { Name_Data = false; };
+    
+                if ( Name_Data === true ) { document.body.appendChild( File_or_Folder ); };
 
-                };
-            
-            } else { Name_Data = false; };
-
-            if ( Name_Data === true ) { document.body.appendChild( File_or_Folder ); };
+            };
 
         };
 
@@ -282,7 +352,7 @@ function List_Data() {
 
         let Dialog_Box = document.createElement( 'div' );
         Dialog_Box.style.width = '76vw';
-        Dialog_Box.style.height = '76vh';
+        Dialog_Box.style.height = '60vh';
         Dialog_Box.style.position = 'absolute';
         Dialog_Box.style.left = '10vw';
         Dialog_Box.style.top = '10vh';
@@ -296,7 +366,7 @@ function List_Data() {
         Dialog_Box.style.borderWidth = '10px';
         Dialog_Box.style.paddingLeft = '2vw';
         Dialog_Box.style.paddingRight = '2vw';
-        Dialog_Box.style.paddingTop = '2vh';
+        Dialog_Box.style.paddingTop = '10vh';
         Dialog_Box.style.paddingBottom = '2vh';
 
         Dialog_Box.addEventListener( 'dblclick', () => {
@@ -324,11 +394,6 @@ function List_Data() {
             sessionStorage.setItem( 'Files', Overall_Files );
 
         };
-
-        Create_Option( Dialog_Box, 'Rename File/Folder', Rename_Objects );
-        Create_Option( Dialog_Box, 'Delete File/Folder', Delete_Objects );
-        Create_Option( Dialog_Box, 'Copy This File/Folder to...', () => { Copy_Data( 'Copy' ); });
-        Create_Option( Dialog_Box, 'Move This File/Folder to...', Move_Data );
         
         const check = JSON.parse( sessionStorage.getItem( 'Files_User_Data' ) );
         
@@ -336,13 +401,35 @@ function List_Data() {
 
             if ( ! ( check[ id ][ 0 ].toLowerCase().includes( 'drive' ) ) ) {
 
-                Create_Option( Dialog_Box, 'Edit Properties of File/Folder', () => { Property_Panel( 'Folder' ); });
+                Create_Option( Dialog_Box, 'Rename This Folder', Rename_Objects );
+                Create_Option( Dialog_Box, 'Delete This Folder', Delete_Objects );
+
+                Create_Option( Dialog_Box, 'Copy This Folder to a New Location', () => { Copy_Data( 'Copy' ); });
+                Create_Option( Dialog_Box, 'Move This Folder to a New Location', Move_Data );
                 
+                Create_Option( Dialog_Box, 'Edit Properties of This Folder', () => { Property_Panel( 'Folder' ); });
+                
+            } else {
+
+                Create_Option( Dialog_Box, 'Rename This Drive', Rename_Objects );
+
+                Create_Option( Dialog_Box, 'Edit Properties of This Drive', () => { Property_Panel( 'Drive' ); });
+
+                Dialog_Box.style.height = '16vh';
+                Dialog_Box.style.paddingTop = '10vh';
+                Dialog_Box.style.top = '35vh';
+
             };
             
         } else if ( typeof( check[ id ] ) === 'object' ) {
 
-            Create_Option( Dialog_Box, 'Edit Properties of File/Folder', () => { Property_Panel( 'File' ); });
+            Create_Option( Dialog_Box, 'Rename This File', Rename_Objects );
+            Create_Option( Dialog_Box, 'Delete This File', Delete_Objects );
+
+            Create_Option( Dialog_Box, 'Copy This File to a New Location', () => { Copy_Data( 'Copy' ); });
+            Create_Option( Dialog_Box, 'Move This File to a New Location', Move_Data );
+
+            Create_Option( Dialog_Box, 'Edit Properties of This File', () => { Property_Panel( 'File' ); });
 
         };
         
@@ -508,12 +595,6 @@ function List_Data() {
 
             if ( Array.isArray( Data ) ) {
 
-                if ( Data[ 0 ].toString().toLowerCase().includes( 'drive' ) ) {
-
-                    return alert( 'You cannot Delete a Drive... To do so go to Disk Management ! ' );
-
-                };
-
                 var Sure = confirm( 'Are you Sure to Permanently Delete this Folder ?' + '\n'
                 + '\n' + '( Note : You Cannot be able to backup this Folder again and All ' +
                 'your sub folders and files in it will be Permanently Deleted ! )' + '\n' );
@@ -525,7 +606,7 @@ function List_Data() {
                     alert( 'The Folder Successfully Deleted ! ' );
 
                     document.body.removeChild( Dialog_Box );
-                    Dialog_Box.remove(); return tasks = 0;
+                    Dialog_Box.remove(); tasks = 0;
 
                     return Data_Verification();
 
@@ -543,7 +624,7 @@ function List_Data() {
                     alert( 'The File Successfully Deleted ! ' );
 
                     document.body.removeChild( Dialog_Box );
-                    Dialog_Box.remove(); return tasks = 0;
+                    Dialog_Box.remove(); tasks = 0;
 
                     return Data_Verification();
 
@@ -700,7 +781,7 @@ function List_Data() {
                     alert( 'The File/Folder Copied Successfully 👍' );
 
                     document.body.removeChild( Dialog_Box );
-                    Dialog_Box.remove(); return tasks = 0;
+                    Dialog_Box.remove(); tasks = 0;
 
                     return Data_Verification();
 
@@ -740,7 +821,7 @@ function List_Data() {
                 alert( 'The File/Folder Moved Successfully 👍' );
 
                 document.body.removeChild( Dialog_Box );
-                Dialog_Box.remove(); return tasks = 0;
+                Dialog_Box.remove(); tasks = 0;
 
                 return Data_Verification();
 
@@ -752,7 +833,7 @@ function List_Data() {
 
             document.body.appendChild( Properties_Panel );
 
-            document.body.removeChild( Dialog_Box ); Dialog_Box.remove(); return tasks = 0;
+            document.body.removeChild( Dialog_Box ); Dialog_Box.remove();
 
             var Remove_Extra_Clone = Properties_Panel.childNodes;
 
@@ -768,15 +849,28 @@ function List_Data() {
             
             if ( data_set_type == 'File' ) {
 
-                Create_Option( Properties_Panel, 'File Name : ' + Data[ 'Name' ], () => {
+                Create_Option( Properties_Panel, 'File Name : ' + Data[ 'Name' ], () => {});
+                Create_Option( Properties_Panel, 'File Extention : ' + Data[ 'Extention' ], () => {});
 
-                    return alert( 'How there you touch Me ! ' );
-
-                });
+                Create_Option(
+                    
+                    Properties_Panel, 'File Full Name : ' + Data[ 'Name' ] + '.' + Data[ 'Extention' ],
+                    () => {}
+                    
+                );
 
                 var check_box = document.createElement( 'input' );
                 check_box.type = 'checkbox';
-                check_box.checked = false;
+                
+                if ( Data[ 'Hidden' ] == 'true' ) {
+
+                    check_box.checked = true;
+
+                } else {
+
+                    check_box.checked = false;
+
+                };
 
                 check_box.style.marginLeft = '35px';
                 check_box.style.width = '20px';
@@ -799,23 +893,84 @@ function List_Data() {
 
             } else if ( data_set_type == 'Folder' ) {
 
-                Create_Option( Properties_Panel, 'Folder Name : ' + Data[ 0 ], () => {
+                Create_Option( Properties_Panel, 'Folder Name : ' + Data[ 0 ], () => {});
 
-                    return alert( 'How to touch Me ? ' );
-                    
-                });
+            } else if (data_set_type == 'Drive' ) {
+
+                Properties_Panel.style.height = '60vh';
+                Properties_Panel.style.top = '10vh';
+
+                Create_Option( Properties_Panel, 'Drive Name : ' + Data[ 0 ], () => {});
 
             } else {
 
                 alert( 'Sorry ! An Unexpected Error Occured...' );
 
                 document.body.removeChild( Properties_Panel );
-
-                return Properties_Panel.remove();
+                Properties_Panel.remove(); return tasks = 0;
 
             }; setTimeout( () => {
 
                 Create_Option( Properties_Panel, 'Close ❌', () => {
+
+                    if ( data_set_type == 'File' ) {
+
+                        if ( check_box.checked == true ) {
+
+                            if ( ! ( Data[ 'Hidden' ] == 'true' ) ) {
+
+                                return Apply_Hidden_File_Changes( 'true' );
+
+                            };
+
+                        } else {
+
+                            if ( ! ( Data[ 'Hidden' ] == 'false' ) ) {
+
+                                return Apply_Hidden_File_Changes( 'false' );
+
+                            };
+
+                        };
+
+                        function Apply_Hidden_File_Changes( change ) {
+
+                            const Current_Location = JSON.parse(
+                                    
+                                sessionStorage.getItem( 'Files_Current_Folder_location' )
+                                
+                            );
+
+                            const imported_data = Extract_Current_User_Details();
+                            var Overall_Files = imported_data[ 1 ];
+
+                            var User_Files = Overall_Files[ imported_data[ 0 ] ][ 'Data' ];
+                            User_Files = Database.Json.Files_Method( User_Files );
+                            User_Files = JSON.parse( User_Files );
+
+                            var File_to_Update = User_Files;
+
+                            for ( var b = 0; b < Current_Location.length; b++ ) {
+
+                                File_to_Update = File_to_Update[ Current_Location[ b ] ];
+
+                            }; Data[ 'Hidden' ] = change;
+
+                            File_to_Update[ id ] = Data;
+
+                            User_Files = JSON.stringify( User_Files );
+                            User_Files = Database.Json.Files_Method( User_Files );
+
+                            Update_Services( User_Files );
+
+                            document.body.removeChild( Properties_Panel );
+                            Properties_Panel.remove();
+
+                            return Data_Verification();
+
+                        };
+                    
+                    };
 
                     document.body.removeChild( Properties_Panel );
                     Properties_Panel.remove();
@@ -871,6 +1026,7 @@ function List_Data() {
 
         Create_Sub_Options( 'Create New File Here', File );
         Create_Sub_Options( 'Create New Folder Here', Folder );
+        Create_Sub_Options( 'Current View : ' + view, Change_View );
 
         function Create_Sub_Options( option, work ) {
 
@@ -951,6 +1107,14 @@ function List_Data() {
                 };
 
             };
+
+        }; function Change_View() {
+
+            if ( view == 'normal' ) { view = 'hidden'; } else { view = 'normal'; };
+
+            document.body.removeChild( Option_Box ); Option_Box.remove();
+
+            return Create_New();
 
         };
 
