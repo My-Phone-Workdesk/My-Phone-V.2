@@ -30,6 +30,7 @@ function Load_Home_Screen() {
     const settings = document.body.appendChild( document.createElement('i') );
     settings.className = "fa-solid fa-gear";
     settings.title = "Settings -- System App";
+    settings.addEventListener('click', () => { location.href = "./Apps/Settings/Settings.html"; });
 
     //CMD ( System App for Laptop, Desktop and Notepad ) ==>
 
