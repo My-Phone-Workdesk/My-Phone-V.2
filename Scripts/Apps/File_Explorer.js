@@ -100,9 +100,13 @@ function List_Data() {
                     
                     } else {
 
-                        File_or_Folder = document.createElement( 'i' );
+                        if ( ! ( Data[ b ][ 0 ][ 'Folder' ][ 'Hidden' ] == 'true' ) ) {
 
-                        Show_Data();
+                            File_or_Folder = document.createElement( 'i' );
+
+                            Show_Data();
+
+                        };
 
                     };
 
@@ -125,7 +129,7 @@ function List_Data() {
                     
                     var span = document.createElement( 'span' );
     
-                    if ( Data[ b ][ 0 ] == undefined ) {
+                    if ( Data[ b ][ 0 ][ 'Name' ] == undefined ) {
     
                         span.innerHTML = "No Data, double click icon to go back";
                         File_or_Folder.className = "fa-solid fa-empty-set";
@@ -138,11 +142,11 @@ function List_Data() {
     
                     } else {
     
-                        if ( Data[ b ][ 0 ].toLowerCase().includes( "drive" ) ) {
+                        if ( Data[ b ][ 0 ][ 'Name' ].toLowerCase().includes( "drive" ) ) {
     
                             File_or_Folder.className = 'fa-duotone fa-hard-drive';
     
-                        }; span.innerHTML = Data[ b ][ 0 ].toString();
+                        }; span.innerHTML = Data[ b ][ 0 ][ 'Name' ].toString();
     
                     }; File_or_Folder.appendChild( span );
                     
@@ -154,11 +158,31 @@ function List_Data() {
                     
                     if ( ! ( No_Data ) ) {
     
-                        File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+                        if ( Data[ b ][ 0 ][ 'Folder' ][ 'Access' ] == 'Block' ) {
+
+                            File_or_Folder.addEventListener( 'contextmenu', () => {
     
-                            Open_Dialog_Box( event.target.id );
-        
-                        });
+                                tasks = 1;
+
+                                alert( 'Your Access to this Drive is Blocked ❗ ' );
+
+                                setTimeout( () => {
+
+                                    return tasks = 0;
+
+                                },1000 );
+            
+                            });
+
+                        } else {
+
+                            File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+    
+                                Open_Dialog_Box( event.target.id );
+            
+                            });
+
+                        };
     
                     };
                 
@@ -188,11 +212,31 @@ function List_Data() {
     
                     if ( ! ( No_Data ) ) {
     
-                        File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+                        if ( Data[ b ][ 'Access' ] == 'Block' ) {
+
+                            File_or_Folder.addEventListener( 'contextmenu', () => {
     
-                            Open_Dialog_Box( event.target.id );
-        
-                        });
+                                tasks = 1;
+
+                                alert( 'Your Access to this File is Blocked ❗ ' );
+
+                                setTimeout( () => {
+
+                                    return tasks = 0;
+
+                                },1000 );
+            
+                            });
+
+                        } else {
+
+                            File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+    
+                                Open_Dialog_Box( event.target.id );
+            
+                            });
+
+                        };
     
                     };
                 
@@ -244,9 +288,13 @@ function List_Data() {
                     
                     } else {
 
-                        File_or_Folder = document.createElement( 'i' );
+                        if ( ! ( Data[ b ][ 0 ][ 'Folder' ][ 'Hidden' ] == 'true' ) ) {
 
-                        Show_Data();
+                            File_or_Folder = document.createElement( 'i' );
+
+                            Show_Data();
+
+                        };
 
                     };
 
@@ -269,7 +317,7 @@ function List_Data() {
                     
                     var span = document.createElement( 'span' );
     
-                    if ( Data[ b ][ 0 ] == undefined ) {
+                    if ( Data[ b ][ 0 ][ 'Name' ] == undefined ) {
     
                         span.innerHTML = "No Data, double click icon to go back";
                         File_or_Folder.className="fa-solid fa-empty-set";
@@ -282,11 +330,11 @@ function List_Data() {
     
                     } else {
     
-                        if ( Data[ b ][ 0 ].toLowerCase().includes( "drive" ) ) {
+                        if ( Data[ b ][ 0 ][ 'Name' ].toLowerCase().includes( "drive" ) ) {
     
                             File_or_Folder.className = 'fa-duotone fa-hard-drive';
     
-                        }; span.innerHTML = Data[ b ][ 0 ].toString();
+                        }; span.innerHTML = Data[ b ][ 0 ][ 'Name' ].toString();
                     
                     }; File_or_Folder.appendChild( span );
                     
@@ -295,12 +343,32 @@ function List_Data() {
                         Location_Folder( event.target.id );
     
                     }); if ( ! ( No_Data ) ) {
+
+                        if ( Data[ b ][ 0 ][ 'Folder' ][ 'Access' ] == 'Block' ) {
+
+                            File_or_Folder.addEventListener( 'contextmenu', () => {
     
-                        File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+                                tasks = 1;
+
+                                alert( 'Your Access to this Folder is Blocked ❗ ' );
+
+                                setTimeout( () => {
+
+                                    return tasks = 0;
+
+                                },1000 );
+            
+                            });
+
+                        } else {
+
+                            File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
     
-                            Open_Dialog_Box( event.target.id );
-        
-                        });
+                                Open_Dialog_Box( event.target.id );
+            
+                            });
+
+                        };
     
                     };
                 
@@ -330,11 +398,31 @@ function List_Data() {
     
                     if ( ! ( No_Data ) ) {
     
-                        File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+                        if ( Data[ b ][ 'Access' ] == 'Block' ) {
+
+                            File_or_Folder.addEventListener( 'contextmenu', () => {
     
-                            Open_Dialog_Box( event.target.id );
-        
-                        });
+                                tasks = 1;
+
+                                alert( 'Your Access to this File is Blocked ❗ ' );
+
+                                setTimeout( () => {
+
+                                    return tasks = 0;
+
+                                },1000 );
+            
+                            });
+
+                        } else {
+
+                            File_or_Folder.addEventListener( 'contextmenu', ( event ) => {
+    
+                                Open_Dialog_Box( event.target.id );
+            
+                            });
+
+                        };
     
                     };
                 
@@ -399,7 +487,7 @@ function List_Data() {
         
         if ( Array.isArray( check[ id ] ) ) {
 
-            if ( ! ( check[ id ][ 0 ].toLowerCase().includes( 'drive' ) ) ) {
+            if ( ! ( check[ id ][ 0 ][ 'Name' ].toLowerCase().includes( 'drive' ) ) ) {
 
                 Create_Option( Dialog_Box, 'Rename This Folder', Rename_Objects );
                 Create_Option( Dialog_Box, 'Delete This Folder', Delete_Objects );
@@ -442,7 +530,7 @@ function List_Data() {
 
             if ( Array.isArray( Data ) ) {
 
-                if ( Data[ 0 ].toLowerCase().includes( 'drive' ) ) {
+                if ( Data[ 0 ][ 'Name' ].toLowerCase().includes( 'drive' ) ) {
 
                     var new_name; do { new_name = prompt( 'Rename this Drive as...' );
 
@@ -459,15 +547,15 @@ function List_Data() {
 
                     for ( var a = 0; a < Old_Data.length; a++ ) {
 
-                        if ( Old_Data[ a ][ 0 ].toLowerCase().includes( 'drive' ) ) {
+                        if ( Old_Data[ a ][ 0 ][ 'Name' ].toLowerCase().includes( 'drive' ) ) {
 
-                            if ( Old_Data[ a ][ 0 ].slice( -2, -1 ).toLowerCase() == new_name.toLowerCase() )
+                            if ( Old_Data[ a ][ 0 ][ 'Name' ].slice( -2, -1 ).toLowerCase() == new_name.toLowerCase() )
                             
                             { return alert( 'This Drive already exists...' ); };
 
                         };
 
-                    }; Old_Data[ id ][ 0 ] = 'Drive ' + new_name + ':';
+                    }; Old_Data[ id ][ 0 ][ 'Name' ] = 'Drive ' + new_name + ':';
 
                     Old_Data = JSON.stringify( Old_Data );
 
@@ -498,13 +586,13 @@ function List_Data() {
 
                             if ( Array.isArray( Old_Data[ a ] ) ) {
     
-                                if ( Old_Data[ a ][ 0 ].toLowerCase() == new_name.toLowerCase() )
+                                if ( Old_Data[ a ][ 0 ][ 'Name' ].toLowerCase() == new_name.toLowerCase() )
                                 
                                 { return alert( 'The Folder with this name already exists...' ); };
     
                             };
     
-                        }; Old_Data[ id ][ 0 ] = new_name;
+                        }; Old_Data[ id ][ 0 ][ 'Name' ] = new_name;
 
                         Old_Data = JSON.stringify( Old_Data );
                         
@@ -704,7 +792,8 @@ function List_Data() {
 
                                 if (
 
-                                    current_location[b][0].toLowerCase() == read_location[a].toLowerCase()
+                                    current_location[ b ][ 0 ][ 'Name' ].toLowerCase()
+                                    == read_location[a].toLowerCase()
 
                                 ) {
 
@@ -722,13 +811,15 @@ function List_Data() {
 
                         } else {
 
-                            return alert( 'You cannot Move a File/Folder into a File...!!!' );
+                            alert( 'You cannot Move a File/Folder into a File...!!!' );
+
+                            return null;
 
                         };
 
                     }; if ( found_status == false ) {
 
-                        return alert( 'This Location is not Found !' );
+                        alert( 'This Location is not Found !' ); return null;
 
                     };
 
@@ -757,7 +848,7 @@ function List_Data() {
 
                         if ( Array.isArray( user_data[ e ] ) ) {
 
-                            if ( user_data[ e ][ 0 ].toLowerCase() == read_location[ d ].toLowerCase() ) {
+                            if ( user_data[ e ][ 0 ][ 'Name' ].toLowerCase() == read_location[ d ].toLowerCase() ) {
 
                                 user_data = user_data[ e ];
 
@@ -789,7 +880,9 @@ function List_Data() {
 
             } else {
 
-                return alert( 'The Location is not Formatted... It should be formatted before use !!' );
+                alert( 'The Location is not Formatted... It should be formatted before use !!' );
+
+                return null;
 
             };
 
@@ -862,15 +955,8 @@ function List_Data() {
                 var check_box = document.createElement( 'input' );
                 check_box.type = 'checkbox';
                 
-                if ( Data[ 'Hidden' ] == 'true' ) {
-
-                    check_box.checked = true;
-
-                } else {
-
-                    check_box.checked = false;
-
-                };
+                if ( Data[ 'Hidden' ] == 'true' ) { check_box.checked = true; }
+                else { check_box.checked = false; };
 
                 check_box.style.marginLeft = '35px';
                 check_box.style.width = '20px';
@@ -879,28 +965,152 @@ function List_Data() {
 
                 var hidden = Create_Option( Properties_Panel, 'Hidden File', () => {
 
-                    if ( check_box.checked == true ) {
-
-                        check_box.checked = false;
-
-                    } else {
-
-                        check_box.checked = true;
-
-                    };
+                    if ( check_box.checked == true ) { check_box.checked = false; }
+                    else { check_box.checked = true; };
 
                 }); hidden.appendChild( check_box );
 
+                var Access = Create_Option( Properties_Panel, 'Access : ' + Data[ 'Access' ], () => {
+
+                    const Are_you_Sure = confirm(
+
+                        '\n' + 'Are you Sure to Block this File ?' + '\n' + '\n' +
+                        'You will be never able to unBlock / Allow it again...' + '\n' + '\n' +
+                        'Means you cannot be able to access this File Again ! ' + '\n'
+
+                    );
+
+                    if ( Are_you_Sure ) {
+
+                        Access.innerHTML = 'Access : Block';
+
+                        const imported_data = Extract_Current_User_Details();
+                        var Overall_Files = imported_data[ 1 ];
+                        var User_Files = Overall_Files[ imported_data[ 0 ] ][ 'Data' ];
+                        User_Files = Database.Json.Files_Method( User_Files );
+                        User_Files = JSON.parse( User_Files );
+
+                        var change_access = User_Files;
+
+                        const Current_Location = JSON.parse(
+                            
+                            sessionStorage.getItem( 'Files_Current_Folder_location' )
+                            
+                        );
+
+                        Data[ 'Access' ] = 'Block';
+
+                        for ( var b = 0; b < Current_Location.length; b++ ) {
+
+                            change_access = change_access[ Current_Location[ b ] ];
+                            
+                        }; change_access[ id ] = Data;
+
+                        User_Files = JSON.stringify( User_Files );
+                        User_Files = Database.Json.Files_Method( User_Files );
+
+                        Update_Services( User_Files );
+
+                        setTimeout( () => {
+
+                            document.body.removeChild( Properties_Panel );
+                            Properties_Panel.remove(); tasks = 0;
+
+                            return Data_Verification();
+
+                        },1000 );
+
+                    } else { return null; };
+
+                });
+
             } else if ( data_set_type == 'Folder' ) {
 
-                Create_Option( Properties_Panel, 'Folder Name : ' + Data[ 0 ], () => {});
+                Properties_Panel.style.height = '40vh';
+                Properties_Panel.style.top = '20vh';
+
+                Create_Option( Properties_Panel, 'Folder Name : ' + Data[ 0 ][ 'Name' ], () => {});
+
+                var tick_box = document.createElement( 'input' );
+                tick_box.type = 'checkbox';
+
+                if ( Data[ 0 ][ 'Folder' ][ 'Hidden' ] == 'true' ) { tick_box.checked = true; }
+                else { tick_box.checked = false; };
+
+                tick_box.style.marginLeft = '35px';
+                tick_box.style.width = '20px';
+                tick_box.style.height = '20px';
+                tick_box.style.marginBottom = '20px';
+
+                var hidden_folder = Create_Option( Properties_Panel, 'Hidden Folder', () => {
+
+                    if ( tick_box.checked == true ) { tick_box.checked = false; }
+                    else { tick_box.checked = true; };
+
+                }); hidden_folder.appendChild( tick_box );
+
+                var Access = Create_Option( Properties_Panel, 'Access : ' + Data[ 0 ][ 'Folder' ][ 'Access' ],
+                
+                () => {
+
+                    const Are_you_Sure = confirm(
+
+                        '\n' + 'Are you Sure to Block this Folder ?' + '\n' + '\n' +
+                        'You will be never able to unBlock / Allow it again...' + '\n' + '\n' +
+                        'Means you cannot be able to access this Folder Again ! ' + '\n'
+
+                    );
+
+                    if ( Are_you_Sure ) {
+
+                        Access.innerHTML = 'Access : Block';
+
+                        const imported_data = Extract_Current_User_Details();
+                        var Overall_Files = imported_data[ 1 ];
+                        var User_Files = Overall_Files[ imported_data[ 0 ] ][ 'Data' ];
+                        User_Files = Database.Json.Files_Method( User_Files );
+                        User_Files = JSON.parse( User_Files );
+
+                        var change_access = User_Files;
+
+                        const Current_Location = JSON.parse(
+                            
+                            sessionStorage.getItem( 'Files_Current_Folder_location' )
+                            
+                        );
+
+                        Data[ 0 ][ 'Folder' ][ 'Access' ] = 'Block';
+
+                        for ( var b = 0; b < Current_Location.length; b++ ) {
+
+                            change_access = change_access[ Current_Location[ b ] ];
+                            
+                        }; change_access[ id ] = Data;
+
+                        User_Files = JSON.stringify( User_Files );
+                        User_Files = Database.Json.Files_Method( User_Files );
+
+                        Update_Services( User_Files );
+
+                        setTimeout( () => {
+
+                            document.body.removeChild( Properties_Panel );
+                            Properties_Panel.remove(); tasks = 0;
+
+                            return Data_Verification();
+
+                        },1000 );
+
+                    } else { return null; };
+
+                });
 
             } else if (data_set_type == 'Drive' ) {
 
-                Properties_Panel.style.height = '60vh';
-                Properties_Panel.style.top = '10vh';
+                Properties_Panel.style.height = '40vh';
+                Properties_Panel.style.top = '20vh';
 
-                Create_Option( Properties_Panel, 'Drive Name : ' + Data[ 0 ], () => {});
+                Create_Option( Properties_Panel, 'Drive Name : ' + Data[ 0 ][ 'Name' ], () => {});
 
             } else {
 
@@ -970,6 +1180,63 @@ function List_Data() {
 
                         };
                     
+                    } else if ( data_set_type == 'Folder' ) {
+
+                        if ( tick_box.checked == true ) {
+
+                            if ( ! ( Data[ 0 ][ 'Folder' ][ 'Hidden' ] == 'true' ) ) {
+
+                                return Apply_Hidden_Folder_Changes( 'true' );
+
+                            };
+
+                        } else {
+
+                            if ( ! ( Data[ 0 ][ 'Folder' ][ 'Hidden' ] == 'false' ) ) {
+
+                                return Apply_Hidden_Folder_Changes( 'false' );
+
+                            };
+
+                        };
+
+                        function Apply_Hidden_Folder_Changes( change ) {
+
+                            const Current_Location = JSON.parse(
+                                    
+                                sessionStorage.getItem( 'Files_Current_Folder_location' )
+                                
+                            );
+
+                            const imported_data = Extract_Current_User_Details();
+                            var Overall_Files = imported_data[ 1 ];
+
+                            var User_Files = Overall_Files[ imported_data[ 0 ] ][ 'Data' ];
+                            User_Files = Database.Json.Files_Method( User_Files );
+                            User_Files = JSON.parse( User_Files );
+
+                            var File_to_Update = User_Files;
+
+                            for ( var b = 0; b < Current_Location.length; b++ ) {
+
+                                File_to_Update = File_to_Update[ Current_Location[ b ] ];
+
+                            }; Data[ 0 ][ 'Folder' ][ 'Hidden' ] = change;
+
+                            File_to_Update[ id ] = Data;
+
+                            User_Files = JSON.stringify( User_Files );
+                            User_Files = Database.Json.Files_Method( User_Files );
+
+                            Update_Services( User_Files );
+
+                            document.body.removeChild( Properties_Panel );
+                            Properties_Panel.remove();
+
+                            return Data_Verification();
+
+                        };
+
                     };
 
                     document.body.removeChild( Properties_Panel );
@@ -1088,9 +1355,9 @@ function List_Data() {
 
                     if ( Array.isArray( Current_Data[ b ] ) ) {
 
-                        if ( Current_Data[ b ][ 0 ].includes( 'New Folder' ) ) {
+                        if ( Current_Data[ b ][ 0 ][ 'Name' ].includes( 'New Folder' ) ) {
 
-                            if ( Current_Data[ b ][ 0 ] == 'New Folder' ) {
+                            if ( Current_Data[ b ][ 0 ][ 'Name' ] == 'New Folder' ) {
 
                                 if ( assignment_number == 0 ) {
 
