@@ -434,6 +434,77 @@ function List_Data() {
 
         };
 
+        Initialize_Back_Icon();
+
+        function Initialize_Back_Icon() {
+
+            var Back = document.createElement( 'i' );
+            document.body.appendChild( Back );
+            
+            Back.className = 'fa-duotone fa-arrow-left-long';
+            Back.style.position = 'absolute';
+            Back.style.right = '6vw';
+            Back.style.bottom = '2vh';
+            Back.style.fontSize = '15vh';
+
+            Back.addEventListener( 'click', () => {
+
+                Files_Current_Folder_location = JSON.parse( Files_Current_Folder_location );
+
+                const imported_data = Extract_Current_User_Details();
+
+                const User_Files = JSON.parse(
+
+                    Database.Json.Files_Method(
+
+                        imported_data[ 1 ][ imported_data[ 0 ] ][ 'Data' ]
+
+                    )
+
+                );
+
+                if ( Files_Current_Folder_location.length == 1 ) {
+
+                    return Data_Verification();
+
+                } else if ( Files_Current_Folder_location.length == 2 ) {
+
+                    sessionStorage.setItem( 'Files_User_Data', JSON.stringify( User_Files ) );
+
+                    var syned_location = Files_Current_Folder_location[ 0 ];
+
+                    sessionStorage.setItem( 'Files_Current_Folder_location', JSON.stringify( new Array( 0 ) ) );
+
+                    return Location_Folder( syned_location );
+
+                } else {
+
+                    const location_length = Files_Current_Folder_location.length;
+                    var syned_location = Files_Current_Folder_location[ location_length - 2 ];
+
+                    Files_Current_Folder_location.pop();
+                    Files_Current_Folder_location.pop();
+
+                    var Previous_location = User_Files;
+
+                    for ( var a = 0; a < Files_Current_Folder_location.length; a++ ) {
+
+                        Previous_location = Previous_location[ Files_Current_Folder_location[ a ] ];
+                        
+                    };
+
+                    sessionStorage.setItem( 'Files_User_Data', JSON.stringify( Previous_location ) );
+                    Files_Current_Folder_location = JSON.stringify( Files_Current_Folder_location );
+                    sessionStorage.setItem( 'Files_Current_Folder_location', Files_Current_Folder_location );
+
+                    return Location_Folder( syned_location );
+
+                };
+
+            });
+
+        };
+
     }; function Open_Dialog_Box( id ) {
 
         id = parseFloat( id ); tasks = 1;
@@ -463,25 +534,6 @@ function List_Data() {
             Dialog_Box.remove(); return tasks = 0;
 
         });
-
-        function Update_Services( Service_Data ) {
-
-            const imported_data = Extract_Current_User_Details();
-
-            const cell = Database.Json.Stringify_Column( 'Data', 'Files' ) 
-            + ( imported_data[ 0 ] + 2 );
-
-            Database.Update_Data( 'Files', cell, Service_Data );
-
-            var Overall_Files = imported_data[ 1 ];
-
-            Overall_Files[ imported_data[ 0 ] ][ 'Data' ] = Service_Data;
-
-            Overall_Files = JSON.stringify( Overall_Files );
-
-            sessionStorage.setItem( 'Files', Overall_Files );
-
-        };
         
         const check = JSON.parse( sessionStorage.getItem( 'Files_User_Data' ) );
         
@@ -970,7 +1022,7 @@ function List_Data() {
 
                 }); hidden.appendChild( check_box );
 
-                var Access = Create_Option( Properties_Panel, 'Access : ' + Data[ 'Access' ], () => {
+                var Access = Create_Option( Properties_Panel, 'Access : Allow', () => {
 
                     const Are_you_Sure = confirm(
 
@@ -1049,9 +1101,7 @@ function List_Data() {
 
                 }); hidden_folder.appendChild( tick_box );
 
-                var Access = Create_Option( Properties_Panel, 'Access : ' + Data[ 0 ][ 'Folder' ][ 'Access' ],
-                
-                () => {
+                var Access = Create_Option( Properties_Panel, 'Access : Allow', () => {
 
                     const Are_you_Sure = confirm(
 
@@ -1111,6 +1161,49 @@ function List_Data() {
                 Properties_Panel.style.top = '20vh';
 
                 Create_Option( Properties_Panel, 'Drive Name : ' + Data[ 0 ][ 'Name' ], () => {});
+
+                var Access = Create_Option( Properties_Panel, 'Access : Allow', () => {
+
+                    const Are_you_Sure = confirm(
+
+                        '\n' + 'Are you Sure to Block this Drive ?' + '\n' + '\n' +
+                        'You will be never able to unBlock / Allow it again...' + '\n' + '\n' +
+                        'Means you cannot be able to access this Drive Again ! ' + '\n'
+
+                    );
+
+                    if ( Are_you_Sure ) {
+
+                        Access.innerHTML = 'Access : Block';
+
+                        const imported_data = Extract_Current_User_Details();
+                        var Overall_Files = imported_data[ 1 ];
+                        var User_Files = Overall_Files[ imported_data[ 0 ] ][ 'Data' ];
+                        User_Files = Database.Json.Files_Method( User_Files );
+                        User_Files = JSON.parse( User_Files );
+
+                        var change_access = User_Files;
+
+                        Data[ 0 ][ 'Folder' ][ 'Access' ] = 'Block';
+                        change_access[ id ] = Data;
+
+                        User_Files = JSON.stringify( User_Files );
+                        User_Files = Database.Json.Files_Method( User_Files );
+
+                        Update_Services( User_Files );
+
+                        setTimeout( () => {
+
+                            document.body.removeChild( Properties_Panel );
+                            Properties_Panel.remove(); tasks = 0;
+
+                            return Data_Verification();
+
+                        },1000 );
+
+                    } else { return null; };
+
+                });
 
             } else {
 
@@ -1318,18 +1411,142 @@ function List_Data() {
 
         }; function File() {
 
-            return alert( 'Sorry ! Under Development... May be developed tomorrrow' );
-
-        }; function Folder() {
-
-            return alert( 'Sorry ! Under Construction... May be developed till tomorrow' );
+            const All_Extentions = [ 'txt', 'exe', 'apk', 'cmd', 'rar', 'dmd', 'bin', 'dustbin', 'sys', 'mp2' ];
 
             const Current_Location = JSON.parse( sessionStorage.getItem( 'Files_Current_Folder_location' ) );
-            const Current_Data = JSON.parse( sessionStorage.getItem( 'Files_User_Data' ) );
 
             const imported_data = Extract_Current_User_Details();
             
             var Current_User_Data = imported_data[ 1 ][ imported_data[ 0 ] ][ 'Data' ];
+            Current_User_Data = Database.Json.Files_Method( Current_User_Data );
+            Current_User_Data = JSON.parse( Current_User_Data );
+
+            if ( Current_Location.length == 0 ) {
+
+                return alert( 'Sorry ! But you cannot Create a File in the Drive Section ! ' );
+
+            } else {
+
+                var Added_Data = Current_User_Data;
+
+                for ( var a = 0; a < Current_Location.length; a++ ) {
+
+                    Added_Data = Added_Data[ Current_Location[ a ] ];
+
+                };
+
+                var new_file_name = Name_to_File();
+
+                do {
+
+                    var Extention = prompt( '\n' + 'Give an Extention to your File...' + '\n' );
+
+                    if ( Extention == null ) {
+
+                        return alert( 'Your File is not Created has you cancelled it ! ' );
+
+                    };
+
+                } while ( All_Extentions.indexOf( Extention.toLowerCase() ) == -1 );
+
+                if ( Array.isArray( new_file_name ) ) {
+
+                    new_file_name = new_file_name[ 0 ];
+
+                } else { return null; };
+
+                const new_file = {
+
+                    Name : new_file_name,
+                    Extention : Extention.toLowerCase(),
+                    Hidden : 'false',
+                    Access : 'Allow',
+
+                };
+
+                Added_Data.push( new_file );
+
+                Current_User_Data = JSON.stringify( Current_User_Data );
+                Current_User_Data = Database.Json.Files_Method( Current_User_Data );
+
+                Update_Services( Current_User_Data );
+
+                setTimeout( () => {
+
+                    return Data_Verification();
+
+                },1000 );
+
+                function Name_to_File() {
+
+                    const new_file_name = prompt(
+
+                        '\n' + "What will be your New File's Name ? " + '\n',
+    
+                        'New File'
+    
+                    );
+
+                    if ( new_file_name == null ) { return null; };
+    
+                    const Current_Data = JSON.parse( sessionStorage.getItem( 'Files_User_Data' ) );
+                    
+                    for ( var b = 0; b < Current_Data.length; b++ ) {
+    
+                        if ( Array.isArray( Current_Data[ b ] ) ) {
+    
+                            if (
+                                
+                                Current_Data[ b ][ 0 ][ 'Name' ].toLowerCase() == new_file_name.toLowerCase()
+                                
+                            ) {
+    
+                                alert( 'A Folder with the name "' + new_file_name + '" already exists ! ' );
+
+                                return Name_to_File();
+    
+                            };
+    
+                        } else if ( typeof( Current_Data[ b ] ) === 'object' ) {
+
+                            if (
+                                
+                                Current_Data[ b ][ 'Name' ].toLowerCase() == new_file_name.toLowerCase()
+                                
+                            ) {
+
+                                alert( 'The File with the name "' + new_file_name + '" already exists ! ' );
+
+                                return Name_to_File();
+
+                            };
+
+                        } else {
+
+                            return alert(
+                                
+                                '\n' + 'Sorry ! This Location has an corrupted File / Folder...' +
+                                '\n' + '\n' + 'Please Check and Try Again ! '
+                                
+                            );
+
+                        };
+    
+                    }; return [ new_file_name ];
+
+                };
+
+            };
+
+        }; function Folder() {
+
+            const Current_Location = JSON.parse( sessionStorage.getItem( 'Files_Current_Folder_location' ) );
+
+            const imported_data = Extract_Current_User_Details();
+            
+            var Current_User_Data = imported_data[ 1 ][ imported_data[ 0 ] ][ 'Data' ];
+            Current_User_Data = Database.Json.Files_Method( Current_User_Data );
+            Current_User_Data = JSON.parse( Current_User_Data );
 
             if ( Current_Location.length == 0 ) {
 
@@ -1343,33 +1560,104 @@ function List_Data() {
 
                     Added_Data = Added_Data[ Current_Location[ a ] ];
 
-                }; const new_folder_name = prompt(
+                };
 
-                    '\n' + "What will be your New Folder's Name ? " + '\n',
+                var new_folder_name = Name_to_Folder();
 
-                    'New Folder'
+                if ( Array.isArray( new_folder_name ) ) {
 
-                );
-                
-                for ( var b = 0; b < Current_Data.length; b++ ) {
+                    new_folder_name = new_folder_name[ 0 ];
 
-                    if ( Array.isArray( Current_Data[ b ] ) ) {
+                } else { return null; };
 
-                        if ( Current_Data[ b ][ 0 ][ 'Name' ].includes( 'New Folder' ) ) {
+                const new_folder = [
 
-                            if ( Current_Data[ b ][ 0 ][ 'Name' ] == 'New Folder' ) {
+                    {
 
-                                if ( assignment_number == 0 ) {
+                        Name : new_folder_name,
+                        Extention : 'folder',
+                        Hidden : 'true',
+                        Access : 'Block',
+                        Folder : {
 
-                                    assignment_number = 1;
+                            Access : 'Allow',
+                            Hidden : 'false'
 
-                                };
+                        }
 
-                            } else {};
+                    }
+
+                ];
+
+                Added_Data.push( new_folder );
+
+                Current_User_Data = JSON.stringify( Current_User_Data );
+                Current_User_Data = Database.Json.Files_Method( Current_User_Data );
+
+                Update_Services( Current_User_Data );
+
+                setTimeout( () => {
+
+                    return Data_Verification();
+
+                },1000 );
+
+                function Name_to_Folder() {
+
+                    const new_folder_name = prompt(
+
+                        '\n' + "What will be your New Folder's Name ? " + '\n',
+    
+                        'New Folder'
+    
+                    );
+
+                    if ( new_folder_name == null ) { return null; };
+    
+                    const Current_Data = JSON.parse( sessionStorage.getItem( 'Files_User_Data' ) );
+                    
+                    for ( var b = 0; b < Current_Data.length; b++ ) {
+    
+                        if ( Array.isArray( Current_Data[ b ] ) ) {
+    
+                            if (
+                                
+                                Current_Data[ b ][ 0 ][ 'Name' ].toLowerCase() == new_folder_name.toLowerCase()
+                                
+                            ) {
+    
+                                alert( 'The Folder with the name "' + new_folder_name + '" already exists ! ' );
+
+                                return Name_to_Folder();
+    
+                            };
+    
+                        } else if ( typeof( Current_Data[ b ] ) === 'object' ) {
+
+                            if (
+                                
+                                Current_Data[ b ][ 'Name' ].toLowerCase() == new_folder_name.toLowerCase()
+                                
+                            ) {
+
+                                alert( 'A File with the name "' + new_folder_name + '" already exists ! ' );
+
+                                return Name_to_Folder();
+
+                            };
+
+                        } else {
+
+                            return alert(
+                                
+                                '\n' + 'Sorry ! This Location has an corrupted File / Folder...' +
+                                '\n' + '\n' + 'Please Check and Try Again ! '
+                                
+                            );
 
                         };
-
-                    };
+    
+                    }; return [ new_folder_name ];
 
                 };
 
@@ -1398,6 +1686,23 @@ function List_Data() {
         };
 
         return [ All_Usernames.indexOf( User ), Overall_Files ];
+
+    }; function Update_Services( Service_Data ) {
+
+        const imported_data = Extract_Current_User_Details();
+
+        const cell = Database.Json.Stringify_Column( 'Data', 'Files' ) 
+        + ( imported_data[ 0 ] + 2 );
+
+        Database.Update_Data( 'Files', cell, Service_Data );
+
+        var Overall_Files = imported_data[ 1 ];
+
+        Overall_Files[ imported_data[ 0 ] ][ 'Data' ] = Service_Data;
+
+        Overall_Files = JSON.stringify( Overall_Files );
+
+        sessionStorage.setItem( 'Files', Overall_Files );
 
     };
 
