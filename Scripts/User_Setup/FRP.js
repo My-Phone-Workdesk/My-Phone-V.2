@@ -136,73 +136,82 @@ function Account() {
 function Finish() {
 
     const Default_Storage = [
-        
-        [
+
+        {
+
+            Name:'Drive C:',
+            Extention:'folder',
+            Access:'Block',
+            Hidden:'true',
+            Folder:{
+
+                Access:'Allow',
+                Hidden:'false'
+
+            }
+
+        }, [
+
+            {
+
+                Name:'System Apps',
+                Extention:'folder',
+                Access:'Block',
+                Hidden:'true',
+                Folder:{
+
+                    Access:'Block',
+                    Hidden:'true'
+
+                }
+
+            }, {
+
+                Name:'Play Store',
+                Extention:'sys',
+                Access:'Block',
+                Hidden:'true'
+
+            }, {
+
+                Name:'Settings',
+                Extention:'sys',
+                Access:'Block',
+                Hidden:'true'
+
+            }, {
+
+                Name:'File Manager',
+                Extention:'sys',
+                Access:'Block',
+                Hidden:'true'
+
+            }, {
+
+                Name:'CMD',
+                Extention:'sys',
+                Access:'Block',
+                Hidden:'true'
+
+            }
+
+        ], [
+
+            {
+
+                Name:'Apps',
+                Extention:'folder',
+                Access:'Block',
+                Hidden:'true',
+                Folder:{
+
+                    Access:'Block',
+                    Hidden:'true'
+
+                }
+
+            }
             
-            'Drive C:', [
-
-                {
-
-                    Name:'System Apps',
-                    Extention:'folder',
-                    Access:'Block',
-                    Hidden:'true',
-                    Folder:{
-
-                        Access:'Block',
-                        Hidden:'true'
-
-                    }
-
-                }, {
-
-                    Name:'Play Store',
-                    Extention:'sys',
-                    Access:'Block',
-                    Hidden:'true'
-
-                }, {
-
-                    Name:'Settings',
-                    Extention:'sys',
-                    Access:'Block',
-                    Hidden:'true'
-
-                }, {
-
-                    Name:'File Manager',
-                    Extention:'sys',
-                    Access:'Block',
-                    Hidden:'true'
-
-                }, {
-
-                    Name:'CMD',
-                    Extention:'sys',
-                    Access:'Block',
-                    Hidden:'true'
-
-                }
-
-            ], [
-
-                {
-
-                    Name:'Apps',
-                    Extention:'folder',
-                    Access:'Block',
-                    Hidden:'true',
-                    Folder:{
-
-                        Access:'Block',
-                        Hidden:'true'
-
-                    }
-
-                }
-                
-            ]
-    
         ]
 
     ];

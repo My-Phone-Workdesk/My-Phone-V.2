@@ -64,8 +64,6 @@ function Extract_Current_User_Details() {
 
 function Load_Home_Screen() {
 
-    const Current_User_Data = Extract_Current_User_Details();
-
     const User_ID = localStorage.getItem( 'Amount_MB' );
 
     var User_Data = sessionStorage.getItem( 'Data' );
@@ -121,4 +119,73 @@ function Load_Home_Screen() {
 
     File_Explorer.addEventListener( 'click', List_Data );
 
+    return User_Installed_Apps();
+
 };
+
+function User_Installed_Apps() {
+
+    const Current_User_Data = Extract_Current_User_Details();
+
+    const Installed_Apps = Current_User_Data[ 0 ][ 3 ];
+
+    for ( var a = 1; a < Installed_Apps.length; a++ ) {
+
+        const app = document.body.appendChild( document.createElement( 'i' ) );
+        app.className = Installed_Apps[ a ][ 'Data' ][ 'icon' ];
+        app.title = Installed_Apps[ a ][ 'Name' ] + ' -- Local App';
+        app.id = a;
+
+        app.addEventListener( 'click', ( event ) => {
+
+            var open_ai = sessionStorage.getItem( 'Current_User_Data' );
+            open_ai = JSON.parse( open_ai );
+
+            var chat_gpt = open_ai[ 0 ][ 3 ][ event.target.id ][ 'Data' ][ 'Script' ];
+            chat_gpt = chat_gpt.toString();
+            chat_gpt = Database.Json.Files_Method( chat_gpt );
+
+            chat_gpt = chat_gpt.split( ',' );
+
+            return Open_App( chat_gpt );
+
+        });
+
+    };
+
+};
+
+function Open_App( app_script ) {
+
+    if ( ! ( Array.isArray( app_script ) ) ) {
+
+        return alert(
+            
+            '\n' + 'The Script is not coded Well...' + '\n' + '\n' + 'I Think the Coder is Mad Enough to' +
+            ' code an app... 😅 May be the Coder is so much selfish ! ' + '\n'
+            
+        );
+
+    };
+
+    document.body.innerHTML = '';
+
+    for ( var a = 0; a < app_script.length; a++ ) {
+
+        Run_Script( app_script[ a ] );
+
+    };
+
+};
+
+function Run_Script( code ) {
+
+    console.log( code );
+
+    document.open();
+    document.body.innerHTML += '<br>' + code;
+    return document.close();
+
+};
+
+// Uner Construction 😡
