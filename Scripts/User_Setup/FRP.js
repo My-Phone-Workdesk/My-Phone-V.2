@@ -141,36 +141,66 @@ function Finish() {
             
             'Drive C:', [
 
-                'Apps Data', {
+                {
+
+                    Name:'System Apps',
+                    Extention:'folder',
+                    Access:'Block',
+                    Hidden:'true',
+                    Folder:{
+
+                        Access:'Block',
+                        Hidden:'true'
+
+                    }
+
+                }, {
 
                     Name:'Play Store',
-                    Size:'100 MB',
-                    Data:'https://system_app.cmd/Play_Store.code',
-                    File_extention:'.exe'
+                    Extention:'sys',
+                    Access:'Block',
+                    Hidden:'true'
 
                 }, {
 
                     Name:'Settings',
-                    Size:'240 MB',
-                    Data:'https://system_app.cmd/Play_Store.code',
-                    File_extention:'.exe'
+                    Extention:'sys',
+                    Access:'Block',
+                    Hidden:'true'
 
                 }, {
 
                     Name:'File Manager',
-                    Size:'158 MB',
-                    Data:'https://system_app.cmd/File_Manager.code',
-                    File_extention:'.exe'
+                    Extention:'sys',
+                    Access:'Block',
+                    Hidden:'true'
 
                 }, {
 
                     Name:'CMD',
-                    Size:'580 MB',
-                    Data:'https://system_app.cmd/CMD.code',
-                    File_extention:'.exe'
+                    Extention:'sys',
+                    Access:'Block',
+                    Hidden:'true'
 
                 }
 
+            ], [
+
+                {
+
+                    Name:'Apps',
+                    Extention:'folder',
+                    Access:'Block',
+                    Hidden:'true',
+                    Folder:{
+
+                        Access:'Block',
+                        Hidden:'true'
+
+                    }
+
+                }
+                
             ]
     
         ]

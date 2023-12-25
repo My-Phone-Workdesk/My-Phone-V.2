@@ -1,4 +1,4 @@
-// Imported Functions From Database ==>
+// Imported Functions From Database and Other Services ==>
 
 import { Database } from "../../Data_Resources/Database.js";
 
@@ -1365,8 +1365,15 @@ function List_Data() {
 
         }); document.body.appendChild( Option_Box );
 
-        Create_Sub_Options( 'Create New File Here', File );
-        Create_Sub_Options( 'Create New Folder Here', Folder );
+        const Possible_Files_User_Data = JSON.parse( sessionStorage.getItem( 'Files_User_Data' ) );
+
+        if ( ! ( Possible_Files_User_Data[ 0 ][ 'Folder' ][ 'Access' ] == 'Block' ) ) {
+
+            Create_Sub_Options( 'Create New File Here', File );
+            Create_Sub_Options( 'Create New Folder Here', Folder );
+
+        };
+
         Create_Sub_Options( 'Current View : ' + view, Change_View );
 
         function Create_Sub_Options( option, work ) {

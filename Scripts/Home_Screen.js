@@ -38,7 +38,33 @@ function Get_User_Data() {
 
 };
 
+function Extract_Current_User_Details() {
+
+    const Overall_Files = JSON.parse( sessionStorage.getItem( 'Files' ) );
+
+    var All_Usernames = new Array();
+
+    for ( var a = 0; a < Overall_Files.length; a++ ) {
+        
+        All_Usernames.push( Overall_Files[ a ][ 'User' ] );
+    
+    };
+
+    const Data = JSON.parse( sessionStorage.getItem( 'Data' ) );
+    const current_user_id = parseFloat( localStorage.getItem( 'Amount_MB' ) );
+
+    var User_Data = Overall_Files[ All_Usernames.indexOf( Data[ current_user_id ][ 'User' ] ) ];
+    User_Data = Database.Json.Files_Method( User_Data[ 'Data' ] );
+
+    sessionStorage.setItem( 'Current_User_Data', User_Data );
+
+    return JSON.parse( User_Data );
+
+}; 
+
 function Load_Home_Screen() {
+
+    const Current_User_Data = Extract_Current_User_Details();
 
     const User_ID = localStorage.getItem( 'Amount_MB' );
 
