@@ -24,28 +24,9 @@ function List_Data() {
 
     var tasks = 0; var view = 'normal';
 
-    if ( sessionStorage.getItem( 'Files' ) == null ) {
+    Data_Verification();
 
-        Database.Read_Data( 'Files', 'Files' );
-
-        setTimeout( () => { Take_Cloud_Files_Data(); },1000 );
-
-    } else { Data_Verification(); };
-    
-
-    function Take_Cloud_Files_Data() {
-
-        if ( sessionStorage.getItem( 'Files' ) == null ) {
-            
-            setTimeout( () => {
-
-                return Take_Cloud_Files_Data();
-
-            },2000 );
-        
-        } else { return Data_Verification(); };
-
-    }; function Data_Verification() {
+    function Data_Verification() {
 
         document.body.style.cursor = 'Default';
 

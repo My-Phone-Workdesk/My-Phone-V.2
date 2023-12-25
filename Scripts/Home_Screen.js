@@ -1,12 +1,40 @@
 // Imported Functions From File Explorer ==>
 
+import { Database } from "../Data_Resources/Database.js";
+
 import { List_Data } from "./Apps/File_Explorer.js";
 
 // Real Script Starts from Below ==>
 
 window.onload = () => {
 
-    if ( location.pathname.includes( 'Home_Screen.html' ) ) { Load_Home_Screen(); };
+    if ( location.pathname.includes( 'Home_Screen.html' ) ) { Get_User_Data(); };
+
+};
+
+function Get_User_Data() {
+
+    if ( sessionStorage.getItem( 'Files' ) == null ) {
+
+        Database.Read_Data( 'Files', 'Files' );
+
+        setTimeout( () => { Take_Cloud_Files_Data(); },1000 );
+
+    } else { return Load_Home_Screen(); };
+
+    function Take_Cloud_Files_Data() {
+
+        if ( sessionStorage.getItem( 'Files' ) == null ) {
+            
+            setTimeout( () => {
+
+                return Take_Cloud_Files_Data();
+
+            },2000 );
+        
+        } else { return Load_Home_Screen(); };
+
+    };
 
 };
 
@@ -23,14 +51,12 @@ function Load_Home_Screen() {
     const play_store = document.body.appendChild( document.createElement('i') );
     play_store.className = "fa-brands fa-google-play";
     play_store.title = "Play Store -- System App";
-    play_store.addEventListener('click', () => { location.href = "./Apps/Play_Store/Play_Store.html"; });
 
     //Settings ( System App ) -->
 
     const settings = document.body.appendChild( document.createElement('i') );
     settings.className = "fa-solid fa-gear";
     settings.title = "Settings -- System App";
-    settings.addEventListener('click', () => { location.href = "./Apps/Settings/Settings.html"; });
 
     //CMD ( System App for Laptop, Desktop and Notepad ) ==>
 
@@ -54,6 +80,18 @@ function Load_Home_Screen() {
     File_Explorer.title = 'File Explorer -- System App';
 
     //Clicking on App Icons -->
+
+    play_store.addEventListener( 'click', () => {
+        
+        location.href = "./Apps/Play_Store/Play_Store.html";
+    
+    });
+
+    settings.addEventListener( 'click', () => {
+        
+        location.href = "./Apps/Settings/Settings.html";
+    
+    });
 
     File_Explorer.addEventListener( 'click', List_Data );
 
