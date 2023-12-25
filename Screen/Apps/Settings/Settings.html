@@ -11,22 +11,25 @@
 <body>
     <div class="settings-container">
         <div class="settings-header">
-            <i class="fa-solid fa-gear" style="font-size: 10rem;"></i>
-            <h1>Settings</h1>
+            <i class="fa-duotone fa-gear" id="icon" style="font-size: 10rem;" onclick="ToggleLightorDarkMode()"></i>
+            <h1 id="name">Settings</h1>
         </div>
         <div class="settings-options">
             <div class="option">
-                <h2>Factory Reset</h2>
-                <p>Reset your device to its factory settings.</p>
+                <i class="fa-duotone fa-clock-rotate-left"></i>
+                <h2 id="1stoptionname">‎ ‎ ‎ Factory Reset</h2>
+                <p id="1stoptiondescription">Reset your device to its factory settings.</p>
             </div>
             <div class="option">
-                <h2>Apps</h2>
-                <p>Manage your applications and settings.</p>
+                <i class="fa-duotone fa-grid"></i>
+                <h2 id="2ndoptionname">‎ ‎ ‎ Apps</h2>
+                <p id="2ndoptiondescription">Manage your applications and settings.</p>
             </div>
         </div>
     </div>
     <button onclick="location.assign('../../Home_Screen.html')" 
-    style="font-weight: 100; font-size: 2rem; position: fixed; top: 1rem; left: 1rem; border-radius: 5rem; border: 0rem; background-color: #373737; color: whitesmoke; padding: 1rem; text-align: center;"
-    class="fa-duotone fa-arrow-left-long"  id="back" onmouseover="document.getElementById('back').style.backgroundColor = '#303030'" onmouseleave="document.getElementById('back').style.backgroundColor = '#373737'"></button>
+    class="fa-duotone fa-arrow-left-long" id="back" 
+    onmouseover="document.getElementById('back').style.backgroundColor = '#303030'" 
+    onmouseleave="document.getElementById('back').style.backgroundColor = '#373737'"></button>
 </body>
 </html>
