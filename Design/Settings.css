@@ -1,5 +1,17 @@
+@font-face {
+
+    font-family: 'main';
+    
+    src: url('Product_Sans_Regular.ttf') format('embedded-opentype'), /* Internet Explorer */
+         url('Product_Sans_Regular.ttf') format('woff2'),             /* Super Modern Browsers */
+         url('Product_Sans_Regular.ttf') format('woff'),              /* Pretty Modern Browsers */
+         url('Product_Sans_Regular.ttf') format('truetype'),          /* Safari, Android, iOS */
+         url('Product_Sans_Regular.ttf') format('svg');               /* Legacy iOS */
+    
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: "main";
     margin: 0;
     padding: 0;
 }
@@ -63,4 +75,60 @@ p {
 .fa-grid, .fa-clock-rotate-left {
     font-size: 4rem;
     float: left;
+}
+
+#optionsicon {
+    float: none;
+}
+
+#resetbtn { 
+    font-size: 2rem; 
+    border-radius: 5rem; 
+    border: white 0.5rem; 
+    background-color: #373737; 
+    color: whitesmoke; 
+    padding: 1rem; 
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+b {
+    color: red;
+}
+
+.apps-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.apps-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.apps-list img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 3rem;
+}
+
+.apps-list span {
+    flex-grow: 1;
+}
+
+.uninstall-button {
+    background-color: #373737;
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 3rem;
+}
+
+.uninstall-button:hover {
+    background-color: #c9302c;
 }
