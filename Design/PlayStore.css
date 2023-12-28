@@ -20,7 +20,7 @@ body { margin: 0;padding: 0; width: 100%; height: 100%; }
 
 a { text-decoration: none; color: inherit; }
 
-img { width: 100%; height: auto; border: black solid 0.2rem; border-radius: 4rem; }
+img { width: 100%; height: 70%; border: black solid 0.2rem; border-radius: 4rem; }
 
 .fa-google-play { font-size: 2rem; letter-spacing: 2px; }
 
@@ -32,7 +32,7 @@ img { width: 100%; height: auto; border: black solid 0.2rem; border-radius: 4rem
 .header-logo { flex: 1; }
 
 .header-installedapps button { padding: 10px 20px; background-color: gray; color: white; border: none;
-    cursor: pointer; border-radius: 1rem; }
+    cursor: pointer; border-radius: 1rem; margin-right: 6px;}
 
 /* Featured Apps section styles */
 

@@ -1,6 +1,6 @@
 window.onload = () => {
 
-    if ( location.pathname.includes( 'InstalledApps.html' ) ) {
+    if ( location.pathname.includes( 'InstalledApps.html' ) || location.pathname.includes( 'OS_Store.html' )) {
 
         var Back_Button = document.getElementById( 'Back_Button' );
         
@@ -10,7 +10,11 @@ window.onload = () => {
 
         });
 
-        setTimeout( ListInstalledApps,500 );
+        if ( location.pathname.includes( 'InstalledApps.html' ) ) {
+
+            setTimeout( ListInstalledApps,100 );
+            
+        }
 
     } else if ( location.pathname.includes( 'Play_Store.html' ) ) {
 
@@ -21,6 +25,7 @@ window.onload = () => {
         var Tata_Play_Install = document.getElementById( 'Tata_Play_Install' );
         var eVote_Install = document.getElementById( 'eVote_Install' );
         var Family_Link_Install = document.getElementById( 'Family_Link_Install' );
+        var OS_Store = document.getElementById( 'OS_Store' );
 
         Installed_Apps.addEventListener( 'click', () => {
 
@@ -61,6 +66,12 @@ window.onload = () => {
         Family_Link_Install.addEventListener( 'click', () => {
 
             return RedirectToInstall('FamilyLink');
+
+        });
+
+        OS_Store.addEventListener( 'click', () => {
+
+            return window.location.assign('OS_Store.html');
 
         });
 
