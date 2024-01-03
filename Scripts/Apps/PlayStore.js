@@ -238,8 +238,6 @@ function ListInstalledApps () {
 
 async function Install () {
 
-    // Can you please explain me what is the work of await delay and time Interval here ?
-
     document.getElementById('installprogress').style.visibility = 'visible';
     document.getElementById('installpercent').style.visibility = 'visible';
 

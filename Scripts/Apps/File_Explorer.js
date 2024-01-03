@@ -428,7 +428,7 @@ function List_Data( run ) {
             
             Back.className = 'fa-duotone fa-arrow-left-long';
             Back.style.position = 'absolute';
-            Back.style.right = '6vw';
+            Back.style.right = '2vw';
             Back.style.bottom = '2vh';
             Back.style.fontSize = '15vh';
 
