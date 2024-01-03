@@ -1367,7 +1367,9 @@ function List_Data() {
 
         const Possible_Files_User_Data = JSON.parse( sessionStorage.getItem( 'Files_User_Data' ) );
 
-        if ( ! ( Possible_Files_User_Data[ 0 ][ 'Folder' ][ 'Access' ] == 'Block' ) ) {
+        console.log( Possible_Files_User_Data );
+
+        if ( ! ( Possible_Files_User_Data[ 0 ][ 0 ][ 'Folder' ][ 'Access' ] == 'Block' ) ) {
 
             Create_Sub_Options( 'Create New File Here', File );
             Create_Sub_Options( 'Create New Folder Here', Folder );

@@ -126,7 +126,6 @@ function Load_Home_Screen() {
 function User_Installed_Apps() {
 
     const Current_User_Data = Extract_Current_User_Details();
-
     const Installed_Apps = Current_User_Data[ 0 ][ 3 ];
 
     for ( var a = 1; a < Installed_Apps.length; a++ ) {
@@ -188,4 +187,4 @@ function Run_Script( code ) {
 
 };
 
-// Uner Construction 😡
+// Under Construction 😡
