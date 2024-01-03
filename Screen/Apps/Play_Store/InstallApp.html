@@ -1,29 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">    
+
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" type="text/css" href="../../../Icons/fontawesome-pro/css/all.css">
-    <title>Install App</title>
     <link rel="stylesheet" href="../../../Design/InstallApp.css">
+
     <script src="../../../Scripts/Apps/PlayStore.js" type="module"></script>
+    <title>Install App</title>
+
 </head>
-<body onload="setInfo();">
+
+<body>
+
     <div class="app-container">
+
         <div class="app-details">
+
             <img src="" alt="App Icon" id="icon">
+
             <div class="info">
+
                 <h1 id="name"></h1>
                 <p id="size"></p>
                 <p id="downloads"></p>
                 <p id="rating"></p>
+
             </div>
+
         </div>
+
         <div class="install-button">
-            <button onclick="Install();">Install</button> <br>
+
+            <button id="Install_Button"> Install </button> <br>
+
             <progress id="installprogress" value="0" max="100" style="visibility: hidden;"></progress>
             <p id="installpercent" style="visibility: hidden;"></p>
+
         </div>
+
     </div>
+
 </body>
+
 </html>

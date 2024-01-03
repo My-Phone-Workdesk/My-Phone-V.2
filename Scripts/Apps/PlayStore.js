@@ -1,6 +1,8 @@
+const pick_random = ( min, max ) => { max += 1; return Math.floor( Math.random() * ( max - min ) + min ); };
+
 window.onload = () => {
 
-    if ( location.pathname.includes( 'InstalledApps.html' ) || location.pathname.includes( 'OS_Store.html' )) {
+    if ( location.pathname.includes( 'InstalledApps.html' ) || location.pathname.includes( 'OS_Store.html' ) ) {
 
         var Back_Button = document.getElementById( 'Back_Button' );
         
@@ -35,118 +37,114 @@ window.onload = () => {
 
         iMobile_Pay_Install.addEventListener( 'click', () => {
 
-            return RedirectToInstall('iMobilePay');
+            return RedirectToInstall( 'iMobile Pay' );
 
         });
 
         PayTM_Install.addEventListener( 'click', () => {
 
-            return RedirectToInstall('PayTM');
+            return RedirectToInstall( 'PayTM' );
 
         });
 
         WhatsApp_Install.addEventListener( 'click', () => {
 
-            return RedirectToInstall('WhatsApp');
+            return RedirectToInstall( 'WhatsApp' );
 
         });
 
         Tata_Play_Install.addEventListener( 'click', () => {
 
-            return RedirectToInstall('TataPlay');
+            return RedirectToInstall( 'Tata Play' );
 
         });
 
         eVote_Install.addEventListener( 'click', () => {
 
-            return RedirectToInstall('eVote');
+            return RedirectToInstall( 'eVote' );
             
         });
 
         Family_Link_Install.addEventListener( 'click', () => {
 
-            return RedirectToInstall('FamilyLink');
+            return RedirectToInstall( 'FamilyLink' );
 
         });
 
         OS_Store.addEventListener( 'click', () => {
 
-            return window.location.assign('OS_Store.html');
+            return window.location.assign( 'OS_Store.html' );
 
         });
+
+    } else if ( location.pathname.includes( 'InstallApp.html' ) ) {
+
+        var Install_button = document.getElementById( 'Install_Button' );
+
+        Install_button.addEventListener( 'click', Install );
+
+        setInfo();
 
     };
 
 };
 
-function RedirectToInstall (AppName) {
+function RedirectToInstall ( AppName ) {
 
     var AppNames = ['iMobile Pay', 'PayTM', 'WhatsApp', 'Tata Play', 'eVote', 'Family Link'];
     var AppSizes = ['150MB', '48MB', '78.6MB', '34MB', '24MB', '185.9MB'];
     var AppDownloads = ['5CR+', '500M+', '500CR+', '5CR+', '1CR+', '100M+'];
     var AppRatings = ['4.6★', '4.6★', '4.1★', '3.7★', '3.7★', '4.5★'];
-    var AppLogos = ['https://play-lh.googleusercontent.com/Hc8vNA4SOZwg5HMnBiwJLMT3tLYll54D994uZG7GeJYBtMEa2zHk8hNywTJZqpwWTg', 
-    'https://play-lh.googleusercontent.com/6_Qan3RBgpJUj0C2ct4l0rKKVdiJgF6vy0ctfWyQ7aN0lBjs78M-1cQUONQSVeo2jfs', 
-    'https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN', 
-    'https://play-lh.googleusercontent.com/PTLQRc7a8vRjs8fmM7hRI36s7gGYalxIFd80xZDvYkIl91d709fcl4-UH9vZbxWDGG8', 
-    'https://play-lh.googleusercontent.com/3APi4HdWb0_rhnhAEoyJEYfSemXW9cNbA2VdOCSN7L6wgdjC_oTxLphER647R9PnSCkV=w240-h480-rw',
-    'https://play-lh.googleusercontent.com/rFAHXzQjUQwLH6vffa9rD_1gjH7dZykH7h6RjthsnoHTKGrJSNqTUw0D_TIQSC3ekg=w240-h480-rw'];
-
-
-    if (AppName == 'iMobilePay') {
-
-        const urlParams = "?name=" + AppNames[0] + "&size=" + AppSizes[0] + "&downloads=" + AppDownloads[0] + "&ratings=" + 
-            AppRatings[0] + "&applogo=" + AppLogos[0];
+    var AppLogos = [
         
-        location.href = "InstallApp.html" + urlParams;
+        'https://play-lh.googleusercontent.com/Hc8vNA4SOZwg5HMnBiwJLMT3tLYll54D994uZG7GeJYBtMEa2zHk8hNywTJZqpwWTg',
 
-    } else if (AppName == 'PayTM') {
+        'https://play-lh.googleusercontent.com/6_Qan3RBgpJUj0C2ct4l0rKKVdiJgF6vy0ctfWyQ7aN0lBjs78M-1cQUONQSVeo2jfs', 
 
-        const urlParams = "?name=" + AppNames[1] + "&size=" + AppSizes[1] + "&downloads=" + AppDownloads[1] + "&ratings=" + 
-            AppRatings[1] + "&applogo=" + AppLogos[1];
-        
-        location.href = "InstallApp.html" + urlParams;
+        'https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN',
 
-    } else if (AppName == 'WhatsApp') {
+        'https://play-lh.googleusercontent.com/PTLQRc7a8vRjs8fmM7hRI36s7gGYalxIFd80xZDvYkIl91d709fcl4-UH9vZbxWDGG8',
 
-        const urlParams = "?name=" + AppNames[2] + "&size=" + AppSizes[2] + "&downloads=" + AppDownloads[2] + "&ratings=" + 
-        AppRatings[2] + "&applogo=" + AppLogos[2];
-        
-        location.href = "InstallApp.html" + urlParams;
+        'https://play-lh.googleusercontent.com/3APi4HdWb0_rhnhAEoyJEYfSemXW9cNbA2VdOCSN7L6wgdjC_oTxLphER647R9PnSCkV=w240-h480-rw',
 
-    } else if (AppName == 'TataPlay') {
+        'https://play-lh.googleusercontent.com/rFAHXzQjUQwLH6vffa9rD_1gjH7dZykH7h6RjthsnoHTKGrJSNqTUw0D_TIQSC3ekg=w240-h480-rw'
 
-        const urlParams = "?name=" + AppNames[3] + "&size=" + AppSizes[3] + "&downloads=" + AppDownloads[3] + "&ratings=" + 
-        AppRatings[3] + "&applogo=" + AppLogos[3];
-        
-        location.href = "InstallApp.html" + urlParams;
+    ];
 
-    } else if (AppName == 'eVote') {
+    const App_number = AppNames.indexOf( AppName );
 
-        const urlParams = "?name=" + AppNames[4] + "&size=" + AppSizes[4] + "&downloads=" + AppDownloads[4] + "&ratings=" + 
-        AppRatings[4] + "&applogo=" + AppLogos[4];
-        
-        location.href = "InstallApp.html" + urlParams;
+    const info = {
 
-    } else if (AppName == 'FamilyLink') {
+        name: AppNames[ App_number ],
+        size: AppSizes[ App_number ],
+        downloads: AppDownloads[ App_number ],
+        ratings: AppRatings[ App_number ],
+        applogo: AppLogos[ App_number ]
 
-        const urlParams = "?name=" + AppNames[5] + "&size=" + AppSizes[5] + "&downloads=" + AppDownloads[5] + "&ratings=" + 
-        AppRatings[5] + "&applogo=" + AppLogos[5];
-        
-        location.href = "InstallApp.html" + urlParams;
+    };
 
-    }
+    sessionStorage.setItem( 'App_Install', JSON.stringify( info ) );
+
+    return location.assign( './InstallApp.html' );
 
 };
 
 function setInfo() {
 
-    const urlParams = new URLSearchParams(window.location.search);
-    document.getElementById('icon').src = urlParams.get('applogo');
-    document.getElementById('name').innerText = urlParams.get('name');
-    document.getElementById('size').innerText = "Size: " + urlParams.get('size');
-    document.getElementById('downloads').innerText = "Downloads: " + urlParams.get('downloads') + "+";
-    document.getElementById('rating').innerText = "Ratings: " + urlParams.get('ratings');
+    const info = JSON.parse( sessionStorage.getItem( 'App_Install' ) );
+    sessionStorage.removeItem( 'App_Install' );
+
+    var icon = document.getElementById( 'icon' );
+    var name = document.getElementById( 'name' );
+    var size = document.getElementById( 'size' );
+    var downloads = document.getElementById( 'downloads' );
+    var rating = document.getElementById( 'rating' );
+
+    icon.src = info.applogo
+    name.innerText = info.name;
+    size.innerText = "Size: " + info.size;
+    downloads.innerText = "Downloads: " + info.downloads + "+";
+    rating.innerText = "Ratings: " + info.ratings;
 
 };
 
@@ -193,9 +191,15 @@ function ListInstalledApps () {
     var apps_container = document.body.querySelector( 'section' );
     apps_container = apps_container.querySelector( 'div' );
 
-    // Temporary...
+    const Current_User_Data = JSON.parse( sessionStorage.getItem( 'Current_User_Data' ) );
 
-    const Installed_Apps = [ 'iMobile_Pay', 'PayTM', 'eVote', 'Tata_Play', 'WhatsApp', 'Family_Link' ];
+    var Installed_Apps = new Array();
+    
+    for ( var a = 1; a < Current_User_Data[ 0 ][ 3 ].length; a++ ) {
+
+        Installed_Apps.push( Current_User_Data[ 0 ][ 3 ][ a ][ 'Name' ] );
+
+    };
 
     for ( var a = 0; a < Installed_Apps.length; a++ ) {
 
@@ -236,20 +240,36 @@ function ListInstalledApps () {
 
 }
 
-async function Install () {
+function Install () {
 
-    document.getElementById('installprogress').style.visibility = 'visible';
-    document.getElementById('installpercent').style.visibility = 'visible';
+    // Temporary -->
 
-    const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+    const Internet_min_time_speed = 500;
+    const Internet_max_time_speed = 1000;
 
-    for (var i = 0; i < 50; i++) {
+    const Internet_min_download_speed = 2;
+    const Internet_max_download_speed = 8;
 
-        await delay(1000);
-        setInterval( ((document.getElementById('installprogress').value += 5),(document.getElementById('installpercent').innerText=document.getElementById('installprogress').value + "%")), 1000 );
+    // Actual -->
 
+    document.getElementById( 'installprogress' ).style.visibility = 'visible';
+    document.getElementById( 'installpercent' ).style.visibility = 'visible';
 
-    };
+    const delay = ( milliseconds ) => new Promise( ( resolve ) => setTimeout( resolve, milliseconds ) );
+
+    for ( var i = 0; i < 100 / Internet_min_download_speed; i++ ) {
+
+        delay( pick_random( Internet_min_time_speed, Internet_max_time_speed ) );
+
+        setInterval(
+            
+            ( ( document.getElementById( 'installprogress' ).value += pick_random( Internet_min_download_speed, Internet_max_download_speed ) ),
+
+            ( document.getElementById( 'installpercent' ).innerText = document.getElementById('installprogress').value + "%" ) )
+        
+        , 1000 );
+
+    }; return console.clear();
 
 };
 
