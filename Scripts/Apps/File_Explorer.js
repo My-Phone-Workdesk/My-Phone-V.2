@@ -6,25 +6,29 @@ import { Run_Function } from 'https://lalacoder.github.io/Modules/Module_for_JS.
 
 // Real Script Starts from Below ==>
 
-function List_Data() {
+function List_Data( run ) {
 
-    document.body.innerHTML = '';
+    if ( run ) {
 
-    document.body.style.cursor = 'Progress';
+        document.body.innerHTML = '';
 
-    document.body.addEventListener( 'contextmenu', Create_New );
+        document.body.style.cursor = 'Progress';
 
-    const User_ID = localStorage.getItem( 'Amount_MB' );
+        document.body.addEventListener( 'contextmenu', Create_New );
 
-    var User_Data = sessionStorage.getItem( 'Data' );
-    User_Data = JSON.parse( User_Data );
-    User_Data = User_Data[ User_ID ];
+        const User_ID = localStorage.getItem( 'Amount_MB' );
 
-    var User = User_Data[ 'User' ];
+        var User_Data = sessionStorage.getItem( 'Data' );
+        User_Data = JSON.parse( User_Data );
+        User_Data = User_Data[ User_ID ];
 
-    var tasks = 0; var view = 'normal';
+        var User = User_Data[ 'User' ];
 
-    Data_Verification();
+        var tasks = 0; var view = 'normal';
+
+        Data_Verification();
+
+    };
 
     function Data_Verification() {
 
@@ -1696,6 +1700,16 @@ function List_Data() {
 
     };
 
+    return {
+
+        Extract_Current_User_Details: Extract_Current_User_Details,
+        Create_New: Create_New,
+        Open_Dialog_Box: Open_Dialog_Box
+
+    };
+
 };
 
-export { List_Data };
+const sub_functions = List_Data( false );
+
+export { List_Data, sub_functions };

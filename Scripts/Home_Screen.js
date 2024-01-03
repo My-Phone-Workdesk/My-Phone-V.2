@@ -117,7 +117,11 @@ function Load_Home_Screen() {
     
     });
 
-    File_Explorer.addEventListener( 'click', List_Data );
+    File_Explorer.addEventListener( 'click', () => {
+
+        List_Data( true );
+
+    });
 
     return User_Installed_Apps();
 
