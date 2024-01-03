@@ -3,6 +3,7 @@ window.onload = () => {
     if ( location.pathname.includes( 'Settings.html' ) ) {
 
         var icon = document.getElementById( 'icon' );
+        var option_class_2 = document.getElementById( 'option_class_2' );
         var option_class_1 = document.getElementById( 'option_class_1' );
         var option = document.getElementById( 'option_class' );
         var back = document.getElementById( 'back' );
@@ -16,6 +17,12 @@ window.onload = () => {
         option_class_1.addEventListener( 'click', () => {
 
             location.assign( 'Uninstall_Apps.html' );
+
+        });
+
+        option_class_2.addEventListener( 'click', () => {
+
+            location.assign( 'WiFi.html' );
 
         });
 
@@ -75,6 +82,28 @@ window.onload = () => {
         });
 
     } else if ( location.pathname.includes( 'Uninstall_Apps.html' ) ) {
+
+        var back = document.getElementById( 'back' );
+
+        back.addEventListener( 'click', () => {
+
+            location.assign( 'Settings.html' );
+
+        });
+
+        back.addEventListener( 'mouseleave', () => {
+
+            back.style.backgroundColor = '#373737';
+
+        });
+
+        back.addEventListener( 'mouseover', () => {
+
+            back.style.backgroundColor = '#303030';
+
+        });
+
+    } else if ( location.pathname.includes( 'WiFi.html' ) ) {
 
         var back = document.getElementById( 'back' );
 

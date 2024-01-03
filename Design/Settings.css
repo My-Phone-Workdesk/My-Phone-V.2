@@ -72,7 +72,7 @@ p {
 
 }
 
-.fa-grid, .fa-clock-rotate-left {
+.fa-grid, .fa-clock-rotate-left, .fa-wifi {
     font-size: 4rem;
     float: left;
 }
@@ -131,4 +131,8 @@ b {
 
 .uninstall-button:hover {
     background-color: #c9302c;
+}
+
+#perfect {
+    font-size: 15px;
 }
