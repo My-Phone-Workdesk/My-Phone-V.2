@@ -30,6 +30,13 @@ window.onload = () => {
         var eVote_Install = document.getElementById( 'eVote_Install' );
         var Family_Link_Install = document.getElementById( 'Family_Link_Install' );
         var OS_Store = document.getElementById( 'OS_Store' );
+        var Back_Button = document.getElementById( 'Back_Button' );
+        
+        Back_Button.addEventListener( 'click', () => {
+
+            return window.location.assign( '../../Home_Screen.html' );
+
+        });
 
         Installed_Apps.addEventListener( 'click', () => {
 
@@ -69,7 +76,7 @@ window.onload = () => {
 
         Family_Link_Install.addEventListener( 'click', () => {
 
-            return RedirectToInstall( 'FamilyLink' );
+            return RedirectToInstall( 'Family Link' );
 
         });
 
@@ -92,7 +99,7 @@ window.onload = () => {
 };
 
 function RedirectToInstall ( AppName ) {
-
+    
     var AppNames = ['iMobile Pay', 'PayTM', 'WhatsApp', 'Tata Play', 'eVote', 'Family Link'];
     var AppSizes = ['150MB', '48MB', '78.6MB', '34MB', '24MB', '185.9MB'];
     var AppDownloads = ['5CR+', '500M+', '500CR+', '5CR+', '1CR+', '100M+'];
@@ -113,21 +120,40 @@ function RedirectToInstall ( AppName ) {
 
     ];
 
-    const App_number = AppNames.indexOf( AppName );
+    var All_Apps = JSON.parse( sessionStorage.getItem( 'Current_User_Data' ) );
+    All_Apps = All_Apps[ 0 ][ 3 ];
 
-    const info = {
+    var All_Apps_Names = new Array();
 
-        name: AppNames[ App_number ],
-        size: AppSizes[ App_number ],
-        downloads: AppDownloads[ App_number ],
-        ratings: AppRatings[ App_number ],
-        applogo: AppLogos[ App_number ]
+    for ( var a = 1; a < All_Apps.length; a++ ) {
+
+        All_Apps_Names.push( All_Apps[ a ][ 'Name' ] );
 
     };
 
-    sessionStorage.setItem( 'App_Install', JSON.stringify( info ) );
+    if ( All_Apps_Names.indexOf( AppName.replace( ' ', '_' ) ) != -1 ) {
 
-    return location.assign( './InstallApp.html' );
+        return alert( AppName + ' is already Installed ! ' );
+        
+    } else {
+
+        const App_number = AppNames.indexOf( AppName );
+
+        const info = {
+
+            name: AppNames[ App_number ],
+            size: AppSizes[ App_number ],
+            downloads: AppDownloads[ App_number ],
+            ratings: AppRatings[ App_number ],
+            applogo: AppLogos[ App_number ]
+
+        };
+
+        sessionStorage.setItem( 'App_Install', JSON.stringify( info ) );
+
+        return location.assign( './InstallApp.html' );
+
+    };
 
 };
 
@@ -170,12 +196,12 @@ function ListInstalledApps () {
 
     const id_format = {
 
-        iMobile_Pay : 'iMobilePay',
+        iMobile_Pay : 'iMobile_Pay',
         PayTM : 'PayTM',
         WhatsApp : 'WhatsApp',
-        Tata_Play : 'TataPlay',
+        Tata_Play : 'Tata_Play',
         eVote : 'eVote',
-        Family_Link : 'FamilyLink'
+        Family_Link : 'Family_Link'
 
     };
     
@@ -192,6 +218,8 @@ function ListInstalledApps () {
 
     var apps_container = document.body.querySelector( 'section' );
     apps_container = apps_container.querySelector( 'div' );
+
+    apps_container.innerHTML = '';
 
     const Current_User_Data = JSON.parse( sessionStorage.getItem( 'Current_User_Data' ) );
 
@@ -261,6 +289,7 @@ function Install () {
 
     var percent = document.getElementById( 'installpercent' );
     var progress = document.getElementById('installprogress');
+    var name = document.getElementById( 'name' );
 
     for ( let i = 0; i < 100 / Internet_min_download_speed; i++ ) {
 
@@ -270,13 +299,20 @@ function Install () {
     
             percent.innerText = progress.value + "%";
 
+            if ( i == Math.floor( 100 / Internet_min_download_speed ) ) {
+
+                name = document.getElementById( 'name' );
+                name = name.innerText;
+
+                return location.assign( '../../Home_Screen.html?new_app=' + name );
+
+            };
+
         }, delay );
 
         delay += pick_random( Internet_min_time_speed, Internet_max_time_speed );
 
     };
-
-    var name = document.getElementById( 'name' );
 
     var AppNames = ['iMobile Pay', 'PayTM', 'WhatsApp', 'Tata Play', 'eVote', 'Family Link'];
     var id_format = ['iMobile_Pay', 'PayTM', 'WhatsApp', 'Tata_Play', 'eVote', 'Family_Link'];
@@ -309,7 +345,7 @@ function Install () {
 
     Database.Update_Data(
         
-        'Files', Database.Json.Stringify_Column( 'Data' ) + ( imported_data[ 0 ] + 2 ), Current_User_Data
+        'Files', Database.Json.Stringify_Column( 'Data', 'Files' ) + ( imported_data[ 0 ] + 2 ), Current_User_Data
 
     );
 
@@ -317,7 +353,43 @@ function Install () {
 
 function Uninstall ( AppName ) {
 
-    console.log( AppName );
+    var Current_User_Data = JSON.parse( sessionStorage.getItem( 'Current_User_Data' ) );
+
+    var Edit_User_Data = Current_User_Data;
+
+    Edit_User_Data = Edit_User_Data[ 0 ][ 3 ];
+
+    var All_Apps_Names = new Array();
+
+    for ( var a = 1; a < Edit_User_Data.length; a++ ) {
+
+        All_Apps_Names.push( Edit_User_Data[ a ][ 'Name' ] );
+
+    };
+
+    Edit_User_Data.splice( All_Apps_Names.indexOf( AppName ) + 1, 1 );
+
+    Current_User_Data = JSON.stringify( Current_User_Data );
+    sessionStorage.setItem( 'Current_User_Data', Current_User_Data );
+
+    Current_User_Data = Database.Json.Files_Method( Current_User_Data );
+
+    const imported_data = Extract_Current_User_Details();
+    var Files = imported_data[ 1 ];
+
+    Files[ imported_data[ 0 ] ][ 'Data' ] = Current_User_Data;
+    Files = JSON.stringify( Files );
+    sessionStorage.setItem( 'Files', Files );
+
+    Database.Update_Data(
+        
+        'Files', Database.Json.Stringify_Column( 'Data', 'Files' ) + ( imported_data[ 0 ] + 2 ), Current_User_Data
+
+    );
+
+    alert( AppName.replace( '_', ' ' ) + ' is Uninstalled Successfully ! ' );
+
+    return ListInstalledApps();
 
 };
 

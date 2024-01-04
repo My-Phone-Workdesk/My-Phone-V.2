@@ -8,7 +8,16 @@ import { List_Data } from "./Apps/File_Explorer.js";
 
 window.onload = () => {
 
-    if ( location.pathname.includes( 'Home_Screen.html' ) ) { Get_User_Data(); };
+    if ( location.pathname.includes( 'Home_Screen.html' ) ) {
+
+        Get_User_Data();
+
+        var urlparams = new URLSearchParams( window.location.search );
+        urlparams = urlparams.get( 'new_app' );
+
+        if ( urlparams != null ) { alert( urlparams + ' is Installed Successfully ! ' ); };
+
+    };
 
 };
 
