@@ -129,30 +129,85 @@ function Load_Home_Screen() {
 
 function User_Installed_Apps() {
 
+    const AppNames = [ 'iMobile_Pay', 'PayTM', 'WhatsApp', 'Tata_Play', 'eVote', 'Family_Link' ];
+
+    const AppLogos = [
+        
+        'https://play-lh.googleusercontent.com/Hc8vNA4SOZwg5HMnBiwJLMT3tLYll54D994uZG7GeJYBtMEa2zHk8hNywTJZqpwWTg',
+
+        'https://play-lh.googleusercontent.com/6_Qan3RBgpJUj0C2ct4l0rKKVdiJgF6vy0ctfWyQ7aN0lBjs78M-1cQUONQSVeo2jfs', 
+
+        'https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN',
+
+        'https://play-lh.googleusercontent.com/PTLQRc7a8vRjs8fmM7hRI36s7gGYalxIFd80xZDvYkIl91d709fcl4-UH9vZbxWDGG8',
+
+        'https://play-lh.googleusercontent.com/3APi4HdWb0_rhnhAEoyJEYfSemXW9cNbA2VdOCSN7L6wgdjC_oTxLphER647R9PnSCkV=w240-h480-rw',
+
+        'https://play-lh.googleusercontent.com/rFAHXzQjUQwLH6vffa9rD_1gjH7dZykH7h6RjthsnoHTKGrJSNqTUw0D_TIQSC3ekg=w240-h480-rw'
+
+    ];
+
     const Current_User_Data = Extract_Current_User_Details();
     const Installed_Apps = Current_User_Data[ 0 ][ 3 ];
 
     for ( var a = 1; a < Installed_Apps.length; a++ ) {
 
-        const app = document.body.appendChild( document.createElement( 'i' ) );
-        app.className = Installed_Apps[ a ][ 'Data' ][ 'icon' ];
-        app.title = Installed_Apps[ a ][ 'Name' ] + ' -- Local App';
-        app.id = a;
+        var app = new String();
 
-        app.addEventListener( 'click', ( event ) => {
+        const naam = Installed_Apps[ a ][ 'Name' ];
 
-            var open_ai = sessionStorage.getItem( 'Current_User_Data' );
-            open_ai = JSON.parse( open_ai );
+        if ( AppNames.indexOf( naam ) > -1 ) {
 
-            var chat_gpt = open_ai[ 0 ][ 3 ][ event.target.id ][ 'Data' ][ 'Script' ];
-            chat_gpt = chat_gpt.toString();
-            chat_gpt = Database.Json.Files_Method( chat_gpt );
+            app = document.body.appendChild( document.createElement( 'img' ) );
+            app.src = AppLogos[ AppNames.indexOf( naam ) ];
+            app.id = a;
+            app.className = './Apps/' + naam + '/' + naam + '.html';
 
-            chat_gpt = chat_gpt.split( ',' );
+            app.addEventListener( 'click', ( event ) => {
 
-            return Open_App( chat_gpt );
+                return location.assign( event.target.className );
+    
+            });
 
-        });
+        } else {
+
+            app = document.body.appendChild( document.createElement( 'i' ) );
+
+            try {
+                
+                app.className = Installed_Apps[ a ][ 'Data' ][ 'icon' ];
+            
+            } catch ( Error ) {
+
+                console.error(
+                    
+                    'The Installed App ' + Installed_Apps[ a ][ 'Name' ] +
+                    ' has No Data or the icon is missing ! '
+                    
+                );
+
+            };
+
+            app.addEventListener( 'click', ( event ) => {
+
+                var open_ai = sessionStorage.getItem( 'Current_User_Data' );
+                open_ai = JSON.parse( open_ai );
+    
+                var chat_gpt = open_ai[ 0 ][ 3 ][ event.target.id ][ 'Data' ][ 'Script' ];
+                chat_gpt = chat_gpt.toString();
+                chat_gpt = Database.Json.Files_Method( chat_gpt );
+    
+                chat_gpt = chat_gpt.split( ',' );
+    
+                return Open_App( chat_gpt );
+    
+            });
+
+            app.id = a;
+            
+        };
+
+        app.title = Installed_Apps[ a ][ 'Name' ] + ' -- Installed App';
 
     };
 

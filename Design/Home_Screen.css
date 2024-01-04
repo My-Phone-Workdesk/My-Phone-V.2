@@ -1,4 +1,5 @@
 @font-face {
+
     font-family: 'main';
     
     src: url('Product_Sans_Regular.ttf') format('embedded-opentype'), /* Internet Explorer */
@@ -7,20 +8,23 @@
          url('Product_Sans_Regular.ttf') format('truetype'),          /* Safari, Android, iOS */
          url('Product_Sans_Regular.ttf') format('svg');               /* Legacy iOS */
     
-    }
-	
-* {
-    font-family: 'main';
 }
-body { height: 100%; width: 100%; background-color: black; display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; grid-template-rows: 1fr 1fr 1fr; margin: 0; }
+	
+* { font-family: 'main'; }
+
+body { height: 100%; width: 100%; background-color: black; display: grid; margin: 0;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; grid-template-rows: 1fr 1fr 1fr; }
 
 i { font-size: 9rem; color: white; margin: 1.2rem; padding: 0.4rem; align-items: center; }
 
-i:hover { cursor: pointer; }
+i:hover, img:hover { cursor: pointer; }
 
-.fa-folders span, .fa-file span, .fa-empty-set span, .fa-hard-drive span { display: block; text-align: center; font-size: 30px; letter-spacing: 3px;
-    text-wrap: wrap; text-transform: lowercase; }
+.fa-folders span, .fa-file span, .fa-empty-set span, .fa-hard-drive span
+{ display: block; text-align: center; font-size: 30px; letter-spacing: 3px; text-wrap: wrap; 
+text-transform: lowercase; }
 
-.fa-folders, .fa-file, .fa-empty-set, .fa-hard-drive { display: flex; align-items: end; justify-content: center; margin: 0; padding: 0;
-    height: 200px; width: 180px; flex-wrap: wrap; margin-left: 20px; margin-top: 20px; }
+.fa-folders, .fa-file, .fa-empty-set, .fa-hard-drive
+{ display: flex; align-items: end; justify-content: center; margin: 0; padding: 0; height: 200px; width: 180px;
+flex-wrap: wrap; margin-left: 20px; margin-top: 20px; }
+
+img { margin: 1.2rem; padding: 0.4rem; align-items: center; border-radius: 3rem; width: 9rem; height: 9rem; }
