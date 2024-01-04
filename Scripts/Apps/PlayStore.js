@@ -1,3 +1,5 @@
+import { Database } from '../../Data_Resources/Database.js';
+
 const pick_random = ( min, max ) => { max += 1; return Math.floor( Math.random() * ( max - min ) + min ); };
 
 window.onload = () => {
@@ -247,34 +249,92 @@ function Install () {
     const Internet_min_time_speed = 500;
     const Internet_max_time_speed = 1000;
 
-    const Internet_min_download_speed = 2;
-    const Internet_max_download_speed = 8;
+    const Internet_min_download_speed = 8;
+    const Internet_max_download_speed = 12;
 
     // Actual -->
 
     document.getElementById( 'installprogress' ).style.visibility = 'visible';
     document.getElementById( 'installpercent' ).style.visibility = 'visible';
 
-    const delay = ( milliseconds ) => new Promise( ( resolve ) => setTimeout( resolve, milliseconds ) );
+    let delay = 1000;
 
-    for ( var i = 0; i < 100 / Internet_min_download_speed; i++ ) {
+    var percent = document.getElementById( 'installpercent' );
+    var progress = document.getElementById('installprogress');
 
-        delay( pick_random( Internet_min_time_speed, Internet_max_time_speed ) );
+    for ( let i = 0; i < 100 / Internet_min_download_speed; i++ ) {
 
-        setInterval(
-            
-            ( ( document.getElementById( 'installprogress' ).value += pick_random( Internet_min_download_speed, Internet_max_download_speed ) ),
+        setTimeout( () => {
 
-            ( document.getElementById( 'installpercent' ).innerText = document.getElementById('installprogress').value + "%" ) )
+            progress.value += pick_random( Internet_min_download_speed, Internet_max_download_speed );
+    
+            percent.innerText = progress.value + "%";
+
+        }, delay );
+
+        delay += pick_random( Internet_min_time_speed, Internet_max_time_speed );
+
+    };
+
+    var name = document.getElementById( 'name' );
+
+    var AppNames = ['iMobile Pay', 'PayTM', 'WhatsApp', 'Tata Play', 'eVote', 'Family Link'];
+    var id_format = ['iMobile_Pay', 'PayTM', 'WhatsApp', 'Tata_Play', 'eVote', 'Family_Link'];
+
+    name = id_format[ AppNames.indexOf( name.innerText ) ];
+
+    const app = {
+
+        Name: name,
+        Access: 'Block',
+        Hidden: 'false',
+        Extention: 'apk' // temporary
+
+    };
+
+    var Current_User_Data = JSON.parse( sessionStorage.getItem( 'Current_User_Data' ) );
+    Current_User_Data[ 0 ][ 3 ].push( app );
+
+    Current_User_Data = JSON.stringify( Current_User_Data );
+    sessionStorage.setItem( 'Current_User_Data', Current_User_Data );
+
+    Current_User_Data = Database.Json.Files_Method( Current_User_Data );
+
+    const imported_data = Extract_Current_User_Details();
+    var Files = imported_data[ 1 ];
+
+    Files[ imported_data[ 0 ] ][ 'Data' ] = Current_User_Data;
+    Files = JSON.stringify( Files );
+    sessionStorage.setItem( 'Files', Files );
+
+    Database.Update_Data(
         
-        , 1000 );
+        'Files', Database.Json.Stringify_Column( 'Data' ) + ( imported_data[ 0 ] + 2 ), Current_User_Data
 
-    }; return console.clear();
+    );
 
 };
 
 function Uninstall ( AppName ) {
 
     console.log( AppName );
+
+};
+
+function Extract_Current_User_Details() {
+
+    const User = parseFloat( localStorage.getItem( 'Amount_MB' ) );
+
+    var Overall_Files = JSON.parse( sessionStorage.getItem( 'Files' ) );
+
+    var All_Usernames = new Array();
+
+    for ( var a = 0; a < Overall_Files.length; a++ ) {
+        
+        All_Usernames.push( Overall_Files[ a ][ 'User' ] );
+    
+    };
+
+    return [ All_Usernames.indexOf( All_Usernames[ User ] ), Overall_Files ];
 
 };
