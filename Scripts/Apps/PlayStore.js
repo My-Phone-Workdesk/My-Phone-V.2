@@ -410,3 +410,5 @@ function Extract_Current_User_Details() {
     return [ All_Usernames.indexOf( All_Usernames[ User ] ), Overall_Files ];
 
 };
+
+export { Uninstall };
