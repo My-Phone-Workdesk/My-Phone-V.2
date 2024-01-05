@@ -129,6 +129,8 @@ window.onload = () => {
 
         });
 
+        return List_Wifi();
+
     };
 
 };
@@ -214,5 +216,74 @@ function List_Installed_Apps() {
         app_list.appendChild( li );
 
     };
+
+};
+
+function List_Wifi() {
+
+    var Wifi_Box = document.body.querySelector( 'div' );
+    Wifi_Box = Wifi_Box.querySelector( 'ul' );
+
+    const All_Wifi = JSON.parse( sessionStorage.getItem( 'Wifi' ) );
+
+    for ( var a = 0; a < All_Wifi.length; a++ ) {
+
+        var li = document.createElement( 'li' );
+        var i = document.createElement( 'i' );
+        var span = document.createElement( 'span' );
+        var button = document.createElement( 'button' );
+
+        if ( All_Wifi[ a ][ 'Signal' ].toLowerCase() == 'strong' ) {
+
+            i.className = 'fa-solid fa-wifi';
+            i.id = 'perfect';
+
+        } else if ( All_Wifi[ a ][ 'Signal' ].toLowerCase() == 'weak' ) {
+
+            i.className = 'fa-duotone fa-wifi-weak';
+
+        } else if ( All_Wifi[ a ][ 'Signal' ].toLowerCase() == 'fair' ) {
+
+            i.className = 'fa-duotone fa-wifi-fair';
+
+        } else { i.className = 'fa-duotone fa-wifi-exclamation'; };
+
+        span.innerHTML = All_Wifi[ a ][ 'Wifi' ];
+        span.style.marginLeft = '10px';
+
+        button.innerHTML = 'Connect';
+        button.className = 'uninstall-button';
+        button.id = All_Wifi[ a ][ 'Wifi' ];
+
+        button.addEventListener( 'click', ( event ) => { button_click( event, button ); });
+
+        li.appendChild( i );
+        li.appendChild( span );
+        li.appendChild( button );
+
+        Wifi_Box.appendChild( li );
+
+    };
+
+    function button_click( event, button ) {
+
+        Connect_to_Wifi( event.target.id );
+
+        event.target.innerHTML = 'Connected';
+        return button.removeEventListener( 'click', ( event ) => {
+            
+            button_click( event, button );
+        
+        });
+
+    };
+
+};
+
+function Connect_to_Wifi( Wifi_Name ) {
+
+    console.log( Wifi_Name );
+
+    return alert( 'The Wifi ' + Wifi_Name + ' is Connected Successfully ! ' );
 
 };

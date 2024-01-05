@@ -15,7 +15,13 @@ window.onload = () => {
         var urlparams = new URLSearchParams( window.location.search );
         urlparams = urlparams.get( 'new_app' );
 
-        if ( urlparams != null ) { alert( urlparams + ' is Installed Successfully ! ' ); };
+        if ( urlparams != null ) {
+            
+            alert( urlparams + ' is Installed Successfully ! ' );
+
+            return location.assign( './Home_Screen.html' );
+        
+        };
 
     };
 
@@ -27,7 +33,13 @@ function Get_User_Data() {
 
         Database.Read_Data( 'Files', 'Files' );
 
-        setTimeout( () => { Take_Cloud_Files_Data(); },1000 );
+        setTimeout( Take_Cloud_Files_Data, 1000 );
+
+    } else if ( sessionStorage.getItem( 'Wifi' ) == null ) {
+
+        Database.Read_Data( 'Wifi', 'Wifi_Router' );
+
+        setTimeout( Take_Cloud_Files_Data, 1000 );
 
     } else { return Load_Home_Screen(); };
 
@@ -35,12 +47,12 @@ function Get_User_Data() {
 
         if ( sessionStorage.getItem( 'Files' ) == null ) {
             
-            setTimeout( () => {
-
-                return Take_Cloud_Files_Data();
-
-            },2000 );
+            setTimeout( Take_Cloud_Files_Data, 2000 );
         
+        } else if ( sessionStorage.getItem( 'Wifi' ) == null ) {
+
+            setTimeout( Take_Cloud_Files_Data, 2000 );
+
         } else { return Load_Home_Screen(); };
 
     };
