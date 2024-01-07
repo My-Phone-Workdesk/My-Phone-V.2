@@ -5,6 +5,7 @@ window.onload = () => {
     if ( location.pathname.includes( 'Settings.html' ) ) {
 
         var icon = document.getElementById( 'icon' );
+        var option_class_3 = document.getElementById( 'option_class_3' );
         var option_class_2 = document.getElementById( 'option_class_2' );
         var option_class_1 = document.getElementById( 'option_class_1' );
         var option = document.getElementById( 'option_class' );
@@ -28,6 +29,12 @@ window.onload = () => {
 
         });
 
+        option_class_3.addEventListener( 'click', () => {
+
+            return location.assign( 'Change_Password.html' );
+
+        });
+
         icon.addEventListener( 'click', ToggleLightorDarkMode );
 
         back.addEventListener( 'click', () => {
@@ -47,6 +54,15 @@ window.onload = () => {
             return back.style.backgroundColor = '#373737';
 
         });
+
+        if ( parseFloat(localStorage.getItem('Amount_MB')) == 0 ) {
+
+            var Change_Password_Div = document.getElementById('option_class_3');
+            Change_Password_Div.style.pointerEvents = 'none';
+            Change_Password_Div.style.opacity = 0.4;
+            Change_Password_Div.title = "Not available for Owner.";
+
+        }
 
     } else if ( location.pathname.includes( 'Factory_Reset.html' ) ) {
 
@@ -130,6 +146,34 @@ window.onload = () => {
         });
 
         return List_Wifi();
+
+    } else if ( location.pathname.includes( 'Change_Password.html' ) ) {
+
+        var back = document.getElementById( 'back' );
+
+        back.addEventListener( 'click', () => {
+
+            return location.assign( 'Settings.html' );
+
+        });
+
+        back.addEventListener( 'mouseleave', () => {
+
+            return back.style.backgroundColor = '#373737';
+
+        });
+
+        back.addEventListener( 'mouseover', () => {
+
+            return back.style.backgroundColor = '#303030';
+
+        });
+
+        if ( parseFloat(localStorage.getItem('Amount_MB')) == 0 ) {
+
+            return window.location.assign('Settings.html');
+
+        }
 
     };
 
