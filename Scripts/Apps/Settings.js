@@ -299,7 +299,11 @@ function List_Wifi() {
         button.className = 'uninstall-button';
         button.id = All_Wifi[ a ][ 'Wifi' ];
 
-        button.addEventListener( 'click', ( event ) => { button_click( event, button ); });
+        button.addEventListener( 'click', ( event ) => {
+
+            Connect_to_Wifi( event.target );
+
+        });
 
         li.appendChild( i );
         li.appendChild( span );
@@ -309,25 +313,14 @@ function List_Wifi() {
 
     };
 
-    function button_click( event, button ) {
-
-        Connect_to_Wifi( event.target.id );
-
-        event.target.innerHTML = 'Connected';
-        return button.removeEventListener( 'click', ( event ) => {
-            
-            button_click( event, button );
-        
-        });
-
-    };
-
 };
 
 function Connect_to_Wifi( Wifi_Name ) {
 
-    console.log( Wifi_Name );
+    console.log( Wifi_Name.id );
 
-    return alert( 'The Wifi ' + Wifi_Name + ' is Connected Successfully ! ' );
+    Wifi_Name.innerHTML = 'Connected';
+
+    return alert( 'The Wifi ' + Wifi_Name.id + ' is Connected Successfully ! ' );
 
 };
