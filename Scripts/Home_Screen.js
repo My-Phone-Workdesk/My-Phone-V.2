@@ -14,18 +14,28 @@ window.onload = () => {
 
         var urlparams = new URLSearchParams( window.location.search );
 
-        if ( (urlparams.get( 'new_app' )) != null ) {
+        if ( ( urlparams.get( 'new_app' ) ) != null ) {
             
-            alert( (urlparams.get( 'new_app' )) + ' is Installed Successfully ! ' );
+            alert( ( urlparams.get( 'new_app' ) ) + ' is Installed Successfully ! ' );
 
             return location.assign( './Home_Screen.html' );
         
         };
 
-        if ( (urlparams.get( 'open_files' )) != null ) {
+        if ( ( urlparams.get( 'open_files' ) ) != null ) {
+
+            sessionStorage.setItem( 'remove_para', true );
+
+            return location.assign( './Home_Screen.html' );
+        
+        };
+
+        if ( ( sessionStorage.getItem( 'remove_para' ) ) != null ) {
+
+            sessionStorage.removeItem( 'remove_para' );
 
             return List_Data( true );
-        
+
         };
 
     };

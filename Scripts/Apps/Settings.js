@@ -2,11 +2,11 @@ import { Uninstall } from "./PlayStore.js";
 
 window.onload = () => {
 
-    if ( (document.getElementById( 'optionsicon' )) != null ) {
+    if ( ( document.getElementById( 'optionsicon' ) ) != null ) {
 
         document.getElementById( 'optionsicon' ).addEventListener( 'click', ToggleLightorDarkMode );
 
-    }
+    };
 
     if ( location.pathname.includes( 'Settings.html' ) ) {
 
@@ -68,14 +68,14 @@ window.onload = () => {
 
         });
 
-        if ( parseFloat(localStorage.getItem('Amount_MB')) == 0 ) {
+        if ( parseFloat( localStorage.getItem( 'Amount_MB' ) ) == 0 ) {
 
-            var Change_Password_Div = document.getElementById('option_class_3');
+            var Change_Password_Div = document.getElementById( 'option_class_3' );
             Change_Password_Div.style.pointerEvents = 'none';
             Change_Password_Div.style.opacity = 0.4;
             Change_Password_Div.title = "Not available for Owner.";
 
-        }
+        };
 
     } else if ( location.pathname.includes( 'Factory_Reset.html' ) ) {
 
@@ -352,7 +352,7 @@ window.onload = () => {
 
         option_class_4_2.addEventListener( 'click', () => {
 
-            window.location.assign('./../Home_Screen.html?open_files=true');
+            window.location.assign( '../../Home_Screen.html?open_files=true' );
 
         });
 
