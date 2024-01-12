@@ -2,9 +2,16 @@ import { Uninstall } from "./PlayStore.js";
 
 window.onload = () => {
 
+    if ( (document.getElementById( 'optionsicon' )) != null ) {
+
+        document.getElementById( 'optionsicon' ).addEventListener( 'click', ToggleLightorDarkMode );
+
+    }
+
     if ( location.pathname.includes( 'Settings.html' ) ) {
 
         var icon = document.getElementById( 'icon' );
+        var option_class_4 = document.getElementById( 'option_class_4' );
         var option_class_3 = document.getElementById( 'option_class_3' );
         var option_class_2 = document.getElementById( 'option_class_2' );
         var option_class_1 = document.getElementById( 'option_class_1' );
@@ -32,6 +39,12 @@ window.onload = () => {
         option_class_3.addEventListener( 'click', () => {
 
             return location.assign( 'Change_Password.html' );
+
+        });
+
+        option_class_4.addEventListener( 'click', () => {
+
+            return location.assign( 'Storage.html' );
 
         });
 
@@ -174,6 +187,175 @@ window.onload = () => {
             return window.location.assign('Settings.html');
 
         }
+
+    } else if ( location.pathname.includes( 'Storage.html' ) ) {
+
+        var back = document.getElementById( 'back' );
+        var option_class_4_1 = document.getElementById( 'option_class_4_1' );
+        var option_class_4_2 = document.getElementById( 'option_class_4_2' );
+
+        back.addEventListener( 'click', () => {
+
+            return location.assign( 'Settings.html' );
+
+        });
+
+        back.addEventListener( 'mouseleave', () => {
+
+            return back.style.backgroundColor = '#373737';
+
+        });
+
+        back.addEventListener( 'mouseover', () => {
+
+            return back.style.backgroundColor = '#303030';
+
+        });
+
+        option_class_4_1.addEventListener( 'click', () => {
+
+            var container = document.getElementById('settings-container');
+            document.getElementById('settings-options').remove();
+            document.getElementById('optionsicon').className = 'fa-duotone fa-grid';
+            document.getElementById('name').innerText = 'Apps Storage';
+            document.title = 'Apps Storage';
+            var heading = document.createElement( 'p' );
+            heading.innerText = 'All Installed Apps :';
+            container.appendChild(heading);
+
+            var app_1 = document.createElement('UL');
+            app_1.setAttribute('class', 'apps-list');
+
+            var app_2 = document.createElement('LI');
+            app_1.appendChild(app_2);
+
+            var app_3 = document.createElement('IMG');
+            app_3.setAttribute('src', 'https://play-lh.googleusercontent.com/Hc8vNA4SOZwg5HMnBiwJLMT3tLYll54D994uZG7GeJYBtMEa2zHk8hNywTJZqpwWTg');
+            app_2.appendChild(app_3);
+
+            var app_4 = document.createElement('SPAN');
+            app_2.appendChild(app_4);
+
+            var app_5 = document.createTextNode((new String("iMobile Pay")));
+            app_4.appendChild(app_5);
+
+            var app_8 = document.createElement('LI');
+            app_1.appendChild(app_8);
+
+            var app_9 = document.createElement('IMG');
+            app_9.setAttribute('src', 'https://play-lh.googleusercontent.com/rFAHXzQjUQwLH6vffa9rD_1gjH7dZykH7h6RjthsnoHTKGrJSNqTUw0D_TIQSC3ekg=w240-h480-rw');
+            app_8.appendChild(app_9);
+
+            var app_10 = document.createElement('SPAN');
+            app_8.appendChild(app_10);
+
+            var app_11 = document.createTextNode((new String("Family Link")));
+            app_10.appendChild(app_11);
+
+            var app_14 = document.createElement('LI');
+            app_1.appendChild(app_14);
+
+            var app_15 = document.createElement('IMG');
+            app_15.setAttribute('src', 'https://play-lh.googleusercontent.com/PTLQRc7a8vRjs8fmM7hRI36s7gGYalxIFd80xZDvYkIl91d709fcl4-UH9vZbxWDGG8');
+            app_14.appendChild(app_15);
+
+            var app_16 = document.createElement('SPAN');
+            app_14.appendChild(app_16);
+
+            var app_17 = document.createTextNode((new String("Tata Play")));
+            app_16.appendChild(app_17);
+
+            var app_20 = document.createElement('LI');
+            app_1.appendChild(app_20);
+
+            var app_21 = document.createElement('IMG');
+            app_21.setAttribute('src', 'https://play-lh.googleusercontent.com/6_Qan3RBgpJUj0C2ct4l0rKKVdiJgF6vy0ctfWyQ7aN0lBjs78M-1cQUONQSVeo2jfs');
+            app_20.appendChild(app_21);
+
+            var app_22 = document.createElement('SPAN');
+            app_20.appendChild(app_22);
+
+            var app_23 = document.createTextNode((new String("PayTM")));
+            app_22.appendChild(app_23);
+
+            var app_26 = document.createElement('LI');
+            app_1.appendChild(app_26);
+
+            var app_27 = document.createElement('IMG');
+            app_27.setAttribute('src', 'https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN');
+            app_26.appendChild(app_27);
+
+            var app_28 = document.createElement('SPAN');
+            app_26.appendChild(app_28);
+
+            var app_29 = document.createTextNode((new String("WhatsApp")));
+            app_28.appendChild(app_29);
+
+            var app_32 = document.createElement('LI');
+            app_1.appendChild(app_32);
+
+            var app_33 = document.createElement('IMG');
+            app_33.setAttribute('src', 'https://play-lh.googleusercontent.com/3APi4HdWb0_rhnhAEoyJEYfSemXW9cNbA2VdOCSN7L6wgdjC_oTxLphER647R9PnSCkV=w240-h480-rw');
+            app_32.appendChild(app_33);
+
+            var app_34 = document.createElement('SPAN');
+            app_32.appendChild(app_34);
+
+            var app_35 = document.createTextNode((new String("eVote")));
+            app_34.appendChild(app_35);
+
+            container.appendChild(app_1);
+
+            var heading = document.createElement( 'p' );
+            heading.innerText = 'Storage :';
+            container.appendChild(heading);
+
+            var node_1 = document.createElement('DIV');
+            node_1.setAttribute('class', 'storage-box');
+
+            var node_2 = document.createElement('P');
+            node_2.setAttribute('class', 'amount');
+            node_1.appendChild(node_2);
+
+            var node_3 = document.createElement('B');
+            node_2.appendChild(node_3);
+
+            var node_4 = document.createTextNode((new String("815 GB")));
+            node_3.appendChild(node_4);
+
+            var node_5 = document.createElement('DIV');
+            node_5.setAttribute('class', 'storage-bar');
+            node_1.appendChild(node_5);
+
+            var node_6 = document.createElement('DIV');
+            node_6.setAttribute('class', 'range');
+            node_1.appendChild(node_6);
+
+            var node_7 = document.createElement('SPAN');
+            node_7.setAttribute('class', 'min');
+            node_6.appendChild(node_7);
+
+            var node_8 = document.createTextNode((new String("0 GB")));
+            node_7.appendChild(node_8);
+
+            var node_9 = document.createElement('SPAN');
+            node_9.setAttribute('class', 'max');
+            node_6.appendChild(node_9);
+
+            var node_10 = document.createTextNode((new String("1000 GB")));
+            node_9.appendChild(node_10);
+
+            container.appendChild(node_1);
+           
+
+        });
+
+        option_class_4_2.addEventListener( 'click', () => {
+
+            window.location.assign('./../Home_Screen.html?open_files=true');
+
+        });
+
 
     };
 

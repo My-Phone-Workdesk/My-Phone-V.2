@@ -13,13 +13,18 @@ window.onload = () => {
         Get_User_Data();
 
         var urlparams = new URLSearchParams( window.location.search );
-        urlparams = urlparams.get( 'new_app' );
 
-        if ( urlparams != null ) {
+        if ( (urlparams.get( 'new_app' )) != null ) {
             
-            alert( urlparams + ' is Installed Successfully ! ' );
+            alert( (urlparams.get( 'new_app' )) + ' is Installed Successfully ! ' );
 
             return location.assign( './Home_Screen.html' );
+        
+        };
+
+        if ( (urlparams.get( 'open_files' )) != null ) {
+
+            return List_Data( true );
         
         };
 
