@@ -66,7 +66,11 @@ function Get_User_Data() {
         
         } else if ( sessionStorage.getItem( 'Wifi' ) == null ) {
 
-            setTimeout( Take_Cloud_Files_Data, 2000 );
+            setTimeout( () => {
+
+                return window.location.reload();
+
+            }, 2000 );
 
         } else { return Load_Home_Screen(); };
 
