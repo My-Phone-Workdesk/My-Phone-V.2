@@ -1,0 +1,51 @@
+@font-face {
+
+    font-family: 'main';
+    
+    src: url('Product_Sans_Regular.ttf') format('embedded-opentype'), /* Internet Explorer */
+         url('Product_Sans_Regular.ttf') format('woff2'),             /* Super Modern Browsers */
+         url('Product_Sans_Regular.ttf') format('woff'),              /* Pretty Modern Browsers */
+         url('Product_Sans_Regular.ttf') format('truetype'),          /* Safari, Android, iOS */
+         url('Product_Sans_Regular.ttf') format('svg');               /* Legacy iOS */
+    
+}
+	
+* { font-family: 'main'; } body { margin: 0; }
+
+.orange-box {
+    background-color: #f27e13;
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+.gray-box {
+    background-color: #ccc;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+}
+
+.box-content {
+    text-align: center;
+}
+
+.icon-placeholder {
+    width: 30%;
+    height: 30%;
+    margin: 0 auto 10px;
+}
+
+.blue-button {
+    background-color: #003368;
+    color: white;
+    padding: 10px 50px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.blue-button:hover {
+    background-color: #163b63;
+}
