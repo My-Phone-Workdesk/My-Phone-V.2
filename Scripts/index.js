@@ -4,6 +4,8 @@ import { Database } from "../Data_Resources/Database.js";
 
 // Real Script Starts from Below ==>
 
+const Power_Off_time = 6; // in seconds
+
 window.onload = () => {
 
     if ( location.pathname.includes( 'Device_Not_Eligible.html' ) ) { runOnStart(); }
@@ -15,6 +17,32 @@ window.onload = () => {
         let Send_Feedback_button = document.getElementById( 'Send_Feed' );
         Send_Feedback_button.addEventListener( 'click', () => { Send_Feedback(); });
 
+        document.addEventListener( 'keydown', ( event ) => {
+
+            var key_control = true;
+
+            if ( event.key == 's' ) {
+
+                setTimeout( () => {
+
+                    if ( key_control ) {
+
+                        return location.assign( './Screen/System/Power_Off.html' );
+
+                    };
+
+                }, Power_Off_time * 1000 );
+
+            };
+
+            document.addEventListener( 'keyup', () => {
+            
+                if ( event.key == 's' ) { key_control = false; };
+            
+            });
+
+        });
+
     };
 
 };
@@ -25,13 +53,14 @@ function Restart() {
     document.body.style.backgroundImage = "url('../Images/Start_Up_Logo.jpg')";
     document.body.style.backgroundSize = "100vw 100vh";
     document.body.style.backgroundRepeat = "no-repeat";
-    setTimeout ( function zoom() {
+
+    setTimeout ( () => {
 
         document.body.style.backgroundColor = "#ffffff";
         document.getElementById("Load_Back").style.visibility = "hidden";
         document.getElementById("Load_Line").style.visibility = "hidden";   
         
-    }, 15575); setTimeout ( () => {
+    }, 15575 ); setTimeout ( () => {
 
         document.body.style.backgroundImage = "none";
         document.body.style.background = "none";
