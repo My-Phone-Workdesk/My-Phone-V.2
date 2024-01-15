@@ -74,7 +74,7 @@ function Get_User_Data() {
 
             setTimeout( () => {
 
-                return Take_Cloud_Files_Data();
+                return window.location.reload();
 
             }, 1000 );
 
