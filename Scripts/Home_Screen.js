@@ -48,15 +48,15 @@ function Get_User_Data() {
 
         Database.Read_Data( 'Files', 'Files' );
 
-        // KUUDA --> setTimeout( Take_Cloud_Files_Data, 1000 );
-        Take_Cloud_Files_Data();
+        setTimeout( Take_Cloud_Files_Data, 1000 );
+
+        // Nothing is Kudda 😡 it has a meaning...
 
     } else if ( sessionStorage.getItem( 'Wifi' ) == null ) {
 
         Database.Read_Data( 'Wifi', 'Wifi_Router' );
 
-        // KUUDA --> setTimeout( Take_Cloud_Files_Data, 1000 );
-        Take_Cloud_Files_Data();
+        setTimeout( Take_Cloud_Files_Data, 1000 );
 
     } else { return Load_Home_Screen(); };
 
@@ -64,18 +64,19 @@ function Get_User_Data() {
 
         if ( sessionStorage.getItem( 'Files' ) == null ) {
             
-            // KUUDA --> setTimeout( Take_Cloud_Files_Data, 2000 );
-            Take_Cloud_Files_Data();
+            setTimeout( () => {
+
+                return Take_Cloud_Files_Data();
+
+            }, 1000 );
         
         } else if ( sessionStorage.getItem( 'Wifi' ) == null ) {
 
-            // setTimeout( () => {
+            setTimeout( () => {
 
-            //     return window.location.reload();
+                return Take_Cloud_Files_Data();
 
-            // }, 2000 );
-
-            return window.location.reload();
+            }, 1000 );
 
         } else { return Load_Home_Screen(); };
 
