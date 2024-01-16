@@ -10,137 +10,53 @@
     
     }
 	
-* {
-    font-family: 'main';
-    font-weight: 900;
-    margin: 0;
-    margin-bottom: 5rem;
-    margin-top: 2rem;
-    padding: 0;
-    text-decoration: none;
-    text-align: left;
-}
-a {
-    text-decoration: none;
-    color: black;
-}
-body {
-    background-color: white;
-    width: 100%;
-}
-h1 {
-    font-size: 5rem;
-    position: relative;
-    left: 2.5rem;
-    text-decoration: underline;
-    width: 90vw;
-}
-h2 {
-    font-size: 3rem;
-}
-hr {
-    margin-bottom: 0;
-    height: 1rem;
-    color: black;
-    background-color: black;
-}
-.Options-Line {
-    height: 0.5rem;
-}
-.Options {
-    position: relative;
-    left: 6rem;
-}
-.extra-space {
-    visibility: visible;
-}
-div {
-    display: flex;
-    justify-content: left;
-    height: 4rem;
-}
-i {
-    font-size: 4rem;
-    margin-left: 3rem;
-}
-#Login-Div {
-    left: 6rem;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    position: relative;
-    bottom: -2rem;
-}
-#different {
-    height: 5rem;
-}
-table {
-    color: black;
-    border: 0.2rem black solid;
-    width: 90vw;
-    font-weight: 500;
-    font-size: 2rem;
-    background-color: lightgrey;
-    position: relative;
-    left: 5rem;
-}
-th {
-    text-align: center;
-    font-size: 5rem;
-    font-weight: 900;
-    background-color: lightgrey;
-}
-tr {
-    color: black;
-}
-td {
-    text-align: center;
-    font-size: 4rem;
-    border: 0.4rem black solid;
-    background-color: white;
-}
-#different:hover, .fa-paper-plane-top:hover {
-    cursor: pointer;
-}
+* { font-family: 'main'; font-weight: 900; margin: 0; margin-bottom: 5rem; margin-top: 2rem; padding: 0;
+    text-decoration: none; text-align: left; }
 
-textarea {
-    width: 97.5%;
-    height: 29vh;
-    font-size: 1rem;
-    color: black;  
-    background-color: white;
-    font-weight: 200;
-    text-align: center;
-    display: block;
-    word-wrap: break-word;
-    border: 1rem black double;
-    padding: 0;
-    margin: 0;
-    border-top: 0;
-}
+a { text-decoration: none; color: black; }
 
-p {
-    font-weight: 700;
-    font-size: 4rem;
-    padding: 0;
-    margin: 0;
-    width: 99.90%;
-    text-align: center;
-    background-color: black;
-    color: white;
-}
-p:hover {
-    cursor: not-allowed;
-}
+body { background-color: white; width: 100%; }
 
-.fa-paper-plane-top {
-    color: rgb(0, 0, 0);
-    margin: 0;
-    margin-top: 1rem;
-    padding: 12px;
-    border: black solid 0.5rem;
-    position: absolute;
-    font-size: 2rem;
-    border-radius: 10%;
-    right: 1rem;
-}
+h1 { font-size: 5rem; position: relative; left: 2.5rem; text-decoration: underline; width: 90vw; }
+
+h2 { font-size: 3rem; }
+
+hr { margin-bottom: 0; height: 1rem; color: black; background-color: black; }
+
+.Options-Line { height: 0.5rem; }
+
+.Options { position: relative; left: 6rem; }
+
+.extra-space { visibility: visible; }
+
+div { display: flex; justify-content: left; height: 4rem; }
+
+i { font-size: 4rem; margin-left: 3rem; }
+
+#Login-Div { left: 6rem; display: flex; justify-content: left; align-items: center; position: relative;
+    bottom: -2rem; }
+
+#different { height: 5rem; }
+
+table { color: black; border: 0.2rem black solid; width: 90vw; font-weight: 500; font-size: 2rem;
+    background-color: lightgrey; position: relative; left: 5rem; }
+
+th { text-align: center; font-size: 5rem; font-weight: 900; background-color: lightgrey; }
+
+tr { color: black; }
+
+td { text-align: center; font-size: 4rem; border: 0.4rem black solid; background-color: white; }
+
+#different:hover, .fa-paper-plane-top:hover { cursor: pointer; }
+
+textarea { resize: none; width: 97.5%; height: 29vh; font-size: 1rem; color: black; background-color: white;
+    font-weight: 200; text-align: center; display: block; word-wrap: break-word; border: 1rem black double;
+    padding: 0; margin: 0; border-top: 0; }
+
+p { font-weight: 700; font-size: 4rem; padding: 0; margin: 0; width: 99.90%; text-align: center;
+    background-color: black; color: white; }
+
+p:hover { cursor: not-allowed; }
+
+.fa-paper-plane-top { color: rgb( 0, 0, 0 ); margin: 0; margin-top: 1rem; padding: 12px; right: 1rem;
+    border: black solid 0.5rem; position: absolute; font-size: 2rem; border-radius: 10%; }

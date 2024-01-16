@@ -45,7 +45,7 @@ function Read_UserData() {
 
 const Database = {
 
-    request_url: 'https://script.google.com/macros/s/AKfycbzaGAA1k5GC0xTqEDn68zonSABMBIzg_enYnuMOE8py7WoEd6MPtsCrCBbRb2_WlJ8/exec',
+    request_url: 'https://script.google.com/macros/s/AKfycby475qByJBhvdZ1iZV0r00NHydk7U-1_2iQ2Vw2xXVNkOwo0_Uv78TzH5B9BNdiFe5j/exec',
 
     Send_request: ( data_type, store_data, _arguments_ ) => {
 
@@ -68,7 +68,7 @@ const Database = {
     Update_Data: ( category, cell, data ) => {
 
         Database.Send_request( 'Update', 'DATABASE', '&category=' + category + '&cell=' + cell
-        + '&data=' + data );
+        + '&status=100' + '&data=' + data );
 
         setTimeout( () => { sessionStorage.removeItem( 'DATABASE' ); },1000 );
 
