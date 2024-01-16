@@ -12,89 +12,29 @@
 	
 * { font-family: 'main'; } body { margin: 0; }
 
-.orange-box {
-    background-color: #f27e13;
-    padding: 20px;
-    color: white;
-    text-align: center;
-}
+.orange-box { background-color: #f27e13; padding: 20px; color: white; text-align: center; }
 
-.gray-box {
-    background-color: #ccc;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 8px;
-}
+.gray-box { background-color: #ccc; padding: 20px; margin: 20px; border-radius: 8px; }
 
-.box-content {
-    text-align: center;
-}
+.box-content { text-align: center; }
 
-.icon-placeholder {
-    width: 30%;
-    height: 30%;
-    margin: 0 auto 10px;
-}
+.icon-placeholder { width: 30%; height: 30%; margin: 0 auto 10px; }
 
-.blue-button {
-    background-color: #003368;
-    color: white;
-    padding: 10px 50px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
+.blue-button { background-color: #003368; color: white; padding: 10px 50px; border: none; border-radius: 5px;
+    cursor: pointer; font-size: 16px; }
 
-.blue-button:hover {
-    background-color: #163b63;
-}
+.blue-button:hover { background-color: #163b63; }
 
-.modal {
-    display: none;
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-    opacity: 0;
-    animation: fade-in 0.5s forwards;
-    border: black 5px solid;
-    border-radius: 5px;
-}
+.modal { display: none; position: fixed; top: 20%; left: 50%; transform: translate(-50%, 0); padding: 20px;
+    background-color: white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 1; opacity: 0;
+    animation: fade-in 0.5s forwards; border: black 5px solid; border-radius: 5px; }
 
-@keyframes fade-in {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
+.modal-content { display: flex; }
 
-.modal-content {
-    display: flex;
-}
+.column { flex: 1; padding: 10px; }
 
-.column {
-    flex: 1;
-    padding: 10px;
-}
+.close { position: absolute; top: 10px; right: 10px; font-size: 20px; cursor: pointer; }
 
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
-}
+.input { width: 100%; padding: 10px; margin: 5px 0; box-sizing: border-box; }
 
-.input {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    box-sizing: border-box;
-}
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
