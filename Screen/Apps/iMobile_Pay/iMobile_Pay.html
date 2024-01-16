@@ -17,49 +17,76 @@
 </head>
 
 <body>
+
+    <div id="container">
     
-    <div class="orange-box"><h1>Welcome to iMobile Pay!</h1></div>
+        <div class="orange-box"><h1>Welcome to iMobile Pay!</h1></div>
 
-    <div class="gray-box">
+        <div class="gray-box">
 
-        <div class="box-content">
+            <div class="box-content">
 
-            <img class="icon-placeholder" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/ICICI_Bank_Logo.svg/2560px-ICICI_Bank_Logo.svg.png">
+                <img class="icon-placeholder" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/ICICI_Bank_Logo.svg/2560px-ICICI_Bank_Logo.svg.png">
 
-            <p>I already have Savings Account/ Credit Card/ Loan with ICICI Bank/ recently opened an account through Button in Second Box.</p>
+                <p>I already have Savings Account/ Credit Card/ Loan with ICICI Bank/ recently opened an account through Button in Second Box.</p>
 
-            <button id="option-1" class="blue-button">I already have an Account</button>
+                <button id="option-1" class="blue-button">I already have an Account</button>
 
+            </div>
+
+        </div>
+
+        <div class="gray-box">
+
+            <div class="box-content">
+
+                <img class="icon-placeholder" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/ICICI_Bank_Logo.svg/2560px-ICICI_Bank_Logo.svg.png">
+
+                <p>I do not have any relationship with ICICI Bank and want to apply for a new Account</p>
+
+                <button id="option-2" class="blue-button">I want to Open a New Account</button>
+
+            </div>
+
+        </div>
+
+        <div class="gray-box">
+
+            <div class="box-content">
+
+                <img class="icon-placeholder" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/ICICI_Bank_Logo.svg/2560px-ICICI_Bank_Logo.svg.png">
+
+                <p>I already have Savings Account of which i want to Change my Details </p>
+
+                <button id="option-3" class="blue-button">I want to Change my Details</button>
+
+            </div>
+            
         </div>
 
     </div>
 
-    <div class="gray-box">
-
-        <div class="box-content">
-
-            <img class="icon-placeholder" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/ICICI_Bank_Logo.svg/2560px-ICICI_Bank_Logo.svg.png">
-
-            <p>I do not have any relationship with ICICI Bank and want to apply for a new Account</p>
-
-            <button id="option-2" class="blue-button">I want to Open a New Account</button>
-
+    <div id="SignInAndUpModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <div id="signin" class="column">
+                <h2>Sign In</h2>
+                <input class="input" type="text" placeholder="Username">
+                <input class="input" type="password" placeholder="Password">
+                <button class="blue-button" id="signinbutton">Sign In</button>
+                <p>Don't have an account? <a href="#" id="switchTabSI">Sign Up</a></p>
+            </div>
+            <div id="signup" class="column" style="display: none;">
+                <h2>Sign Up</h2>
+                <input class="input" type="text" placeholder="Name">
+                <input class="input" type="text" placeholder="Username">
+                <input class="input" type="password" placeholder="Password">
+                <input class="input" type="password" placeholder="Security Code">
+                <input class="input" type="text" placeholder="Mobile Number">
+                <button class="blue-button" id="signupbutton">Sign Up</button>
+                <p>Already have an account? <a href="#" id="switchTabSU">Sign In</a></p>
+            </div>
         </div>
-
-    </div>
-
-    <div class="gray-box">
-
-        <div class="box-content">
-
-            <img class="icon-placeholder" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/ICICI_Bank_Logo.svg/2560px-ICICI_Bank_Logo.svg.png">
-
-            <p>I already have Savings Account of which i want to Change my Details </p>
-
-            <button id="option-3" class="blue-button">I want to Change my Details</button>
-
-        </div>
-        
     </div>
 
 </body>

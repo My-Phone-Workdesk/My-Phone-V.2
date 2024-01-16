@@ -5,6 +5,11 @@ window.onload = () => {
         var option_1 = document.getElementById( 'option-1' );
         var option_2 = document.getElementById( 'option-2' );
         var option_3 = document.getElementById( 'option-3' );
+        var modal_close_button = document.getElementById( 'closeModal' );
+        var modal_switch_tab_signup = document.getElementById( 'switchTabSU' );
+        var modal_switch_tab_signin = document.getElementById( 'switchTabSI' );
+        var signup_button = document.getElementById( 'signupbutton' );
+        var signin_button = document.getElementById( 'signinbutton' );
 
         option_3.addEventListener( 'click', () => {
 
@@ -12,17 +17,49 @@ window.onload = () => {
 
         });
 
-        option_2.addEventListener( 'click', () => {
-
-            return location.assign( 'Sign_In&Up.html?sign_up' );
-
-        });
-
         option_1.addEventListener( 'click', () => {
 
-            return location.assign( 'Sign_In&Up.html?sign_in' );
+            return openModal('signin');
 
         });
+
+        option_2.addEventListener( 'click', () => {
+
+            return openModal('signup');
+
+        });
+
+        modal_close_button.addEventListener( 'click', () => {
+
+            return closeModal();
+
+        });
+
+        modal_switch_tab_signup.addEventListener( 'click', () => {
+
+            return switchTab('signin');
+
+        });
+
+        modal_switch_tab_signin.addEventListener( 'click', () => {
+
+            return switchTab('signup');
+
+        });
+
+        signup_button.addEventListener( 'click', () => {
+
+            return SignUp();
+
+        });
+
+        signin_button.addEventListener( 'click', () => {
+
+            return SignIn();
+
+        });
+
+    
 
     } else if ( location.pathname.includes( 'Change_Details.html' ) ) { 
 
@@ -94,14 +131,53 @@ function changeDetails() {
         return alert( 'Authentication failed. Please enter the correct branch code.' );
 
     } else {
+    
+        // FOR AB ----> Your logic to update the account details goes here
+        // From AB ----> Thank You for that 🙏
 
-
+        return alert('Account details changed successfully!');
 
     };
 
-    // FOR AB ----> Your logic to update the account details goes here
-    // From AB ----> Thank You for that 🙏
-
-    return alert('Account details changed successfully!');
-
 };
+
+function openModal(tabName) {
+    var modal = document.getElementById('SignInAndUpModal');
+    modal.style.display = 'block';
+
+    document.getElementById('signin').style.display = tabName === 'signin' ? 'block' : 'none';
+    document.getElementById('signup').style.display = tabName === 'signup' ? 'block' : 'none';
+}
+
+function closeModal() {
+    var modal = document.getElementById('SignInAndUpModal');
+    modal.style.display = 'none';
+}
+
+function switchTab(tabName) {
+    var signinTab = document.getElementById('signin');
+    var signupTab = document.getElementById('signup');
+
+    if (tabName === 'signin') {
+        signinTab.style.display = 'block';
+        signupTab.style.display = 'none';
+    } else if (tabName === 'signup') {
+        signinTab.style.display = 'none';
+        signupTab.style.display = 'block';
+    }
+}
+
+window.onclick = function (event) {
+    var modal = document.getElementById('SignInAndUpModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+};
+
+function SignIn() {
+    return window.location.assign('Account.html');
+}
+
+function SignUp() {
+    return alert('Your Branch Code is 9211');
+}
