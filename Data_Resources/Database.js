@@ -45,7 +45,7 @@ function Read_UserData() {
 
 const Database = {
 
-    request_url: 'https://script.google.com/macros/s/AKfycby475qByJBhvdZ1iZV0r00NHydk7U-1_2iQ2Vw2xXVNkOwo0_Uv78TzH5B9BNdiFe5j/exec',
+    request_url: 'https://script.google.com/macros/s/AKfycbzxo99rgoZnBpMQhxv5DTzqOe5235RkZhCiCOf6R7HUBuA4AdJCLma5I1xwl4n1_pmK/exec',
 
     Send_request: ( data_type, store_data, _arguments_ ) => {
 
@@ -70,7 +70,12 @@ const Database = {
         Database.Send_request( 'Update', 'DATABASE', '&category=' + category + '&cell=' + cell
         + '&status=100' + '&data=' + data );
 
-        setTimeout( () => { sessionStorage.removeItem( 'DATABASE' ); },1000 );
+    },
+
+    Update_Multi_Data: () => {
+
+        Database.Send_request( 'Update', 'DATABASE', '&category=' + category + '&cell=' + cell
+        + '&status=200' + '&data=' + data );
 
     },
 
@@ -79,15 +84,11 @@ const Database = {
         Database.Send_request( 'Create', 'DATABASE', '&category=' + category + '&data=' +
         Database.Json.stringify( data ) );
 
-        setTimeout( () => { sessionStorage.removeItem( 'DATABASE' ); },1000 );
-
     },
 
     Delete_Data: ( category, cell ) => {
 
         Database.Send_request( 'Delete', 'DATABASE', '&category=' + category + '&cell=' + cell );
-
-        setTimeout( () => { sessionStorage.removeItem( 'DATABASE' ); },1000 );
 
     },
 
