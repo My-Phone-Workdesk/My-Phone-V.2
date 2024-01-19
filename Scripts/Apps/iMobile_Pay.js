@@ -2,23 +2,20 @@ window.onload = () => {
 
     if ( location.pathname.includes( 'iMobile_Pay.html' ) ) {
 
+        var modal = document.getElementById( 'SignInAndUpModal' );
+
         var option_1 = document.getElementById( 'option-1' );
         var option_2 = document.getElementById( 'option-2' );
         var option_3 = document.getElementById( 'option-3' );
 
-        var modal_close_button = document.getElementById( 'closeModal' );
+        var modal_close_button = modal.querySelector( 'span' );
         var modal_switch_tab_signup = document.getElementById( 'switchTabSU' );
         var modal_switch_tab_signin = document.getElementById( 'switchTabSI' );
         var signup_button = document.getElementById( 'signupbutton' );
         var signin_button = document.getElementById( 'signinbutton' );
 
-        var modal = document.getElementById( 'SignInAndUpModal' );
-
-        modal.addEventListener( 'click', () => {
-
-            return modal.style.display = 'none';
-
-        });
+        var sign_in = document.getElementById( 'signin' );
+        var sign_up = document.getElementById( 'signup' );
 
         option_3.addEventListener( 'click', () => {
 
@@ -40,7 +37,11 @@ window.onload = () => {
 
         modal_close_button.addEventListener( 'click', () => {
 
-            return closeModal();
+            sign_in.style.visibility = 'hidden';
+            sign_up.style.visibility = 'hidden';
+
+            modal.style.visibility = 'hidden';
+            modal.className = 'modal';
 
         });
 
@@ -95,7 +96,14 @@ window.onload = () => {
 
         });
 
-    } else if ( location.pathname.includes( 'Account.html' ) ) { 
+    } else if ( location.pathname.includes( 'Account.html' ) ) {
+
+        const Accounts_Data = JSON.parse( sessionStorage.getItem( 'Accounts_Data' ) );
+        var account = parseFloat( sessionStorage.getItem( 'Logged_In_Account' ) );
+
+        sessionStorage.removeItem( 'Logged_In_Account' );
+
+        account = Accounts_Data[ account ];
 
         var showBranchCodeButton = document.getElementById( 'showBranchCodeButton' );
         var branchCodeText = document.getElementById( 'branchCodeText' );
@@ -103,9 +111,10 @@ window.onload = () => {
         showBranchCodeButton.addEventListener( 'click', () => {
 
             branchCodeText.innerText = 'Shown';
-            return ShowBranchCode();
 
-        });    
+            return ShowBranchCode( account[ 'Branch_Code' ] );
+
+        });
 
     };
 
@@ -226,20 +235,29 @@ function openModal( tabName ) {
 
     var modal = document.getElementById( 'SignInAndUpModal' );
 
-    modal.style.display = 'block';
+    var sign_in = document.getElementById( 'signin' );
+    var sign_up = document.getElementById( 'signup' );
 
-    document.getElementById( 'signin' ).style.display = tabName === 'signin' ? 'block' : 'none';
-    document.getElementById( 'signup' ).style.display = tabName === 'signup' ? 'block' : 'none';
+    modal.style.visibility = 'visible';
+    modal.className = 'model';
 
-    // Ohh ! The Above code is done in an advanced and 100% brain use way of javascript...
+    if ( tabName == 'signin' ) {
 
-};
+        sign_in.style.visibility = 'visible';
 
-function closeModal() {
+        modal.style.top = '20vh';
+        modal.style.height = '65vh';
+        modal.style.width = '25vw';
 
-    var modal = document.getElementById( 'SignInAndUpModal' );
+    } else if ( tabName == 'signup' ) {
 
-    modal.style.display = 'none';
+        sign_up.style.visibility = 'visible';
+
+        modal.style.top = '5vh';
+        modal.style.height = '75vh';
+        modal.style.width = '30vw';
+
+    };
 
 };
 
@@ -264,7 +282,53 @@ function switchTab( tabName ) {
 
 function SignIn() {
 
-    return window.location.assign( './Account.html' );
+    var sign_in = document.getElementById( 'signin' );
+    var inputs = sign_in.querySelectorAll( 'input' );
+
+    var username = inputs[ 0 ].value;
+    var password = inputs[ 1 ].value;
+
+    const Accounts_Data = JSON.parse( sessionStorage.getItem( 'Accounts_Data' ) );
+
+    var Usernames = new Array();
+    var Passwords = new Array();
+
+    for ( var a = 0; a < Accounts_Data.length; a++ ) {
+
+        Usernames.push( Accounts_Data[ a ][ 'Username' ] );
+        Passwords.push( Accounts_Data[ a ][ 'Password' ] );
+
+    };
+
+    var any_notification = sign_in.querySelector( 'span' );
+
+    if ( Usernames.indexOf( username ) == -1 ) {
+
+        return any_notification.innerHTML = 'Sorry ! We are not able to find the Account with this Username...';
+
+    } else {
+
+        any_notification.innerHTML = '';
+
+        if ( password === Passwords[ Usernames.indexOf( username ) ] ) {
+
+            any_notification.innerHTML = '';
+
+            setTimeout( () => {
+
+                sessionStorage.setItem( 'Logged_In_Account', Usernames.indexOf( username ) );
+
+                return window.location.assign( './Account.html' );
+
+            },1000 ); // Animation...
+
+        } else {
+
+            return any_notification.innerHTML = 'Incorrect Password entered ! ';
+
+        };
+
+    };
 
 };
 
@@ -274,9 +338,9 @@ function SignUp() {
 
 };
 
-function ShowBranchCode() {
+function ShowBranchCode( branchCode ) {
 
-    var branchCode = "9211"; // For AB --> First you have to get the branch code. 9211 is a sample
+    branchCode = branchCode.toString();
 
     var branchCode1 = document.getElementById( 'branchCode1' );
     var branchCode1Span = document.getElementById( 'branchCode1Span' );
@@ -291,14 +355,15 @@ function ShowBranchCode() {
     branchCode2.innerText = '';
     branchCode3.innerText = '';
     branchCode4.innerText = '';
-    branchCode1.appendChild(branchCode1Span);
-    branchCode2.appendChild(branchCode2Span);
-    branchCode3.appendChild(branchCode3Span);
-    branchCode4.appendChild(branchCode4Span);
+    
+    branchCode1.appendChild( branchCode1Span );
+    branchCode2.appendChild( branchCode2Span );
+    branchCode3.appendChild( branchCode3Span );
+    branchCode4.appendChild( branchCode4Span );
+
     branchCode1Span.innerText = branchCode.charAt(0);
     branchCode2Span.innerText = branchCode.charAt(1);
     branchCode3Span.innerText = branchCode.charAt(2);
     branchCode4Span.innerText = branchCode.charAt(3);
 
-
-}
+};
