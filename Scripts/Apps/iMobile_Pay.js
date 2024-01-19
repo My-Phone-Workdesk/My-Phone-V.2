@@ -95,6 +95,18 @@ window.onload = () => {
 
         });
 
+    } else if ( location.pathname.includes( 'Account.html' ) ) { 
+
+        var showBranchCodeButton = document.getElementById( 'showBranchCodeButton' );
+        var branchCodeText = document.getElementById( 'branchCodeText' );
+
+        showBranchCodeButton.addEventListener( 'click', () => {
+
+            branchCodeText.innerText = 'Shown';
+            return ShowBranchCode();
+
+        });    
+
     };
 
 };
@@ -261,3 +273,32 @@ function SignUp() {
     return alert( 'Your Branch Code is 9211' );
 
 };
+
+function ShowBranchCode() {
+
+    var branchCode = "9211"; // For AB --> First you have to get the branch code. 9211 is a sample
+
+    var branchCode1 = document.getElementById( 'branchCode1' );
+    var branchCode1Span = document.getElementById( 'branchCode1Span' );
+    var branchCode2 = document.getElementById( 'branchCode2' );
+    var branchCode2Span = document.getElementById( 'branchCode2Span' );
+    var branchCode3 = document.getElementById( 'branchCode3' );
+    var branchCode3Span = document.getElementById( 'branchCode3Span' );
+    var branchCode4 = document.getElementById( 'branchCode4' );
+    var branchCode4Span = document.getElementById( 'branchCode4Span' );
+
+    branchCode1.innerText = '';
+    branchCode2.innerText = '';
+    branchCode3.innerText = '';
+    branchCode4.innerText = '';
+    branchCode1.appendChild(branchCode1Span);
+    branchCode2.appendChild(branchCode2Span);
+    branchCode3.appendChild(branchCode3Span);
+    branchCode4.appendChild(branchCode4Span);
+    branchCode1Span.innerText = branchCode.charAt(0);
+    branchCode2Span.innerText = branchCode.charAt(1);
+    branchCode3Span.innerText = branchCode.charAt(2);
+    branchCode4Span.innerText = branchCode.charAt(3);
+
+
+}
