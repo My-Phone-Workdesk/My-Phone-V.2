@@ -96,6 +96,10 @@ window.onload = () => {
 
         });
 
+    } else if ( location.pathname.includes( 'Delete_Account.html' ) ) {
+
+        return true;
+
     } else if ( location.pathname.includes( 'Account.html' ) ) {
 
         const Accounts_Data = JSON.parse( sessionStorage.getItem( 'Accounts_Data' ) );
@@ -108,11 +112,31 @@ window.onload = () => {
         var showBranchCodeButton = document.getElementById( 'showBranchCodeButton' );
         var branchCodeText = document.getElementById( 'branchCodeText' );
 
+        var name = document.getElementById( 'name' );
+        var username = document.getElementById( 'username' );
+        var security_code = document.getElementById( 'security_code' );
+        var Mobile_Number = document.getElementById( 'Mobile_Number' );
+
+        name.innerHTML = account[ 'Name' ];
+        username.innerHTML = account[ 'Username' ];
+        security_code.innerHTML = 'Security Code --> ' + account[ 'Security_Code' ];
+        Mobile_Number.innerHTML = 'Mobile No. --> +91 ' + account[ 'Mobile_Number' ];
+
         showBranchCodeButton.addEventListener( 'click', () => {
 
-            branchCodeText.innerText = 'Shown';
+            if ( branchCodeText.innerHTML == 'Hide Branch Code' ) {
 
-            return ShowBranchCode( account[ 'Branch_Code' ] );
+                branchCodeText.innerText = 'Show Branch Code';
+
+                return HideBranchCode();
+
+            } else {
+
+                branchCodeText.innerText = 'Hide Branch Code';
+
+                return ShowBranchCode( account[ 'Branch_Code' ] );
+
+            };
 
         });
 
@@ -320,7 +344,7 @@ function SignIn() {
 
                 return window.location.assign( './Account.html' );
 
-            },1000 ); // Animation...
+            },500 ); // Animation...
 
         } else {
 
@@ -361,9 +385,23 @@ function ShowBranchCode( branchCode ) {
     branchCode3.appendChild( branchCode3Span );
     branchCode4.appendChild( branchCode4Span );
 
-    branchCode1Span.innerText = branchCode.charAt(0);
-    branchCode2Span.innerText = branchCode.charAt(1);
-    branchCode3Span.innerText = branchCode.charAt(2);
-    branchCode4Span.innerText = branchCode.charAt(3);
+    branchCode1Span.innerText = branchCode.charAt( 0 );
+    branchCode2Span.innerText = branchCode.charAt( 1 );
+    branchCode3Span.innerText = branchCode.charAt( 2 );
+    branchCode4Span.innerText = branchCode.charAt( 3 );
+
+};
+
+function HideBranchCode() {
+
+    var branchCode1 = document.getElementById( 'branchCode1' );
+    var branchCode2 = document.getElementById( 'branchCode2' );
+    var branchCode3 = document.getElementById( 'branchCode3' );
+    var branchCode4 = document.getElementById( 'branchCode4' );
+
+    branchCode1.innerHTML = '<span id="branchCode1Span">!</span>Branch';
+    branchCode2.innerHTML = '<span id="branchCode2Span">!</span>Code';
+    branchCode3.innerHTML = '<span id="branchCode3Span">!</span>is';
+    branchCode4.innerHTML = '<span id="branchCode4Span">!</span>Hidden';
 
 };
