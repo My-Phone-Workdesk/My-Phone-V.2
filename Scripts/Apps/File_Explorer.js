@@ -1373,7 +1373,7 @@ function List_Data( run ) {
 
         console.log( Possible_Files_User_Data );
 
-        if ( ! ( Possible_Files_User_Data[ 0 ][ 0 ][ 'Folder' ][ 'Access' ] == 'Block' ) ) {
+        if ( ! ( Possible_Files_User_Data[ 0 ][ 'Folder' ][ 'Access' ] == 'Block' ) ) {
 
             Create_Sub_Options( 'Create New File Here', File );
             Create_Sub_Options( 'Create New Folder Here', Folder );
