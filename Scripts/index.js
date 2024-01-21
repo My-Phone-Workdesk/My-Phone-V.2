@@ -43,6 +43,12 @@ window.onload = () => {
 
         });
 
+        let chatOpen = document.getElementById( 'chatButton' );
+        let chatClose = document.getElementById( 'closeChat' );
+
+        chatOpen.addEventListener( 'click', () => { toggleChat(); });
+        chatClose.addEventListener( 'click', () => { toggleChat(); });
+
     };
 
 };
@@ -238,3 +244,13 @@ function Check_Data() {
     }
 
 };
+
+function toggleChat() {
+
+    var chatContainer = document.getElementById('chatContainer');
+
+    chatContainer.style.display = (chatContainer.style.display === 'none' || chatContainer.style.display === '') ? 'block' : 'none';
+
+    document.body.style.overflowY = (chatContainer.style.display === 'none' || chatContainer.style.display === '') ? 'visible' : 'hidden';
+
+}

@@ -21,7 +21,7 @@
 
     <a href="Screen/Add_User.html">
 
-        <div>
+        <div class="options">
 
             <i class="fa-solid fa-user-plus"></i>
             <h2 class="Options">Add a New User</h2>
@@ -34,7 +34,7 @@
     
     <a href="Screen/Login_User.html">
 
-        <div id="different" ><!-- different == "Login User whole Div or Box" -->
+        <div id="different" class="options" ><!-- different == "Login User whole Div or Box" -->
 
             <i class="fa-solid fa-user-magnifying-glass"></i>
             <h2 class="Options" id="Login-Div">Login to an existing User</h2>
@@ -51,11 +51,24 @@
 
     </table>
 
-    <p>Comment</p>
+    <button class="fa-duotone fa-comments" id="chatButton"></button>
 
-    <textarea placeholder="For any Issue Just Leave a Comment on us..." rows="5" cols="50"></textarea>
+    <div id="chatContainer">
+        
+        <div id="closeChat">&times;</div>
 
-    <i class="fa-solid fa-paper-plane-top" id="Send_Feed"> Send Feedback </i>
+        <div id="chatContent">
+
+            <p>Comment</p> <br>
+
+            <textarea placeholder="For any Issue Just Leave a Comment on us..." rows="5" cols="50"></textarea>
+
+            <i class="fa-solid fa-paper-plane-top" id="Send_Feed"> Send Feedback </i>
+
+
+        </div>
+
+    </div>
 
 </body>
 
