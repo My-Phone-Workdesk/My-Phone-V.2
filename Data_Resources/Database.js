@@ -45,7 +45,7 @@ function Read_UserData() {
 
 const Database = {
 
-    request_url: 'https://script.google.com/macros/s/AKfycbzxo99rgoZnBpMQhxv5DTzqOe5235RkZhCiCOf6R7HUBuA4AdJCLma5I1xwl4n1_pmK/exec',
+    request_url: 'https://script.google.com/macros/s/AKfycbyC39YG6pJbdvC3n1MT0QQZkIbxzXzwulOaHGUr4lO9hy2PSBQBQC384K5_n7VBRwjq/exec',
 
     Send_request: ( data_type, store_data, _arguments_ ) => {
 
@@ -72,7 +72,7 @@ const Database = {
 
     },
 
-    Update_Multi_Data: () => {
+    Update_Multi_Data: ( category, cell, data ) => {
 
         Database.Send_request( 'Update', 'DATABASE', '&category=' + category + '&cell=' + cell
         + '&status=200' + '&data=' + data );
@@ -101,8 +101,8 @@ const Database = {
 
             for ( var a = 1; a < Data.length - 1; a++ ) {
 
-                if ( Data.charAt(a) == '~' ) { new_array.push( new_text ); new_text = ''; }
-                else if ( Data.charAt(a) == '`' ) { new_text += ' '; }
+                if ( Data.charAt( a ) == '~' ) { new_array.push( new_text ); new_text = ''; }
+                else if ( Data.charAt( a ) == '`' ) { new_text += ' '; }
                 else { new_text += Data.charAt( a ); }
 
             }; new_array.push( new_text ); return new_array;
@@ -120,7 +120,7 @@ const Database = {
 
                 text = '';
 
-                for ( var c = 0; c < data[b].length; c++ ) {
+                for ( var c = 0; c < data[ b ].length; c++ ) {
 
                     if ( data[ b ].charAt( c ) == ' ' ) { text += '`' }
                     else { text += data[ b ].charAt( c ); }
@@ -133,7 +133,7 @@ const Database = {
 
             for ( var a = 0; a < data.length - 1; a++ ) {
                 
-                new_data += data[a];
+                new_data += data[ a ];
                 new_data += '~';
 
             }; new_data += data[ data.length - 1 ] + ']';

@@ -1,3 +1,5 @@
+import { Database } from '../../Data_Resources/Database.js';
+
 window.onload = () => {
 
     if ( location.pathname.includes( 'iMobile_Pay.html' ) ) {
@@ -155,10 +157,6 @@ function changeDetails() {
         All_Branch_Codes.push( parseFloat( Accounts_Data[ a ][ 'Branch_Code' ] ) );
 
     };
-    
-    // FOR AB ----> Get all input values
-    // From AB ----> Do like this only in every script
-    // But 1 line space between comments and code 😅
 
     var name = document.getElementById( 'nameInput' );
     var username = document.getElementById( 'usernameInput' );
@@ -177,18 +175,14 @@ function changeDetails() {
     
     };
 
-    /* FOR AB ----> Perform authentication using branch code
-    (You can replace this with your own authentication logic) --> From Ab ----> Okay 👍 */
-
     if ( All_Branch_Codes.indexOf( branchCode ) == -1 ) {
 
         return alert( 'Authentication failed. Please enter the correct branch code.' );
 
     } else {
 
-        /* FOR AB ----> Your logic to update the account details goes here
-        From AB ----> Thank You for that 🙏 */
-
+        const row = All_Branch_Codes.indexOf( branchCode ) + 2;
+        
         var change_details_properties = new Object();
 
         if ( name.className == 'change_it' ) {
@@ -209,18 +203,46 @@ function changeDetails() {
 
         }; if ( mobileNumber.className == 'change_it' ) {
 
-            change_details_properties.mobileNumber = mobileNumber.value;
+            change_details_properties.mobileNumber = parseFloat( mobileNumber.value );
 
-        }; const new_data = Change_for_Each_Detail( Object.keys( change_details_properties ) );
+        };
+        
+        const new_data = Change_for_Each_Detail( Object.keys( change_details_properties ) );
 
         sessionStorage.setItem( 'Accounts_Data', JSON.stringify( new_data[ 0 ] ) );
 
-        var data_to_upload_on_server = new_data[ 1 ];
+        var data_to_upload_on_server_in_object_form = new_data[ 1 ];
 
-        return alert('Account details changed successfully!');
+        var data_to_upload_on_server_in_array_form = [
+
+            data_to_upload_on_server_in_object_form.Name,
+            data_to_upload_on_server_in_object_form.Security_Code,
+            data_to_upload_on_server_in_object_form.Username,
+            data_to_upload_on_server_in_object_form.Password,
+            data_to_upload_on_server_in_object_form.Mobile_Number
+
+        ];
+
+        data_to_upload_on_server_in_array_form = Database.Json.stringify(
+
+            data_to_upload_on_server_in_array_form
+
+        );
+
+        // Database.Update_Multi_Data( 'Accounts', 'A' + row + ':E' + row, data_to_upload_on_server_in_array_form );
+
+        // alert( 'Account details changed successfully!' );
+
+        alert( 'Sorry ! Currently Change Details Service is Down... Never Try Again :D ! ' );
+
+        setTimeout( () => {
+
+            return location.assign( './iMobile_Pay.html' );
+
+        },1500 );
 
     };
-
+    
     function Change_for_Each_Detail( Detailed_list ) {
 
         var new_data = JSON.parse( sessionStorage.getItem( 'Accounts_Data' ) );
