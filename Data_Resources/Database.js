@@ -1,3 +1,5 @@
+window.onload = () => { if ( location.pathname.includes( 'Load_Data.html' ) ) { Read_UserData(); }; };
+
 function Read_UserData() {
 
     setTimeout( () => {
@@ -45,7 +47,7 @@ function Read_UserData() {
 
 const Database = {
 
-    request_url: 'https://script.google.com/macros/s/AKfycbyC39YG6pJbdvC3n1MT0QQZkIbxzXzwulOaHGUr4lO9hy2PSBQBQC384K5_n7VBRwjq/exec',
+    request_url: 'https://script.google.com/macros/s/AKfycbwWhOZxebhvqJcP3ZWKqAq9mXIx2p9wtyxJeOgYT4tz7KW-FbNXN7cbgQwnew6DEFTv/exec',
 
     Send_request: ( data_type, store_data, _arguments_ ) => {
 
@@ -201,7 +203,7 @@ cell is use in Update and Delete...
 
 In Update the Cell should be Column + Row i.e.. for example --> B2, C12, F34, etc
 
-In Delete the cell should be Row like 5, 1, 4, 9, etc but cell > 0 and the cell should be user id + 2
+In Delete the cell should be Row like 5, 1, 4, 9, etc but cell > 2 and the cell should be user id + 2
 because that is the Row number of the Sheet...
 
 In Update the cell's row should be like the delete one only...!!!
@@ -211,11 +213,9 @@ data is use in Update and Create...
 In Update the data can be only a single word, sentence or a number that can be placed in the cell...
 
 In Create the data should be a Json.stringified ( Database.Json.stringify ) formatted array...
-In Which the length of the array should be == the length of the Columns is that shhet you entered in
+In Which the length of the array should be == the length of the Columns is that sheet you entered in
 the category parameter...
 
 In Create data the data will be appended as a new row at the last of the "category" sheet */
-
-window.onload = () => { if ( location.pathname.includes( 'Load_Data.html' ) ) { Read_UserData(); }; };
 
 export { Database };

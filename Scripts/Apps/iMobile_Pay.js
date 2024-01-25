@@ -229,17 +229,17 @@ function changeDetails() {
 
         );
 
-        // Database.Update_Multi_Data( 'Accounts', 'A' + row + ':E' + row, data_to_upload_on_server_in_array_form );
+        Database.Update_Multi_Data( 'Accounts', 'A' + row + ':E' + row, data_to_upload_on_server_in_array_form );
 
         // alert( 'Account details changed successfully!' );
 
-        alert( 'Sorry ! Currently Change Details Service is Down... Never Try Again :D ! ' );
+        alert( 'Your provided account details successfully changed !' );
 
-        setTimeout( () => {
+        /* setTimeout( () => {
 
             return location.assign( './iMobile_Pay.html' );
 
-        },1500 );
+        },1500 ); */
 
     };
     
