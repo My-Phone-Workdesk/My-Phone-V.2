@@ -231,18 +231,8 @@ function changeDetails() {
         );
 
         Database.Update_Multi_Data( 'Accounts', 'A' + row + ':E' + row, data_to_upload_on_server_in_array_form );
-
-        // alert( 'Account details changed successfully!' );
-
+        
         alert( 'Your provided account details successfully changed !' );
-
-        console.log(data_to_upload_on_server_in_array_form, data_to_upload_on_server_in_object_form, new_data);
-
-        /* setTimeout( () => {
-
-            return location.assign( './iMobile_Pay.html' );
-
-        },1500 ); */
 
     };
     
