@@ -90,6 +90,7 @@ window.onload = () => {
                 const inputId = checkbox.id.replace( 'Checkbox', 'Input' );
                 const input = document.getElementById( inputId );
                 input.disabled = !checkbox.checked;
+                input.innerText = "";
                 
                 if ( input.disabled == false ) { input.className = 'change_it'; }
                 else { input.removeAttribute( 'class' ); };
@@ -234,6 +235,8 @@ function changeDetails() {
         // alert( 'Account details changed successfully!' );
 
         alert( 'Your provided account details successfully changed !' );
+
+        console.log(data_to_upload_on_server_in_array_form, data_to_upload_on_server_in_object_form, new_data);
 
         /* setTimeout( () => {
 

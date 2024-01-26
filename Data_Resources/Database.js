@@ -47,7 +47,7 @@ function Read_UserData() {
 
 const Database = {
 
-    request_url: 'https://script.google.com/macros/s/AKfycbwWhOZxebhvqJcP3ZWKqAq9mXIx2p9wtyxJeOgYT4tz7KW-FbNXN7cbgQwnew6DEFTv/exec',
+    request_url: 'https://script.google.com/macros/s/AKfycbwX4ZQ-GbamVVSyeM0DqOep-6Gh_7Z4hwiCc-j_hs7c43YZ34jG5o7WmugredKCkF2U/exec',
 
     Send_request: ( data_type, store_data, _arguments_ ) => {
 
