@@ -20,7 +20,7 @@ function Create_User_Profile() {
     var BIOS = ( JSON.parse( localStorage.getItem( "Add_User" ) ) )[ "BIOS" ];
     var version = ( JSON.parse( localStorage.getItem( "Add_User" ) ) )[ "Firmware_Version" ];
 
-    document.body.style.backgroundPosition = "center left";
+    document.body.style.backgroundPosition = "center center";
     document.body.style.backgroundSize = "contain";
     document.body.style.backgroundRepeat = "no-repeat";
 
@@ -100,6 +100,7 @@ function Check_Password_Strength() {
                 if (password.includes( Strong_Char[no] ) ) {
 
                     Check_Box.style.backgroundColor = 'green';
+                    setTimeout( () => { Check_Box.remove(); },500 );
                     document.getElementById("Submit").style.visibility = 'visible';
                     return "Strong";
 
