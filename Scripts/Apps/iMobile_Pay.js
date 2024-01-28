@@ -234,6 +234,16 @@ function changeDetails() {
         
         alert( 'Your provided account details successfully changed !' );
 
+        document.body.style.cursor = 'none';
+
+        setTimeout( () => {
+
+            document.body.style.cursor = 'Default';
+
+            return window.location.assign( './iMobile_Pay.html' );
+
+        },3000 );
+
     };
     
     function Change_for_Each_Detail( Detailed_list ) {
