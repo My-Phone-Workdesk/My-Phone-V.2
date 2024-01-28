@@ -1,3 +1,5 @@
+const Server = 'https://script.google.com/macros/s/AKfycbwX4ZQ-GbamVVSyeM0DqOep-6Gh_7Z4hwiCc-j_hs7c43YZ34jG5o7WmugredKCkF2U/exec';
+
 window.onload = () => { if ( location.pathname.includes( 'Load_Data.html' ) ) { Read_UserData(); }; };
 
 function Read_UserData() {
@@ -47,7 +49,7 @@ function Read_UserData() {
 
 const Database = {
 
-    request_url: 'https://script.google.com/macros/s/AKfycbwX4ZQ-GbamVVSyeM0DqOep-6Gh_7Z4hwiCc-j_hs7c43YZ34jG5o7WmugredKCkF2U/exec',
+    request_url: Server,
 
     Send_request: ( data_type, store_data, _arguments_ ) => {
 
@@ -150,7 +152,7 @@ const Database = {
 
             var data = JSON.parse( sessionStorage.getItem( data_location ) );
 
-            data = data[0];
+            data = data[ 0 ];
 
             data = Object.keys( data ).indexOf( Column_Name );
 

@@ -10,7 +10,7 @@ window.onload = () => {
 
     if ( location.pathname.includes( 'Device_Not_Eligible.html' ) ) { runOnStart(); }
     else if ( location.pathname.includes( 'Add_User.html' ) ) { Restart(); }
-    else { // For index.html
+    else {
 
         Check_Data();
 
@@ -46,8 +46,8 @@ window.onload = () => {
         let chatOpen = document.getElementById( 'chatButton' );
         let chatClose = document.getElementById( 'closeChat' );
 
-        chatOpen.addEventListener( 'click', () => { toggleChat(); });
-        chatClose.addEventListener( 'click', () => { toggleChat(); });
+        chatOpen.addEventListener( 'click', toggleChat );
+        chatClose.addEventListener( 'click', toggleChat );
 
     };
 
@@ -79,46 +79,49 @@ function Restart() {
 
 function Users() {
 
-    var b = new Array();
-    var d = new Array();
-    b = JSON.parse(sessionStorage.getItem("Data"));
+    const b = JSON.parse( sessionStorage.getItem( 'Data' ) );
 
-    function removeAdministrator(value) {
-        //Removing Administrator from Users table for security purposes...
-        return value != 'Administrator';
-    }
+    function removeAdministrator( value ) { return value != 'Administrator'; };
         
     if ( b != null ) {
 
-        for (var id = 0; id < b.length; id++) {
-            var e = b[id];
-            d.push( e["User"] );
-        }
-        let table = document.querySelector('table');
-        d = d.filter(removeAdministrator);
-        var c = d.length; c--;
-        
-        for (var a = 0; a <= c; a++) {
-            table.insertRow(a + 1).insertCell(0).innerHTML = d[a];
-        }
+        var e = null; var d = new Array();
 
-    }
+        for ( var id = 0; id < b.length; id++ ) { e = b[ id ]; d.push( e.User ); };
+
+        let table = document.querySelector( 'table' );
+        
+        d = d.filter( removeAdministrator ); var c = d.length; c--;
+        
+        for ( var a = 0; a <= c; a++ ) { table.insertRow( a + 1 ).insertCell( 0 ).innerHTML = d[a]; };
+
+    };
 
 };
 
 function runOnStart() {
-    const minwidth = window.matchMedia("(min-width: 0px)");
-    const maxwidth = window.matchMedia("(max-width: 1279px)");
-    if (minwidth.matches && maxwidth.matches) {
-        if ( ! ( location.pathname.includes("/Device_Not_Eligible.html") ) ) {
-            location.href="Device_Not_Eligible.html";
-        }
+
+    const minwidth = window.matchMedia( "(min-width: 0px)" );
+    const maxwidth = window.matchMedia( "(max-width: 1279px)" );
+
+    if ( minwidth.matches && maxwidth.matches ) {
+
+        if ( ! ( location.pathname.includes( '/Device_Not_Eligible.html' ) ) ) {
+
+            window.location.assign( './Device_Not_Eligible.html' );
+
+        };
+
     } else {
-        //Continue with the Main Screen because Device Passed to open the website...
-        if (location.pathname.includes("/Device_Not_Eligible.html")) {
-            location.href = "index.html";
-        }
-    }
+        
+        if ( location.pathname.includes( '/Device_Not_Eligible.html' ) ) {
+            
+            window.location.assign( './index.html' );
+
+        };
+
+    };
+
 };
 
 function Send_Feedback() {
@@ -136,51 +139,51 @@ function Send_Feedback() {
 
         sessionStorage.removeItem( 'Feedback' );
 
-        // Comment == Feedback { returns --> True };
-
-        let Comment = document.querySelector('textarea').value;
+        let Comment = document.querySelector( 'textarea' ).value;
 
         if ( Comment == '' ) {
 
-            alert("Cannot Send Empty Comment...!!! "); // Empty Comment
+            return alert( 'Cannot Send Empty Comment...!!! ' );
 
-        } else if ( Comment.length <= 35 ) { alert("Too Short Comment..."); }
+        } else if ( Comment.length <= 35 ) {
+            
+            return alert( 'Too Short Comment...' );
+        
+        } else {
 
-        else {
-
-            var Send = confirm("Confirm to Send Feedback ?");
+            var Send = confirm( 'Confirm to Send Feedback ?' );
 
             if ( Send ) {
                 
-                var name = prompt("Please Enter your Name", "");
+                var name = prompt( 'Please Enter your Name', '' );
 
                 if ( name == null ) {
 
-                    alert("Feedback Failed to Send..."); // Failed to Send
+                    return alert( 'Feedback Failed to Send...' );
 
-                } else if ( name == "" ) {
+                } else if ( name == '' ) {
 
-                    alert("Please Enter a Name..."); // Empty Response
+                    return alert( 'Please Enter a Name...' );
 
                 } else {
 
-                    var Contact = prompt("Please Enter your Contact Information so that We can Contact you. It can be a Mobile Number, email, address, etc... But it should be Real! ", "");
+                    var Contact = prompt( 'Please Enter your Contact Information so that We can Contact you. It can be a Mobile Number, email, address, etc... But it should be Real ! ', '' );
 
                     if ( Contact == null ) {
 
-                        alert("Feedback Failed to Send..."); // Failed to Send
+                        return alert("Feedback Failed to Send...");
 
-                    } else if ( Contact == "" ) {
+                    } else if ( Contact == '' ) {
 
-                        alert("Please Enter a valid Contact Information..."); // Empty Response
+                        return alert( 'Please Enter a valid Contact Information...' );
 
                     } else {
 
-                        var Existing_User = prompt( "Do you have any of your Existing User ? If Yes ! Then Please Enter the User's Name or If No ! Then you can enter Owner too", 'Owner' )
+                        var Existing_User = prompt( "Do you have any of your Existing User ? If Yes ! Then Please Enter the User's Name or If No ! Then you can enter Owner too", 'Owner' );
                         
                         if ( Existing_User == null ) {
 
-                            alert( 'Feedback Failed to Send...' ); // Failed to Send
+                            return alert( 'Feedback Failed to Send...' );
 
                         } else {
 
@@ -191,7 +194,7 @@ function Send_Feedback() {
 
                             for ( var a = 0; a < Users.length; a++ ) {
 
-                                only_Users.push( Users[a]['User'] );
+                                only_Users.push( Users[ a ][ 'User' ] );
 
                             }; Users = only_Users; only_Users = null;
 
@@ -212,14 +215,13 @@ function Send_Feedback() {
 
                                 setTimeout( () => {
 
-                                    alert( 'Thank You for your Feedback...' );
-                                    return true;
+                                    return alert( 'Thank You for your Feedback...' );
 
-                                },1000 ); // Exit ( Comment Sent )
+                                },1000 );
 
                             } else {
 
-                                alert( 'Sorry ! This User does not Exists...' );
+                                return alert( 'Sorry ! This User does not Exists...' );
 
                             };
 
@@ -229,7 +231,7 @@ function Send_Feedback() {
 
                 };
 
-            } else { return; }  // Exit ( Do not Send Comment )
+            } else { return alert( 'The Feedback cancelled ! ' ); };
 
         };
 
@@ -239,24 +241,25 @@ function Send_Feedback() {
 
 function Check_Data() {
 
-    if ( ( sessionStorage.getItem("Data") == null ) || ( sessionStorage.getItem("Accounts_Data") == null ) ) {
-
-        location.href = "./Data_Resources/Load_Data.html";
-
-    } else {
-
-        Users(); runOnStart(); // Else All Good...
-
-    }
+    if ( ( sessionStorage.getItem( 'Data' ) == null ) || ( sessionStorage.getItem( 'Accounts_Data' ) == null ) )
+    { window.location.assign( './Data_Resources/Load_Data.html' ); } else { Users(); runOnStart(); };
 
 };
 
 function toggleChat() {
 
-    var chatContainer = document.getElementById('chatContainer');
+    var chatContainer = document.getElementById( 'chatContainer' );
 
-    chatContainer.style.display = (chatContainer.style.display === 'none' || chatContainer.style.display === '') ? 'block' : 'none';
+    if ( chatContainer.style.display === 'none' || chatContainer.style.display === '' ) {
 
-    document.body.style.overflowY = (chatContainer.style.display === 'none' || chatContainer.style.display === '') ? 'visible' : 'hidden';
+        chatContainer.style.display = 'block';
+        document.body.style.overflowY = 'visible';
 
-}
+    } else {
+        
+        chatContainer.style.display = 'none';
+        document.body.style.overflowY = 'hidden';
+    
+    };
+
+};
