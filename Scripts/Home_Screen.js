@@ -10,8 +10,6 @@ window.onload = () => {
 
     if ( location.pathname.includes( 'Home_Screen.html' ) ) {
 
-        Get_User_Data();
-
         var urlparams = new URLSearchParams( window.location.search );
 
         if ( ( urlparams.get( 'new_app' ) ) != null ) {
@@ -38,47 +36,7 @@ window.onload = () => {
 
         };
 
-    };
-
-};
-
-function Get_User_Data() {
-
-    if ( sessionStorage.getItem( 'Files' ) == null ) {
-
-        Database.Read_Data( 'Files', 'Files' );
-
-        setTimeout( Take_Cloud_Files_Data, 1000 );
-
-        // Nothing is Kudda 😡 it has a meaning...
-
-    } else if ( sessionStorage.getItem( 'Wifi' ) == null ) {
-
-        Database.Read_Data( 'Wifi', 'Wifi_Router' );
-
-        setTimeout( Take_Cloud_Files_Data, 1000 );
-
-    } else { return Load_Home_Screen(); };
-
-    function Take_Cloud_Files_Data() {
-
-        if ( sessionStorage.getItem( 'Files' ) == null ) {
-            
-            setTimeout( () => {
-
-                return Take_Cloud_Files_Data();
-
-            }, 1000 );
-        
-        } else if ( sessionStorage.getItem( 'Wifi' ) == null ) {
-
-            setTimeout( () => {
-
-                return window.location.reload();
-
-            }, 1000 );
-
-        } else { return Load_Home_Screen(); };
+        return Load_Home_Screen();
 
     };
 
@@ -291,5 +249,3 @@ function Run_Script( code ) {
     return document.close();
 
 };
-
-// Under Construction 😡

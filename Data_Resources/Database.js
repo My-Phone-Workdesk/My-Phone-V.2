@@ -1,49 +1,36 @@
 const Server = 'https://script.google.com/macros/s/AKfycbwX4ZQ-GbamVVSyeM0DqOep-6Gh_7Z4hwiCc-j_hs7c43YZ34jG5o7WmugredKCkF2U/exec';
 
-window.onload = () => { if ( location.pathname.includes( 'Load_Data.html' ) ) { Read_UserData(); }; };
+window.onload = () => { if ( location.pathname.includes( '/Load_Data.html' ) ) { return Import_Database(); }; };
 
-function Read_UserData() {
+function Import_Database() {
 
-    setTimeout( () => {
+    const Storage_Media = [ 'Accounts_Data', 'Data', 'Wifi', 'Files' ];
+    const Media_Memory = [ 'Accounts', 'User_Accounts', 'Wifi_Router', 'Files' ];
 
-        if ( sessionStorage.getItem("Accounts_Data") == null ) {
+    for ( var a = 0; a < Storage_Media.length; a++ ) {
 
-            Database.Read_Data( 'Accounts_Data', 'Accounts' );
+        if ( sessionStorage.getItem( Storage_Media[ a ] ) == null ) {
 
-            setTimeout( () => {
+            Database.Read_Data( Storage_Media[ a ], Media_Memory[ a ] );
 
-                if ( sessionStorage.getItem("Data") == null ) {
-    
-                    Database.Read_Data( 'Data', 'User_Accounts' );
+            return Read_Queries( Storage_Media[ a ] );
 
-                    setTimeout( () => {
-    
-                        if ( sessionStorage.getItem("Data") != null &&
-                        sessionStorage.getItem("Accounts_Data") != null )
-        
-                        {
-        
-                            localStorage.removeItem("Add_User"); location.href = "../index.html";
-        
-                        } else {
-
-                            setTimeout( () => {
-
-                                localStorage.removeItem( "Add_User" ); location.href = '../index.html';
-
-                            },5000 );
-
-                        }; /* return "All Data Extracted from the Server"...!!! */
-        
-                    },2000 );
-    
-                };
-    
-            },1000 );
-    
         };
 
-    },1000 );
+    };
+
+    localStorage.removeItem( 'Add_User' ); return window.location.assign( '../index.html' );
+
+    function Read_Queries( category ) {
+
+        setTimeout( () => {
+
+            if ( sessionStorage.getItem( category ) == null ) { return Read_Queries( category ); }
+            else { return Import_Database(); };
+
+        },1000 );
+
+    };
 
 };
 

@@ -10,46 +10,46 @@ window.onload = () => {
 
     if ( location.pathname.includes( 'Device_Not_Eligible.html' ) ) { runOnStart(); }
     else if ( location.pathname.includes( 'Add_User.html' ) ) { Restart(); }
-    else {
+    else { return runOnStart(); };
 
-        Check_Data();
+};
 
-        let Send_Feedback_button = document.getElementById( 'Send_Feed' );
-        Send_Feedback_button.addEventListener( 'click', () => { Send_Feedback(); });
+function Backand_Home_Screen() {
 
-        document.addEventListener( 'keydown', ( event ) => {
+    let Send_Feedback_button = document.getElementById( 'Send_Feed' );
+    Send_Feedback_button.addEventListener( 'click', () => { Send_Feedback(); });
 
-            var key_control = true;
+    document.addEventListener( 'keydown', ( event ) => {
 
-            if ( event.key == 's' ) {
+        var key_control = true;
 
-                setTimeout( () => {
+        if ( event.key == 's' ) {
 
-                    if ( key_control ) {
+            setTimeout( () => {
 
-                        return location.assign( './Screen/System/Power_Off.html' );
+                if ( key_control ) {
 
-                    };
+                    return location.assign( './Screen/System/Power_Off.html' );
 
-                }, Power_Off_time * 1000 );
+                };
 
-            };
+            }, Power_Off_time * 1000 );
 
-            document.addEventListener( 'keyup', () => {
-            
-                if ( event.key == 's' ) { key_control = false; };
-            
-            });
+        };
 
+        document.addEventListener( 'keyup', () => {
+        
+            if ( event.key == 's' ) { key_control = false; };
+        
         });
 
-        let chatOpen = document.getElementById( 'chatButton' );
-        let chatClose = document.getElementById( 'closeChat' );
+    });
 
-        chatOpen.addEventListener( 'click', toggleChat );
-        chatClose.addEventListener( 'click', toggleChat );
+    let chatOpen = document.getElementById( 'chatButton' );
+    let chatClose = document.getElementById( 'closeChat' );
 
-    };
+    chatOpen.addEventListener( 'click', toggleChat );
+    chatClose.addEventListener( 'click', toggleChat );
 
 };
 
@@ -93,7 +93,9 @@ function Users() {
         
         d = d.filter( removeAdministrator ); var c = d.length; c--;
         
-        for ( var a = 0; a <= c; a++ ) { table.insertRow( a + 1 ).insertCell( 0 ).innerHTML = d[a]; };
+        for ( var a = 0; a <= c; a++ ) { table.insertRow( a + 1 ).insertCell( 0 ).innerHTML = d[ a ]; };
+
+        return Backand_Home_Screen();
 
     };
 
@@ -118,7 +120,7 @@ function runOnStart() {
             
             window.location.assign( './index.html' );
 
-        };
+        } else { return Check_Data(); };
 
     };
 
@@ -241,8 +243,17 @@ function Send_Feedback() {
 
 function Check_Data() {
 
-    if ( ( sessionStorage.getItem( 'Data' ) == null ) || ( sessionStorage.getItem( 'Accounts_Data' ) == null ) )
-    { window.location.assign( './Data_Resources/Load_Data.html' ); } else { Users(); runOnStart(); };
+    const Storage_Media = [ 'Data', 'Accounts_Data', 'Wifi', 'Files' ];
+
+    for ( var a = 0; a < Storage_Media.length; a++ ) {
+
+        if ( sessionStorage.getItem( Storage_Media[ a ] ) == null ) {
+
+            return window.location.assign( './Data_Resources/Load_Data.html' );
+
+        };
+        
+    }; return Users();
 
 };
 
