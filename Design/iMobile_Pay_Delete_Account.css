@@ -1,1 +1,27 @@
-/* This is for Lucky */
+body { width: 100vw; height: 100vh; background-color: lightblue; overflow: hidden; }
+
+p { display: block; position: fixed; left: 5rem; margin-top: 3rem; margin-bottom: 2rem; }
+
+p.Security_Code { top: 10rem; }
+
+input { width: 20rem; text-align: center; height: 2rem; border: 0.2rem black solid; color: black;
+    background-color: white; margin-left: 2rem; }
+
+input::placeholder { color: red; }
+
+p { font-size: 2rem; }
+
+button { border-radius: 20%; font-size: 1rem; padding: 1rem; position: fixed; bottom: 5rem; left: 5rem;
+    background-color: red; color: lightblue; }
+
+i { margin-left: 0.4rem; margin-right: 0.4rem; }
+
+button:hover { cursor: pointer; }
+
+span { color: red; position: fixed; left: 5rem; bottom: 15rem; font-size: 2rem; }
+
+span:hover { cursor: not-allowed; }
+
+p:hover { cursor: not-allowed; }
+
+/* Actual Designing Work for Lucky as this is temporary */

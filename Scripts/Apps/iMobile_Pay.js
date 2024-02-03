@@ -4,6 +4,12 @@ window.onload = () => {
 
     if ( location.pathname.includes( 'iMobile_Pay.html' ) ) {
 
+        if ( sessionStorage.getItem( 'confirmation' ) != null ) {
+
+            sessionStorage.removeItem( 'confirmation' );
+
+        };
+
         var modal = document.getElementById( 'SignInAndUpModal' );
 
         var option_1 = document.getElementById( 'option-1' );
@@ -101,7 +107,37 @@ window.onload = () => {
 
     } else if ( location.pathname.includes( 'Delete_Account.html' ) ) {
 
-        return true;
+        const confirmation = JSON.parse( sessionStorage.getItem( 'confirmation' ) );
+
+        const inputs = document.body.querySelectorAll( 'input' );
+
+        var button = document.body.querySelector( 'button' );
+        var span = document.body.querySelector( 'span' );
+
+        button.addEventListener( 'click', () => {
+
+            const security_code = parseFloat( inputs[ 0 ].value );
+            const branchCode = parseFloat( inputs[ 1 ].value );
+            
+            if ( security_code === parseFloat( confirmation.securityCode ) ) {
+
+                if ( branchCode === parseFloat( confirmation.branchCode ) ) {
+
+                    span.innerHTML = ''; return Delete_Account();
+
+                } else {
+
+                    return span.innerHTML = 'Branch Code is incorrect... Please Try Again ! ';
+
+                };
+
+            } else {
+
+                return span.innerHTML = 'Security Code is incorrect... Please Try Again ! ';
+
+            };
+
+        });
 
     } else if ( location.pathname.includes( 'Account.html' ) ) {
 
@@ -142,6 +178,13 @@ window.onload = () => {
             };
 
         });
+
+        const confirmation = new Object();
+
+        confirmation.branchCode = account[ 'Branch_Code' ];
+        confirmation.securityCode = account[ 'Security_Code' ];
+
+        return sessionStorage.setItem( 'confirmation', JSON.stringify( confirmation ) );
 
     };
 
@@ -428,5 +471,13 @@ function HideBranchCode() {
     branchCode2.innerHTML = '<span id="branchCode2Span">!</span>Code';
     branchCode3.innerHTML = '<span id="branchCode3Span">!</span>is';
     branchCode4.innerHTML = '<span id="branchCode4Span">!</span>Hidden';
+
+};
+
+function Delete_Account() {
+
+    alert( 'Your Account Successfully Deleted ! ' );
+
+    return window.location.assign( './iMobile_Pay.html' );
 
 };
