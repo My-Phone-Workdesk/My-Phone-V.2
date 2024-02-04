@@ -56,3 +56,7 @@ button {
 button:hover {
     background-color: #163b63;
 }
+
+span {
+    color: red;
+}

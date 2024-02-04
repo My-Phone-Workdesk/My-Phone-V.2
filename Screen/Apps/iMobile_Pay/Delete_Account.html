@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" type="text/css" href="../../../Icons/fontawesome-pro/css/all.css">
-    <link rel="stylesheet" href="../../../Design/iMobile_Pay_Delete_Account.css">
+    <link rel="stylesheet" href="../../../Design/iMobile_Pay_Change_Details.css">
 
     <link rel="Icon" type="Image/X-icon" href="../../../Icons/Delete_Account.ico" />
 
@@ -17,20 +17,28 @@
 </head>
 
 <body>
-
-    <p class="Security_Code">
-        
-        Security Code : <input type="password" placeholder="Enter your Security Code for confirmation" />
     
-    </p>
+    <div class="container">
 
-    <p> Branch Code : <input type="password" placeholder="Enter your Branch Code for confirmation" /> </p>
+        <h1>Delete Account</h1>
 
-    <span></span>
+        <div class="authentication">
 
-    <button> <i class="fa-solid fa-trash-xmark"></i> Confirm to Delete my Account </button>
+            <label for="password">Password:</label>
+            <input type="password" id="password">
 
-    <!-- Actual HTML Work for Lucky as this is temporary -->
+        </div>
+
+        <div class="authentication">
+
+            <label for="branchCode">Branch Code:</label>
+            <input type="password" id="branchCode">
+
+        </div><br><span></span><br><br> 
+
+        <button id="changeDetails">Delete Account</button>
+
+    </div>
 
 </body>
 

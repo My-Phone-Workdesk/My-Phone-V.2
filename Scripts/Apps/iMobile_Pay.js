@@ -108,18 +108,18 @@ window.onload = () => {
     } else if ( location.pathname.includes( 'Delete_Account.html' ) ) {
 
         const confirmation = JSON.parse( sessionStorage.getItem( 'confirmation' ) );
-
-        const inputs = document.body.querySelectorAll( 'input' );
+        sessionStorage.removeItem( 'confirmation' );
 
         var button = document.body.querySelector( 'button' );
         var span = document.body.querySelector( 'span' );
 
         button.addEventListener( 'click', () => {
 
-            const security_code = parseFloat( inputs[ 0 ].value );
+            const inputs = document.body.querySelectorAll( 'input' );
+            const password = ( inputs[ 0 ].value );
             const branchCode = parseFloat( inputs[ 1 ].value );
             
-            if ( security_code === parseFloat( confirmation.securityCode ) ) {
+            if ( password === parseFloat( confirmation.password ) ) {
 
                 if ( branchCode === parseFloat( confirmation.branchCode ) ) {
 
@@ -133,7 +133,7 @@ window.onload = () => {
 
             } else {
 
-                return span.innerHTML = 'Security Code is incorrect... Please Try Again ! ';
+                return span.innerHTML = 'Password is incorrect... Please Try Again ! ';
 
             };
 
@@ -181,7 +181,7 @@ window.onload = () => {
 
         const confirmation = new Object();
 
-        confirmation.branchCode = account[ 'Branch_Code' ];
+        confirmation.password = account[ 'Password' ];
         confirmation.securityCode = account[ 'Security_Code' ];
 
         return sessionStorage.setItem( 'confirmation', JSON.stringify( confirmation ) );
