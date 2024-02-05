@@ -339,21 +339,21 @@ function Skip() {
 
                     if ( returned_value == false ) {
 
-                        return give_alert( "This is not a valid Command for Boot ❌ ", () => { return true; });
+                        alert( "This is not a valid Command for Boot ❌ " );
 
                     }  else if ( returned_value == true ) {
                         
-                        return give_alert( "The Command was Successful", () => { return true; });
+                        alert( "The Command was Successful" );
                     
                     };
 
-                } while ( special_commands.indexOf( command ) == -1 );
+                } while ( special_commands.indexOf( command.toLowerCase() ) == -1 );
 
                 if ( command == '/reboot' ) {  return location.assign( '../../index.html' ); };
 
             } else if ( command == null ) {} else {
                 
-                return give_alert( "Not an appropriate answer", () => { return true; });
+                alert( "Not an appropriate answer" );
             
             };
 
@@ -368,9 +368,9 @@ function Check_Command( command ) {
 
     if ( command == null || command == "" ) {
         
-        return give_alert( "Please Enter a Command... Can't access empty command box...", () => { return; });
+        return alert( "Please Enter a Command... Can't access empty command box..." );
 
-    } else if ( command == '/exit' || command == '/reboot' ) { return sessionStorage.clear(); }
+    } else if ( command == '/exit' || command == '/reboot' ) { sessionStorage.clear(); return true; }
     else if ( command == "/restart" ) { return window.location.assign( '../System/Restart.html' ); }
     else if ( command == '/power off' ) { return window.location.assign( '../System/Power_Off.html' ); }
     else { return false; }
