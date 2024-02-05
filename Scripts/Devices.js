@@ -4,6 +4,51 @@ import { Database } from '../Data_Resources/Database.js';
 
 // Real Script Starts from Below ==>
 
+function give_alert( statement, upcoming_function ) {
+
+    var message = false;
+
+    var div = document.createElement( 'div' );
+    div.id = 'alert';
+
+    var button = document.createElement( 'button' );
+    button.id = 'alert_close';
+
+    var icon = document.createElement( 'i' );
+    icon.className = 'fa-solid fa-circle-xmark';
+
+    var p = document.createElement( 'p' );
+    p.id = 'alert_statement';
+    p.innerHTML = statement;
+
+    button.addEventListener( 'click', () => { div.remove(); return message = 'read'; });
+
+    button.appendChild( icon ); div.appendChild( button ); div.appendChild( p );
+
+    document.body.appendChild( div );
+
+    alert_read();
+
+    function alert_read() {
+
+        setTimeout( () => {
+    
+            if ( message == 'read' ) {
+    
+                return upcoming_function();
+    
+            } else {
+    
+                return alert_read( upcoming_function );
+                
+            };
+            
+        },1000 );
+    
+    };
+
+};
+
 window.onload = () => {
 
     if ( location.pathname.includes( 'Mother_Board.html' ) ) {
@@ -185,13 +230,18 @@ function Payment_MB() {
 
                             if ( a == -1 ) {
 
-                                alert( 'Sorry ! An Error Occured, But your Money will not lose' );
-                                alert( 'We are Redirecting you to Home Screen...' );
-                                location.href = '../../index.html'; return -3;
+                                return give_alert( 'Sorry ! An Error Occured, But' +
+                                'your Money will not lose', () => {
 
-                            };
-                            
-                            Database.Update_Data( 'Accounts', a + ( c + 2 ), d );
+                                    return give_alert( 'We are Redirecting you to Home Page...', () => {
+
+                                        location.href = '../../index.html'; return -3;
+
+                                    });
+
+                                });
+
+                            }; Database.Update_Data( 'Accounts', a + ( c + 2 ), d );
 
                             document.body.style.cursor = "Progress";
 
@@ -208,32 +258,46 @@ function Payment_MB() {
                                 update = JSON.stringify( update );
                                 sessionStorage.setItem("Accounts_Data", update);
 
-                                alert("Payment Successful");
-                                location.href = "../../OS_Package/OS_Setup/OS_Setup.html";
+                                return give_alert( 'Payment Successful', () => {
 
-                                document.body.style.cursor = "Default";
+                                    location.href = "../../OS_Package/OS_Setup/OS_Setup.html";
+
+                                    document.body.style.cursor = "Default";
+
+                                });
 
                             },2000 ); return 1;
                             
                         } else {
 
-                            alert("Sorry, You can't Proceed ahead due to insufficient Account Balance");
-                            location.reload(); return -2;
+                            return give_alert( "Sorry, You can't Proceed ahead due to insufficient" +
+                            "Account Balance", () => {
+
+                                window.location.reload(); return -2;
+
+                            });
 
                         };
 
                     } else if (c == 0) {
 
-                        alert("You can't use Government Financial Money...");
-                        location.reload(); return 0;
+                        return give_alert( "You can't use Government Financial Money...", () => {
+
+                            window.location.reload(); return 0;
+
+                        });
 
                     };
 
                 } else { c++; };
 
-            }; alert("Wrong Security Code"); location.reload(); return -1;
+            }; return give_alert( "Wrong Security Code", () => {
 
-    } catch (error) { alert(error.message); }
+                window.location.reload(); return -1;
+
+            });
+
+    } catch ( error ) { return give_alert( error.message, () => { return true; }); };
     
 };
 
@@ -266,24 +330,37 @@ function Skip() {
 
             } else if ( command == "Yes" ) {
 
+                var special_commands = [ '/exit', '/reboot', '/restart', '/power_off' ];
+
                 do {
                     
                     var command = prompt("Enter your Command to Boot...");
                     var returned_value = Check_Command( command );
 
-                    if ( returned_value == false ) { alert("This is not a valid Command for Boot ❌ "); } 
-                    else if ( returned_value == true ) { alert("The Command was Successful"); };
+                    if ( returned_value == false ) {
 
-                } while ( command != '/exit' && command != '/reboot' && command != '/restart' && command != '/power off' );
+                        return give_alert( "This is not a valid Command for Boot ❌ ", () => { return true; });
 
-                if ( command == '/reboot' ) {  location.href = "../../index.html"; }
+                    }  else if ( returned_value == true ) {
+                        
+                        return give_alert( "The Command was Successful", () => { return true; });
+                    
+                    };
 
-            } else if ( command == null ) {} else { alert("Not an appropriate answer"); }
+                } while ( special_commands.indexOf( command ) == -1 );
+
+                if ( command == '/reboot' ) {  return location.assign( '../../index.html' ); };
+
+            } else if ( command == null ) {} else {
+                
+                return give_alert( "Not an appropriate answer", () => { return true; });
+            
+            };
 
 
         } while ( command != "No" && command != '/exit' && command != null && command != '/reboot' && command != '/restart' && command != '/power off' );
 
-    }; return false; // The User don't want to command to Boot...
+    }; return false;
 
 };
 
@@ -291,10 +368,11 @@ function Check_Command( command ) {
 
     if ( command == null || command == "" ) {
         
-        alert("Please Enter a Command... Can't access empty command box..."); return null;
+        return give_alert( "Please Enter a Command... Can't access empty command box...", () => { return; });
 
-    } else if ( command == '/exit' || command == '/reboot' ) { sessionStorage.clear(); }
-    else if ( command == "/restart" ) { location.href = "../System/Restart.html"; }
-    else if ( command == '/power off' ) { location.href = "../System/Power_Off.html" }
+    } else if ( command == '/exit' || command == '/reboot' ) { return sessionStorage.clear(); }
+    else if ( command == "/restart" ) { return window.location.assign( '../System/Restart.html' ); }
+    else if ( command == '/power off' ) { return window.location.assign( '../System/Power_Off.html' ); }
+    else { return false; }
 
 };
