@@ -82,14 +82,6 @@ function Login() {
 
                             if ( user_lock == locks_hash[check] ) {
 
-                                //Correct User Lock Entered... User Recognised...!!!
-
-                                if ( sessionStorage.getItem( 'Files' ) ) {
-
-                                    sessionStorage.removeItem( 'Files' );
-
-                                };
-
                                 localStorage.setItem("Amount_MB", check);
                                 location.href = "./OS_Loader.html";
 
