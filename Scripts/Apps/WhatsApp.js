@@ -1,0 +1,1 @@
+window.onload = () => { /* Eat 5 Star do Nothing ! */ };
