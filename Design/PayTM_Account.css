@@ -58,8 +58,8 @@ body, html {
 
 .content-left {
 	background: #002970;
-	width: 100%;
-	height: 80rem;
+	width: 550px;
+	height: 55rem
 }
 
 .content-left__info {
@@ -123,8 +123,7 @@ body, html {
 .content-left__button-content {
 	display: flex;
 	justify-content: center;
-	align-items: center;
-	margin-top: 6px
+	align-items: center
 }
 
 .content-left__button-txt {
@@ -276,4 +275,9 @@ body, html {
 	.login-switch-button {
 		width: 100%
 	}
+}
+
+.BankLogo {
+	height: 5rem;
+	width: auto
 }
