@@ -39,7 +39,7 @@ function give_alert( statement, upcoming_function ) {
     
             } else {
     
-                return alert_read( upcoming_function );
+                return alert_read();
                 
             };
             
@@ -291,11 +291,11 @@ function Payment_MB() {
 
                 } else { c++; };
 
-            }; return give_alert( "Wrong Security Code", () => {
+        }; return give_alert( "Wrong Security Code", () => {
 
-                window.location.reload(); return -1;
+            window.location.reload(); return -1;
 
-            });
+        });
 
     } catch ( error ) { return give_alert( error.message, () => { return true; }); };
     
@@ -305,74 +305,93 @@ function Skip() {
 
     var ok = confirm("Are you Sure to Skip adding Mother Board... ( This Step can't be undone ❗ ) ");
 
-    if ( ok ) {
-
-        do {
-            
-            var command = prompt("Any Command for Boot ?", "No");
-
-            if ( command == "No" ) {
-
-                document.body.style.cursor = "Progress";
-
-                var Account = new Object();
-                Account.Device = localStorage.getItem( 'device_type' );
-                Account.Payment = false;
-                Account = JSON.stringify( Account );
-                localStorage.setItem( 'Add_User', Account );
-
-                setTimeout( () => {
-
-                    document.body.style.cursor = "Default";
-                    location.href = "../../OS_Package/OS_Setup/OS_Setup.html"; 
-
-                },2000 );
-
-            } else if ( command == "Yes" ) {
-
-                var special_commands = [ '/exit', '/reboot', '/restart', '/power_off' ];
-
-                do {
-                    
-                    var command = prompt("Enter your Command to Boot...");
-                    var returned_value = Check_Command( command );
-
-                    if ( returned_value == false ) {
-
-                        alert( "This is not a valid Command for Boot ❌ " );
-
-                    }  else if ( returned_value == true ) {
-                        
-                        alert( "The Command was Successful" );
-                    
-                    };
-
-                } while ( special_commands.indexOf( command.toLowerCase() ) == -1 );
-
-                if ( command == '/reboot' ) {  return location.assign( '../../index.html' ); };
-
-            } else if ( command == null ) {} else {
-                
-                alert( "Not an appropriate answer" );
-            
-            };
-
-
-        } while ( command != "No" && command != '/exit' && command != null && command != '/reboot' && command != '/restart' && command != '/power off' );
-
-    }; return false;
+    if ( ok ) { return Skip_Loopy_Loop(); }; return false;
 
 };
 
-function Check_Command( command ) {
+function Skip_Loopy_Loop() {
 
-    if ( command == null || command == "" ) {
+    var Loopy = true; do {
+            
+        var command = prompt("Any Command for Boot ?", "no");
+
+        if ( command == "no" ) {
+
+            document.body.style.cursor = "Progress";
+
+            var Account = new Object();
+            Account.Device = localStorage.getItem( 'device_type' );
+            Account.Payment = false;
+            Account = JSON.stringify( Account );
+            localStorage.setItem( 'Add_User', Account );
+
+            setTimeout( () => {
+
+                document.body.style.cursor = "Default";
+                location.href = "../../OS_Package/OS_Setup/OS_Setup.html"; 
+
+            },2000 );
+
+        } else if ( command == "Yes" ) { return Skip_Loop(); }
         
-        return alert( "Please Enter a Command... Can't access empty command box..." );
+        else if ( command == null ) {} else {
 
-    } else if ( command == '/exit' || command == '/reboot' ) { sessionStorage.clear(); return true; }
-    else if ( command == "/restart" ) { return window.location.assign( '../System/Restart.html' ); }
-    else if ( command == '/power off' ) { return window.location.assign( '../System/Power_Off.html' ); }
-    else { return false; }
+            Loopy = false; return give_alert( "Not an appropriate answer", Skip_Loopy_Loop );
+        
+        };
+
+
+    } while ( command != "No" && command != '/exit' && command != null && command != '/reboot' &&
+    command != '/restart' && command != '/power off' && Loopy == false ); return 658;
+
+};
+
+function Skip_Loop() {
+    
+    var Loopy = true; do {
+                
+        var command = prompt("Enter your Command to Boot...");
+        var returned_value = Check_or_Run_Command( command, 'check' );
+
+        if ( returned_value == false ) {
+
+            Loopy = false; return give_alert( 'This is not a valid Command for Boot ❌ ', Skip_Loop );
+
+        } else if ( returned_value == true ) {
+            
+            Loopy = false; return give_alert( "The Command was Successful", () => {
+                
+                return Check_or_Run_Command( command, 'run' );
+            
+            });
+        
+        } else if ( returned_value == 'empty_input_error' ) {
+
+            Loopy = false; return give_alert( "Please Enter a Command... Can't access empty command box...",
+            Skip_Loop );
+
+        } else if ( returned_value == 'escape' ) { Loopy = false; };
+
+    } while ( Loopy == true ); return 658;
+
+};
+
+function Check_or_Run_Command( command, check_or_run ) {
+
+    if ( check_or_run == 'check' ) {
+
+        if ( command == null ) { return 'escape'; } else if ( command == "" ) { return 'empty_input_error'; }
+        else if ( command == '/exit' || command == '/reboot' ) { sessionStorage.clear(); return true; }
+        else if ( command == "/restart" || command == '/power_off' ) { return true; }
+        else { return false; };
+
+    } else if ( check_or_run == 'run' ) {
+
+        if ( command == '/reboot' ) {  return location.assign( '../../index.html' ); }
+        else if ( command == "/restart" ) { return window.location.assign( '../System/Restart.html' ); }
+        else if ( command == '/power_off' ) { return window.location.assign( '../System/Power_Off.html' ); }
+        else if ( command == '/exit' ) { return true; };
+
+    };
 
 };

@@ -46,6 +46,8 @@ button { position: absolute; color: black; background-color: white; font-size: 2
 
 input:active { cursor: text; }
 
+/* From here the Alert Design starts... After designing alert please delete this comment line.. */
+
 div#alert { position: fixed; width: 60vw; height: 25vh; background-color: white; border: 0.6rem green solid;
     top: 37.5vh; left: 20vw; visibility: visible; z-index: 3; font-size: 2rem; }
 
