@@ -45,14 +45,3 @@ button { position: absolute; color: black; background-color: white; font-size: 2
 .fa-eye, .fa-eye-slash { margin-left: 0.5rem; position: relative; font-size: 2.5rem; bottom: -1.8rem; }
 
 input:active { cursor: text; }
-
-/* From here the Alert Design starts... After designing alert please delete this comment line.. */
-
-div#alert { position: fixed; width: 60vw; height: 25vh; background-color: white; border: 0.6rem green solid;
-    top: 37.5vh; left: 20vw; visibility: visible; z-index: 3; font-size: 2rem; }
-
-p#alert_statement { text-align: center; text-wrap: wrap; position: relative; bottom: 5vh; color: black; }
-
-button#alert_close i { font-size: 2rem; color: black; }
-
-button#alert_close { border: none; position: relative; top: 0.5vh; left: 0.5vw; }

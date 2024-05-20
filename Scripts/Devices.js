@@ -168,7 +168,7 @@ function Setup() {
             localStorage.setItem("device_type", "Administrative Device");
             localStorage.setItem("Amount_MB", 5000); break;
 
-    }; window.location.href = "../../Screen/User_Setup/Mother_Board.html";
+    }; return window.location.href = "../../Screen/User_Setup/Mother_Board.html";
 
 };
 
