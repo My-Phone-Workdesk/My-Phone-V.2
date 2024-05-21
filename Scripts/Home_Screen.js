@@ -4,6 +4,8 @@ import { Database } from "../Data_Resources/Database.js";
 
 import { List_Data } from "./Apps/File_Explorer.js";
 
+import { give_alert } from './Alert.js';
+
 // Real Script Starts from Below ==>
 
 window.onload = () => {
@@ -14,9 +16,11 @@ window.onload = () => {
 
         if ( ( urlparams.get( 'new_app' ) ) != null ) {
             
-            alert( ( urlparams.get( 'new_app' ) ) + ' is Installed Successfully ! ' );
+            return give_alert( ( urlparams.get( 'new_app' ) ) + ' is Installed Successfully ! ', () => {
 
-            return location.assign( './Home_Screen.html' );
+                return location.assign( './Home_Screen.html' );
+
+            });
         
         };
 
@@ -221,12 +225,8 @@ function Open_App( app_script ) {
 
     if ( ! ( Array.isArray( app_script ) ) ) {
 
-        return alert(
-            
-            '\n' + 'The Script is not coded Well...' + '\n' + '\n' + 'I Think the Coder is Mad Enough to' +
-            ' code an app... 😅 May be the Coder is so much selfish ! ' + '\n'
-            
-        );
+        return give_alert( '\n' + 'The Script is not coded Well...' + '\n' + '\n' + 'I Think the Coder ' +
+        'is Mad Enough to code an app... 😅 May be the Coder is so much selfish ! ' + '\n', () => {});
 
     };
 

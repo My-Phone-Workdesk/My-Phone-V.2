@@ -2,6 +2,8 @@
 
 import { Database } from "../Data_Resources/Database.js";
 
+import { give_alert } from "./Alert.js";
+
 // Real Script Starts from Below ==>
 
 const Power_Off_time = 6; // in seconds
@@ -145,11 +147,11 @@ function Send_Feedback() {
 
         if ( Comment == '' ) {
 
-            return alert( 'Cannot Send Empty Comment...!!! ' );
+            return give_alert( 'Cannot Send Empty Comment...!!!', () => {});
 
         } else if ( Comment.length <= 35 ) {
             
-            return alert( 'Too Short Comment...' );
+            return give_alert( 'Too Short Comment...', () => {});
         
         } else {
 
@@ -161,23 +163,24 @@ function Send_Feedback() {
 
                 if ( name == null ) {
 
-                    return alert( 'Feedback Failed to Send...' );
+                    return give_alert( 'Feedback Failed to Send...', () => {});
 
                 } else if ( name == '' ) {
 
-                    return alert( 'Please Enter a Name...' );
+                    return give_alert( 'Please Enter a Name...', () => {});
 
                 } else {
 
-                    var Contact = prompt( 'Please Enter your Contact Information so that We can Contact you. It can be a Mobile Number, email, address, etc... But it should be Real ! ', '' );
+                    var Contact = prompt( 'Please Enter your Contact Information so that We can Contact ' +
+                    'you. It can be a Mobile Number, email, address, etc... But it should be Real ! ', '' );
 
                     if ( Contact == null ) {
 
-                        return alert("Feedback Failed to Send...");
+                        return give_alert( "Feedback Failed to Send...", () => {});
 
                     } else if ( Contact == '' ) {
 
-                        return alert( 'Please Enter a valid Contact Information...' );
+                        return give_alert( 'Please Enter a valid Contact Information...', () => {});
 
                     } else {
 
@@ -185,7 +188,7 @@ function Send_Feedback() {
                         
                         if ( Existing_User == null ) {
 
-                            return alert( 'Feedback Failed to Send...' );
+                            return give_alert( 'Feedback Failed to Send...', () => {});
 
                         } else {
 
@@ -217,13 +220,13 @@ function Send_Feedback() {
 
                                 setTimeout( () => {
 
-                                    return alert( 'Thank You for your Feedback...' );
+                                    return give_alert( 'Thank You for your Feedback...', () => {});
 
                                 },1000 );
 
                             } else {
 
-                                return alert( 'Sorry ! This User does not Exists...' );
+                                return give_alert( 'Sorry ! This User does not Exists...', () => {});
 
                             };
 
@@ -233,7 +236,7 @@ function Send_Feedback() {
 
                 };
 
-            } else { return alert( 'The Feedback cancelled ! ' ); };
+            } else { return give_alert( 'The Feedback cancelled ! ', () => {}); };
 
         };
 
