@@ -4,8 +4,8 @@ window.onload = () => { if ( location.pathname.includes( '/Load_Data.html' ) ) {
 
 function Import_Database() {
 
-    const Storage_Media = [ 'Accounts_Data', 'Data', 'Wifi', 'Files' ];
-    const Media_Memory = [ 'Accounts', 'User_Accounts', 'Wifi_Router', 'Files' ];
+    const Storage_Media = [ 'Accounts_Data', 'Data', 'Wifi', 'Files', 'Feedback' ];
+    const Media_Memory = [ 'Accounts', 'User_Accounts', 'Wifi_Router', 'Files', 'Feedback' ];
 
     for ( var a = 0; a < Storage_Media.length; a++ ) {
 

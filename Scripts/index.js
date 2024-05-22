@@ -130,15 +130,10 @@ function runOnStart() {
 
 function Send_Feedback() {
 
-    document.body.style.cursor = 'progress';
-
-    Database.Read_Data( 'Feedback', 'Feedback' );
+    var Feedback_length = JSON.parse( sessionStorage.getItem( 'Feedback' ) );
 
     setTimeout( () => {
 
-        document.body.style.cursor = 'Default';
-
-        var Feedback_length = JSON.parse( sessionStorage.getItem( 'Feedback' ) );
         Feedback_length = Feedback_length.length + 2;
 
         sessionStorage.removeItem( 'Feedback' );
@@ -240,7 +235,7 @@ function Send_Feedback() {
 
         };
 
-    },2500 );
+    },200 );
 
 };
 
