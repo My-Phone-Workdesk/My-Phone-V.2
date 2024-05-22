@@ -2,6 +2,8 @@
 
 import { Database } from '../Data_Resources/Database.js';
 
+import { give_alert } from './Alert.js';
+
 // Real Script Starts from Below ==>
 
 window.onload = () => {
@@ -207,9 +209,11 @@ function Next() {
     
     if ( ! ( file_data[0] == '--- Start ---' && file_data[file_data.length - 1] == '--- End ---') ) {
 
-        alert("The Certificate is not Suitable for your System...");
+        return give_alert( "The Certificate is not Suitable for your System...", () => {
 
-        sessionStorage.setItem( 'Check' , false ); location.reload();
+            sessionStorage.setItem( 'Check' , false ); return location.reload();
+
+        });
         
     } else {
 
@@ -267,24 +271,31 @@ function Program( Code ) {
 
                 } else {
 
-                    alert('Your Uploaded OS Certificate is not Correct...');
+                    return give_alert( 'Your Uploaded OS Certificate is not Correct...', () => {
 
-                    sessionStorage.setItem( 'Check', false ); location.reload();
+                        sessionStorage.setItem( 'Check', false ); return location.reload();
+
+                    });
 
                 };
 
             } else {
 
-                alert('Your Selected OS is not Correct...');
+                return give_alert( 'Your Selected OS is not Correct...', () => {
 
-                sessionStorage.setItem( 'Check', false ); location.reload();
+                    sessionStorage.setItem( 'Check', false ); return location.reload();
+
+                });
 
             };
 
         } else {
 
-            alert('Your Uploaded OS File is not Valid...');
-            sessionStorage.setItem( 'Check', false ); location.reload();
+            return give_alert( 'Your Uploaded OS File is not Valid...', () => {
+
+                sessionStorage.setItem( 'Check', false ); return location.reload();
+
+            });
 
         };
 
@@ -318,11 +329,20 @@ function Program( Code ) {
 
                 sessionStorage.setItem( 'Check', false );
 
-                alert( 'The Mother Board of ' + part + ' is not suitable for your Device : ' + Account );
+                return give_alert(
+                    
+                    'The Mother Board of ' + part + ' is not suitable for your Device : ' + Account, () => {
 
-                alert( 'We are reloading this Screen so that you can edit or upload suitable OS again...' );
+                        return setTimeout( () => {
 
-                location.reload();
+                            return give_alert( 'We are reloading this Screen so that you can edit or upload suitable' +
+                            'OS again...', () => { return location.reload(); });
+
+                        },500 );
+
+                    }
+                
+                );
             
             };
 
@@ -371,15 +391,25 @@ function Program( Code ) {
 
                     sessionStorage.setItem( 'Check', false );
 
-                    alert( 'The Mother Board Access Security Code is not Valid... Try changing that ❗ ' );
-                    location.reload();
+                    return give_alert(
+                        
+                        'The Mother Board Access Security Code is not Valid... Try changing that ❗ ', () => {
+
+                            return location.reload();
+
+                        }
+                    
+                    );
 
                 } else if ( Security_Codes_Data.indexOf( part ) == 0 ) {
 
                     sessionStorage.setItem( 'Check', false );
 
-                    alert( 'You cannot use Government Financial Security Code for that...' );
-                    location.reload();
+                    return give_alert( 'You cannot use Government Financial Security Code for that...', () => {
+
+                        return location.reload();
+
+                    });
 
                 } else {
 
@@ -395,9 +425,19 @@ function Program( Code ) {
 
                             sessionStorage.setItem( 'Check', false );
 
-                            alert( 'Sorry ! An Error Occured, But your Money will not lose' );
-                            alert( 'We are Redirecting you to Home Screen...' );
-                            location.href = '../../index.html'; return -3;
+                            return give_alert( 'Sorry ! An Error Occured, But your Money will not lose', () => {
+
+                                return setTimeout( () => {
+
+                                    return give_alert( 'We are Redirecting you to Home Screen...', () => {
+
+                                        return window.location.assign( '../../index.html' );
+    
+                                    });
+
+                                },500 );
+
+                            });
 
                         };
 
@@ -409,8 +449,15 @@ function Program( Code ) {
 
                         sessionStorage.setItem( 'Check', false );
 
-                        alert( "Sorry, You can't Proceed ahead due to insufficient Account Balance" );
-                        location.reload();
+                        return give_alert(
+                            
+                            "Sorry, You can't Proceed ahead due to insufficient Account Balance", () => {
+
+                                return location.reload();
+
+                            }
+                            
+                        );
 
                     };
 
@@ -420,11 +467,23 @@ function Program( Code ) {
 
                 sessionStorage.setItem( 'Check', false );
 
-                alert( 'Sorry ! But due to your "/exit" command the data has been wipe out...' );
+                return give_alert( 'Sorry ! But due to your "/exit" command the data has been wipe out...', () => {
 
-                alert( 'So, You need to do the Setup from the Starting as your Money will not lose :)' );
+                    return setTimeout( () => {
 
-                sessionStorage.clear(); location.href = '../../index.html';
+                        return give_alert(
+                            
+                            'So, You need to do the Setup from the Starting as your Money will not lose :)', () => {
+
+                                sessionStorage.clear(); return window.location.assign( '../../index.html' );
+
+                            }
+                            
+                        );
+
+                    },500 );
+
+                });
             
             };
 

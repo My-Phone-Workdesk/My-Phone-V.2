@@ -1,3 +1,9 @@
+// Imported Functions From Database ==>
+
+import { give_alert } from './Alert.js';
+
+// Real Script Starts from Below ==>
+
 window.onload = () => {
 
     if ( location.pathname.includes( 'Login_User.html' ) ) {
@@ -30,7 +36,7 @@ window.onload = () => {
         let owner_signin = document.getElementById( 'owner-signin' );
         owner_signin.addEventListener( 'click', () => {
 
-            localStorage.setItem("Amount_MB", 0); location.href = "OS_Loader.html";
+            localStorage.setItem( "Amount_MB", 0 ); location.href = "OS_Loader.html";
 
         });
 
@@ -40,7 +46,7 @@ window.onload = () => {
 
 function Login() {
 
-    var answer = document.getElementById('username').value;
+    var answer = document.getElementById( 'username' ).value;
 
     if ( answer != null ) {
 
@@ -74,39 +80,39 @@ function Login() {
 
                     }; locks_hash = User_list; User_list = null;
 
-                    do {
+                    var loop_stopper = false; do {
 
                         var user_lock = document.getElementById('userlock').value;
 
                         if ( user_lock != null ) {
 
-                            if ( user_lock == locks_hash[check] ) {
+                            if ( user_lock == locks_hash[ check ] ) {
 
-                                localStorage.setItem("Amount_MB", check);
-                                location.href = "./OS_Loader.html";
+                                localStorage.setItem( "Amount_MB", check );
+                                return window.location.assign( './OS_Loader.html' );
 
-                            } else if ( user_lock.toLowerCase() == "./exit" ) {
-
-                                /* Stop it and return */ return 9211;
-
-                            } else { return alert("Incorrect User Lock Entered..."); };
+                            } else {
+                                
+                                loop_stopper = true; return give_alert( "Incorrect User Lock Entered...", () => {});
+                            
+                            };
 
                         } else { return 9211; };
                         
-                    } while ( ! ( user_lock == locks_hash[check] ) );
+                    } while ( ! ( user_lock == locks_hash[ check ] ) && loop_stopper == false );
 
                 } else {
 
                     //No User Lock for the Public User Owner...
 
-                    localStorage.setItem("Amount_MB", 0);
-                    location.href = "OS_Loader.html";
+                    localStorage.setItem( "Amount_MB", 0 );
+                    return window.location.assign( './OS_Loader.html' );
 
                 }; return;
 
             }; //Do not Return Anything just add 1 to check variable
 
-        }; return alert("User ID not Available");
+        }; return give_alert( "User ID not Available", () => { return true; } );
 
     };
 
