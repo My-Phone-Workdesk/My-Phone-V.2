@@ -262,12 +262,12 @@ function toggleChat() {
     if ( chatContainer.style.display === 'none' || chatContainer.style.display === '' ) {
 
         chatContainer.style.display = 'block';
-        document.body.style.overflowY = 'visible';
+        document.body.style.overflowY = 'hidden';
 
     } else {
         
         chatContainer.style.display = 'none';
-        document.body.style.overflowY = 'hidden';
+        document.body.style.overflowY = 'visible';
     
     };
 
