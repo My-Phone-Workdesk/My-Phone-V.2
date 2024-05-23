@@ -82,8 +82,6 @@ function Restart() {
 function Users() {
 
     const b = JSON.parse( sessionStorage.getItem( 'Data' ) );
-
-    function removeAdministrator( value ) { return value != 'Administrator'; };
         
     if ( b != null ) {
 
@@ -93,7 +91,7 @@ function Users() {
 
         let table = document.querySelector( 'table' );
         
-        d = d.filter( removeAdministrator ); var c = d.length; c--;
+        var c = d.length; c--;
         
         for ( var a = 0; a <= c; a++ ) { table.insertRow( a + 1 ).insertCell( 0 ).innerHTML = d[ a ]; };
 
@@ -135,8 +133,6 @@ function Send_Feedback() {
     setTimeout( () => {
 
         Feedback_length = Feedback_length.length + 2;
-
-        sessionStorage.removeItem( 'Feedback' );
 
         let Comment = document.querySelector( 'textarea' ).value;
 
@@ -221,7 +217,7 @@ function Send_Feedback() {
 
                             } else {
 
-                                return give_alert( 'Sorry ! This User does not Exists...', () => {});
+                                return give_alert( 'Sorry ! This User does not Exist...', () => {});
 
                             };
 
@@ -231,7 +227,7 @@ function Send_Feedback() {
 
                 };
 
-            } else { return give_alert( 'The Feedback cancelled ! ', () => {}); };
+            } else { return give_alert( 'Operation Cancelled! ', () => {}); };
 
         };
 
@@ -241,7 +237,7 @@ function Send_Feedback() {
 
 function Check_Data() {
 
-    const Storage_Media = [ 'Data', 'Accounts_Data', 'Wifi', 'Files' ];
+    const Storage_Media = [ 'Data', 'Accounts_Data', 'Wifi', 'Files', 'Feedback' ];
 
     for ( var a = 0; a < Storage_Media.length; a++ ) {
 

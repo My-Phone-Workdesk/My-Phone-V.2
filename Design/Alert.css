@@ -1,10 +1,18 @@
-/* From here the Alert Design starts... After designing alert please delete this comment line.. */
-
 div#alert { position: fixed; width: 60vw; height: 25vh; background-color: white; border: 0.6rem green solid;
-    top: 37.5vh; left: 20vw; visibility: visible; z-index: 3; font-size: 2rem; }
+    top: 37.5vh; left: 20vw; visibility: visible; z-index: 3; font-size: 2rem;  box-shadow: 10px 10px; padding: 0%; margin: 0%; transform: translate(-50%, -50%); opacity: 0; animation: fadeInFromTopCenter 1s forwards; }
 
-p#alert_statement { text-align: center; text-wrap: wrap; position: relative; bottom: 5vh; color: black; }
+p#alert_statement { text-align: center; text-wrap: wrap; position: relative; bottom: 5vh; color: black; background-color: transparent; padding: 0%; margin: 0%; z-index: 0;}
 
-button#alert_close i { font-size: 2rem; color: black; }
+button#alert_close { border: none; position: relative; left: 0.5vw; padding: 0%; margin: 0%; z-index: 1; font-size: 2rem;}
 
-button#alert_close { border: none; position: relative; top: 0.5vh; left: 0.5vw; }
+
+@keyframes fadeInFromTopCenter {
+    0% {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

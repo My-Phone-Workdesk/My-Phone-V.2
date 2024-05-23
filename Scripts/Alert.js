@@ -5,15 +5,13 @@ function give_alert( statement, upcoming_function ) {
 
     var button = document.createElement( 'button' );
     button.id = 'alert_close';
-
-    var icon = document.createElement( 'i' );
-    icon.className = 'fa-solid fa-circle-xmark';
+    button.className = 'fa-solid fa-circle-xmark';
 
     var p = document.createElement( 'p' );
     p.id = 'alert_statement';
     p.innerHTML = statement;
 
-    button.appendChild( icon ); div.appendChild( button ); div.appendChild( p );
+    div.appendChild( button ); div.appendChild( p );
 
     document.body.appendChild( div );
 
