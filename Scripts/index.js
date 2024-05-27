@@ -108,7 +108,7 @@ function runOnStart() {
 
     if ( minwidth.matches && maxwidth.matches ) {
 
-        if ( ! ( location.pathname.includes( '/Device_Not_Eligible.html' ) ) ) {
+        if ( ! ( location.pathname.includes( '/Device_Not_Eligible.html' ) || location.pathname.includes( '/Device_Not_eligible.html' )) ) {
 
             window.location.assign( './Device_Not_Eligible.html' );
 
@@ -116,7 +116,7 @@ function runOnStart() {
 
     } else {
         
-        if ( location.pathname.includes( '/Device_Not_Eligible.html' ) ) {
+        if ( location.pathname.includes( '/Device_Not_Eligible.html' ) || location.pathname.includes( '/Device_Not_Eligible.html' ) ) {
             
             window.location.assign( './index.html' );
 
