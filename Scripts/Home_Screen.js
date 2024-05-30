@@ -97,10 +97,10 @@ function Load_Home_Screen() {
 
         const CMD = document.body.appendChild( document.createElement('i') );
     
-        CMD.className = "fa-solid fa-rectangle-terminal";
-        CMD.title = "CMD -- Command Prompt";
+        CMD.className = "fa-duotone fa-gear-complex-code";
+        CMD.title = "SCE -- System Code Editor";
 
-        CMD.addEventListener('click', () => { location.href = "./Apps/CMD/CMD.html"; });
+        CMD.addEventListener('click', () => { location.href = "./Apps/SCE/SCE.html"; });
 
     };
 

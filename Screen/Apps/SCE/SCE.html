@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="Icon" type="Image/X-icon" href="../../../Icons/app.system.CMD.ico" />
+    <link rel="stylesheet" href="../../../Design/SCE.css" />
+    
+    <link rel="stylesheet" type="text/css" href="../../../Icons/fontawesome-pro/css/all.css">
+
+    <script src="../../../Scripts/Apps/SCE.js" type="module" ></script>
+    <title>System Code Editor</title>
+
+</head>
+
+<body>
+
+    <div class="code-editor">
+        <div class="editor-header"><i class="fa-duotone fa-gear-complex-code"></i> System Code Editor</div>
+        <pre class="line-numbers" contenteditable="true">
+<code class="language-css" id="code">Write your code here</code></pre>
+        <div class="editor-footer">
+            <button id="test-code-button">Test Code</button>
+            <button id="save-button">Save</button>
+        </div>
+    </div>
+    
+    <div class="popup-container" id="popup">
+        <div class="popup">
+            <span class="close" id="close-popup">&times;</span>
+            <input type="text" id="input" placeholder="File Name">
+            <select id="File-Extention">
+                <option value=".cmd">.cmd</option>
+                <option value=".pkg">.pkg</option>
+                <option value=".exe">.exe</option>
+                <option value=".apk">.apk</option>
+                <option value=".dmd">.dmd</option>
+                <option value=".rar">.rar</option>
+            </select>
+            <button id="Save">Save</button>
+            <button id="Compile">Run</button>
+        </div>
+    </div>
+
+</body>
+
+</html>

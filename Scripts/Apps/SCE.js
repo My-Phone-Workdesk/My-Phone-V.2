@@ -2,10 +2,30 @@ import { Run_Function } from 'https://lalacoder.github.io/Modules/Module_for_JS.
 
 window.onload = () => {
 
-    if ( location.pathname.includes( 'CMD.html' ) ) {
+    if ( location.pathname.includes( 'SCE.html' ) ) {
 
         let Compile = document.getElementById( 'Compile' );
         Compile.addEventListener( 'click', Compilation );
+
+        document.getElementById("save-button").addEventListener("click", function() {
+            document.getElementById("popup").style.display = "flex";
+            document.body.style.overflow = "hidden";
+        });
+
+        document.getElementById("test-code-button").addEventListener("click", function() {
+            document.getElementById("popup").style.display = "flex";
+            document.body.style.overflow = "hidden";
+        });
+    
+        document.getElementById("close-popup").addEventListener("click", function() {
+            document.getElementById("popup").style.display = "none";
+            document.body.style.overflow = "auto";
+        });
+    
+        document.getElementById("save-file").addEventListener("click", function() {
+            document.getElementById("popup").style.display = "none";
+            document.body.style.overflow = "auto";
+        });
 
     } else if ( location.pathname.includes( 'Run.html' ) ) { Run(); };
 
@@ -47,7 +67,7 @@ function Compilation() {
 
 function Scripting() {
 
-    if ( localStorage.getItem("Code_Ext") == ".cmd" ) { // For CMD...
+    if ( localStorage.getItem("Code_Ext") == ".cmd" ) {
 
         var code_array = new Array();
         var field = "normal";
