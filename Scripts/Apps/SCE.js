@@ -22,7 +22,7 @@ window.onload = () => {
             document.body.style.overflow = "auto";
         });
     
-        document.getElementById("save-file").addEventListener("click", function() {
+        document.getElementById("Save").addEventListener("click", function() {
             document.getElementById("popup").style.display = "none";
             document.body.style.overflow = "auto";
         });
@@ -33,11 +33,11 @@ window.onload = () => {
 
 function Run() {
 
+    document.open();
     document.write("Compiling your Code File Please Wait...");
 
     setTimeout( () => {
 
-        document.open();
         document.write("Running Script...");
 
         setTimeout( Scripting,2000 );
@@ -52,7 +52,7 @@ function Compilation() {
     localStorage.setItem("Code_Ext", file_extention.value);
 
     let code = document.getElementById("code");
-    let code_text = code.value;
+    let code_text = code.innerText;
 
     var code_array = new Array();
     code_array = code_text.split("\n");
