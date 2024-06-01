@@ -304,6 +304,19 @@ window.onload = () => {
             var app_35 = document.createTextNode((new String("eVote")));
             app_34.appendChild(app_35);
 
+            var app_36 = document.createElement('LI');
+            app_1.appendChild(app_36);
+
+            var app_37 = document.createElement('IMG');
+            app_37.setAttribute('src', 'https://play-lh.googleusercontent.com/QRRGW2tMZ4-FNw0XWk6WWiXHaQCGxuwM-92HrBhlA4WOd_AGmjVmQkiHyAqQjW2yByc=w240-h480-rw');
+            app_36.appendChild(app_37);
+
+            var app_38 = document.createElement('SPAN');
+            app_36.appendChild(app_38);
+
+            var app_39 = document.createTextNode((new String("Chrome")));
+            app_38.appendChild(app_39);
+
             container.appendChild(app_1);
 
             var heading = document.createElement( 'p' );
@@ -377,7 +390,7 @@ function ToggleLightorDarkMode () {
 
 function List_Installed_Apps() {
 
-    var AppNames = ['iMobile_Pay', 'PayTM', 'WhatsApp', 'Tata_Play', 'eVote', 'Family_Link'];
+    var AppNames = ['iMobile_Pay', 'PayTM', 'WhatsApp', 'Tata_Play', 'eVote', 'Family_Link', 'Chrome'];
     var AppLogos = [
         
         'https://play-lh.googleusercontent.com/Hc8vNA4SOZwg5HMnBiwJLMT3tLYll54D994uZG7GeJYBtMEa2zHk8hNywTJZqpwWTg',
@@ -390,7 +403,9 @@ function List_Installed_Apps() {
 
         'https://play-lh.googleusercontent.com/3APi4HdWb0_rhnhAEoyJEYfSemXW9cNbA2VdOCSN7L6wgdjC_oTxLphER647R9PnSCkV=w240-h480-rw',
 
-        'https://play-lh.googleusercontent.com/rFAHXzQjUQwLH6vffa9rD_1gjH7dZykH7h6RjthsnoHTKGrJSNqTUw0D_TIQSC3ekg=w240-h480-rw'
+        'https://play-lh.googleusercontent.com/rFAHXzQjUQwLH6vffa9rD_1gjH7dZykH7h6RjthsnoHTKGrJSNqTUw0D_TIQSC3ekg=w240-h480-rw',
+
+        'https://play-lh.googleusercontent.com/QRRGW2tMZ4-FNw0XWk6WWiXHaQCGxuwM-92HrBhlA4WOd_AGmjVmQkiHyAqQjW2yByc=w240-h480-rw'
 
     ];
 

@@ -29,6 +29,7 @@ window.onload = () => {
         var Tata_Play_Install = document.getElementById( 'Tata_Play_Install' );
         var eVote_Install = document.getElementById( 'eVote_Install' );
         var Family_Link_Install = document.getElementById( 'Family_Link_Install' );
+        var Chrome_Install = document.getElementById( 'Chrome_Install' );
         var OS_Store = document.getElementById( 'OS_Store' );
         var Back_Button = document.getElementById( 'Back_Button' );
         
@@ -74,6 +75,12 @@ window.onload = () => {
             
         });
 
+        Chrome_Install.addEventListener( 'click', () => {
+
+            return RedirectToInstall( 'Chrome' );
+            
+        });
+
         Family_Link_Install.addEventListener( 'click', () => {
 
             return RedirectToInstall( 'Family Link' );
@@ -100,10 +107,10 @@ window.onload = () => {
 
 function RedirectToInstall ( AppName ) {
     
-    var AppNames = ['iMobile Pay', 'PayTM', 'WhatsApp', 'Tata Play', 'eVote', 'Family Link'];
-    var AppSizes = ['150MB', '48MB', '78.6MB', '34MB', '24MB', '185.9MB'];
-    var AppDownloads = ['5CR+', '500M+', '500CR+', '5CR+', '1CR+', '100M+'];
-    var AppRatings = ['4.6★', '4.6★', '4.1★', '3.7★', '3.7★', '4.5★'];
+    var AppNames = ['iMobile Pay', 'PayTM', 'WhatsApp', 'Tata Play', 'eVote', 'Family Link', 'Chrome'];
+    var AppSizes = ['150MB', '48MB', '78.6MB', '34MB', '24MB', '185.9MB', '40MB'];
+    var AppDownloads = ['5CR+', '500M+', '500CR+', '5CR+', '1CR+', '100M+', '1KCR+'];
+    var AppRatings = ['4.6★', '4.6★', '4.1★', '3.7★', '3.7★', '4.5★', '4.0★'];
     var AppLogos = [
         
         'https://play-lh.googleusercontent.com/Hc8vNA4SOZwg5HMnBiwJLMT3tLYll54D994uZG7GeJYBtMEa2zHk8hNywTJZqpwWTg',
@@ -190,8 +197,9 @@ function ListInstalledApps () {
 
         eVote : 'https://play-lh.googleusercontent.com/3APi4HdWb0_rhnhAEoyJEYfSemXW9cNbA2VdOCSN7L6wgdjC_oTxLphER647R9PnSCkV=w240-h480-rw',
 
-        Family_Link : 'https://play-lh.googleusercontent.com/rFAHXzQjUQwLH6vffa9rD_1gjH7dZykH7h6RjthsnoHTKGrJSNqTUw0D_TIQSC3ekg=w240-h480-rw'
+        Family_Link : 'https://play-lh.googleusercontent.com/rFAHXzQjUQwLH6vffa9rD_1gjH7dZykH7h6RjthsnoHTKGrJSNqTUw0D_TIQSC3ekg=w240-h480-rw',
 
+        Chrome : 'https://play-lh.googleusercontent.com/QRRGW2tMZ4-FNw0XWk6WWiXHaQCGxuwM-92HrBhlA4WOd_AGmjVmQkiHyAqQjW2yByc=w240-h480-rw'
     };
 
     const id_format = {
@@ -201,7 +209,8 @@ function ListInstalledApps () {
         WhatsApp : 'WhatsApp',
         Tata_Play : 'Tata_Play',
         eVote : 'eVote',
-        Family_Link : 'Family_Link'
+        Family_Link : 'Family_Link',
+        Chrome : 'Chrome'
 
     };
     
@@ -212,7 +221,8 @@ function ListInstalledApps () {
         WhatsApp : 'WhatsApp',
         eVote : 'eVote',
         Tata_Play : 'Tata Play',
-        Family_Link : 'Family Link'
+        Family_Link : 'Family Link',
+        Chrome : 'Chrome'
 
     };
 
@@ -314,8 +324,8 @@ function Install () {
 
     };
 
-    var AppNames = ['iMobile Pay', 'PayTM', 'WhatsApp', 'Tata Play', 'eVote', 'Family Link'];
-    var id_format = ['iMobile_Pay', 'PayTM', 'WhatsApp', 'Tata_Play', 'eVote', 'Family_Link'];
+    var AppNames = ['iMobile Pay', 'PayTM', 'WhatsApp', 'Tata Play', 'eVote', 'Family Link', 'Chrome'];
+    var id_format = ['iMobile_Pay', 'PayTM', 'WhatsApp', 'Tata_Play', 'eVote', 'Family_Link', 'Chrome'];
 
     name = id_format[ AppNames.indexOf( name.innerText ) ];
 
