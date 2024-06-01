@@ -186,7 +186,11 @@ function Check_Document() {
                         sessionStorage.removeItem("Amount_MB");
                         sessionStorage.removeItem("Certificate");
 
-                        location.href = "../../Screen/User_Setup/Create_User_Profile.html";
+                        return window.location.assign(
+                            
+                            '../../Screen/User_Setup/Create_User_Profile.html'
+                            
+                        );
 
                     } else { location.reload(); }
 

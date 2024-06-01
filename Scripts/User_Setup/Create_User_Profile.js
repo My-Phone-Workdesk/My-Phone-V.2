@@ -1,3 +1,9 @@
+// Imported Functions From Database and Other Services ==>
+
+import { give_alert } from "../Alert.js";
+
+// Real Script Starts from Below ==>
+
 window.onload = () => {
 
     if ( location.pathname.includes( 'Create_User_Profile.html' ) ) {
@@ -45,16 +51,19 @@ function Submit_Details() {
     let Data = JSON.parse( sessionStorage.getItem("Data") );
     let users_list = new Array();
 
-    for ( var v = 0; v < Data.length; v++ ) { users_list.push( Data[v]["User"] ); }
-    Data = null;
+    for ( var v = 0; v < Data.length; v++ ) { users_list.push( Data[v]["User"] ); } Data = null;
 
     if ( user_profile == null || user_profile == '' ) {
 
-        alert("Please Fill User Profile Name..."); return false;
+        return give_alert( "Please Fill User Profile Name...", () => { return false; });
 
     } else if ( users_list.includes(user_profile) ) {
 
-        alert("This User Profile Name is already taken ! Try Another One..."); return false;
+        return give_alert(
+            
+            "This User Profile Name is already taken ! Try Another One...", () => { return false; }
+            
+        );
 
     } else {
 
@@ -85,7 +94,11 @@ function Check_Password_Strength() {
 
         setTimeout( () => {
 
-            alert("Very Weak Password !! Can't Go Ahead... ( Do not include Spaces )... ");
+            return give_alert(
+                
+                "Very Weak Password !! Can't Go Ahead... ( Do not include Spaces )... ", () => { return false; }
+                
+            );
 
         },300 ); return "Very Weak";
 
@@ -110,7 +123,11 @@ function Check_Password_Strength() {
 
             setTimeout( () => {
 
-                alert("Weak Password !! Can't Go Ahead... ( Make it more Stronger )...");
+                return give_alert(
+                    
+                    "Weak Password !! Can't Go Ahead... ( Make it more Stronger )...", () => { return false; }
+                    
+                );
 
             },300 ); return "Weak";
 
@@ -121,7 +138,13 @@ function Check_Password_Strength() {
 
             setTimeout( () => {
 
-                alert("Very Weak Password !! Can't Go Ahead... ( Do not include Spaces )... ");
+                return give_alert(
+                    
+                    "Very Weak Password !! Can't Go Ahead... ( Do not include Spaces )... ",
+                    
+                    () => { return false; }
+                
+                );
 
             },300 ); return "Very Weak";
 

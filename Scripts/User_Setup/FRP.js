@@ -2,6 +2,8 @@
 
 import { Database } from "../../Data_Resources/Database.js";
 
+import { give_alert } from "../Alert.js";
+
 // Real Script Starts from Below ==>
 
 window.onload = () => {
@@ -68,8 +70,7 @@ function Account() {
 
     if ( Users_Data == null ) {
 
-        alert("Missing Data Please Go to Home Page...");
-        return false;
+        return give_alert( "Missing Data Please Go to Home Page...", () => { return false; });
 
     } else {
 
@@ -77,8 +78,11 @@ function Account() {
         
         if ( Users_Data.includes(email) ) {
 
-            alert("Please Use a New E-mail... This E-mail is already in use !!! ");
-            return false;
+            return give_alert(
+                
+                "Please Use a New E-mail... This E-mail is already in use !!! ", () => { return false; }
+                
+            );
 
         };
 
@@ -86,13 +90,15 @@ function Account() {
 
     if ( Data == null ) {
 
-        alert("Missing Data Please Go to Home Page...");
-        return false;
+        return give_alert( "Missing Data Please Go to Home Page...", () => { return false; });
 
     } else if ( email == '' || email == null || password == null || password == '' ) {
 
-        alert("Please Fill Both the Information 'Username' and 'Password' ..!! ");
-        return false;
+        return give_alert(
+            
+            "Please Fill Both the Information 'Username' and 'Password' ..!! ", () => { return false; }
+
+        );
 
     } else {
 
@@ -120,14 +126,17 @@ function Account() {
 
                 } else {
 
-                    alert("Incorrect Password ! Please Try Again...");
-                    return false;
+                    return give_alert( "Incorrect Password ! Please Try Again...", () => { return false; });
 
                 };
 
             }; // Move ahead this was not the email matched...
 
-        }; alert("Sorry this Email wasn't Found on the Server..."); location.reload();
+        }; return give_alert(
+            
+            "Sorry this Email wasn't Found on the Server...", () => { return location.reload(); }
+            
+        );
 
     };
 
@@ -240,9 +249,17 @@ function Finish() {
 
             if ( ( Object.keys( Data ).indexOf( details[v] ) ) == -1 ) {
 
-                alert("Your Some Data is Missing ! May be you have left some steps... Please Restart Add User from Home Page... Your Money would be Lost :( ");
+                return give_alert(
+                    
+                    'Your Some Data is Missing ! May be you have left some steps... Please Restart Add' +
+                    
+                    'User from Home Page... Your Money would be Lost :( ', () => {
 
-                location.href = "../../../index.html"; return;
+                        return window.location.assign( '../../../index.html' );
+
+                    }
+                    
+                );
 
             }; // To check that all Data is present or Not !
 
@@ -284,13 +301,30 @@ function Finish() {
 
             if ( used_space == -1 ) {
                 
-                alert( 'Your Provided Storage Unit is Invalid' );
+                return give_alert( 'Your Provided Storage Unit is Invalid', () => {
 
-                alert( 'You have to Correct your Certificate and Restart from OS Setup' );
+                    return give_alert(
+                        
+                        'You have to Correct your Certificate and Restart from OS Setup', () => {
 
-                alert( 'Your Money will not be lost if you restart from OS Setup...' );
+                            return give_alert(
+                                
+                                'Your Money will not be lost if you restart from OS Setup...', () => {
 
-                location.href = '../../../OS_Package/OS_Setup/OS_Setup.html';
+                                    return window.location.assign(
+                                        
+                                        '../../../OS_Package/OS_Setup/OS_Setup.html'
+                                        
+                                    );
+
+                                }
+                                
+                            );
+
+                        }
+                    );
+
+                });
             
             }; Files.push( used_space[ 0 ] );
 
@@ -348,13 +382,19 @@ function Finish() {
 
                         setTimeout( () => {
 
-                            alert("Congratulations ! Your User Successfully Created on Server");
+                            return give_alert(
+                                
+                                "Congratulations ! Your User Successfully Created on Server", () => {
 
-                            sessionStorage.removeItem( 'DATABASE' );
-                            sessionStorage.removeItem( 'Data' );
-                            sessionStorage.removeItem( 'Accounts_Data' );
-                            
-                            location.href = '../../../index.html';
+                                    sessionStorage.removeItem( 'DATABASE' );
+                                    sessionStorage.removeItem( 'Data' );
+                                    sessionStorage.removeItem( 'Accounts_Data' );
+                                    
+                                    return window.location.assign( '../../../index.html' );
+
+                                }
+                                
+                            );
 
                         },1000 );
 
