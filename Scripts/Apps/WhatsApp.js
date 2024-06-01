@@ -28,3 +28,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });    
 });
+
+function switchChat(chatElement) {
+    // Remove 'active' class from all chat elements
+    const chatElements = document.querySelectorAll('.chat');
+    chatElements.forEach(element => {
+        element.classList.remove('active');
+    });
+
+    // Add 'active' class to the clicked chat element
+    chatElement.classList.add('active');
+
+    // Update the chat header with the selected chat name
+    const chatName = chatElement.querySelector('.chat-info h4').textContent;
+    document.querySelector('.chat-header h4').textContent = chatName;
+
+    // You can add code here to load and display messages for the selected chat
+}
