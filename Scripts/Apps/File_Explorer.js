@@ -4,6 +4,8 @@ import { Database } from "../../Data_Resources/Database.js";
 
 import { Run_Function } from 'https://lalacoder.github.io/Modules/Module_for_JS.js';
 
+import { give_alert } from '../Alert.js';
+
 // Real Script Starts from Below ==>
 
 function List_Data( run ) {
@@ -40,10 +42,15 @@ function List_Data( run ) {
 
         if ( ( Files_Data[ imported_data[ 0 ] ][ 'Data' ] === 'No Data' ) ) {
 
-            return alert( 'Your User has No Data... ' + 
-            'Please Contact My Phone V.2 about that from Comment Section!' );
+            return give_alert(
+                
+                'Your User has No Data... Please Contact My Phone V.2 about that from Comment Section !',
+                
+                () => {}
 
-            // This is only for under Development... Will be Replaced Later !
+                // This is only for under Development... Will be Replaced Later !
+
+            );
         
         } else {
 
@@ -147,15 +154,11 @@ function List_Data( run ) {
 
                             File_or_Folder.addEventListener( 'contextmenu', () => {
     
-                                tasks = 1;
-
-                                alert( 'Your Access to this Drive is Blocked ❗ ' );
-
-                                setTimeout( () => {
-
-                                    return tasks = 0;
-
-                                },1000 );
+                                tasks = 1; return give_alert( 'Your Access to this Drive is Blocked ❗ ',
+                                
+                                    () => { setTimeout( () => { return tasks = 0; },1000 ); }
+                                
+                                );
             
                             });
 
@@ -201,15 +204,11 @@ function List_Data( run ) {
 
                             File_or_Folder.addEventListener( 'contextmenu', () => {
     
-                                tasks = 1;
+                                tasks = 1; return give_alert( 'Your Access to this File is Blocked ❗ ',
 
-                                alert( 'Your Access to this File is Blocked ❗ ' );
-
-                                setTimeout( () => {
-
-                                    return tasks = 0;
-
-                                },1000 );
+                                    () => { setTimeout( () => { return tasks = 0; },1000 ); }
+                                
+                                );
             
                             });
 
@@ -333,15 +332,11 @@ function List_Data( run ) {
 
                             File_or_Folder.addEventListener( 'contextmenu', () => {
     
-                                tasks = 1;
+                                tasks = 1; return give_alert( 'Your Access to this Folder is Blocked ❗ ',
 
-                                alert( 'Your Access to this Folder is Blocked ❗ ' );
-
-                                setTimeout( () => {
-
-                                    return tasks = 0;
-
-                                },1000 );
+                                    () => { setTimeout( () => { return tasks = 0; },1000 ); }
+                                
+                                );
             
                             });
 
@@ -387,15 +382,11 @@ function List_Data( run ) {
 
                             File_or_Folder.addEventListener( 'contextmenu', () => {
     
-                                tasks = 1;
-
-                                alert( 'Your Access to this File is Blocked ❗ ' );
-
-                                setTimeout( () => {
-
-                                    return tasks = 0;
-
-                                },1000 );
+                                tasks = 1; return give_alert( 'Your Access to this File is Blocked ❗ ',
+                                
+                                    () => { setTimeout( () => { return tasks = 0; },1000 ); }
+                                
+                                );
             
                             });
 
@@ -575,11 +566,11 @@ function List_Data( run ) {
                     
                         document.body.removeChild( Dialog_Box );
                         Dialog_Box.remove(); return tasks = 0;
-
+    
                     } else if ( new_name.length != 1 ) {
-
-                        alert( 'Drive name must be of an Single Character...' );
-
+    
+                        return give_alert( 'Drive name must be of an Single Character...', () => {});
+    
                     }; } while ( new_name.length != 1 );
 
                     for ( var a = 0; a < Old_Data.length; a++ ) {
@@ -588,7 +579,11 @@ function List_Data( run ) {
 
                             if ( Old_Data[ a ][ 0 ][ 'Name' ].slice( -2, -1 ).toLowerCase() == new_name.toLowerCase() )
                             
-                            { return alert( 'This Drive already exists...' ); };
+                            {
+                                
+                                return give_alert( 'This Drive already exists...', () => { return true; });
+                            
+                            };
 
                         };
 
@@ -598,11 +593,11 @@ function List_Data( run ) {
 
                     Old_Data = Database.Json.Files_Method( Old_Data );
 
-                    Update_Services( Old_Data );
+                    Update_Services( Old_Data ); return give_alert( 'The Drive Renamed Successfully ! ',
+                    
+                        () => { return Data_Verification(); }
 
-                    alert( 'The Drive Renamed Successfully ! ' );
-
-                    return Data_Verification();
+                    );
 
                 } else {
                     
@@ -615,7 +610,11 @@ function List_Data( run ) {
 
                     } else if ( new_name == '' ) {
 
-                        return alert( 'Folder Name should be atleast a single character...' );
+                        return give_alert( 'Folder Name should be atleast a single character...',
+                            
+                            () => { return true; }
+
+                        );
 
                     } else {
 
@@ -625,7 +624,13 @@ function List_Data( run ) {
     
                                 if ( Old_Data[ a ][ 0 ][ 'Name' ].toLowerCase() == new_name.toLowerCase() )
                                 
-                                { return alert( 'The Folder with this name already exists...' ); };
+                                {
+
+                                    return give_alert( 'The Folder with this name already exists...',
+                                
+                                    () => { return true }
+                                
+                                ); };
     
                             };
     
@@ -637,9 +642,11 @@ function List_Data( run ) {
 
                         Update_Services( Old_Data );
 
-                        alert( 'The Folder Renamed Successfully ! ' );
+                        return give_alert( 'The Folder Renamed Successfully ! ', () => {
 
-                        return Data_Verification();
+                            return Data_Verification();
+
+                        });
 
                     };
 
@@ -656,7 +663,7 @@ function List_Data( run ) {
 
                 } else if ( new_name == '' ) {
 
-                    return alert( 'File Name should be atleast a single character...' );
+                    return give_alert( 'File Name should be atleast a single character...', () => {});
 
                 } else {
 
@@ -666,7 +673,11 @@ function List_Data( run ) {
 
                             if ( Old_Data[ a ][ 'Name' ].toLowerCase() == new_name.toLowerCase() )
                             
-                            { return alert( 'The File with this name already exists...' ); };
+                            {
+                                
+                                return give_alert( 'The File with this name already exists...', () => {});
+                            
+                            };
 
                         };
 
@@ -678,17 +689,17 @@ function List_Data( run ) {
 
                     Update_Services( Old_Data );
 
-                    alert( 'The File Renamed Successfully ! ' );
-
-                    return Data_Verification();
+                    return give_alert( 'The File Renamed Successfully ! ', () => {});
 
                 };
 
             } else {
                 
-                alert( 'This File is Corrupted Hence, Cannot be Renamed...!!!' );
+                return give_alert( 'This File is Corrupted Hence, Cannot be Renamed...!!!', () => {
 
-                return console.log( typeof( Data ), Data, id );
+                    return console.log( typeof( Data ), Data, id );
+
+                });
             
             };
 
@@ -728,12 +739,13 @@ function List_Data( run ) {
 
                     Permanently_Delete();
 
-                    alert( 'The Folder Successfully Deleted ! ' );
+                    return give_alert( 'The Folder Successfully Deleted ! ', () => {
 
-                    document.body.removeChild( Dialog_Box );
-                    Dialog_Box.remove(); tasks = 0;
+                        document.body.removeChild( Dialog_Box ); Dialog_Box.remove(); tasks = 0;
+                        
+                        return Data_Verification();
 
-                    return Data_Verification();
+                    });
 
                 };
 
@@ -746,12 +758,13 @@ function List_Data( run ) {
 
                     Permanently_Delete();
 
-                    alert( 'The File Successfully Deleted ! ' );
+                    return give_alert( 'The File Successfully Deleted ! ', () => {
+                            
+                        document.body.removeChild( Dialog_Box ); Dialog_Box.remove(); tasks = 0;
 
-                    document.body.removeChild( Dialog_Box );
-                    Dialog_Box.remove(); tasks = 0;
+                        return Data_Verification();
 
-                    return Data_Verification();
+                    });
 
                 };
 
@@ -844,19 +857,25 @@ function List_Data( run ) {
 
                         } else if ( advance == 'Copy' ) {
 
-                            return alert( 'You cannot Copy a File/Folder into a File...!!!' );
+                            return give_alert( 'You cannot Copy a File/Folder into a File...!!!',
+                            
+                                () => { return true; }
+                            
+                            );
 
                         } else {
 
-                            alert( 'You cannot Move a File/Folder into a File...!!!' );
-
-                            return null;
+                            return give_alert( 'You cannot Move a File/Folder into a File...!!!',
+                            
+                                () => { return null; }
+                            
+                            );
 
                         };
 
                     }; if ( found_status == false ) {
 
-                        alert( 'This Location is not Found !' ); return null;
+                        return give_alert( 'This Location is not Found !', () => { return null; });
 
                     };
 
@@ -906,20 +925,26 @@ function List_Data( run ) {
 
                     Update_Services( final_data );
 
-                    alert( 'The File/Folder Copied Successfully 👍' );
+                    return give_alert( 'The File/Folder Copied Successfully 👍', () => {
 
-                    document.body.removeChild( Dialog_Box );
-                    Dialog_Box.remove(); tasks = 0;
+                        document.body.removeChild( Dialog_Box );
+                        Dialog_Box.remove(); tasks = 0;
 
-                    return Data_Verification();
+                        return Data_Verification();
+
+                    });
 
                 } else { return [ final_data, Files_Current_Folder_location, id ]; };
 
             } else {
 
-                alert( 'The Location is not Formatted... It should be formatted before use !!' );
-
-                return null;
+                return give_alert(
+                    
+                    'The Location is not Formatted... It should be formatted before use !!',
+                    
+                    () => { return null; }
+                    
+                );
 
             };
 
@@ -948,12 +973,14 @@ function List_Data( run ) {
 
                 Update_Services( final_data );
 
-                alert( 'The File/Folder Moved Successfully 👍' );
+                return give_alert( 'The File/Folder Moved Successfully 👍', () => {
 
-                document.body.removeChild( Dialog_Box );
-                Dialog_Box.remove(); tasks = 0;
+                    document.body.removeChild( Dialog_Box );
+                    Dialog_Box.remove(); tasks = 0;
 
-                return Data_Verification();
+                    return Data_Verification();
+
+                });
 
             }, 1000 );
 
@@ -1192,10 +1219,12 @@ function List_Data( run ) {
 
             } else {
 
-                alert( 'Sorry ! An Unexpected Error Occured...' );
+                return give_alert( 'Sorry ! An Unexpected Error Occured...', () => {
 
-                document.body.removeChild( Properties_Panel );
-                Properties_Panel.remove(); return tasks = 0;
+                    document.body.removeChild( Properties_Panel );
+                    Properties_Panel.remove(); return tasks = 0;
+
+                });
 
             }; setTimeout( () => {
 
@@ -1428,7 +1457,11 @@ function List_Data( run ) {
 
             if ( Current_Location.length == 0 ) {
 
-                return alert( 'Sorry ! But you cannot Create a File in the Drive Section ! ' );
+                return give_alert( 'Sorry ! But you cannot Create a File in the Drive Section ! ',
+                
+                    () => { return true; }
+                    
+                );
 
             } else {
 
@@ -1448,7 +1481,7 @@ function List_Data( run ) {
 
                     if ( Extention == null ) {
 
-                        return alert( 'Your File is not Created has you cancelled it ! ' );
+                        return give_alert( 'Your File is not Created has you cancelled it ! ', () => {});
 
                     };
 
@@ -1506,9 +1539,13 @@ function List_Data( run ) {
                                 
                             ) {
     
-                                alert( 'A Folder with the name "' + new_file_name + '" already exists ! ' );
+                                return give_alert(
+                                    
+                                    'A Folder with the name "' + new_file_name + '" already exists ! ',
+                                    
+                                    () => { return Name_to_File(); }
 
-                                return Name_to_File();
+                                );
     
                             };
     
@@ -1520,18 +1557,22 @@ function List_Data( run ) {
                                 
                             ) {
 
-                                alert( 'The File with the name "' + new_file_name + '" already exists ! ' );
+                                return give_alert(
+                                    
+                                    'The File with the name "' + new_file_name + '" already exists ! ',
 
-                                return Name_to_File();
+                                    () => { return Name_to_File(); }
+                                    
+                                );
 
                             };
 
                         } else {
 
-                            return alert(
+                            return give_alert(
                                 
                                 '\n' + 'Sorry ! This Location has an corrupted File / Folder...' +
-                                '\n' + '\n' + 'Please Check and Try Again ! '
+                                '\n' + '\n' + 'Please Check and Try Again ! ', () => {}
                                 
                             );
 
@@ -1555,7 +1596,11 @@ function List_Data( run ) {
 
             if ( Current_Location.length == 0 ) {
 
-                return alert( 'Sorry ! But you cannot Create a Folder in the Drive Section ! ' );
+                return give_alert(
+                    
+                    'Sorry ! But you cannot Create a Folder in the Drive Section ! ', () => {}
+                    
+                );
 
             } else {
 
@@ -1631,9 +1676,13 @@ function List_Data( run ) {
                                 
                             ) {
     
-                                alert( 'The Folder with the name "' + new_folder_name + '" already exists ! ' );
-
-                                return Name_to_Folder();
+                                return give_alert(
+                                    
+                                    'The Folder with the name "'+ new_folder_name +'" already exists !',
+                                    
+                                    () => { return Name_to_Folder(); }
+                                    
+                                );
     
                             };
     
@@ -1645,18 +1694,22 @@ function List_Data( run ) {
                                 
                             ) {
 
-                                alert( 'A File with the name "' + new_folder_name + '" already exists ! ' );
+                                return give_alert(
+                                    
+                                    'A File with the name "' + new_folder_name + '" already exists ! ',
 
-                                return Name_to_Folder();
+                                    () => { return Name_to_Folder(); }
+                                    
+                                );
 
                             };
 
                         } else {
 
-                            return alert(
+                            return give_alert(
                                 
                                 '\n' + 'Sorry ! This Location has an corrupted File / Folder...' +
-                                '\n' + '\n' + 'Please Check and Try Again ! '
+                                '\n' + '\n' + 'Please Check and Try Again ! ', () => {}
                                 
                             );
 
