@@ -1,4 +1,10 @@
+// Imported Functions From Database and Other Services ==>
+
 import { Database } from '../../Data_Resources/Database.js';
+
+import { give_alert } from '../Alert.js';
+
+// Real Script Starts from Below ==>
 
 window.onload = () => {
 
@@ -215,13 +221,19 @@ function changeDetails() {
     
     } else {
         
-        return alert( '\n' + 'Please Fill up your Branch Code ! Its Neccessary for changing your details...' );
+        return give_alert(
+            
+            '\n' + 'Please Fill up your Branch Code ! Its Neccessary for changing your details...',
+
+            () => { return true; }
+            
+        );
     
     };
 
     if ( All_Branch_Codes.indexOf( branchCode ) == -1 ) {
 
-        return alert( 'Authentication failed. Please enter the correct branch code.' );
+        return give_alert( 'Authentication failed. Please enter the correct branch code.', () => {});
 
     } else {
 
@@ -275,17 +287,19 @@ function changeDetails() {
 
         Database.Update_Multi_Data( 'Accounts', 'A' + row + ':E' + row, data_to_upload_on_server_in_array_form );
         
-        alert( 'Your provided account details successfully changed !' );
+        return give_alert( 'Your provided account details successfully changed !', () => {
 
-        document.body.style.cursor = 'none';
+            document.body.style.cursor = 'none';
 
-        setTimeout( () => {
+            setTimeout( () => {
 
-            document.body.style.cursor = 'Default';
+                document.body.style.cursor = 'Default';
 
-            return window.location.assign( './iMobile_Pay.html' );
+                return window.location.assign( './iMobile_Pay.html' );
 
-        },3000 );
+            },3000 );
+
+        });
 
     };
     
@@ -426,7 +440,7 @@ function SignIn() {
 
 function SignUp() {
 
-    return alert( 'Your Branch Code is 9211' );
+    return give_alert( 'Your Branch Code is 9211', () => { return true; } );
 
 };
 
@@ -476,8 +490,10 @@ function HideBranchCode() {
 
 function Delete_Account() {
 
-    alert( 'Your Account Successfully Deleted ! ' );
+    return give_alert( 'Your Account Successfully Deleted ! ', () => {
 
-    return window.location.assign( './iMobile_Pay.html' );
+        return window.location.assign( './iMobile_Pay.html' );
+
+    });
 
 };

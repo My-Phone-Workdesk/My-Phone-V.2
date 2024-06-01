@@ -1,6 +1,12 @@
+// Imported Functions From Database and Other Services ==>
+
 import { Database } from '../../Data_Resources/Database.js';
 
-const pick_random = ( min, max ) => { max += 1; return Math.floor( Math.random() * ( max - min ) + min ); };
+import { give_alert } from '../Alert.js';
+
+// Real Script Starts from Below ==>
+
+const random = ( min, max ) => { max += 1; return Math.floor( Math.random() * ( max - min ) + min ); };
 
 window.onload = () => {
 
@@ -142,7 +148,7 @@ function RedirectToInstall ( AppName ) {
 
     if ( All_Apps_Names.indexOf( AppName.replace( ' ', '_' ) ) != -1 ) {
 
-        return alert( AppName + ' is already Installed ! ' );
+        return give_alert( AppName + ' is already Installed ! ', () => {});
         
     } else {
 
@@ -307,7 +313,7 @@ function Install () {
 
         setTimeout( () => {
 
-            progress.value += pick_random( Internet_min_download_speed, Internet_max_download_speed );
+            progress.value += random( Internet_min_download_speed, Internet_max_download_speed );
     
             percent.innerText = progress.value + "%";
 
@@ -322,7 +328,7 @@ function Install () {
 
         }, delay );
 
-        delay += pick_random( Internet_min_time_speed, Internet_max_time_speed );
+        delay += random( Internet_min_time_speed, Internet_max_time_speed );
 
     };
 
@@ -399,9 +405,11 @@ function Uninstall ( AppName ) {
 
     );
 
-    alert( AppName.replace( '_', ' ' ) + ' is Uninstalled Successfully ! ' );
+    return give_alert( AppName.replace( '_', ' ' ) + ' is Uninstalled Successfully ! ', () => {
 
-    return ListInstalledApps();
+        return ListInstalledApps();
+
+    });
 
 };
 

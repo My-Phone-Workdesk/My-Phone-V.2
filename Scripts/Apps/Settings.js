@@ -1,4 +1,10 @@
+// Imported Functions From Database and Other Services ==>
+
 import { Uninstall } from "./PlayStore.js";
+
+import { give_alert } from "../Alert.js";
+
+// Real Script Starts from Below ==>
 
 window.onload = () => {
 
@@ -430,7 +436,7 @@ function List_Installed_Apps() {
 
         if ( AppNames.indexOf( All_User_Installed_Apps[ b ] ) == -1 ) {
 
-            return alert( 'The App is not of My Phone V.2' ); // Temporary...
+            return give_alert( 'The App is not of My Phone V.2', () => {}); // Temporary...
 
         };
 
@@ -518,6 +524,6 @@ function Connect_to_Wifi( Wifi_Name ) {
 
     Wifi_Name.innerHTML = 'Connected';
 
-    return alert( 'The Wifi ' + Wifi_Name.id + ' is Connected Successfully ! ' );
+    return give_alert( 'The Wifi ' + Wifi_Name.id + ' is Connected Successfully ! ', () => {});
 
 };
