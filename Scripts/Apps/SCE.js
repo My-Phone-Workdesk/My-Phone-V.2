@@ -1,4 +1,8 @@
+// Imported Functions From Database and Other Services ==>
+
 import { Run_Function } from 'https://lalacoder.github.io/Modules/Module_for_JS.js';
+
+// Real Script Starts from Below ==>
 
 window.onload = () => {
 
