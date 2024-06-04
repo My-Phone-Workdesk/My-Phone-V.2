@@ -11,38 +11,59 @@ window.onload = () => {
         let Compile = document.getElementById( 'Compile' );
         Compile.addEventListener( 'click', Compilation );
 
-        document.getElementById("save-button").addEventListener("click", function() {
+        document.getElementById( "save-button" ).addEventListener( "click", () => {
+            
             document.getElementById("popup").style.display = "flex";
             document.body.style.overflow = "hidden";
+        
         });
 
-        document.getElementById("test-code-button").addEventListener("click", function() {
+        document.getElementById( "test-code-button" ).addEventListener( "click", () => {
+            
             document.getElementById("popup").style.display = "flex";
             document.body.style.overflow = "hidden";
+        
         });
     
-        document.getElementById("close-popup").addEventListener("click", function() {
+        document.getElementById( "close-popup" ).addEventListener( "click", () => {
+            
             document.getElementById("popup").style.display = "none";
             document.body.style.overflow = "auto";
+        
         });
     
-        document.getElementById("Save").addEventListener("click", function() {
+        document.getElementById( "Save" ).addEventListener( "click", () => {
+            
             document.getElementById("popup").style.display = "none";
             document.body.style.overflow = "auto";
+        
         });
 
     } else if ( location.pathname.includes( 'Run.html' ) ) { Run(); };
 
 };
 
+function print_data( data ) {
+
+    var body = document.body;
+
+    var new_data = document.createElement( 'h2' );
+
+    new_data.innerText = data;
+    
+    body.appendChild( new_data );
+
+};
+
 function Run() {
 
-    document.open();
-    document.write("Compiling your Code File Please Wait...");
+    print_data( "Compiling your Code File Please Wait..." );
 
     setTimeout( () => {
 
-        document.write("Running Script...");
+        document.body.innerText = '';
+
+        print_data( "Running Script..." );
 
         setTimeout( Scripting,2000 );
 
@@ -52,64 +73,58 @@ function Run() {
 
 function Compilation() {
 
-    let file_extention = document.getElementById("File-Extention");
-    localStorage.setItem("Code_Ext", file_extention.value);
+    let file_extention = document.getElementById( "File-Extention" );
+    localStorage.setItem( "Code_Ext", file_extention.value );
 
-    let code = document.getElementById("code");
-    let code_text = code.innerText;
+    let code = document.querySelectorAll( 'code' ); var script = new Array();
 
-    var code_array = new Array();
-    code_array = code_text.split("\n");
-    localStorage.setItem( "Code", JSON.stringify(code_array) );
+    for ( var a = 0; a < code.length; a++ ) { script.push( code[ a ].innerText ); };
 
-    var input_title = document.getElementById('input');
-    localStorage.setItem("device_type", input_title.value);
+    localStorage.setItem( "Code", JSON.stringify( script ) );
 
-    location.href = './Run.html';
+    var input_title = document.getElementById( 'input' );
+    localStorage.setItem( "device_type", input_title.value );
+
+    return window.location.assign( './Run.html' );
 
 };
 
 function Scripting() {
 
-    if ( localStorage.getItem("Code_Ext") == ".cmd" ) {
+    if ( localStorage.getItem( "Code_Ext" ) == ".cmd" ) {
 
-        var code_array = new Array();
-        var field = "normal";
+        var code_array = new Array(); var field = "normal";
 
-        code_array = JSON.parse( localStorage.getItem("Code") );
+        code_array = JSON.parse( localStorage.getItem( "Code" ) );
 
-        document.write("<hr><h1 style='text-align: center; text-decoration: underline;'> " +
-        localStorage.getItem("device_type") + localStorage.getItem("Code_Ext") + " </h1><hr>");
+        var hr1 = document.createElement( 'hr' ); var h1 = document.createElement( 'h1' );
+        h1.style.textAlign = 'center'; h1.style.textDecoration = 'underline';
+        h1.innerText = localStorage.getItem( "device_type" ) + localStorage.getItem( "Code_Ext" );
+        var hr2 = document.createElement( 'hr' ); var br1 = document.createElement( 'br' );
+        var br2 = document.createElement( 'br' ); var h2 = document.createElement( 'h2' );
+        h2.innerText = "-".repeat( 46 ) + " Compilation and Errors " + "-".repeat( 46 );
+        document.title = localStorage.getItem( "device_type" ); var br3 = document.createElement( 'br' );
 
-        document.write("<br>");
-        document.write("<br>");
+        document.body.appendChild( hr1 ); document.body.appendChild( h1 ); document.body.appendChild( hr2 );
+        document.body.appendChild( br1 ); document.body.appendChild( br2 ); document.body.appendChild( h2 );
+        document.body.appendChild( br3 );
 
-        document.write( "<h2> " + "-".repeat(46) + " Compilation and Errors " + "-".repeat(46) + " </h2>" );
+        for ( var line = 0; line < code_array.length; line++ ) {
 
-        document.title = localStorage.getItem("device_type");
-        document.write("<br>");
+            field = check_Syntax_Array( code_array[ line ], line );
+            
+            var h3 = document.createElement( 'h3' ); h3.innerText = field; document.body.appendChild( h3 );
 
-        for (var line = 0; line < code_array.length; line++) {
+            if ( field.toLowerCase().includes( "error" ) ) { console.error( field ); return "Error in Code"; };
 
-            field = check_Syntax_Array( code_array[line], line);
-            document.write("<h3> " + field + " </h3>");
+        }; setTimeout( () => {
 
-            if ( field.includes("Error") ) {
+            var br4 = document.createElement( 'br' ); document.body.appendChild( br4 );
+            var h2_1 = document.createElement( 'h2' ); document.body.appendChild( h2_1 );
 
-                console.error(field);
-                return "Error in Code";
+            h2_1.innerText = "-".repeat( 57 ) + " Output " + "-".repeat( 57 );
 
-            } else { /* All Good Compilation of that Line Done...!!! */ };
-
-        }; //Here the Compilation Finishes...
-
-        setTimeout( () => {
-
-            document.write("<br>");
-
-            document.write( "<h2> " + "-".repeat(57) + " Output " + "-".repeat(57) + " </h2>" );
-
-            for (var line = 0; line < code_array.length; line++) { Run_Code( code_array[line] ); };
+            for ( var line = 0; line < code_array.length; line++ ) { Run_Code( code_array[ line ] ); };
 
         },2000 );
 
@@ -417,7 +432,88 @@ function Run_Code( statement ) {
 
 function Type_Identification( variable ) {
 
-    if ( variable.charAt(0) == "~" && variable.charAt(-1) == '~' ) { return "Var"; }
-    else { return "String"; };
+    if ( variable.charAt( 0 ) == "~" && variable.charAt( -1 ) == '~' ) { return "Var"; } else { return "String"; };
 
 };
+
+/* An Extract from ChatGPT by giving it some kinds of instructions...
+
+function evaluateCondition(condition) {
+    
+    try { return eval(condition); } catch (e) { console.error('Invalid condition:', condition); return false; }
+
+}
+
+function runUserCode(code) {
+    const output = document.getElementById('output');
+
+    function executeCommands(commands, condition) {
+        let shouldContinue = typeof condition === 'number' ? condition > 0 : evaluateCondition(condition);
+        while (shouldContinue) {
+            for (let j = 0; j < commands.length; j++) {
+                if (typeof commands[j] === 'string') {
+                    if (commands[j].startsWith('for ')) {
+                        const conditionOrCount = commands[j].slice(4, -1).trim();
+                        const isNumber = !isNaN(conditionOrCount);
+                        const loopCondition = isNumber ? parseInt(conditionOrCount) : conditionOrCount;
+                        const innerCommands = [];
+                        j++;
+                        while (commands[j] !== ':' && j < commands.length) {
+                            innerCommands.push(commands[j]);
+                            j++;
+                        }
+                        if (commands[j] === ':') {
+                            executeCommands(innerCommands, loopCondition);
+                        }
+                    } else if (commands[j].startsWith('print"""') && commands[j].endsWith('"""')) {
+                        const strToPrint = commands[j].slice(7, -3);
+                        if (typeof strToPrint === 'string') {
+                            output.innerHTML += strToPrint + '<br>';
+                        } else {
+                            console.error('Error: Invalid content to print. Must be a string.');
+                        }
+                    } else if (commands[j].startsWith('print"""') && !commands[j].endsWith('"""')) {
+                        console.error('Error: Invalid print statement. Expected """ at the end.');
+                    } else if (commands[j].startsWith('print"""') && !commands[j].startsWith('print"""')) {
+                        console.error('Error: Invalid print statement. Expected """ at the start.');
+                    } else if (commands[j] !== ':') {
+                        // Any other string handling if needed
+                    }
+                } else if (typeof commands[j] === 'function') {
+                    commands[j]();
+                }
+            }
+            if (typeof condition === 'number') {
+                condition--;
+            } else {
+                shouldContinue = evaluateCondition(condition);
+            }
+        }
+    }
+
+    executeCommands(code, 1);
+}
+
+// Example usage:
+
+// Define an array of instructions and functions (user's code)
+let count = 3;  // Example variable to use in conditions
+const userCode = [
+    "print\"\"\"String 1\"\"\"",
+    function() { console.log('Function 1 executed'); },
+    'print"""123""";',
+    'print"int";',
+    function() { console.log('Function 2 executed'); count--; },
+    'print"""abc""";',
+    function() { console.log('Function 3 executed'); },
+    'print"456";',
+    ":",
+    function() { console.log('Function 4 executed'); },
+];
+
+// Run the user's code
+document.addEventListener('DOMContentLoaded', () => {
+    runUserCode(userCode);
+});
+
+*/
