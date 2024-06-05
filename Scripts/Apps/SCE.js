@@ -1,9 +1,3 @@
-// Imported Functions From Database and Other Services ==>
-
-import { Run_Function } from 'https://lalacoder.github.io/Modules/Module_for_JS.js';
-
-// Real Script Starts from Below ==>
-
 window.onload = () => {
 
     if ( location.pathname.includes( 'SCE.html' ) ) {
@@ -74,16 +68,17 @@ function Run() {
 function Compilation() {
 
     let file_extention = document.getElementById( "File-Extention" );
-    localStorage.setItem( "Code_Ext", file_extention.value );
+    sessionStorage.setItem( "SCE", JSON.stringify( { File_Extention: file_extention.value } ) );
 
     let code = document.querySelectorAll( 'code' ); var script = new Array();
 
     for ( var a = 0; a < code.length; a++ ) { script.push( code[ a ].innerText ); };
 
-    localStorage.setItem( "Code", JSON.stringify( script ) );
+    var SCE = JSON.parse( sessionStorage.getItem( 'SCE' ) ); SCE[ 'Script' ] = script;
 
-    var input_title = document.getElementById( 'input' );
-    localStorage.setItem( "device_type", input_title.value );
+    var input_title = document.getElementById( 'input' ); SCE[ 'File_Name' ] = input_title.value;
+
+    SCE[ 'File_variables' ] = new Array(); sessionStorage.setItem( 'SCE', JSON.stringify( SCE ) );
 
     return window.location.assign( './Run.html' );
 
@@ -91,19 +86,18 @@ function Compilation() {
 
 function Scripting() {
 
-    if ( localStorage.getItem( "Code_Ext" ) == ".cmd" ) {
+    const SCE = JSON.parse( sessionStorage.getItem( 'SCE' ) );
 
-        var code_array = new Array(); var field = "normal";
+    if ( SCE.File_Extention == ".cmd" ) {
 
-        code_array = JSON.parse( localStorage.getItem( "Code" ) );
+        var code_array = new Array(); var field = "normal"; code_array = SCE.Script;
 
         var hr1 = document.createElement( 'hr' ); var h1 = document.createElement( 'h1' );
-        h1.style.textAlign = 'center'; h1.style.textDecoration = 'underline';
-        h1.innerText = localStorage.getItem( "device_type" ) + localStorage.getItem( "Code_Ext" );
-        var hr2 = document.createElement( 'hr' ); var br1 = document.createElement( 'br' );
+        h1.style.textAlign = 'center'; h1.style.textDecoration = 'underline'; h1.innerText = SCE.File_Name +
+        SCE.File_Extention; var hr2 = document.createElement( 'hr' ); var br1 = document.createElement( 'br' );
         var br2 = document.createElement( 'br' ); var h2 = document.createElement( 'h2' );
         h2.innerText = "-".repeat( 46 ) + " Compilation and Errors " + "-".repeat( 46 );
-        document.title = localStorage.getItem( "device_type" ); var br3 = document.createElement( 'br' );
+        document.title = SCE.File_Name; var br3 = document.createElement( 'br' );
 
         document.body.appendChild( hr1 ); document.body.appendChild( h1 ); document.body.appendChild( hr2 );
         document.body.appendChild( br1 ); document.body.appendChild( br2 ); document.body.appendChild( h2 );
@@ -134,86 +128,128 @@ function Scripting() {
 
 function check_Syntax_Array( Syntax, line ) {
 
-    if ( Syntax.charAt(0) == '#' ) {
+    if ( Syntax.charAt( 0 ) == '#' ) { return "Commentary Line..." + "Line == " + line; }
 
-        //Its a Comment just compile or ignore it...
-        return "Commentary Line..." + "Line == " + line;
+    else if ( [ ':', ';', '}' ].indexOf( Syntax.charAt( Syntax.length - 1 ) ) == -1 ) {
+        
+        return "Error in line : " + line + " : ';' or '{' or ':' expected at the end of the line... ";
 
-    }; if ( ! ( Syntax.charAt(Syntax.length - 1) != ";" || Syntax.charAt(Syntax.length - 1) != "{" ) ) {
+    } else if ( Syntax.startsWith( 'print' ) ) {
 
-        var error = " ';' or '{' expected at the end of the line... ";
-        return "Error in line : " + line + " : " + error;
+        if ( Syntax.charAt( Syntax.length - 1 ) != ";" ) {
 
-    }; // Checking of the Symbol ';' at the end of the Line or Syntax...
+            return "Error in line : " + line + " : Print() function should include character ';' at last...";
+        
+        }; if ( ! ( Syntax.startsWith( '"""', 5 ) && Syntax.endsWith( '"""', Syntax.length - 1 ) ) ) {
 
-    if ( Syntax.includes("Print") ) {
+            if ( ! ( Syntax.startsWith( '""', 5 ) && Syntax.endsWith( '""', Syntax.length - 1 ) ) ) {
 
-        if ( Syntax.charAt(Syntax.length - 1) == ";" ) {
+                if ( ! ( Syntax.charAt( 6 ) == '"' && Syntax.charAt( Syntax.length - 2 ) == '"' ) ) {
 
-            if ( ( Syntax.slice(-4, -1) ) == '"""' && ( Syntax.slice(5, 8) ) == '"""') {
+                    return "Error in line : " + line + " : Print() function's Syntax is improper..." +
+                    ' Go to "myphone-v.2-chrome://www.SCE_language_syntax.com" for more information about' +
+                    ' the Print() function...';
 
-                var yay = Syntax.slice(8, -4);
+                } else {
 
-            if ( Run_Function.type.Identify( yay ) == 'String' ) { /* It is a String Value.... */ }
+                    const content = Syntax.slice( 6, -2 );
 
-            else {
+                    if ( isNaN( content ) ) {
 
-                var error = "This Syntax of Print() is only for String Value...";
-                return "Error in line : " + line + " : " + error;
+                        return "Error in line: " + line + " : Expected Number Data inside Print() function...";
 
-            };
-
-            } else if ( ( Syntax.slice(-3, -1) ) == '""' && ( Syntax.slice(5, 7) ) == '""') {
-
-                // No Error in Printing Variables...
-
-            } else if ( ( Syntax.slice(-2, -1) ) == '"' && ( Syntax.slice(5, 6) ) == '"') {
-
-                var yay = Syntax.slice(6, -2);
-
-                if ( Run_Function.type.Identify( yay ) == 'int' ) { /* It is a Integer Value... */ }
-
-                else {
-
-                    var error = "This Syntax of Print() is only for Integer Value...";
-                    return "Error in line : " + line + " : " + error;
+                    };
 
                 };
 
             } else {
 
-                var error = " Print() function must include atleast one character ')' in start and" +
-                "before last... "
+                const SCE = JSON.parse( sessionStorage.getItem( 'SCE' ) );
+                const variables = SCE.File_variables;
 
-                return "Error in line : " + line + " : " + error;
+                const content = Syntax.slice( 7, -3 );
+
+                if ( variables.indexOf( content ) == -1 ) {
+
+                    return "Error in line: " + line + " : Expected an Defined Variable inside Print() function...";
+
+                };
 
             };
 
         } else {
 
-            var error = " Print() function should include character ';' at last... ";
+            const content = Syntax.slice( 8, -4 );
 
-            return "Error in line : " + line + " : " + error;
+            if ( ! ( typeof content === 'string' ) ) {
+
+                return "Error in line: " + line + " : Expected String Data inside Print() function...";
+
+            };
 
         };
 
-    }; if ( Syntax.includes("get.") ) {
+    } else if ( Syntax.startsWith( "get." ) ) {
 
-        if ( Syntax.slice(-1) == ";" && Syntax.slice(-2, -1) == ")" ) {
+        if ( Syntax.startsWith( "get." ) && Syntax.endsWith( ");" ) ) {
 
-            if ( ! ( Syntax.toLowerCase().includes("user_lock of user (") || Syntax.toLowerCase().includes("user with user_lock (") || Syntax.toLowerCase().includes("user.id with user (") || Syntax.toLowerCase().includes("user.id with user_lock (") || Syntax.toLowerCase().includes("user_lock with id (") || Syntax.toLowerCase().includes("user with id (") || Syntax.toLowerCase().includes("user_device with id (") || Syntax.toLowerCase().includes("user_firmware with id (") || Syntax.toLowerCase().includes("user_firmware-version with id (") || Syntax.toLowerCase().includes("user_money with id (") ) ) {
+            let substring = Syntax.substring( 4, Syntax.length - 2 ).toLowerCase(); substring = substring.trim();
 
-                var error = " This Syntax of 'get' module is invalid... ";
+            const patterns = [ 'user_lock of user(', 'user with user_lock(', 'user.id with user(',
+            'user.id with user_lock(', 'user_lock with id(', 'user with id(', 'user_device with id(',
+            'user_firmware with id(', 'user_money with id(', 'user_firmware-version with id(' ];
 
-                return "Error in line : " + line + " : " + error;
+            const foundPattern = patterns.some( ( pattern ) => { return substring.startsWith( pattern ); });
+
+            if ( ! foundPattern ) {
+
+                return "Error in line: " + line + ' : This Syntax of "get" module is invalid... ' +
+                'try resolving it by checking the Get() function in your script or Go to "myphone-v.2' +
+                '-chrome://www.SCE_language_syntax.com" for more information about the Get() function...';
+
+            } else {
+
+                if ( patterns.indexOf( foundPattern ) >= 4 && patterns.indexOf( foundPattern ) <= 9 ) {
+
+                    var startParenthesis = substring.indexOf( '(' ) + 1;
+                    var withinParentheses = substring.substring( startParenthesis );
+                    withinParentheses = withinParentheses.trim();
+
+                    if (
+                        
+                        ( withinParentheses.startsWith('"') && withinParentheses.endsWith('"') ) || 
+                        ( withinParentheses.startsWith("'") && withinParentheses.endsWith("'") )
+                        
+                    ) { /* Error String found */ } else if ( typeof withinParentheses === 'string' ) {
+
+                        /* Its a variable */
+
+                    } else if ( isNaN( withinParentheses ) ) { return true; /* error */ };
+
+                } else {
+
+                    var startParenthesis = substring.indexOf( '(' ) + 1;
+                    var withinParentheses = substring.substring( startParenthesis );
+                    
+                    if (
+                        
+                        ( withinParentheses.startsWith('"') && withinParentheses.endsWith('"') ) || 
+                        ( withinParentheses.startsWith("'") && withinParentheses.endsWith("'") )
+                        
+                    ) {
+
+                        // True its a String...
+
+                    } else { /* Its a variable */ };
+
+                };
 
             };
 
         } else {
 
-            var error = " The Brackets '()' are not Closed Properly... ";
-            error += "or the executing ';' symbol is missing...";
-            return "Error in line : " + line + " : " + error;
+            return "Syntax of line: " + line + " : Get() function's Syntax is improper... Go to" +
+            ' "myphone-v.2-chrome://www.SCE_language_syntax.com" for more information about the Get() function...';
 
         };
 
@@ -223,9 +259,9 @@ function check_Syntax_Array( Syntax, line ) {
 
 function Run_Code( statement ) {
 
-    if ( statement.includes("Print") ) {
+    if ( statement.includes( "print" ) ) {
 
-        if ( statement.includes('"""') ) {
+        if ( statement.includes( '"""' ) ) {
 
             document.writeln( "<h4> " + statement.slice(8, -4) + " </h4>" );
 
@@ -436,20 +472,23 @@ function Type_Identification( variable ) {
 
 };
 
-/* An Extract from ChatGPT by giving it some kinds of instructions...
-
-function evaluateCondition(condition) {
+function evaluateCondition( condition ) {
     
-    try { return eval(condition); } catch (e) { console.error('Invalid condition:', condition); return false; }
+    try { return eval( condition ); } catch ( conditional_error ) {
+        
+        return 'Invalid condition : ' + condition + '\n' + '\n' + conditional_error;
+    
+    }
 
-}
+};
 
-function runUserCode(code) {
-    const output = document.getElementById('output');
+function runUserCode( code ) {
 
-    function executeCommands(commands, condition) {
-        let shouldContinue = typeof condition === 'number' ? condition > 0 : evaluateCondition(condition);
-        while (shouldContinue) {
+    function executeCommands( commands, condition ) {
+
+        let shouldContinue = typeof condition === 'number' ? condition > 0 : evaluateCondition( condition );
+
+        while ( shouldContinue ) {
             for (let j = 0; j < commands.length; j++) {
                 if (typeof commands[j] === 'string') {
                     if (commands[j].startsWith('for ')) {
@@ -492,28 +531,4 @@ function runUserCode(code) {
     }
 
     executeCommands(code, 1);
-}
-
-// Example usage:
-
-// Define an array of instructions and functions (user's code)
-let count = 3;  // Example variable to use in conditions
-const userCode = [
-    "print\"\"\"String 1\"\"\"",
-    function() { console.log('Function 1 executed'); },
-    'print"""123""";',
-    'print"int";',
-    function() { console.log('Function 2 executed'); count--; },
-    'print"""abc""";',
-    function() { console.log('Function 3 executed'); },
-    'print"456";',
-    ":",
-    function() { console.log('Function 4 executed'); },
-];
-
-// Run the user's code
-document.addEventListener('DOMContentLoaded', () => {
-    runUserCode(userCode);
-});
-
-*/
+};
