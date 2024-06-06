@@ -78,7 +78,9 @@ function Compilation() {
 
     var input_title = document.getElementById( 'input' ); SCE[ 'File_Name' ] = input_title.value;
 
-    SCE[ 'File_variables' ] = new Array(); sessionStorage.setItem( 'SCE', JSON.stringify( SCE ) );
+    SCE[ 'File_variables' ] = new Array(); SCE.Compiled_Code = new Array();
+
+    sessionStorage.setItem( 'SCE', JSON.stringify( SCE ) );
 
     return window.location.assign( './Run.html' );
 
@@ -128,9 +130,16 @@ function Scripting() {
 
 function check_Syntax_Array( Syntax, line ) {
 
-    if ( Syntax.charAt( 0 ) == '#' ) { return "Commentary Line..." + "Line == " + line; }
+    const SCE = JSON.parse( sessionStorage.getItem( 'SCE' ) );
+    const variables = SCE.File_variables;
 
-    else if ( [ ':', ';', '}' ].indexOf( Syntax.charAt( Syntax.length - 1 ) ) == -1 ) {
+    if ( Syntax.charAt( 0 ) == '#' ) {
+        
+        SCE.Compiled_Code.push( 'Comment' );
+
+        return "Commentary Line..." + "Line == " + line;
+    
+    } else if ( [ ':', ';', '}' ].indexOf( Syntax.charAt( Syntax.length - 1 ) ) == -1 ) {
         
         return "Error in line : " + line + " : ';' or '{' or ':' expected at the end of the line... ";
 
@@ -152,9 +161,7 @@ function check_Syntax_Array( Syntax, line ) {
 
                 } else {
 
-                    const content = Syntax.slice( 6, -2 );
-
-                    if ( isNaN( content ) ) {
+                    const content = Syntax.slice( 6, -2 ); if ( isNaN( content ) ) {
 
                         return "Error in line: " + line + " : Expected Number Data inside Print() function...";
 
@@ -163,9 +170,6 @@ function check_Syntax_Array( Syntax, line ) {
                 };
 
             } else {
-
-                const SCE = JSON.parse( sessionStorage.getItem( 'SCE' ) );
-                const variables = SCE.File_variables;
 
                 const content = Syntax.slice( 7, -3 );
 
@@ -220,11 +224,24 @@ function check_Syntax_Array( Syntax, line ) {
                         ( withinParentheses.startsWith('"') && withinParentheses.endsWith('"') ) || 
                         ( withinParentheses.startsWith("'") && withinParentheses.endsWith("'") )
                         
-                    ) { /* Error String found */ } else if ( typeof withinParentheses === 'string' ) {
+                    ) {
+                        
+                        return "Error in line : " + line + " : Expected a int input or variable with int data...";
+                    
+                    } else if ( typeof withinParentheses === 'string' ) {
 
-                        /* Its a variable */
+                        if ( variables.indexOf( withinParentheses ) == -1 ) {
 
-                    } else if ( isNaN( withinParentheses ) ) { return true; /* error */ };
+                            return "Error in line: " + line + " : Expected an Defined Variable inside" +
+                            "Get() function...";
+
+                        } else if ( isNaN( variables[ variables.indexOf( withinParentheses ) ] ) ) {
+
+                            return "Error in line : " + line + " : Expected a int data inside the variable...";
+
+                        };
+
+                    };
 
                 } else {
 
@@ -233,14 +250,32 @@ function check_Syntax_Array( Syntax, line ) {
                     
                     if (
                         
-                        ( withinParentheses.startsWith('"') && withinParentheses.endsWith('"') ) || 
-                        ( withinParentheses.startsWith("'") && withinParentheses.endsWith("'") )
+                        ! ( ( withinParentheses.startsWith( '"' ) && withinParentheses.endsWith( '"' ) ) ||
+                        ( withinParentheses.startsWith( "'" ) && withinParentheses.endsWith( "'" ) ) )
                         
                     ) {
 
-                        // True its a String...
+                        if ( isNaN( withinParentheses ) && typeof withinParentheses === 'string' ) {
 
-                    } else { /* Its a variable */ };
+                            if ( variables.indexOf( withinParentheses ) == -1 ) {
+
+                                return "Error in line: " + line + " : Expected an Defined Variable inside" +
+                                "Get() function...";
+
+                            } else if ( typeof variables[ variables.indexOf( withinParentheses ) ] !== 'string' ) {
+
+                                return "Error in line : " + line + " : Expected a String data inside the variable...";
+
+                            };
+
+                        } else {
+
+                            return "Error in line : " + line + " : Expected String input or variable with" +
+                            "String data...";
+
+                        };
+
+                    };
 
                 };
 
@@ -252,6 +287,40 @@ function check_Syntax_Array( Syntax, line ) {
             ' "myphone-v.2-chrome://www.SCE_language_syntax.com" for more information about the Get() function...';
 
         };
+
+    } else if ( Syntax.startsWith( "say_" ) ) {
+
+        if ( Syntax.endsWith( "_;" ) ) {
+
+            var content = Syntax.substring( 4, Syntax.length - 2 );
+
+            if ( ! ( ( content.startsWith( '"' ) && content.endsWith( '"' ) ) ||
+                ( content.startsWith( "'" ) && content.endsWith( "'" ) ) ) )
+                
+            {
+
+                if ( isNaN( content ) && typeof content === 'string' ) {
+
+                    if ( variables.indexOf( content ) == -1 ) {
+
+                        return "Error in line: " + line + " : Expected an Defined Variable inside" +
+                        "Get() function...";
+
+                    } else if ( typeof variables[ variables.indexOf( withinParentheses ) ] !== 'string' ) {
+
+                        return "Error in line : " + line + " : Expected a String data inside the variable...";
+
+                    };
+
+                } else {
+
+                    return "Error in line : " + line + " : the input for the Say() function is not defined...";
+
+                };
+
+            };
+
+        } else if ( Syntax.endsWith( ");" ) ) {};
 
     }; return "Syntax of Line : " + line + " : Successfully Compiled...";
     
