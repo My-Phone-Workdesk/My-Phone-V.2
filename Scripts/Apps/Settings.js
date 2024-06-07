@@ -301,7 +301,7 @@ window.onload = () => {
             app_1.appendChild(app_32);
 
             var app_33 = document.createElement('IMG');
-            app_33.setAttribute('src', 'https://play-lh.googleusercontent.com/3APi4HdWb0_rhnhAEoyJEYfSemXW9cNbA2VdOCSN7L6wgdjC_oTxLphER647R9PnSCkV=w240-h480-rw');
+            app_33.setAttribute('src', 'https://evote.co.in/img/evote-logo.png');
             app_32.appendChild(app_33);
 
             var app_34 = document.createElement('SPAN');
