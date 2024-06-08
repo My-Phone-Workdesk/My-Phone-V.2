@@ -78,7 +78,7 @@ function Compilation() {
 
     var input_title = document.getElementById( 'input' ); SCE[ 'File_Name' ] = input_title.value;
 
-    SCE[ 'File_variables' ] = new Array(); SCE.Compiled_Code = new Array();
+    SCE[ 'File_variables' ] = new Array(); SCE[ 'Compiled_Code' ] = new Array();
 
     sessionStorage.setItem( 'SCE', JSON.stringify( SCE ) );
 
@@ -130,8 +130,7 @@ function Scripting() {
 
 function check_Syntax_Array( Syntax, line ) {
 
-    const SCE = JSON.parse( sessionStorage.getItem( 'SCE' ) );
-    const variables = SCE.File_variables;
+    const SCE = JSON.parse( sessionStorage.getItem( 'SCE' ) ); const variables = SCE.File_variables;
 
     if ( Syntax.charAt( 0 ) == '#' ) {
         
@@ -165,7 +164,7 @@ function check_Syntax_Array( Syntax, line ) {
 
                         return "Error in line: " + line + " : Expected Number Data inside Print() function...";
 
-                    };
+                    } else { SCE.Compiled_Code.push( { do:'print', data: content } ); };
 
                 };
 
@@ -173,11 +172,13 @@ function check_Syntax_Array( Syntax, line ) {
 
                 const content = Syntax.slice( 7, -3 );
 
-                if ( variables.indexOf( content ) == -1 ) {
+                const variable_index = variables.findIndex( item => item.name === content );
+
+                if ( variable_index == -1 ) {
 
                     return "Error in line: " + line + " : Expected an Defined Variable inside Print() function...";
 
-                };
+                } else { SCE.Compiled_Code.push( { do:'print', data: variables[ variable_index ] } ); };
 
             };
 
@@ -189,7 +190,7 @@ function check_Syntax_Array( Syntax, line ) {
 
                 return "Error in line: " + line + " : Expected String Data inside Print() function...";
 
-            };
+            } else { SCE.Compiled_Code.push( { do:'print', data: content } ); };
 
         };
 
@@ -199,30 +200,28 @@ function check_Syntax_Array( Syntax, line ) {
 
             let substring = Syntax.substring( 4, Syntax.length - 2 ).toLowerCase(); substring = substring.trim();
 
-            const patterns = [ 'user_lock of user(', 'user with user_lock(', 'user.id with user(',
-            'user.id with user_lock(', 'user_lock with id(', 'user with id(', 'user_device with id(',
-            'user_firmware with id(', 'user_money with id(', 'user_firmware-version with id(' ];
+            const patterns = [
+                
+                'user_lock of user(', 'user with user_lock(', 'user.id with user(', 'user.id with user_lock(',
+                'user_lock with id(', 'user with id(', 'user_device with id(', 'user_firmware with id(',
+                'user_money with id(', 'user_firmware-version with id('
+            
+            ];
 
             const foundPattern = patterns.some( ( pattern ) => { return substring.startsWith( pattern ); });
 
-            if ( ! foundPattern ) {
+            if ( foundPattern ) {
 
-                return "Error in line: " + line + ' : This Syntax of "get" module is invalid... ' +
-                'try resolving it by checking the Get() function in your script or Go to "myphone-v.2' +
-                '-chrome://www.SCE_language_syntax.com" for more information about the Get() function...';
-
-            } else {
+                var startParenthesis = substring.indexOf( '(' ) + 1;
+                var withinParentheses = substring.substring( startParenthesis );
+                withinParentheses = withinParentheses.trim();
 
                 if ( patterns.indexOf( foundPattern ) >= 4 && patterns.indexOf( foundPattern ) <= 9 ) {
 
-                    var startParenthesis = substring.indexOf( '(' ) + 1;
-                    var withinParentheses = substring.substring( startParenthesis );
-                    withinParentheses = withinParentheses.trim();
-
                     if (
                         
-                        ( withinParentheses.startsWith('"') && withinParentheses.endsWith('"') ) || 
-                        ( withinParentheses.startsWith("'") && withinParentheses.endsWith("'") )
+                        ( withinParentheses.startsWith('"') && withinParentheses.endsWith( '"' ) ) || 
+                        ( withinParentheses.startsWith("'") && withinParentheses.endsWith( "'" ) )
                         
                     ) {
                         
@@ -230,60 +229,76 @@ function check_Syntax_Array( Syntax, line ) {
                     
                     } else if ( typeof withinParentheses === 'string' ) {
 
-                        if ( variables.indexOf( withinParentheses ) == -1 ) {
+                        const variable_index = variables.findIndex( item => item.name === withinParentheses );
+
+                        if ( variable_index == -1 ) {
 
                             return "Error in line: " + line + " : Expected an Defined Variable inside" +
                             "Get() function...";
 
-                        } else if ( isNaN( variables[ variables.indexOf( withinParentheses ) ] ) ) {
+                        } else if ( isNaN( variables[ variable_index ] ) ) {
 
                             return "Error in line : " + line + " : Expected a int data inside the variable...";
 
+                        } else {
+                            
+                            SCE.Compiled_Code.push( { do:'get', data: variables[ variable_index ] } );
+                        
                         };
 
-                    };
+                    } else { SCE.Compiled_Code.push( { do:'print', data: withinParentheses } ); };
 
                 } else {
-
-                    var startParenthesis = substring.indexOf( '(' ) + 1;
-                    var withinParentheses = substring.substring( startParenthesis );
                     
                     if (
                         
-                        ! ( ( withinParentheses.startsWith( '"' ) && withinParentheses.endsWith( '"' ) ) ||
-                        ( withinParentheses.startsWith( "'" ) && withinParentheses.endsWith( "'" ) ) )
+                        ( withinParentheses.startsWith( '"' ) && withinParentheses.endsWith( '"' ) ) ||
+                        ( withinParentheses.startsWith( "'" ) && withinParentheses.endsWith( "'" ) )
                         
                     ) {
 
-                        if ( isNaN( withinParentheses ) && typeof withinParentheses === 'string' ) {
+                        withinParentheses = withinParentheses.replace( /['"]/g, '' );
 
-                            if ( variables.indexOf( withinParentheses ) == -1 ) {
+                        SCE.Compiled_Code.push( { do:'print', data: withinParentheses } );
 
-                                return "Error in line: " + line + " : Expected an Defined Variable inside" +
-                                "Get() function...";
+                    } else if ( isNaN( withinParentheses ) && typeof withinParentheses === 'string' ) {
 
-                            } else if ( typeof variables[ variables.indexOf( withinParentheses ) ] !== 'string' ) {
+                        const variable_index = variables.findIndex( item => item.name === withinParentheses );
 
-                                return "Error in line : " + line + " : Expected a String data inside the variable...";
+                        if ( variable_index == -1 ) {
 
-                            };
+                            return "Error in line: " + line + " : Expected an Defined Variable inside" +
+                            "Get() function...";
+
+                        } else if ( typeof variables[ variable_index ] !== 'string' ) {
+
+                            return "Error in line : " + line + " : Expected a String data inside the variable...";
 
                         } else {
-
-                            return "Error in line : " + line + " : Expected String input or variable with" +
-                            "String data...";
-
+                            
+                            SCE.Compiled_Code.push( { do:'print', data: variables[ variable_index ] } );
+                        
                         };
+
+                    } else {
+
+                        return "Error in line : " + line + " : Expected String input or variable with String data...";
 
                     };
 
                 };
 
+            } else {
+
+                return "Error in line: " + line + ' : This Syntax of "get" module is invalid... ' +
+                'try resolving it by checking the Get() function in your script or Go to "myphone-v.2' +
+                '-chrome://www.SCE_language_syntax.com" for more information about the Get() function...';
+
             };
 
         } else {
 
-            return "Syntax of line: " + line + " : Get() function's Syntax is improper... Go to" +
+            return "Error in line : " + line + " : Get() function's Syntax is improper... Go to" +
             ' "myphone-v.2-chrome://www.SCE_language_syntax.com" for more information about the Get() function...';
 
         };
@@ -292,35 +307,140 @@ function check_Syntax_Array( Syntax, line ) {
 
         if ( Syntax.endsWith( "_;" ) ) {
 
-            var content = Syntax.substring( 4, Syntax.length - 2 );
-
-            if ( ! ( ( content.startsWith( '"' ) && content.endsWith( '"' ) ) ||
-                ( content.startsWith( "'" ) && content.endsWith( "'" ) ) ) )
+            var content = Syntax.substring( 4, Syntax.length - 2 ); if (
                 
-            {
+                ( content.startsWith( '"' ) && content.endsWith( '"' ) ) ||
+                ( content.startsWith( "'" ) && content.endsWith( "'" ) )
+                
+            ) {
 
-                if ( isNaN( content ) && typeof content === 'string' ) {
+                content = content.replace( /['"]/g, '' );
 
-                    if ( variables.indexOf( content ) == -1 ) {
+                SCE.Compiled_Code.push( { do:'say', data: content } );
 
-                        return "Error in line: " + line + " : Expected an Defined Variable inside" +
-                        "Get() function...";
+            } else if ( isNaN( content ) && typeof content === 'string' ) {
 
-                    } else if ( typeof variables[ variables.indexOf( withinParentheses ) ] !== 'string' ) {
+                const variable_index = variables.findIndex( item => item.name === content );
 
-                        return "Error in line : " + line + " : Expected a String data inside the variable...";
+                if ( variable_index == -1 ) {
 
-                    };
+                    return "Error in line: " + line + " : Expected an Defined Variable inside Say() function...";
+
+                } else if ( typeof variables[ variable_index ] !== 'string' ) {
+
+                    return "Error in line : " + line + " : Expected a String data inside the variable...";
 
                 } else {
 
-                    return "Error in line : " + line + " : the input for the Say() function is not defined...";
+                    SCE.Compiled_Code.push( { do:'say', data: variables[ variable_index ] } );
+
+                };
+
+            } else { SCE.Compiled_Code.push( { do:'say', data: content } ); };
+
+        } else if ( Syntax.endsWith( ");" ) ) {
+
+            const regex = /^say_(.+)_\(\s*(.+)\s*\);$/;
+            const match = Syntax.match( regex );
+
+            if ( match ) {
+
+                var statement = match[ 1 ]; const time = match[ 2 ]; if (
+                
+                    ( statement.startsWith( '"' ) && statement.endsWith( '"' ) ) ||
+                    ( statement.startsWith( "'" ) && statement.endsWith( "'" ) )
+                    
+                ) {
+    
+                    statement = statement.replace( /['"]/g, '' );
+                    
+                    const value = Check_Time( statement, time );
+                    
+                    if ( value != true ) { return value; };
+    
+                } else if ( typeof statement === 'string' ) {
+    
+                    const variable_index = variables.findIndex( item => item.name === statement );
+
+                    if ( variable_index == -1 ) {
+
+                        return "Error in line: " + line + " : Expected an Defined Variable inside Say() function...";
+
+                    } else if ( typeof variables[ variable_index ] !== 'string' ) {
+
+                        return "Error in line : " + line + " : Expected a String data inside the variable...";
+
+                    } else {
+                        
+                        const value = Check_Time( variables[ variable_index ], time );
+
+                        if ( value != true ) { return value; };
+                    
+                    };
+    
+                } else {
+                    
+                    const value = Check_Time( statement, time );
+
+                    if ( value != true ) { return value; };
+                
+                };
+
+            } else {
+
+                return "Error in line : " + line + " : Missing Time parameter starting format i.e.. '_('...";
+                
+            };
+
+            function Check_Time( statement, time ) {
+
+                if (
+                
+                    ( ( time.startsWith( '"' ) && time.endsWith( '"' ) ) ||
+                    ( time.startsWith( "'" ) && time.endsWith( "'" ) ) ) ||
+                    ( isNaN( time ) && typeof time !== 'number' )
+                    
+                ) {
+    
+                    return "Error in line : " + line + " : Expected a int input or variable with int data in the" +
+                    " Time parameter...";
+    
+                } else if ( typeof time === 'string' ) {
+    
+                    const variable_index = variables.findIndex( item => item.name === time );
+
+                    if ( variable_index == -1 ) {
+
+                        return "Error in line: " + line + " : Expected an Defined Variable inside Say() function...";
+
+                    } else if ( isNaN( variables[ variable_index ] ) ) {
+
+                        return "Error in line : " + line + " : Expected a Int data inside the variable...";
+
+                    } else {
+                        
+                        SCE.Compiled_Code.push({
+                            
+                            do: 'say', data: statement, time: variables[ variable_index ]
+                        
+                        }); return true;
+                    
+                    };
+    
+                } else {
+
+                    SCE.Compiled_Code.push( { do: 'say', data: statement, time: time } ); return true;
 
                 };
 
             };
 
-        } else if ( Syntax.endsWith( ");" ) ) {};
+        } else {
+
+            return "Error in line : " + line + " : Say() function's Syntax is improper... Go to" +
+            ' "myphone-v.2-chrome://www.SCE_language_syntax.com" for more information about the Say() function...';
+
+        };
 
     }; return "Syntax of Line : " + line + " : Successfully Compiled...";
     
@@ -541,6 +661,8 @@ function Type_Identification( variable ) {
 
 };
 
+// For Future Use for Loops by ChatGPT AI ==>
+
 function evaluateCondition( condition ) {
     
     try { return eval( condition ); } catch ( conditional_error ) {
@@ -597,7 +719,6 @@ function runUserCode( code ) {
                 shouldContinue = evaluateCondition(condition);
             }
         }
-    }
+    }; executeCommands(code, 1);
 
-    executeCommands(code, 1);
 };
