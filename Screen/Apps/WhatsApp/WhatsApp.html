@@ -9,71 +9,72 @@
     <link rel="stylesheet" href="../../../Design/WhatsApp.css" />
     <link rel="Icon" type="Image/x-icon" href="https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN" />
     
-    <link rel="stylesheet" type="text/css" href="../Icons/fontawesome-pro/css/all.css">
+    <link rel="stylesheet" type="text/css" href="../../../../Icons/fontawesome-pro/css/all.css">
     <script src="../../../Scripts/Apps/WhatsApp.js" ></script>
     <title> WhatsApp </title>
 
 </head>
 
 <body>
-    <div class="container">
-        <div class="sidebar">
-            <div class="sidebar-header">
-                <h1>WhatsApp</h1>
-                <div class="actions">
-                    <label class="theme-switch action-btn">
-                        <input type="checkbox" id="theme-toggle" />
-                        <span class="slider round"></span>
-                    </label>
+    <body class="dark-mode">
+        <div class="container">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <h1>WhatsApp</h1>
+                    <div class="actions">
+                        <label class="theme-switch action-btn">
+                            <input type="checkbox" id="theme-toggle" checked />
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="search-box">
+                    <input type="text" placeholder="Search or start new chat">
+                </div>
+                <div class="chats">
+                    <div class="chat active" onclick="switchChat(this)">
+                        <div class="chat-info">
+                            <h4>BIH</h4>
+                            <p>My name is LALA!</p>
+                        </div>
+                        <div class="chat-time">1:38 pm</div>
+                    </div>
+                    <div class="chat" onclick="switchChat(this)">
+                        <div class="chat-info">
+                            <h4>Sorry Didi</h4>
+                            <p>I am khushi not sorry!</p>
+                        </div>
+                        <div class="chat-time">Yesterday</div>
+                    </div>
                 </div>
             </div>
-            <div class="search-box">
-                <input type="text" placeholder="Search or start new chat">
-            </div>
-            <div class="chats">
-                <div class="chat active" onclick="switchChat(this)">
-                    <div class="chat-info">
-                        <h4>BIH</h4>
-                        <p>My name is LALA!</p>
-                    </div>
-                    <div class="chat-time">1:38 pm</div>
+            <div class="chat-window">
+                <div class="chat-header">
+                    <h4>BIH</h4>
                 </div>
-                <div class="chat" onclick="switchChat(this)">
-                    <div class="chat-info">
-                        <h4>Sorry Didi</h4>
-                        <p>I am khushi not sorry!</p>
+                <div class="chat-body">
+                    <div class="message outgoing">
+                        <div class="message-info">
+                            <p>Hi LALA!</p>
+                        </div>
                     </div>
-                    <div class="chat-time">Yesterday</div>
+                    <div class="message incoming">
+                        <div class="message-info">
+                            <p>My name is LALA!</p>
+                        </div>
+                    </div>
+                    <div class="message outgoing">
+                        <div class="message-info">
+                            <p>What's your name?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-footer">
+                    <input type="text" placeholder="Type a message" id="message-input">
+                    <button class="send-btn">Send</button>
                 </div>
             </div>
         </div>
-        <div class="chat-window">
-            <div class="chat-header">
-                <h4>BIH</h4>
-            </div>
-            <div class="chat-body">
-                <div class="message outgoing">
-                    <div class="message-info">
-                        <p>Hi LALA!</p>
-                    </div>
-                </div>
-                <div class="message incoming">
-                    <div class="message-info">
-                        <p>My name is LALA!</p>
-                    </div>
-                </div>
-                <div class="message outgoing">
-                    <div class="message-info">
-                        <p>What's your name?</p>
-                    </div>
-                </div>
-            </div>
-            <div class="chat-footer">
-                <input type="text" placeholder="Type a message" id="message-input">
-                <button class="send-btn">Send</button>
-            </div>
-        </div>
-    </div>    
 </body>
 
 </html>
