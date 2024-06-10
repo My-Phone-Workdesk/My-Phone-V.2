@@ -84,7 +84,9 @@ function Compilation() {
 
 function Scripting() {
 
-    const SCE = JSON.parse( sessionStorage.getItem( 'SCE' ) ); const variables = SCE.File_variables;
+    document.body.innerText = ''; const SCE = JSON.parse( sessionStorage.getItem( 'SCE' ) );
+    
+    const variables = SCE.File_variables;
 
     if ( SCE.File_Extention == ".cmd" ) {
 
@@ -116,7 +118,17 @@ function Scripting() {
 
             h2_1.innerText = "-".repeat( 57 ) + " Output " + "-".repeat( 57 );
 
-            for ( var line = 0; line < SCE.Compiled_Code.length; line++ ) { Run_Code( SCE.Compiled_Code[ line ] ); };
+            for ( var line = 0; line < SCE.Compiled_Code.length; line++ ) {
+                
+                const Output = Run_Code( SCE.Compiled_Code[ line ], line );
+
+                if ( Output != true ) {
+
+                    return print_data( Output.trim() );
+
+                };
+            
+            };
 
         },1500 );
 
@@ -146,7 +158,7 @@ function check_Syntax_Array( Syntax, line, SCE, variables ) {
 
             if ( ! ( Syntax.startsWith( '""', 5 ) && Syntax.endsWith( '""', Syntax.length - 1 ) ) ) {
 
-                if ( ! ( Syntax.charAt( 6 ) == '"' && Syntax.charAt( Syntax.length - 2 ) == '"' ) ) {
+                if ( ! ( Syntax.charAt( 5 ) == '"' && Syntax.charAt( Syntax.length - 2 ) == '"' ) ) {
 
                     return "Error in line : " + line + " : Print() function's Syntax is improper..." +
                     ' Go to "myphone-v.2-chrome://www.SCE_language_syntax.com" for more information about' +
@@ -236,11 +248,23 @@ function check_Syntax_Array( Syntax, line, SCE, variables ) {
 
                         } else {
                             
-                            SCE.Compiled_Code.push( { do:'get', data: variables[ variable_index ] } );
+                            SCE.Compiled_Code.push({
+                                
+                                do:'get', data: variables[ variable_index ], get: patterns.indexOf( foundPattern )
+                            
+                            });
                         
                         };
 
-                    } else { SCE.Compiled_Code.push( { do:'print', data: withinParentheses } ); };
+                    } else {
+                        
+                        SCE.Compiled_Code.push({
+                        
+                            do:'get', data: withinParentheses, get: patterns.indexOf( foundPattern )
+                    
+                        });
+                    
+                    };
 
                 } else {
                     
@@ -253,7 +277,11 @@ function check_Syntax_Array( Syntax, line, SCE, variables ) {
 
                         withinParentheses = withinParentheses.replace( /['"]/g, '' );
 
-                        SCE.Compiled_Code.push( { do:'print', data: withinParentheses } );
+                        SCE.Compiled_Code.push({
+                            
+                            do:'get', data: withinParentheses, get: patterns.indexOf( foundPattern )
+                        
+                        });
 
                     } else if ( isNaN( withinParentheses ) && typeof withinParentheses === 'string' ) {
 
@@ -270,7 +298,11 @@ function check_Syntax_Array( Syntax, line, SCE, variables ) {
 
                         } else {
                             
-                            SCE.Compiled_Code.push( { do:'print', data: variables[ variable_index ] } );
+                            SCE.Compiled_Code.push({
+                                
+                                do:'get', data: variables[ variable_index ], get: patterns.indexOf( foundPattern )
+                            
+                            });
                         
                         };
 
@@ -444,70 +476,63 @@ function check_Syntax_Array( Syntax, line, SCE, variables ) {
     
 };
 
-function Run_Code( Compiled_line ) {
+function Run_Code( Compiled_line, line ) {
 
-    if ( Compiled_line.do == 'print' ) { return print_data( Compiled_line.data ); };
-    
-};
+    const SCE = JSON.parse( sessionStorage.getItem( 'SCE' ) ); const variables = SCE.File_variables;
 
-// For Future Use for Loops by ChatGPT AI ==>
+    if ( Compiled_line.do == 'print' ) { print_data( Compiled_line.data ); }
+    else if ( Compiled_line.do == 'get' ) {
 
-function evaluateCondition( condition ) {
-    
-    try { return eval( condition ); } catch ( conditional_error ) {
+        const Data = JSON.parse( sessionStorage.getItem( 'Data' ) );
+
+        const application = [
+            
+            { given: 'User', give: 'User_Lock' }, { given: 'User_Lock', give: 'User' }, { given: 'User', give: 'id' },
+            { given: 'User_Lock', give: 'id' }, { given: 'id', give: 'User_Lock' }, { given: 'id', give: 'User' },
+            { given: 'id', give: 'Device' }, { given: 'id', give: 'Firmware' },
+            { given: 'id', give: 'Firmware_Version' }, { given: 'id', give: 'Account' }
         
-        return 'Invalid condition : ' + condition + '\n' + '\n' + conditional_error;
+        ];
+
+        const on_error = [
+            
+            'The Specified User not Found on the Server...', 'No User Found with such User Lock on the Server...',
+            'No User Found with the give Username on the Server...',
+            'No User found who has such User Lock, on the Server...',
+            'No User Found with that id on the Server or the User has some details missing that is illigal...'
+        
+        ];
+
+        return 'Error : Get is Under Construction...';
+
+        var given, get = false;
+
+        const match = Data.findIndex( ( item ) => {
+
+            return item[ application[ Compiled_line.get ][ 'given' ] ] === Compiled_line.data;
+
+        });
+
+        if ( match === true || match == 'GIVEN_ID' || match == 'GET_ID' ) {
+
+            if ( match === true ) {
+
+                variables.get = Data[ application[ Compiled_line.get ].give ];
+
+            };
+
+        } else {
+
+            var error_message; if ( Compiled_line.get <= 4 ) {
+                
+                error_message = on_error[ Compiled_line.get ];
+            
+            } else { error_message = on_error[ 4 ]; };
+
+            return 'Error in Code Line : ' + line + ' : ' + error_message;
+
+        };
+
+    }; return true;
     
-    }
-
-};
-
-function runUserCode( code ) {
-
-    function executeCommands( commands, condition ) {
-
-        let shouldContinue = typeof condition === 'number' ? condition > 0 : evaluateCondition( condition );
-
-        while ( shouldContinue ) {
-            for (let j = 0; j < commands.length; j++) {
-                if (typeof commands[j] === 'string') {
-                    if (commands[j].startsWith('for ')) {
-                        const conditionOrCount = commands[j].slice(4, -1).trim();
-                        const isNumber = !isNaN(conditionOrCount);
-                        const loopCondition = isNumber ? parseInt(conditionOrCount) : conditionOrCount;
-                        const innerCommands = [];
-                        j++;
-                        while (commands[j] !== ':' && j < commands.length) {
-                            innerCommands.push(commands[j]);
-                            j++;
-                        }
-                        if (commands[j] === ':') {
-                            executeCommands(innerCommands, loopCondition);
-                        }
-                    } else if (commands[j].startsWith('print"""') && commands[j].endsWith('"""')) {
-                        const strToPrint = commands[j].slice(7, -3);
-                        if (typeof strToPrint === 'string') {
-                            output.innerHTML += strToPrint + '<br>';
-                        } else {
-                            console.error('Error: Invalid content to print. Must be a string.');
-                        }
-                    } else if (commands[j].startsWith('print"""') && !commands[j].endsWith('"""')) {
-                        console.error('Error: Invalid print statement. Expected """ at the end.');
-                    } else if (commands[j].startsWith('print"""') && !commands[j].startsWith('print"""')) {
-                        console.error('Error: Invalid print statement. Expected """ at the start.');
-                    } else if (commands[j] !== ':') {
-                        // Any other string handling if needed
-                    }
-                } else if (typeof commands[j] === 'function') {
-                    commands[j]();
-                }
-            }
-            if (typeof condition === 'number') {
-                condition--;
-            } else {
-                shouldContinue = evaluateCondition(condition);
-            }
-        }
-    }; executeCommands(code, 1);
-
 };
