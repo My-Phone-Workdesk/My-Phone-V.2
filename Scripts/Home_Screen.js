@@ -149,7 +149,7 @@ function User_Installed_Apps() {
 
         'https://play-lh.googleusercontent.com/PTLQRc7a8vRjs8fmM7hRI36s7gGYalxIFd80xZDvYkIl91d709fcl4-UH9vZbxWDGG8',
 
-        'https://evote.co.in/img/evote-logo.png',
+        'https://evote.co.in/img/favicon.ico',
 
         'https://play-lh.googleusercontent.com/rFAHXzQjUQwLH6vffa9rD_1gjH7dZykH7h6RjthsnoHTKGrJSNqTUw0D_TIQSC3ekg=w240-h480-rw',
 

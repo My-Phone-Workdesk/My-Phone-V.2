@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Icon" type="Image/X-icon" href="https://evote.co.in/img/favicon.ico" />
+    <link rel="stylesheet" href="../../../Design/eVote.css" />
+    <link rel="stylesheet" type="text/css" href="../../../Icons/fontawesome-pro/css/all.css">
+    <script src="../../../Scripts/Apps/eVote.js" defer></script>
+    <title>eVote</title>
+</head>
+
+<body>
+    <header id="header">
+        <div class="logo">
+            <img src="https://evote.co.in/img/evote-logo.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Head</a>
+                    <div class="dropdown-content">
+                        <button onclick="moveHeader('Head - Results')">Results</button>
+                        <button onclick="moveHeader('Head - Make a Party')">Make a Party</button>
+                        <button onclick="moveHeader('Head - Vote')">Vote</button>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Mini Head</a>
+                    <div class="dropdown-content">
+                        <button onclick="moveHeader('Mini Head - Results')">Results</button>
+                        <button onclick="moveHeader('Mini Head - Make a Party')">Make a Party</button>
+                        <button onclick="moveHeader('Mini Head - Vote')">Vote</button>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div id="heading-container"></div>
+    <div id="message-container"></div>
+    <div id="vote-container" class="vote-container">
+        <select id="party-select" class="dropdown">
+            <option value="Party 1">Party 1</option>
+            <option value="Party 2">Party 2</option>
+        </select>
+        <button id="vote-button" class="vote-button" onclick="vote()">Vote</button>
+        <button id="finish-election-button" class="finish-button" style="display: none;" onclick="finishElection()">Finish Election</button>
+    </div>
+    <div id="make-party-container" class="make-party-container"></div>
+</body>
+
+</html>
