@@ -29,21 +29,23 @@ function moveHeader(headingText) {
     makePartyContainer.style.display = 'none';
 
     // Display content based on the clicked button
-    if (headingText.includes('Results')) {
+    if (headingText.toString().includes('Results')) {
         messageContainer.innerHTML = `<p class="message">Lala won by 9211 votes!</p>`;
         messageContainer.style.display = 'block';
-    } else if (headingText.includes('Vote')) {
+    } else if (headingText.toString().includes('Vote')) {
         voteContainer.style.display = 'flex';
-    } else if (headingText.includes('Make a Party')) {
+    } else if (headingText.toString().includes('Make a Party')) {
         let note;
         let amount;
-        if (headingText.includes('Head')) {
+        console.log(headingText.toString())
+        if (headingText.toString() === 'Head - Make a Party') {
             note = "1. Please make sure that the election of head has started.<br>2. You must pay INR 50,000/- to create a party.<br>3. You have not created another Head or Mini Head party alongside.";
             amount = 50000;
-        } else if (headingText.includes('Mini Head')) {
+        };
+        if (headingText.toString() === 'Mini Head - Make a Party') {
             note = "1. Please make sure that the election of mini head has started.<br>2. You must pay INR 30,000/- to create a party.<br>3. You have not created another Head or Mini Head party alongside.";
             amount = 30000;
-        }
+        };
         makePartyContainer.innerHTML = `
             <p class="note">${note}</p>
             <input type="text" placeholder="Party Name" id="party-name" required>
