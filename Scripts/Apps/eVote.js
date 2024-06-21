@@ -40,8 +40,8 @@ function moveHeader(headingText) {
         if (headingText.includes('Head')) {
             note = "1. Please make sure that the election of head has started.<br>2. You must pay INR 50,000/- to create a party.<br>3. You have not created another Head or Mini Head party alongside.";
             amount = 50000;
-        } else {
-            note = "1. Please make sure that the election of head has started.<br>2. You must pay INR 30,000/- to create a party.<br>3. You have not created another Head or Mini Head party alongside.";
+        } else if (headingText.includes('Mini Head')) {
+            note = "1. Please make sure that the election of mini head has started.<br>2. You must pay INR 30,000/- to create a party.<br>3. You have not created another Head or Mini Head party alongside.";
             amount = 30000;
         }
         makePartyContainer.innerHTML = `
