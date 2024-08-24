@@ -503,23 +503,17 @@ function Run_Code( Compiled_line, line ) {
         
         ];
 
-        return 'Error : Get is Under Construction...';
-
-        var given, get = false;
+        if ( application[ Compiled_line.get ].given == 'id' ) {};
 
         const match = Data.findIndex( ( item ) => {
 
-            return item[ application[ Compiled_line.get ][ 'given' ] ] === Compiled_line.data;
+            return item[ application[ Compiled_line.get ].given ] === Compiled_line.data;
 
         });
 
-        if ( match === true || match == 'GIVEN_ID' || match == 'GET_ID' ) {
-
-            if ( match === true ) {
-
-                variables.get = Data[ application[ Compiled_line.get ].give ];
-
-            };
+        if ( match != -1 ) {
+            
+            variables.get = Data[ match ][ application[ Compiled_line.get ].give ];
 
         } else {
 
